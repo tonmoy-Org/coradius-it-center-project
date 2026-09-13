@@ -41,20 +41,20 @@
     }
     .custom-testimonial-card .card-top-image {
         width: 100%;
-        height: 220px;
+        height: 180px;
         object-fit: cover;
     }
     .custom-testimonial-card .card-body {
-        padding: 26px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
     }
     .custom-testimonial-card p {
         color: var(--color-text-secondary, #4B5A72);
-        font-size: 15.5px;
-        line-height: 1.75;
-        margin-bottom: 22px;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;

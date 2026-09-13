@@ -26,12 +26,11 @@
     .lead-card {
         background: #ffffff;
         border-radius: 8px;
-        box-shadow: 0 20px 40px rgba(0, 86, 210, 0.08);
         overflow: hidden;
         border: 1px solid rgba(0, 86, 210, 0.1);
         display: flex;
         flex-wrap: wrap;
-        max-width: 1000px;
+        max-width: 100%;
         margin: 0 auto;
     }
     .lead-info-side {

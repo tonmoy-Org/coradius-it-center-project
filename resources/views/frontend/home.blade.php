@@ -13,7 +13,33 @@
         margin: 0 !important;
         padding-top: 0 !important;
     }
+
+    /* Make the landing page width narrower as per client requirement */
+    @media (min-width: 992px) {
+        .container.container-1278 {
+            max-width: 1080px !important;
+        }
+    }
     
+    /* Enforce 8px border-radius for all sections on the home page */
+    .home-page-sections .card, .home-page-sections .cow-wrapper, .home-page-sections .cow-card,
+    .home-page-sections .mc-special-gift-card, .home-page-sections .about-me-card,
+    .home-page-sections .instructor-card, .home-page-sections .description-card,
+    .home-page-sections .highlight-banner-card, .home-page-sections .mc-breakdown-light-card,
+    .home-page-sections .mc-content-card, .home-page-sections .faq-card, .home-page-sections .faq-image-card img,
+    .home-page-sections .mc-benefits-card-wrapper, .home-page-sections .mc-target-audience-card-light,
+    .home-page-sections .mc-support-feature-card, .home-page-sections .mc-channel-card,
+    .home-page-sections .custom-testimonial-card, .home-page-sections .counter-card-box,
+    .home-page-sections .coupon-banner-wrapper img, .home-page-sections .ad-banner-section-1 img,
+    .home-page-sections .ad-banner-section-2 img, .home-page-sections .success-banner-section img,
+    .hero-area .hero-video-wrapper, .hero-area .hero-video-wrapper video,
+    .hero-area .hero-video-wrapper iframe, .hero-area .hero-video-wrapper img,
+    .lead-card, .rounded-3, .rounded-4, .rounded-5,
+    [style*="border-radius: 10px"], [style*="border-radius: 12px"], 
+    [style*="border-radius: 16px"], [style*="border-radius: 20px"] {
+        border-radius: 8px !important;
+    }
+
     header, .template-header, .header-navigation, .header-area {
         display: none !important;
         height: 0 !important;
