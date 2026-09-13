@@ -26,10 +26,10 @@
     
     .sticky-promo-wrapper {
         width: 100%;
-        background: #d1fae5; /* Match light green bg from above */
-        border: 2px solid #10b981;
+        background: var(--color-blue-tint, #EAF2FE);
+        border: 1.5px solid var(--color-border-tint, #C7DCFA);
         border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 6px 24px rgba(0, 86, 210, 0.12);
         transition: all 0.3s ease;
         z-index: 1040;
     }
@@ -40,6 +40,7 @@
         width: 100%;
         max-width: 1278px;
         margin: 0 auto;
+        align-items: center;
     }
     
     .sticky-promo-wrapper.is-sticky {
@@ -54,7 +55,10 @@
         border-left: none;
         border-right: none;
         border-bottom: none;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        border-top: 1.5px solid var(--color-border-tint, #C7DCFA);
+        background: var(--color-blue-tint, #EAF2FE);
+        box-shadow: 0 -4px 25px rgba(0, 31, 92, 0.12);
+        backdrop-filter: blur(10px);
     }
 
     .sp-left {
@@ -67,10 +71,11 @@
     }
 
     .sp-left h3 {
-        color: #047857;
+        color: var(--color-text-ink, #0A1E3F);
         margin: 0;
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
     }
 
     .sp-middle {
@@ -83,34 +88,38 @@
     .sp-countdown {
         display: flex;
         gap: 8px;
+        user-select: none;
     }
 
     .sp-cd-item {
-        background: #ffffff;
-        color: #047857;
-        border-radius: 4px;
-        padding: 6px 12px;
-        min-width: 50px;
+        background: #FFFFFF;
+        color: var(--color-text-ink, #0A1E3F);
+        border-radius: 8px;
+        padding: 6px 14px;
+        min-width: 52px;
         text-align: center;
         font-weight: bold;
-        border: 1px solid #10b981;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
+        box-shadow: 0 2px 6px rgba(0, 31, 92, 0.05);
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
     .sp-cd-item .num {
-        font-size: 16px;
-        font-weight: 700;
-        color: #ea580c;
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--color-accent-orange, #FF7A00);
         line-height: 1.2;
     }
 
     .sp-cd-item span.label {
         font-size: 9px;
-        color: #047857;
+        color: var(--color-text-secondary, #4B5A72);
         text-transform: uppercase;
-        margin-top: 4px;
+        margin-top: 3px;
+        letter-spacing: 0.5px;
+        font-weight: 700;
     }
 
     .sp-right {
@@ -119,6 +128,7 @@
         align-items: center;
         justify-content: flex-end;
         min-width: 200px;
+        position: relative;
     }
 
     .sp-right .btn-enroll {
@@ -131,21 +141,31 @@
         font-size: 15px !important;
         font-weight: 700 !important;
         line-height: 1.2 !important;
-        border-radius: 10px !important;
-        background-color: #10b981 !important;
-        border: 2px solid #10b981 !important;
+        border-radius: 8px !important;
+        background-color: var(--color-primary, #0056D2) !important;
+        border: none !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
-        overflow: visible !important;
+        box-shadow: 0 4px 14px rgba(0, 86, 210, 0.35);
+        overflow: hidden !important;
+        position: relative;
         transition: all 0.3s ease;
+        user-select: none;
+    }
+
+    .sp-right .btn-enroll::before,
+    .sp-right .btn-enroll::after {
+        content: none !important;
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
 
     .sp-right .btn-enroll:hover {
-        background-color: #059669 !important;
-        border-color: #059669 !important;
+        background-color: var(--color-primary-hover, #FF7A00) !important;
+        border-color: var(--color-primary-hover, #FF7A00) !important;
         color: #ffffff !important;
         transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
+        box-shadow: 0 6px 18px rgba(255, 122, 0, 0.45);
     }
 
     .sp-right .btn-enroll i {
@@ -157,20 +177,21 @@
     /* Button Border Beam Animation styles */
     .btn-border-beam-svg {
         position: absolute;
-        top: -2px !important;
-        left: -2px !important;
-        width: calc(100% + 4px) !important;
-        height: calc(100% + 4px) !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
         pointer-events: none;
         z-index: 1;
-        overflow: visible !important;
+        border-radius: inherit;
+        overflow: hidden !important;
     }
 
     .btn-border-beam-rect {
         stroke-linecap: round;
         animation: btn-border-beam-travel 4s linear infinite;
         will-change: stroke-dashoffset;
-        filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.9)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+        filter: drop-shadow(0 0 3px rgba(251, 191, 36, 0.8));
     }
 
     @keyframes btn-border-beam-travel {
@@ -225,6 +246,7 @@
             text-align: center;
             line-height: 1.2;
             margin: 0;
+            color: var(--color-text-ink, #0A1E3F);
         }
         .sp-countdown {
             gap: 4px;
@@ -232,19 +254,25 @@
         .sp-cd-item {
             padding: 4px;
             min-width: 38px;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border-tint, #D9E8FC);
         }
         .sp-cd-item .num {
             font-size: 13px;
+            color: var(--color-accent-orange, #FF7A00);
         }
         .sp-cd-item span.label {
             font-size: 8px;
             margin-top: 2px;
+            color: var(--color-text-secondary, #4B5A72);
         }
         .sticky-promo-wrapper.is-sticky {
             border-radius: 0;
             max-width: 100%;
             border-left: none;
             border-right: none;
+            border-top: 1.5px solid var(--color-border-tint, #C7DCFA);
+            background: var(--color-blue-tint, #EAF2FE);
         }
     }
 </style>

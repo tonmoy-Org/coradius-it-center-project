@@ -65,7 +65,7 @@
         }
 
         .color-secondary {
-            color: #25ab7c;
+            color: #0056D2;
         }
 
         .text-al {
@@ -155,7 +155,7 @@
 
         .invoice-table .table.table-v2 thead th {
             color: #FFF;
-            background-color: #25ab7c;
+            background-color: #0056D2;
             padding: 15px;
         }
 

@@ -423,7 +423,7 @@
 
                         <!-- Video Instruction Button -->
                         <div class="video-instruction-btn-wrapper mt-3 d-none">
-                            <button type="button" class="btn btn-primary btn-sm w-100 play-video-instruction-btn" style="background-color: #10b981; border: none; padding: 10px; border-radius: 4px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; color: #fff;">
+                            <button type="button" class="btn btn-primary btn-sm w-100 play-video-instruction-btn" style="background-color: #0056D2; border: none; padding: 10px; border-radius: 4px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; color: #fff;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
                                 </svg>

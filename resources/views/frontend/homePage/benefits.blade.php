@@ -46,8 +46,8 @@
 
 <style>
     .mc-target-audience-card-light {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
+        background: var(--color-white, #ffffff);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 16px;
         padding: 24px 22px;
         height: 100%;
@@ -57,8 +57,8 @@
 
     .mc-target-audience-card-light:hover {
         transform: translateY(-4px);
-        border-color: #10b981;
-        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.12);
+        border-color: var(--color-primary, #0056D2);
+        box-shadow: 0 12px 30px rgba(0, 86, 210, 0.12);
     }
 
     .mc-audience-icon-box-light {
@@ -75,14 +75,14 @@
     .mc-audience-title-light {
         font-size: 18px;
         font-weight: 700;
-        color: #0f172a;
+        color: var(--color-text-ink, #0A1E3F);
         margin: 0 0 6px 0;
         line-height: 1.4;
     }
 
     .mc-audience-desc-light {
         font-size: 14px;
-        color: #475569;
+        color: var(--color-text-secondary, #4B5A72);
         line-height: 1.6;
         margin-bottom: 10px;
     }
@@ -90,15 +90,15 @@
     .mc-audience-check-note-light {
         font-size: 13px;
         font-weight: 600;
-        color: #059669;
+        color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         gap: 6px;
     }
 
     mark.title-highlight, .title-highlight, h2 mark, .course-section-title mark {
-        background: #d1fae5 !important;
-        color: #047857 !important;
+        background: var(--color-blue-tint, #EAF2FE) !important;
+        color: var(--color-primary, #0056D2) !important;
         padding: 2px 8px;
         border-radius: 6px;
     }
@@ -107,7 +107,7 @@
 <section class="benefits-section p-t-60 p-b-60" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
-            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: #1a1b4b !important;">
+            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">
                 {!! format_title_highlight($benefitsTitle) !!}
             </h2>
 
@@ -147,9 +147,9 @@
 
                         if ($idx === 0 || str_contains(strtolower($bTitle), 'শিক্ষার্থী') || str_contains(strtolower($bTitle), 'student')) {
                             $iconClass = 'fas fa-handshake';
-                            $iconBg = '#ecfdf5';
-                            $iconBorder = '#a7f3d0';
-                            $iconColor = '#059669';
+                            $iconBg = 'var(--color-blue-tint, #EAF2FE)';
+                            $iconBorder = '#D9E8FC';
+                            $iconColor = '#0056D2';
                         } elseif ($idx === 1 || str_contains(strtolower($bTitle), 'বেকার') || str_contains(strtolower($bTitle), 'jobless') || str_contains(strtolower($bTitle), 'unemployed')) {
                             $iconClass = 'fas fa-times-circle';
                             $iconBg = '#fef2f2';
@@ -159,17 +159,17 @@
                             $iconClass = 'fas fa-coins';
                             $iconBg = '#fffbeb';
                             $iconBorder = '#fde68a';
-                            $iconColor = '#d97706';
+                            $iconColor = '#FF7A00';
                         } elseif ($idx === 3 || str_contains(strtolower($bTitle), 'চাকুরীজীবী') || str_contains(strtolower($bTitle), 'job') || str_contains(strtolower($bTitle), 'employee')) {
                             $iconClass = 'fas fa-briefcase';
-                            $iconBg = '#f0f9ff';
-                            $iconBorder = '#bae6fd';
-                            $iconColor = '#0284c7';
+                            $iconBg = 'var(--color-blue-tint, #EAF2FE)';
+                            $iconBorder = '#C7DCFA';
+                            $iconColor = '#0056D2';
                         } else {
                             $iconClass = 'fas fa-check-circle';
-                            $iconBg = '#ecfdf5';
-                            $iconBorder = '#a7f3d0';
-                            $iconColor = '#059669';
+                            $iconBg = 'var(--color-blue-tint, #EAF2FE)';
+                            $iconBorder = '#D9E8FC';
+                            $iconColor = '#0056D2';
                         }
                     @endphp
 

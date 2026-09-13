@@ -27,14 +27,14 @@
 <div class="footer-newsletter-wrapper" style="position: relative; z-index: 10; margin-bottom: -65px;">
     <div class="container container-1278">
         <div class="newsletter-card shadow-none" 
-             style="background-color: {{ setting('promo_banner_bg_color') ?: '#eef7f4' }}; border-radius: 8px; padding: 35px 40px;">
+             style="background-color: {{ setting('promo_banner_bg_color') ?: 'var(--color-blue-tint, #EAF2FE)' }}; border: 1px solid var(--color-border-hover, #C7DCFA); border-radius: 12px; padding: 35px 40px;">
             <div class="row align-items-center g-4">
                 <!-- Column 1: Newsletter Title & Description -->
                 <div class="col-lg-6 col-md-12">
-                    <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
+                    <h3 class="fw-bold mb-2" style="color: #0A1E3F; font-size: 24px; line-height: 1.2;">
                         {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
                     </h3>
-                    <p class="mb-0" style="color: #4b5563; font-size: 14px; line-height: 1.5;">
+                    <p class="mb-0" style="color: #4B5A72; font-size: 14px; line-height: 1.5;">
                         {{ setting('newsletter_description', app()->getLocale()) ?: (setting('newsletter_description') ?: __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')) }}
                     </p>
                 </div>
@@ -58,12 +58,13 @@
                     @endphp
                     
                     @if($countdownTitle)
-                    <div class="mb-3 fw-bold text-dark text-center w-100" style="font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
+                    <div class="mb-3 fw-bold text-center w-100" style="color: #0A1E3F; font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
                     @endif
 
                     <style>
                         .footer-timer-item {
                             width: 45px; height: 50px; min-width: 40px;
+                            border: 1px solid #D9E8FC;
                         }
                         .footer-timer-item h4 {
                             font-size: 1.1rem;
@@ -87,15 +88,15 @@
                         <!-- Timer -->
                         <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-2 order-1 flex-nowrap" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
                             <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
-                                <h4 class="hours m-0 fw-bold" style="color: #ea580c; line-height: 1.1;">00</h4>
+                                <h4 class="hours m-0 fw-bold" style="color: #FF7A00; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">HRS</span>
                             </div>
                             <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
-                                <h4 class="minutes m-0 fw-bold" style="color: #ea580c; line-height: 1.1;">00</h4>
+                                <h4 class="minutes m-0 fw-bold" style="color: #FF7A00; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">MIN</span>
                             </div>
                             <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
-                                <h4 class="seconds m-0 fw-bold" style="color: #ea580c; line-height: 1.1;">00</h4>
+                                <h4 class="seconds m-0 fw-bold" style="color: #FF7A00; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">SEC</span>
                             </div>
                         </div>
@@ -116,7 +117,7 @@
 @endif
 
 <!--====== Start Main Dark Footer Area ======-->
-<footer class="footer-area footer-area-v2" style="background-color: #110B3A; color: #ffffff; padding-top: {{ $showNewsletter ? '120px' : '60px' }}; padding-bottom: 30px; position: relative;">
+<footer class="footer-area footer-area-v2" style="background-color: #111120; color: #ffffff; padding-top: {{ $showNewsletter ? '120px' : '60px' }}; padding-bottom: 30px; position: relative;">
     <div class="footer-widget">
         <div class="container container-1278">
             <div class="row g-4 justify-content-between">
@@ -262,7 +263,8 @@
                             .footer-social-link {
                                 width: 36px;
                                 height: 36px;
-                                background: rgba(255, 255, 255, 0.1);
+                                background: rgba(255, 255, 255, 0.08);
+                                border: 1px solid rgba(255, 255, 255, 0.12);
                                 color: #ffffff !important;
                                 border-radius: 50%;
                                 display: inline-flex;
@@ -275,7 +277,8 @@
                             .footer-social-link:hover {
                                 transform: translateY(-3px) scale(1.1);
                                 color: #ffffff !important;
-                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+                                border-color: transparent;
                             }
                             .footer-social-link.fb:hover { background-color: #1877F2 !important; }
                             .footer-social-link.tw:hover { background-color: #1DA1F2 !important; }

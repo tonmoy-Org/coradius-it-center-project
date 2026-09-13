@@ -37,12 +37,12 @@
     .about-me-description-content {
         font-size: 16px !important;
         line-height: 1.85 !important;
-        color: #374151 !important;
+        color: var(--color-text-secondary, #4B5A72) !important;
     }
     .about-me-description-content p {
         font-size: 16px !important;
         line-height: 1.85 !important;
-        color: #374151 !important;
+        color: var(--color-text-secondary, #4B5A72) !important;
         margin-bottom: 16px;
     }
     .about-me-description-content ul {
@@ -61,7 +61,7 @@
         margin-bottom: 10px !important;
         font-size: 16px !important;
         line-height: 1.7 !important;
-        color: #374151 !important;
+        color: var(--color-text-secondary, #4B5A72) !important;
     }
 </style>
 
@@ -72,7 +72,7 @@
             <!-- Left Side Image Card -->
             <div class="col-lg-5 col-md-12" data-aos="fade-right">
                 <div class="about-me-card position-relative overflow-hidden shadow-sm" 
-                     style="border-radius: 16px; min-height: 500px; background: linear-gradient(135deg, #FFE485 0%, #FCD34D 100%);">
+                     style="border-radius: 16px; min-height: 500px; border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
                     
                     <img src="{{ $aboutImgUrl }}" alt="About Me Instructor" 
                          class="img-fluid w-100" 
@@ -85,13 +85,13 @@
                 <div class="about-me-text-block ps-lg-4">
                     <div class="common-heading">
                         @if($tag)
-                            <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: #10b981; letter-spacing: 2px; font-size: 15px;">
+                            <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: var(--color-primary, #0056D2); letter-spacing: 2px; font-size: 15px;">
                                 {{ __($tag) }}
                             </span>
                         @endif
 
                         @if($title)
-                            <h2 class="m-b-25 fw-bold" style="color: #1a1b4b; font-size: 36px; line-height: 1.3;">
+                            <h2 class="m-b-25 fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 36px; line-height: 1.3;">
                                 {!! format_title_highlight(__($title)) !!}
                             </h2>
                         @endif

@@ -1,7 +1,100 @@
 @extends('frontend.layouts.master')
 @section('title', __('sign_in'))
+@section('hide_footer', 'true')
 
-@section('title', __('sign_in'))
+@push('css')
+<style>
+    .sign-in-section {
+        min-height: calc(100vh - 90px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 110px !important;
+        padding-bottom: 70px !important;
+    }
+
+    .user-form-container {
+        border-radius: 16px !important;
+        box-shadow: 0 16px 45px rgba(0, 31, 92, 0.08) !important;
+        border: 1px solid var(--color-border-tint, #D9E8FC) !important;
+        background: #FFFFFF !important;
+    }
+
+    .user-form-container .form-title h3 {
+        color: var(--color-text-ink, #0A1E3F) !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.3px;
+    }
+
+    /* Global Button Architecture for Login */
+    .user-form-container form button.template-btn,
+    .user-form-container form .template-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 48px !important;
+        padding: 12px 24px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+        background: var(--color-primary, #0056D2) !important;
+        background-color: var(--color-primary, #0056D2) !important;
+        color: #ffffff !important;
+        border: none !important;
+        box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        cursor: pointer;
+        text-decoration: none !important;
+    }
+
+    .user-form-container form button.template-btn:hover,
+    .user-form-container form .template-btn:hover {
+        background: var(--color-primary-hover, #FF7A00) !important;
+        background-color: var(--color-primary-hover, #FF7A00) !important;
+        border-color: var(--color-primary-hover, #FF7A00) !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 22px rgba(255, 122, 0, 0.4) !important;
+    }
+
+    .user-form-container form button.template-btn i,
+    .user-form-container form .template-btn i {
+        font-size: 14px !important;
+        margin-left: 0 !important;
+        transition: transform 0.25s ease;
+    }
+
+    .user-form-container form button.template-btn:hover i,
+    .user-form-container form .template-btn:hover i {
+        transform: translateX(4px);
+    }
+
+    .forgot-pass-btn a {
+        color: var(--color-primary, #0056D2) !important;
+        font-weight: 600 !important;
+        transition: color 0.2s ease;
+    }
+
+    .forgot-pass-btn a:hover {
+        color: var(--color-primary-hover, #FF7A00) !important;
+    }
+
+    .remember-password input:checked + label::before {
+        background-color: var(--color-primary, #0056D2) !important;
+        border-color: var(--color-primary, #0056D2) !important;
+    }
+
+    .loading_button,
+    button.loading_button,
+    .user-form-container form .loading_button {
+        display: none !important;
+    }
+</style>
+@endpush
+
 @section('content')
     <!--====== Start Sign In Section ======-->
     <section class="sign-in-section p-t-130 p-b-75 p-t-md-90 p-b-sm-40 p-t-sm-40">
@@ -165,8 +258,10 @@
                                         </div>
                                     @endif
                                     <div class="col-12">
-                                        <button class="template-btn m-b-25" type="submit">{{__('login') }}</button>
-                                        @include('components.frontend_loading_btn',['class' => 'template-btn m-b-25'])
+                                        <button class="template-btn w-100 m-b-25" type="submit">
+                                            <span>{{ __('login') }}</span>
+                                            <i class="fas fa-arrow-right"></i>
+                                        </button>
                                     </div>
                                     <div class="col-12">
                                         <div class="forgot-pass-btn m-b-20">

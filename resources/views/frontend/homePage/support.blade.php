@@ -127,11 +127,11 @@
 <style>
     /* Support Section Styles - Standard typography & previous image size */
     .mc-support-section-wrapper {
-        background-color: #eefaf6;
-        background-image: linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+        background-color: var(--color-blue-tint, #EAF2FE);
+        background-image: linear-gradient(rgba(0, 86, 210, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 86, 210, 0.04) 1px, transparent 1px);
         background-size: 20px 20px;
-        border-top: 1px solid #d1fae5;
-        border-bottom: 1px solid #d1fae5;
+        border-top: 1px solid var(--color-border-tint, #C7DCFA);
+        border-bottom: 1px solid var(--color-border-tint, #C7DCFA);
         padding-top: 50px;
         padding-bottom: 50px;
         margin-top: 0 !important;
@@ -145,7 +145,7 @@
         font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif) !important;
         font-size: 32px !important;
         font-weight: 700 !important;
-        color: #1a1b4b !important;
+        color: var(--color-text-ink, #0A1E3F) !important;
         line-height: 1.3 !important;
         margin-bottom: 12px !important;
         display: flex;
@@ -158,7 +158,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: #059669;
+        color: var(--color-primary, #0056D2);
         font-size: 26px;
     }
 
@@ -167,7 +167,7 @@
         font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif) !important;
         font-size: 17px !important;
         font-weight: 700 !important;
-        color: #065f46 !important;
+        color: var(--color-primary, #0056D2) !important;
         margin-bottom: 12px !important;
         line-height: 1.5 !important;
     }
@@ -178,7 +178,7 @@
         font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif) !important;
         font-size: 15.5px !important;
         line-height: 1.8 !important;
-        color: #334155 !important;
+        color: var(--color-text-secondary, #4B5A72) !important;
         margin-bottom: 22px !important;
     }
 
@@ -191,8 +191,8 @@
     }
 
     .mc-support-feature-card {
-        background: #ffffff;
-        border: 1px solid #dcf2e8;
+        background: var(--color-white, #ffffff);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 14px;
         padding: 18px 12px 16px 12px;
         text-align: center;
@@ -205,16 +205,16 @@
 
     .mc-support-feature-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 22px rgba(16, 185, 129, 0.08);
-        border-color: #a7f3d0;
+        box-shadow: 0 10px 22px rgba(0, 86, 210, 0.08);
+        border-color: var(--color-border-hover, #C7DCFA);
     }
 
     .mc-feature-icon-circle {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: #ecfdf5;
-        color: #059669;
+        background-color: var(--color-blue-tint, #EAF2FE);
+        color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -233,7 +233,7 @@
         font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif) !important;
         font-size: 14.5px !important;
         font-weight: 700 !important;
-        color: #1a1b4b !important;
+        color: var(--color-text-ink, #0A1E3F) !important;
         margin-bottom: 6px !important;
     }
 
@@ -289,7 +289,7 @@
     }
 
     .mc-divider-bullet {
-        color: #059669;
+        color: #0056D2;
         font-size: 15px;
     }
 
@@ -301,13 +301,13 @@
     }
 
     .mc-avatar-default {
-        background: #e7f7ed;
-        color: #048240;
+        background: var(--color-blue-tint, #EAF2FE);
+        color: var(--color-primary, #0056D2);
     }
 
     .mc-channel-card {
         background: #ffffff;
-        border: 1px solid #dcf2e8;
+        border: 1px solid #D9E8FC;
         border-radius: 14px;
         padding: 24px 20px 22px 20px;
         min-height: 205px;
@@ -320,12 +320,13 @@
 
     .mc-channel-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 22px rgba(16, 185, 129, 0.08);
+        box-shadow: 0 8px 22px rgba(0, 86, 210, 0.08);
+        border-color: #C7DCFA;
     }
 
     .mc-channel-card.highlighted-channel {
-        border-color: #6ee7b7;
-        box-shadow: 0 4px 18px rgba(5, 150, 105, 0.08);
+        border-color: #3B8AF2;
+        box-shadow: 0 4px 18px rgba(0, 86, 210, 0.08);
     }
 
     .mc-channel-card-top {
@@ -404,64 +405,13 @@
         font-weight: 500;
     }
 
-    /* Channel Action Button */
-    .mc-channel-btn {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 9px 16px;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        text-decoration: none !important;
-        transition: all 0.25s ease;
-    }
 
-    /* Primary (template-btn) exact match with login & site primary buttons */
-    .mc-channel-btn-primary.template-btn {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        padding: 11.5px 24px !important;
-        border-radius: 5px !important;
-        font-size: 15px !important;
-        font-weight: 600 !important;
-        line-height: 1.5 !important;
-        text-decoration: none !important;
-        text-align: center !important;
-        margin: 0 !important;
-        background-color: var(--theme-clr, var(--color-secondary-4)) !important;
-        border: 2px solid var(--theme-clr, var(--color-secondary-4)) !important;
-        color: #ffffff !important;
-        transition: all 0.35s ease !important;
-        box-shadow: none !important;
-    }
-
-    .mc-channel-btn-primary.template-btn:hover {
-        background-color: var(--color-hover, var(--theme-clr-deep-1, #1e3a8a)) !important;
-        border-color: var(--color-hover, var(--theme-clr-deep-1, #1e3a8a)) !important;
-        color: #ffffff !important;
-        transform: translateY(-2px);
-    }
-
-    .mc-channel-btn-primary.template-btn i {
-        margin-left: 6px;
-        transition: transform 0.25s ease;
-    }
-
-    .mc-channel-btn-primary.template-btn:hover i {
-        transform: translateX(3px);
-    }
 
     /* Bottom Banner Strip */
     .mc-support-footer-strip {
         margin-top: 26px;
         background: transparent;
-        border: 1px solid #86efac;
+        border: 1px solid #C7DCFA;
         border-radius: 12px;
         padding: 12px 20px;
         display: flex;
@@ -476,7 +426,7 @@
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        background-color: #048240;
+        background-color: #0056D2;
         color: #ffffff;
         display: inline-flex;
         align-items: center;
@@ -639,10 +589,7 @@
             font-size: 11px;
         }
 
-        .mc-channel-btn-primary.template-btn {
-            font-size: 13px !important;
-            padding: 9px 12px !important;
-        }
+
     }
 
     /* 3. Tablets (768px - 991px) */
@@ -714,10 +661,7 @@
             font-size: 12px !important;
         }
 
-        .mc-channel-btn-primary.template-btn {
-            font-size: 13.5px !important;
-            padding: 9.5px 14px !important;
-        }
+
 
         .mc-support-footer-strip {
             padding: 12px 18px;
@@ -960,12 +904,6 @@
             font-size: 11.5px;
         }
 
-        .mc-channel-btn-primary.template-btn {
-            font-size: 13.5px !important;
-            padding: 10px 14px !important;
-            border-radius: 5px !important;
-        }
-
         .mc-support-footer-strip {
             margin-top: 20px;
             flex-direction: column;
@@ -1051,11 +989,7 @@
             margin-bottom: 14px;
         }
 
-        .mc-channel-btn-primary.template-btn {
-            font-size: 13px !important;
-            padding: 9px 12px !important;
-            border-radius: 5px !important;
-        }
+
 
         .mc-footer-strip-text {
             font-size: 12px;
@@ -1167,9 +1101,9 @@
                                 <span class="mc-team-status-label">{{ $cLabel }}</span>
                             </div>
                         </div>
-                        <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="template-btn mc-channel-btn-primary">
+                        <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="template-btn w-100">
                             <span>{{ $cBtnText }}</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 @endforeach

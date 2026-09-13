@@ -22,20 +22,20 @@
 <style>
     /* Equal Height Card Container */
     .custom-testimonial-card {
-        background: #ffffff;
+        background: var(--color-white, #ffffff);
         border-radius: 8px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         height: 100%;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        border: 1px solid #E5E7EB;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         transition: all 0.3s ease;
         width: 100%;
     }
     .custom-testimonial-card:hover {
-        border-color: #10b981;
-        box-shadow: 0 15px 35px rgba(16, 185, 129, 0.1);
+        border-color: var(--color-primary, #0056D2);
+        box-shadow: 0 15px 35px rgba(0, 86, 210, 0.12);
         transform: translateY(-5px);
     }
     .custom-testimonial-card .card-top-image {
@@ -50,7 +50,7 @@
         flex-grow: 1;
     }
     .custom-testimonial-card p {
-        color: #475569;
+        color: var(--color-text-secondary, #4B5A72);
         font-size: 15.5px;
         line-height: 1.75;
         margin-bottom: 22px;
@@ -71,7 +71,7 @@
         border-radius: 50%;
         margin-right: 14px;
         object-fit: cover;
-        border: 2px solid #10b981;
+        border: 2px solid var(--color-primary, #0056D2);
         padding: 2px;
     }
     .author-details {
@@ -82,61 +82,60 @@
         margin: 0 0 2px 0;
         font-size: 16px;
         font-weight: 700;
-        color: #1a1b4b; 
+        color: var(--color-text-ink, #0A1E3F); 
     }
     .author-details span {
         font-size: 13px;
-        color: #64748b;
+        color: var(--color-text-muted, #8A96A8);
         margin-bottom: 4px;
         font-weight: 500;
     }
     .author-details .stars {
-        color: #f59e0b;
+        color: var(--color-accent-gold, #FFB800);
         font-size: 13px;
     }
 
     /* Slick Equal Height Slides Fix */
     .success-slider .slick-track {
         display: flex !important;
-        align-items: stretch;
     }
     .success-slider .slick-slide {
-        height: auto !important;
-        display: flex !important;
+        height: inherit !important;
     }
     .success-slider .slick-slide > div {
-        width: 100%;
-        display: flex;
         height: 100%;
     }
 
-    /* Slick Carousel 3 Dots Pagination Styling */
-    .success-slider-container .slick-dots {
+    /* Custom Navigation Dots */
+    .success-slider .slick-dots {
+        position: relative;
+        bottom: 0;
+        margin-top: 30px;
         display: flex !important;
         justify-content: center;
         align-items: center;
+        gap: 8px;
         list-style: none;
         padding: 0;
-        margin-top: 24px;
-        margin-bottom: 0;
-        gap: 8px;
     }
-    .success-slider-container .slick-dots li {
+    .success-slider .slick-dots li {
         margin: 0;
+        width: auto;
+        height: auto;
     }
-    .success-slider-container .slick-dots li button {
-        font-size: 0;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background-color: #cbd5e1;
-        border: none;
+    .success-slider .slick-dots li button {
+        width: 8px;
+        height: 8px;
         padding: 0;
-        cursor: pointer;
+        border-radius: 50%;
+        background: #cbd5e1;
+        border: none;
+        outline: none;
+        font-size: 0;
         transition: all 0.3s ease;
     }
-    .success-slider-container .slick-dots li.slick-active button {
-        background-color: #10b981;
+    .success-slider .slick-dots li.slick-active button {
+        background: var(--color-primary, #0056D2);
         width: 24px;
         border-radius: 6px;
     }
@@ -225,17 +224,17 @@
             <div class="col-lg-5 order-1 order-lg-2 ps-lg-4 mb-4 mb-lg-0">
                 <div class="common-heading" data-aos="fade-left" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
                     @if(!empty($successEyebrow))
-                        <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                        <span class="sub-title text-uppercase fw-bold m-b-15 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                             {!! format_title_highlight($successEyebrow) !!}
                         </span>
                     @endif
                     @if(!empty($successTitle))
-                        <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-20" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
                             {!! format_title_highlight($successTitle) !!}
                         </h2>
                     @endif
                     @if(!empty($successSubtitle))
-                        <p class="m-b-25" style="color: #475569; font-size: 16px; line-height: 1.7;">
+                        <p class="m-b-25" style="color: #4B5A72; font-size: 16px; line-height: 1.7;">
                             {{ $successSubtitle }}
                         </p>
                     @endif

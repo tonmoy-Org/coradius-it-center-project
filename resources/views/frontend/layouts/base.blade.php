@@ -100,20 +100,36 @@
     <style>
         :root {
             --body-font: '{{ setting("body_font") }}', sans-serif;
-            /* --body-font: '
-
-
-        {{ setting("body_font_size") }}   ', sans-serif; */
             --header-font: '{{ setting("header_font") }}', sans-serif;
-            /* --header-font: '
 
+            /* Coradius IT Center Brand Palette (Extracted from Logo) */
+            --color-primary: #0056D2;
+            --color-primary-hover: #FF7A00;
+            --color-secondary: #3B8AF2;
+            --color-accent-orange: #FF7A00;
+            --color-accent-gold: #FFB800;
+            --color-navy: #001F5C;
+            --color-footer-bg: #111120;
+            --color-hero-bg-start: #001F5C;
+            --color-hero-bg-end: #0B1226;
+            --color-blue-tint: #EAF2FE;
+            --theme-blue-tint: #EAF2FE;
+            --color-border-tint: #D9E8FC;
+            --color-border-hover: #C7DCFA;
+            --color-text-ink: #0A1E3F;
+            --color-text-secondary: #4B5A72;
+            --color-text-muted: #8A96A8;
+            --color-white: #FFFFFF;
+        }
 
-        {{ setting("header_font_size") }}   ', sans-serif; */
+        .form-control:focus, .nice-select:focus, input:focus, textarea:focus, select:focus {
+            border-color: var(--color-primary) !important;
+            box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.15) !important;
         }
         
         .template-btn, .template-btn.bordered-btn, .template-btn.bordered-btn-secondary,
         .btn {
-            border-radius: 4px !important;
+            border-radius: 6px !important;
         }
 
         .card, .course-item, .blog-post-item, .category-item, .testimonial-item,
@@ -130,7 +146,7 @@
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) scale(1.15) !important;
-            background: #0056D2 !important;
+            background: var(--color-primary) !important;
             border-radius: 50% !important;
         }
         @media (max-width: 767.98px) {
@@ -210,21 +226,21 @@
             font-weight: 600 !important;
             padding: 10px 24px !important;
             border-radius: 6px !important;
-            background: #0056D2 !important;
-            background-color: #0056D2 !important;
+            background: var(--color-primary) !important;
+            background-color: var(--color-primary) !important;
             color: #ffffff !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            box-shadow: 0 4px 12px rgba(0, 86, 210, 0.22) !important;
+            box-shadow: 0 4px 14px rgba(0, 86, 210, 0.22) !important;
             border: none !important;
             text-decoration: none !important;
             line-height: 1.35 !important;
             min-height: 42px !important;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         .template-btn:hover,
@@ -235,10 +251,42 @@
         .about-me-btn:hover,
         .sp-right .btn-enroll:hover {
             transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.35) !important;
+            background: var(--color-primary-hover) !important;
+            background-color: var(--color-primary-hover) !important;
+            color: #ffffff !important;
+        }
+
+        /* Secondary & Outline Buttons */
+        .template-btn.bordered-btn,
+        .template-btn.bordered-btn-secondary,
+        .btn-outline-primary {
+            background: transparent !important;
+            border: 2px solid var(--color-primary) !important;
+            color: var(--color-primary) !important;
+            box-shadow: none !important;
+        }
+        .template-btn.bordered-btn:hover,
+        .template-btn.bordered-btn-secondary:hover,
+        .btn-outline-primary:hover {
+            background: var(--color-primary-hover) !important;
+            border-color: var(--color-primary-hover) !important;
+            color: #ffffff !important;
             box-shadow: 0 6px 18px rgba(255, 122, 0, 0.35) !important;
-            background: #FF7A00 !important;
-            background-color: #FF7A00 !important;
-        }    color: #ffffff !important;
+        }
+
+        .back-to-top {
+            background-color: var(--color-primary) !important;
+            color: #ffffff !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
+            transition: all 0.3s ease !important;
+        }
+        .back-to-top:hover {
+            background-color: var(--color-primary-hover) !important;
+            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4) !important;
+            color: #ffffff !important;
+            transform: translateY(-3px) !important;
         }
 
         .template-btn::before,

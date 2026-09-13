@@ -44,18 +44,18 @@
 @if($showSpecialGift)
 <style>
     .mc-special-gift-card {
-        background-color: #ebf5f1;
-        border: 1px solid #d1e8de;
-        border-radius: 8px;
+        background-color: var(--color-blue-tint, #EAF2FE);
+        border: 1px solid var(--color-border-tint, #C7DCFA);
+        border-radius: 12px;
         padding: 42px 28px;
         margin-bottom: 0;
     }
 
     .mc-gift-pill {
         display: inline-block;
-        background-color: #ffffff;
-        border: 1px solid #d1e8de;
-        color: #10b981;
+        background-color: var(--color-white, #ffffff);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
+        color: var(--color-primary, #0056D2);
         font-size: 0.88rem;
         font-weight: 800;
         padding: 6px 18px;
@@ -64,15 +64,15 @@
     }
 
     .mc-callout-quote {
-        background: #ffffff;
-        border-left: 4px solid #10b981;
+        background: var(--color-white, #ffffff);
+        border-left: 4px solid var(--color-primary, #0056D2);
         border-radius: 8px;
         padding: 16px 20px;
         font-style: italic;
-        color: #4a5568;
+        color: var(--color-text-secondary, #4B5A72);
         margin-top: 18px;
         margin-bottom: 18px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 4px 12px rgba(0, 31, 92, 0.04);
     }
     
     @media (max-width: 767px) {
@@ -102,7 +102,7 @@
                     @endif
 
                     @if($giftTitle)
-                        <h2 class="fw-bold text-center mb-3" style="color: #1a1b4b; font-size: 26px; line-height: 1.4;">
+                        <h2 class="fw-bold text-center mb-3" style="color: var(--color-text-ink, #0A1E3F); font-size: 26px; line-height: 1.4;">
                             {!! format_title_highlight($formatCurrencyText($giftTitle)) !!}
                         </h2>
                     @endif
@@ -134,7 +134,7 @@
                                 <div class="mc-callout-quote d-flex justify-content-between align-items-center w-100 text-start mt-2 mb-2">
                                     <div class="quote-text me-3">{!! $quote['text'] ?? '' !!}</div>
                                     @if(!empty($quote['price']))
-                                        <div class="quote-price fw-bolder px-3 py-1 rounded" style="color: #059669; background-color: #ecfdf5; font-style: normal; white-space: nowrap; font-size: 1.15rem; border: 1px solid #a7f3d0;">
+                                        <div class="quote-price fw-bolder px-3 py-1 rounded" style="color: var(--color-primary, #0056D2); background-color: var(--color-blue-tint, #EAF2FE); font-style: normal; white-space: nowrap; font-size: 1.15rem; border: 1px solid var(--color-border-tint, #D9E8FC);">
                                             {{ $formatCurrencyText($quote['price']) }}
                                         </div>
                                     @endif
