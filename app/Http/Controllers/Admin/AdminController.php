@@ -43,65 +43,47 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
+        $today = Carbon::today();
+        $thisWeek = Carbon::today()->subDays(7);
+        $thisMonth = Carbon::today()->startOfMonth();
 
-        if ($request->ajax() && $request->has('earning_report')) {
-            return app(AdvanceEarningStatistic::class)->execute($request);
+        $totalLeads = \App\Models\MarketingLead::count();
+        $todayLeads = \App\Models\MarketingLead::whereDate('created_at', $today)->count();
+        $weeklyLeads = \App\Models\MarketingLead::where('created_at', '>=', $thisWeek)->count();
+        $monthlyLeads = \App\Models\MarketingLead::where('created_at', '>=', $thisMonth)->count();
+
+        // Chart Data (Last 7 Days)
+        $chartData = [];
+        $chartLabels = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::today()->subDays($i);
+            $chartLabels[] = $date->format('M d');
+            $chartData[] = \App\Models\MarketingLead::whereDate('created_at', $date)->count();
         }
 
-        if ($request->ajax() && $request->has('best_selling_course')) {
-            $data = app(BestSellingCourse::class)->execute($request);
-
-            return view('backend.admin.dashboard.best_selling_table', ['best_selling_courses' => $data]);
+        // Chart Data (Last 30 Days)
+        $monthlyChartData = [];
+        $monthlyChartLabels = [];
+        for ($i = 29; $i >= 0; $i--) {
+            $date = Carbon::today()->subDays($i);
+            $monthlyChartLabels[] = $date->format('M d');
+            $monthlyChartData[] = \App\Models\MarketingLead::whereDate('created_at', $date)->count();
         }
 
-        $currentMonth      = Carbon::now()->format('Y-m');
+        // Recent 5 Leads
+        $recentLeads = \App\Models\MarketingLead::latest()->take(5)->get();
 
-        // Query for sales in the current month
-        $currentMonthSales = Checkout::whereRaw('DATE_FORMAT(created_at, "%Y-%m") = ?', [$currentMonth])
-            ->get()->sum('payable_amount');
-
-        $data              = [
-
-            'total_course_count'               => Course::count(),
-            'since_last_month_course_count'    => $this->sinceLastMonthWiseQuery(new Course())->count(),
-
-            'total_free_course_count'          => Course::where('is_free', 1)->count(),
-
-            'total_earning'                    => Checkout::sum('payable_amount'),
-            'since_last_month_sale'            => $this->sinceLastMonthWiseQuery(new Checkout())->sum('payable_amount'),
-
-            'courseStatisticData'              => app(CourseStatistic::class)->execute($request),
-
-            'best_selling_courses'             => app(BestSellingCourse::class)->execute($request),
-
-            'new_course_count'                 => Course::count(),
-            'total_sales'                      => Enroll::sum('price'),
-
-            'charts'                           => [
-                'enrolment'    => app(EnrolmentStatistic::class)->execute($request),
-                'earning'      => app(EarningStatistic::class)->execute($request),
-                'organization' => app(OrganizationStatistic::class)->execute($request),
-                'course'       => app(CourseStatistic::class)->execute($request),
-                'advance'      => app(AdvanceEarningStatistic::class)->execute($request),
-                'instructor'   => app(InstructorStatistic::class)->execute($request),
-                'student'      => app(StudentStatistic::class)->execute($request),
-            ],
-
-            'total_admin'                      => User::where('user_type', 'admin')->count(),
-            'total_user'                       => User::count(),
-
-            'total_course'                     => Course::count(),
-            'free_course'                      => Course::where('is_free', 1)->count(),
-            'paid_course'                      => Course::where('is_free', 0)->count(),
-            'total_lesson'                     => Lesson::count(),
-            'total_assignment'                 => Assignment::count(),
-
-            'total_sale'                       => Checkout::sum('payable_amount'),
-            'total_revenue'                    => 0,
-            'current_month_sales'              => $currentMonthSales,
+        $data = [
+            'totalLeads'         => $totalLeads,
+            'todayLeads'         => $todayLeads,
+            'weeklyLeads'        => $weeklyLeads,
+            'monthlyLeads'       => $monthlyLeads,
+            'chartLabels'        => json_encode($chartLabels),
+            'chartData'          => json_encode($chartData),
+            'monthlyChartLabels' => json_encode($monthlyChartLabels),
+            'monthlyChartData'   => json_encode($monthlyChartData),
+            'recentLeads'        => $recentLeads,
         ];
-
-        //    dd($data);
 
         return view('backend.admin.dashboard_multi', $data);
     }

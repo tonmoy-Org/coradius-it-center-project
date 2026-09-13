@@ -1,4 +1,4 @@
-﻿<div class="col-xxl-3 col-lg-4 col-md-4">
+<div class="col-xxl-3 col-lg-4 col-md-4">
     <h3 class="section-title"{{ __('theme_option') }}></h3>
     <div class="bg-white redious-border py-3 py-sm-30 mb-30">
         <div class="email-tamplate-sidenav">
@@ -23,15 +23,7 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('website.seo'))
-                    <li>
-                        <a href="{{ route('website.seo') }}"
-                           class="{{ request()->routeIs('website.seo') ? 'active' : '' }}">
-                            <span class="icon"><i class="las la-bullhorn"></i></span>
-                            <span>{{ __('website_seo') }}</span>
-                        </a>
-                    </li>
-                @endif
+
                 @if(hasPermission('custom.js'))
                     <li>
                         <a href="{{ route('custom.js') }}"

@@ -111,22 +111,17 @@
                         },
                         url: url,
                         success: function (response) {
-                            Swal.fire(
-                                response.title,
-                                response.message,
-                                response.status,
-                                response.is_reload,
-                            ).then((confirmed) => {
+                            if (response.status === 'success') {
+                                toastr.success(response.message);
+                            } else {
+                                toastr.error(response.message);
+                            }
+                            setTimeout(function() {
                                 location.reload();
-                            });
+                            }, 1500);
                         },
                         error: function (response) {
-                            Swal.fire(
-                                response.title,
-                                response.message,
-                                response.status
-                            ).then((confirmed) => {
-                            });
+                            toastr.error('An unexpected error occurred');
                         }
 
                     });

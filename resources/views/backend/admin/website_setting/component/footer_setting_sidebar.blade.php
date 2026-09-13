@@ -21,14 +21,7 @@
             </a>
         </li>
     @endif
-    @if(hasPermission('footer.quick-links'))
-        <li class="nav-item" role="presentation">
-            <a href="{{ route('footer.quick-links') }}"
-               class="nav-link ps-0 {{ request()->routeIs('footer.quick-links') ? 'active' : '' }}">
-                <span>{{ __('quick_links') }}</span>
-            </a>
-        </li>
-    @endif
+
     @if(hasPermission('footer.copyright'))
         <li class="nav-item" role="presentation">
             <a href="{{ route('footer.copyright') }}"
