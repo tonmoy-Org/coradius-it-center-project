@@ -19,14 +19,14 @@
         z-index: 10;
     }
     .counter-card-box {
-        background: #ffffff !important;
+        background: var(--color-white, #ffffff) !important;
         border-radius: 14px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 8px 24px rgba(0, 31, 92, 0.05);
         padding: 38px 20px 45px 20px;
         text-align: center;
         position: relative;
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -34,14 +34,15 @@
         width: 100%;
         height: 100%;
         min-height: 190px;
-        border: 1px solid #f1f5f9;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
     }
     .counter-card-box:hover {
         transform: translateY(-4px);
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.11);
+        border-color: var(--color-border-hover, #C7DCFA);
+        box-shadow: 0 14px 32px rgba(0, 86, 210, 0.12);
     }
     .counter-label {
-        color: #1f2937 !important;
+        color: var(--color-text-ink, #0A1E3F) !important;
         font-size: 22px !important;
         font-weight: 700 !important;
         line-height: 1.25;
@@ -51,14 +52,14 @@
     .counter-dot-line {
         width: 85px;
         height: 1px;
-        background-color: #a7f3d0;
+        background-color: var(--color-border-tint, #D9E8FC);
         margin: 8px auto 12px auto;
         position: relative;
     }
     .counter-dot {
         width: 6px;
         height: 6px;
-        background-color: #25ab7c;
+        background-color: var(--color-primary, #0056D2);
         border-radius: 50%;
         position: absolute;
         top: 50%;
@@ -66,7 +67,7 @@
         transform: translate(-50%, -50%);
     }
     .counter-number {
-        color: #25ab7c !important;
+        color: var(--color-primary, #0056D2) !important;
         font-size: 34px !important;
         font-weight: 800 !important;
         line-height: 1.1;
@@ -175,7 +176,7 @@
                         </h3>
                         <div class="counter-bottom-wave">
                             <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-                                <path d="M0.00,49.98 C150.00,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #eef9f4;"></path>
+                                <path d="M0.00,49.98 C150.00,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: var(--color-blue-tint, #EAF2FE);"></path>
                             </svg>
                         </div>
                     </div>

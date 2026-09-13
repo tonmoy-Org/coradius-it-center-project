@@ -8,30 +8,33 @@
 @if(count($cards) > 0 || $title)
 <style>
     .cow-wrapper {
-        background-color: #f4faf6; /* very light green background */
+        background-color: var(--color-blue-tint, #EAF2FE);
+        border: 1px solid var(--color-border-tint, #C7DCFA);
         border-radius: 20px;
         padding: 60px 40px;
         margin-bottom: 0px;
     }
     .cow-title { 
-        color: #1a1b4b;
+        color: var(--color-text-ink, #0A1E3F);
         font-size: 28px;
         font-weight: 800;
         text-align: center;
         margin-bottom: 50px;
     }
     .cow-card {
-        background-color: #ffffff;
+        background-color: var(--color-white, #ffffff);
         border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
+        box-shadow: 0 4px 20px rgba(0, 31, 92, 0.04);
         padding: 30px;
         height: 100%;
         display: flex;
         flex-direction: column;
     }
     .cow-card-title {
-        background-color: #dcfce7; /* light green for title bg */
-        color: #065f46; /* darker green for text */
+        background-color: var(--color-blue-tint, #EAF2FE);
+        color: var(--color-primary, #0056D2);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         padding: 16px 24px;
         border-radius: 8px;
         font-size: 20px;
@@ -47,7 +50,7 @@
         padding-top: 10px;
     }
     .cow-card-content {
-        color: #6b7280;
+        color: var(--color-text-secondary, #4B5A72);
         font-size: 15px;
         line-height: 2.2;
         padding-left: 24px; /* Align with title text */
@@ -58,7 +61,7 @@
         padding-right: 140px; /* leaves room for absolute image */
     }
     .cow-card-content strong, .cow-card-content b {
-        color: #065f46; /* bold text matches title color */
+        color: var(--color-text-ink, #0A1E3F);
     }
     .cow-card-content p {
         margin-bottom: 12px;

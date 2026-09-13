@@ -3,7 +3,7 @@
 @endphp
 
 @if(isset($hero_course) && $hero_course)
-<section class="hero-area p-t-60 p-b-60 text-center position-relative overflow-hidden" style="background-color: #123e2b;">
+<section class="hero-area p-t-60 p-b-60 text-center position-relative overflow-hidden" style="background: linear-gradient(180deg, var(--color-hero-bg-start, #001F5C) 0%, var(--color-hero-bg-end, #0B1226) 100%);">
     <!-- Floating background decorative shapes -->
     <div class="hero-bg-shapes">
         <div class="hero-shape hero-shape-1" data-speed="1.5"></div>
@@ -20,7 +20,7 @@
                     @if($hero_course->subject)
                         <div class="mb-3">
                             <a href="javascript:void(0)" style="text-decoration: none; display: inline-block;">
-                                <span class="badge hero-badge hero-badge-animated" style="background-color: rgba(255,255,255,0.15); color: #2db37c; padding: 6px 14px; border-radius: 20px; cursor: pointer;">{{ trim($hero_course->subject->title) }}</span>
+                                <span class="badge hero-badge hero-badge-animated" style="background-color: rgba(0, 86, 210, 0.2); color: #3B8AF2; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(59, 138, 242, 0.35); cursor: pointer;">{{ trim($hero_course->subject->title) }}</span>
                             </a>
                         </div>
                     @endif
@@ -41,16 +41,16 @@
                     @endif
 
                     {{-- Video or Image --}}
-                    <div class="hero-video-wrapper video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 1150px; border: 2px solid rgba(255, 193, 7, 0.5);">
+                    <div class="hero-video-wrapper video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 1150px; border: 2px solid rgba(0, 86, 210, 0.4);">
                         <!-- Border Beam SVG -->
                         <svg class="border-beam-svg">
                             <defs>
                                 <linearGradient id="beam-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#ffc107" stop-opacity="0" />
-                                    <stop offset="30%" stop-color="#ffc107" stop-opacity="0.85" />
-                                    <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
-                                    <stop offset="70%" stop-color="#ffc107" stop-opacity="0.85" />
-                                    <stop offset="100%" stop-color="#ffc107" stop-opacity="0" />
+                                    <stop offset="0%" stop-color="#FF7A00" stop-opacity="0" />
+                                    <stop offset="25%" stop-color="#FF7A00" stop-opacity="0.9" />
+                                    <stop offset="50%" stop-color="#FFB800" stop-opacity="1" />
+                                    <stop offset="75%" stop-color="#3B8AF2" stop-opacity="0.9" />
+                                    <stop offset="100%" stop-color="#0056D2" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
                             <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient)" stroke-width="2.5" rx="12" ry="12" />
@@ -99,25 +99,25 @@
 <section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
         <div class="description-card p-4 p-md-5 position-relative overflow-hidden" 
-             style="background-color: #eaf7f2; border: 1px solid #bfead8; border-radius: 20px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.05);">
+             style="background-color: var(--color-blue-tint, #EAF2FE); border: 1px solid var(--color-border-tint, #C7DCFA); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.06);">
             
             <div class="row g-4 g-lg-5 align-items-center">
                 <!-- Left Column -->
                 <div class="col-lg-6 col-md-12">
-                    <div class="quote-decorator mb-2" style="color: #10b981; font-size: 55px; line-height: 1; font-family: Georgia, serif; font-weight: bold;">
+                    <div class="quote-decorator mb-2" style="color: var(--color-primary, #0056D2); font-size: 55px; line-height: 1; font-family: Georgia, serif; font-weight: bold;">
                         “
                     </div>
                     @if($hero_course->description_subtitle)
-                        <h2 class="mb-3 fw-bold" style="color: #111827; font-size: 30px; line-height: 1.3;">
+                        <h2 class="mb-3 fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
                             {!! format_title_highlight($hero_course->description_subtitle) !!}
                         </h2>
                     @else
-                        <h2 class="mb-3 fw-bold" style="color: #111827; font-size: 30px; line-height: 1.3;">
+                        <h2 class="mb-3 fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
                             আমি আপনাদের বলতে চাই
                         </h2>
                     @endif
                     
-                    <div class="course-description-content" style="color: #374151; font-size: 16px; line-height: 1.85; font-weight: 400;">
+                    <div class="course-description-content" style="color: var(--color-text-secondary, #4B5A72); font-size: 16px; line-height: 1.85; font-weight: 400;">
                         {!! $hero_course->description !!}
                     </div>
                 </div>
@@ -136,51 +136,51 @@
                     $descBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : 'প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।';
                 @endphp
                 <div class="col-lg-6 col-md-12">
-                    <div class="p-3 p-md-4 rounded-4" style="background: rgba(255, 255, 255, 0.7); border: 1px solid #d1fae5;">
+                    <div class="p-3 p-md-4 rounded-4" style="background: var(--color-white, #FFFFFF); border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 4px 18px rgba(0, 31, 92, 0.05);">
                         <!-- Top Subtitle -->
                         @if(!empty($descRightTitle))
-                            <h4 class="fw-bold mb-4" style="color: #111827; font-size: 17.5px; line-height: 1.65;">
+                            <h4 class="fw-bold mb-4" style="color: var(--color-text-ink, #0A1E3F); font-size: 17.5px; line-height: 1.65;">
                                 {!! format_title_highlight($descRightTitle) !!}
                             </h4>
                         @endif
 
                         <!-- 3-Step Timeline Nodes -->
                         <div class="timeline-nodes-wrapper position-relative mb-4 py-2">
-                            <div class="timeline-line" style="position: absolute; top: 18px; left: 10%; right: 10%; height: 2px; background: #a7f3d0; z-index: 1;"></div>
+                            <div class="timeline-line" style="position: absolute; top: 18px; left: 10%; right: 10%; height: 2px; background: var(--color-border-tint, #D9E8FC); z-index: 1;"></div>
                             <div class="row text-center position-relative" style="z-index: 2;">
                                 <div class="col-4">
-                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: #10b981; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #10b981;"></div>
-                                    <div class="fw-bold text-dark" style="font-size: 14px;">{{ $descStep1Title }}</div>
-                                    <div class="text-muted" style="font-size: 11.5px;">{{ $descStep1Sub }}</div>
+                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
+                                    <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep1Title }}</div>
+                                    <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep1Sub }}</div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: #10b981; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #10b981;"></div>
-                                    <div class="fw-bold text-dark" style="font-size: 14px;">{{ $descStep2Title }}</div>
-                                    <div class="text-muted" style="font-size: 11.5px;">{{ $descStep2Sub }}</div>
+                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
+                                    <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep2Title }}</div>
+                                    <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep2Sub }}</div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: #10b981; border: 3px solid #ffffff; box-shadow: 0 0 0 2px #10b981;"></div>
-                                    <div class="fw-bold text-dark" style="font-size: 14px;">{{ $descStep3Title }}</div>
-                                    <div class="text-muted" style="font-size: 11.5px;">{{ $descStep3Sub }}</div>
+                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
+                                    <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep3Title }}</div>
+                                    <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep3Sub }}</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Inner Highlight Banner Card -->
                         <div class="highlight-banner-card p-3 p-md-4 rounded-3 text-center" 
-                             style="background: #ffffff; border: 2px solid #10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.12);">
+                             style="background: var(--color-white, #ffffff); border: 2px solid var(--color-primary, #0056D2); box-shadow: 0 4px 15px rgba(0, 86, 210, 0.12);">
                             <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
                                 @if(!empty($descBannerIcon))
                                     <span style="font-size: 26px;">{{ $descBannerIcon }}</span>
                                 @endif
                                 @if(!empty($descBannerTitle))
-                                    <h3 class="m-0 fw-bold" style="color: #d97706; font-size: 22px; letter-spacing: 0.5px;">
+                                    <h3 class="m-0 fw-bold" style="color: var(--color-accent-orange, #FF7A00); font-size: 22px; letter-spacing: 0.5px;">
                                         {!! format_title_highlight($descBannerTitle) !!}
                                     </h3>
                                 @endif
                             </div>
                             @if(!empty($descBannerSub))
-                                <p class="m-0 fw-semibold" style="color: #4b5563; font-size: 14.5px;">
+                                <p class="m-0 fw-semibold" style="color: var(--color-text-secondary, #4B5A72); font-size: 14.5px;">
                                     {{ $descBannerSub }}
                                 </p>
                             @endif
@@ -361,7 +361,7 @@
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background: radial-gradient(circle, #2db37c 0%, transparent 70%);
+    background: radial-gradient(circle, #3B8AF2 0%, transparent 70%);
     filter: blur(40px);
     animation: hero-float-slow 12s ease-in-out infinite;
 }
@@ -372,7 +372,7 @@
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, #10b981 0%, transparent 70%);
+    background: radial-gradient(circle, #0056D2 0%, transparent 70%);
     filter: blur(50px);
     animation: hero-float-slow-rev 15s ease-in-out infinite;
 }
@@ -435,7 +435,7 @@
     position: absolute;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(255, 193, 7, 0.22) 0%, rgba(255, 193, 7, 0.08) 45%, rgba(255, 193, 7, 0) 70%);
+    background: radial-gradient(circle, rgba(59, 138, 242, 0.22) 0%, rgba(0, 86, 210, 0.08) 45%, rgba(0, 86, 210, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
@@ -453,18 +453,18 @@
 /* Video Wrapper styling */
 .hero-video-wrapper {
     border-radius: 12px !important;
-    border-color: rgba(255, 193, 7, 0.5) !important;
-    box-shadow: 0 30px 60px -15px rgba(255, 193, 7, 0.3), 
-                0 0 50px 10px rgba(255, 193, 7, 0.08) !important;
+    border-color: rgba(0, 86, 210, 0.45) !important;
+    box-shadow: 0 30px 60px -15px rgba(0, 86, 210, 0.3), 
+                0 0 50px 10px rgba(59, 138, 242, 0.12) !important;
     transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
                 border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
     will-change: box-shadow, border-color;
 }
 
 .hero-video-wrapper:hover {
-    border-color: rgba(255, 193, 7, 0.75) !important;
-    box-shadow: 0 30px 70px -10px rgba(255, 193, 7, 0.4), 
-                0 0 60px 15px rgba(255, 193, 7, 0.12) !important;
+    border-color: rgba(255, 122, 0, 0.65) !important;
+    box-shadow: 0 30px 70px -10px rgba(0, 86, 210, 0.4), 
+                0 0 60px 15px rgba(255, 122, 0, 0.15) !important;
 }
 
 /* Border Beam SVG and rect styles */
@@ -481,7 +481,7 @@
     stroke-linecap: round;
     animation: border-beam-travel 8s linear infinite;
     will-change: stroke-dashoffset;
-    filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.6));
+    filter: drop-shadow(0 0 4px rgba(255, 122, 0, 0.7));
 }
 
 @keyframes border-beam-travel {
@@ -503,7 +503,7 @@
 .hero-badge-animated:hover {
     transform: scale(1.05);
     background-color: rgba(255, 255, 255, 0.25) !important;
-    box-shadow: 0 0 15px rgba(45, 179, 124, 0.3);
+    box-shadow: 0 0 15px rgba(59, 138, 242, 0.35);
 }
 
 /* Global button hover glow just for hero section */
@@ -514,7 +514,7 @@
 }
 .hero-btns .template-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(45, 179, 124, 0.3);
+    box-shadow: 0 10px 20px rgba(255, 122, 0, 0.35);
 }
 .hero-btns .template-btn::before {
     content: '';
@@ -592,7 +592,7 @@
     .course-description-content * {
         font-size: 14.5px !important;
         line-height: 1.65 !important;
-        color: #334155 !important;
+        color: #4B5A72 !important;
     }
     .course-description-content h1,
     .course-description-content h2,
@@ -600,7 +600,7 @@
     .course-description-content h4 {
         font-size: 16px !important;
         font-weight: 600 !important;
-        color: #0f172a !important;
+        color: #0A1E3F !important;
         margin-top: 10px !important;
         margin-bottom: 6px !important;
     }
@@ -609,14 +609,48 @@
     .course-description-content div {
         font-size: 14.5px !important;
         line-height: 1.65 !important;
-        color: #334155 !important;
+        color: #4B5A72 !important;
         margin-bottom: 8px !important;
     }
     .course-description-content strong,
     .course-description-content b {
         font-weight: 600 !important;
-        color: #10b981 !important;
+        color: #0056D2 !important;
     }
+}
+
+/* Brand overrides for course description rich text content */
+.course-description-content strong,
+.course-description-content b {
+    color: #0056D2 !important;
+}
+.course-description-content mark {
+    background-color: #FFB800 !important;
+    color: #0A1E3F !important;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.course-description-content [style*="rgb(18, 62, 43)"],
+.course-description-content [style*="#123e2b"],
+.course-description-content [style*="#0d4630"],
+.course-description-content [style*="#047857"] {
+    background-color: #001F5C !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
+    padding: 4px 12px !important;
+    display: inline-block !important;
+}
+.course-description-content [style*="rgb(79, 183, 145)"],
+.course-description-content [style*="#10b981"],
+.course-description-content [style*="#25ab7c"],
+.course-description-content [style*="#2db37c"] {
+    color: #0056D2 !important;
+}
+.course-description-content [style*="rgb(255, 255, 0)"] {
+    background-color: #FFB800 !important;
+    color: #0A1E3F !important;
+    border-radius: 4px !important;
+    padding: 2px 8px !important;
 }
 </style>
 @endpush

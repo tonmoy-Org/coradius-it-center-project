@@ -39,11 +39,11 @@
     <div class="container container-1278">
         <div class="mc-registration-section" id="register">
             @if($is_enrolled && !(auth()->check() && (auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'staff')))
-                <div class="text-center p-5 shadow-sm" style="border: 2px dashed #10b981; border-radius: 12px; background-color: #f0fdf4; margin-top: 20px; margin-bottom: 20px;">
+                <div class="text-center p-5 shadow-sm" style="border: 2px dashed var(--color-primary, #0056D2); border-radius: 12px; background-color: var(--color-blue-tint, #EAF2FE); margin-top: 20px; margin-bottom: 20px;">
                     <div class="mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary, #0056D2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                     </div>
-                    <h3 class="fw-bold mb-3" style="color: #065f46; font-size: 24px;">আপনি ইতিমধ্যে এই কোর্সে ভর্তি হয়েছেন!</h3>
+                    <h3 class="fw-bold mb-3" style="color: var(--color-text-ink, #0A1E3F); font-size: 24px;">আপনি ইতিমধ্যে এই কোর্সে ভর্তি হয়েছেন!</h3>
                     <p class="text-muted mb-4" style="font-size: 16px;">কোর্সটি শুরু করতে এখনই আপনার লার্নিং ড্যাশবোর্ডে প্রবেশ করুন।</p>
                     <a href="{{ route('my-profile') }}" class="template-btn px-5 py-3" style="font-size: 16px; border-radius: 8px;">ড্যাশবোর্ডে যান (Go to Dashboard)</a>
                     
@@ -67,7 +67,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                                 <span class="text-dark" style="font-weight: 500;">Have a coupon?</span>
-                                <a href="javascript:void(0)" class="text-decoration-none coupon-toggle" style="color: #10b981; font-weight: 500;" onclick="document.querySelector('.coupon-form-wrapper').style.display = document.querySelector('.coupon-form-wrapper').style.display === 'none' ? 'block' : 'none'">Click here to enter your code</a>
+                                <a href="javascript:void(0)" class="text-decoration-none coupon-toggle" style="color: var(--color-primary, #0056D2); font-weight: 500;" onclick="document.querySelector('.coupon-form-wrapper').style.display = document.querySelector('.coupon-form-wrapper').style.display === 'none' ? 'block' : 'none'">Click here to enter your code</a>
                             </div>
                             <div class="coupon-form-wrapper mt-4 p-4 shadow-sm" style="display: none; transition: all 0.3s ease; border: 1px dashed #e2e8f0; border-radius: 4px;">
                                 <p class="text-muted small mb-3">If you have a coupon code, please apply it below.</p>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        <h4 class="fw-bold mb-4" style="color: #1a1b4b; font-size: 22px;">Billing Details</h4>
+                        <h4 class="fw-bold mb-4" style="color: #0A1E3F; font-size: 22px;">Billing Details</h4>
                         
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-dark mb-2">{{ $nameLabel }} <span class="text-danger">*</span></label>
@@ -125,7 +125,7 @@
                     
                     <!-- Right Column: Your Order -->
                     <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
-                        <h4 class="fw-bold mb-4" style="color: #1a1b4b; font-size: 22px;">Your Order</h4>
+                        <h4 class="fw-bold mb-4" style="color: #0A1E3F; font-size: 22px;">Your Order</h4>
                         
                         <div class="order-summary-box mb-4">
                             <table class="table border-bottom" style="margin-bottom: 0;">
@@ -164,7 +164,7 @@
                                     </tr>
                                     <tr class="border-top">
                                         <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">Total</td>
-                                        <td class="py-3 border-0 text-end fw-bold" style="padding-right: 0; font-size: 20px; color: #10b981;" id="order_total">
+                                        <td class="py-3 border-0 text-end fw-bold" style="padding-right: 0; font-size: 20px; color: #0056D2;" id="order_total">
                                             {{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}
                                         </td>
                                     </tr>
