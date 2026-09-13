@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ 'Faculty - LMS Online Education Course HTML Template || Successful Order' }}</title>
+    <title>{{ 'Coradius IT Center || Successful Order' }}</title>
 
     <style>
         * {
@@ -240,7 +240,7 @@
                     <div class="invoice-header">
                         <div class="dashboard-logo float-left">
                             <a href="{{ route('home') }}" class="sticky-logo">
-                                {{-- <img src="https://lms.spagreen.net/public/frontend/img/logo.png" alt="logo" height="30"> --}}
+                                {{-- <img src="https://lms.spagreen.net/public/images/default/logo/logo.png" alt="logo" height="30"> --}}
                                 <img src="{{ $logo_url }}" alt="logo" height="30">
                             </a>
                         </div>
@@ -360,3 +360,4 @@
 </div>
 </body>
 </html>
+

@@ -36,7 +36,7 @@
                                 {{ __('30-Day Money-Back Guarantee') }}
                             </h5>
                             <p style="color: var(--color-body); font-family: var(--body-font); line-height: 1.8;">
-                                {{ __('At FacultyLMS, customer satisfaction is our highest priority. If you are not completely satisfied with your course purchase, you are eligible for a full refund within 30 calendar days from the date of purchase, provided the conditions below are met.') }}
+                                {{ __('At Coradius IT Center, customer satisfaction is our highest priority. If you are not completely satisfied with your course purchase, you are eligible for a full refund within 30 calendar days from the date of purchase, provided the conditions below are met.') }}
                             </p>
                         </div>
 
@@ -84,7 +84,7 @@
                             <ol class="ps-3" style="color: var(--color-body); font-family: var(--body-font); line-height: 2;">
                                 <li>{{ __('Log in to your account and go to your Purchase History or Support Ticket section.') }}</li>
                                 <li>{{ __('Select the course you wish to refund and click Request Refund.') }}</li>
-                                <li>{{ __('Alternatively, send an email to') }} <strong style="color: var(--theme-clr, var(--color-secondary-4));">{{ setting('contact_email') ?: 'support@facultylms.com' }}</strong> {{ __('with your order ID.') }}</li>
+                                <li>{{ __('Alternatively, send an email to') }} <strong style="color: var(--theme-clr, var(--color-secondary-4));">{{ setting('contact_email') ?: 'support@coradiusit.com' }}</strong> {{ __('with your order ID.') }}</li>
                             </ol>
                         </div>
 

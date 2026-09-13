@@ -6,13 +6,11 @@ use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\BadgeController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\LessonController;
-use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\LiveClassController;
 use App\Http\Controllers\Admin\MediaLibraryController;
 use App\Http\Controllers\Admin\PackageSolutionController;
@@ -22,9 +20,7 @@ use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SuccessStoryController;
-use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteSetting\FooterSettingController;
@@ -50,10 +46,6 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('courses/{course}/statistics', [CourseController::class, 'statistics'])->name('course.statistics');
         Route::post('course-publish', [CourseController::class, 'published'])->name('course.publish');
 
-        Route::resource('level', LevelController::class)->except(['show', 'create']);
-        Route::resource('tag', TagController::class)->except(['show', 'create']);
-        Route::resource('category', CategoryController::class)->except(['show']);
-        Route::resource('subjects', SubjectController::class)->except(['show']);
         Route::resource('sections', SectionController::class)->only(['store', 'edit', 'update', 'destroy']);
         Route::post('sections-order', [SectionController::class, 'sectionsOrder'])->name('course.sections.order');
         Route::resource('lessons', LessonController::class)->only(['store', 'edit', 'update', 'destroy']);
@@ -86,30 +78,17 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         });
         Route::delete('delete-media', [MediaLibraryController::class, 'delete'])->name('media.destroy');
 
-        //firebase setting (CMS)
-        Route::get('firebase', [WebsiteSettingController::class, 'firebase'])->name('admin.firebase');
-        Route::post('firebase', [WebsiteSettingController::class, 'firebaseUpdate'])->name('firebase.update');
 
         //chat setting (CMS)
-        Route::get('chat-messenger', [WebsiteSettingController::class, 'chatMessenger'])->name('chat.messenger');
-        Route::post('chat-messenger', [WebsiteSettingController::class, 'saveMessengerSetting'])->name('chat.messenger');
 
 
         //website setting
-        Route::get('home-page', [WebsiteSettingController::class, 'homePage'])->name('home.page.builder');
-        Route::post('home-page', [WebsiteSettingController::class, 'updateHomePage'])->name('home.page.builder');
         //website theme setting
-        Route::get('website-themes', [WebsiteSettingController::class, 'themes'])->name('website.themes');
-        Route::post('website-themes', [WebsiteSettingController::class, 'updateThemes'])->name('website.themes');
         //website theme options
         Route::get('theme-options', [WebsiteSettingController::class, 'themeOptions'])->name('theme.options');
         Route::post('theme-options', [WebsiteSettingController::class, 'updateThemesOptions'])->name('theme.options');
 
-        //website header-menu
-        Route::get('header-logo', [HeaderSettingController::class, 'headerLogo'])->name('header.logo');
 
-        Route::get('header-topbar', [HeaderSettingController::class, 'headerTopbar'])->name('header.topbar');
-        Route::get('header-menu', [HeaderSettingController::class, 'headerMenu'])->name('header.menu');
 
         //website hero
         Route::get('hero-section', [WebsiteSettingController::class, 'heroSection'])->name('hero.section');
@@ -126,35 +105,21 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         Route::get('useful-link-setting', [FooterSettingController::class, 'usefulLinkSetting'])->name('footer.useful-links');
 
-        Route::get('resource-link-setting', [FooterSettingController::class, 'resourceLinkSetting'])->name('footer.resource-links');
 
         Route::get('quick-link-setting', [FooterSettingController::class, 'quickLinkSetting'])->name('footer.quick-links');
 
-        Route::get('apps-link-setting', [FooterSettingController::class, 'appsLinkSetting'])->name('footer.apps-links');
 
         Route::get('copyright-setting', [FooterSettingController::class, 'copyrightSetting'])->name('footer.copyright');
 
-        //website popup setting
-        Route::get('website-popup', [WebsiteSettingController::class, 'popup'])->name('website.popup');
-        Route::post('website-popup', [WebsiteSettingController::class, 'savePopupSetting'])->name('website.popup');
 
-        //website popup setting
-        Route::get('call-to-action', [WebsiteSettingController::class, 'callToAction'])->name('website.cta');
-        Route::post('save-call-to-action', [WebsiteSettingController::class, 'saveCtaSetting'])->name('website.cta.save');
         Route::get('save-call-to-action', function () {
-            return redirect()->route('website.cta');
         });
 
-        //website popup setting
-        Route::get('become-instructor-content', [WebsiteSettingController::class, 'instructorContent'])->name('website.instructor_content');
-        Route::post('become-instructor-content', [WebsiteSettingController::class, 'saveInstructorContent'])->name('website.instructor_content');
 
         //website webinar section setting
-        Route::get('webinar-section', [WebsiteSettingController::class, 'webinarSection'])->name('website.webinar_section');
         Route::match(['get', 'post'], 'save-webinar-section', [WebsiteSettingController::class, 'saveWebinarSection'])->name('website.webinar_section.save');
 
         //website feature section setting
-        Route::get('feature-section', [WebsiteSettingController::class, 'featureSection'])->name('website.feature_section');
         Route::match(['get', 'post'], 'save-feature-section', [WebsiteSettingController::class, 'saveFeatureSection'])->name('website.feature_section.save');
 
         //website about section setting
@@ -166,7 +131,6 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::match(['get', 'post'], 'save-categories-of-work-section', [WebsiteSettingController::class, 'saveCategoriesOfWorkSection'])->name('website.categories_of_work_section.save');
 
         //website why choose section setting
-        Route::get('why-choose-section', [WebsiteSettingController::class, 'whyChooseSection'])->name('website.why_choose_section');
         Route::match(['get', 'post'], 'save-why-choose-section', [WebsiteSettingController::class, 'saveWhyChooseSection'])->name('website.why_choose_section.save');
 
         //website success video section setting
@@ -209,11 +173,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::resource('success-stories', SuccessStoryController::class)->except(['show']);
         Route::post('save-success-banner', [WebsiteSettingController::class, 'saveSuccessBanner'])->name('website.success_banner.save');
 
-        //testimonials
-        Route::resource('testimonials', TestimonialController::class)->except(['show']);
 
-        //brands
-        Route::resource('brands', BrandController::class)->except(['show']);
 
         /*------==== Marketing ------------------======= */
         //coupons
@@ -249,11 +209,6 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::post('live-class-status', [LiveClassController::class, 'statusChange'])->name('live.class.status');
         Route::post('pages-status', [PageController::class, 'statusChange'])->name('page.status.change');
         Route::post('coupon-status', [CouponController::class, 'statusChange'])->name('coupon.status.change');
-        Route::post('category-status', [CategoryController::class, 'statusChange'])->name('category.status.change');
-        Route::post('category-feature', [CategoryController::class, 'featuredChange'])->name('category.feature.change');
-        Route::post('subject-status', [SubjectController::class, 'statusChange'])->name('subject.status.change');
-        Route::post('level-status', [LevelController::class, 'statusChange'])->name('level.status.change');
-        Route::post('tag-status', [TagController::class, 'statusChange'])->name('tag.status.change');
         Route::post('success-status', [SuccessStoryController::class, 'statusChange'])->name('success.status.change');
         Route::post('success-feature', [SuccessStoryController::class, 'featuredChange'])->name('success.feature.change');
         Route::post('testimonial-status', [TestimonialController::class, 'statusChange'])->name('testimonial.status.change');
@@ -268,7 +223,6 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('organizations', [AjaxController::class, 'organizations'])->name('organizations');
         Route::get('success-stories', [AjaxController::class, 'successStory'])->name('stories');
         Route::get('selectedcourseID/{id}', [AjaxController::class, 'selectedCourse']);
-        Route::get('subjects', [AjaxController::class, 'subjects'])->name('subjects');
         Route::get('lessons', [AjaxController::class, 'lessons'])->name('lessons');
         Route::get('courses', [AjaxController::class, 'courses'])->name('courses');
         Route::get('blogs', [AjaxController::class, 'blogs'])->name('blogs');

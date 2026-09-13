@@ -36,7 +36,7 @@
                                 {{ __('Information We Collect') }}
                             </h5>
                             <p style="color: var(--color-body); font-family: var(--body-font); line-height: 1.8;">
-                                {{ __('We respect your personal privacy. When you register or purchase a course on FacultyLMS, we collect essential account details such as your name, email address, phone number, and transaction history.') }}
+                                {{ __('We respect your personal privacy. When you register or purchase a course on Coradius IT Center, we collect essential account details such as your name, email address, phone number, and transaction history.') }}
                             </p>
                         </div>
 

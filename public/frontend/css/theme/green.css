@@ -1,10 +1,11 @@
 /* theme-clr Theme color */
 :root {
-  --theme-clr: #25ab7c;
-  --theme-clr-rgb: 37 171 124;
-  --theme-clr-light-1: #bee6d8;
-  --theme-clr-deep-1: #264d3f;
-  --theme-clr-deep-2: #08261c;
+  --theme-clr: #0056D2;
+  --theme-clr-rgb: 0 86 210;
+  --theme-clr-light-1: #D9E8FC;
+  --theme-clr-deep-1: #072C66;
+  --theme-clr-deep-2: #031638;
+  --theme-accent-orange: #FF7A00;
 }
 
 *::-moz-selection {

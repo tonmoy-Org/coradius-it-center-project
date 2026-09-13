@@ -48,295 +48,11 @@
                                 }
                             </script>
 
-                            <div class="pageTitle mt-4">
-                                <h6 class="sub-title">{{ __('headers') }}</h6>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-6 col-sm-12">
-                                <div class="custom-radio mb-4">
-                                    <label>
-                                        <input type="radio" name="header" value="header_one" {{ setting('header') == 'header_one' ? 'checked' : '' }}>
-                                        <div class="website-theme header-section">
-                                            <div class="website-thumb">
-                                                <img src="{{ static_asset('admin/img/theme/header1.png') }}" alt="Theme">
-                                            </div>
-
-                                            <div class="website-theme-active">
-                                                <span class="check-icon"><i class="las la-check"></i></span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End Header Section 1 -->
-
-                            <div class="col-xl-4 col-lg-6 col-sm-12">
-                                <div class="custom-radio mb-4">
-                                    <label>
-                                        <input type="radio" name="header" value="header_two" {{ setting('header') == 'header_two' ? 'checked' : '' }}>
-                                        <div class="website-theme header-section">
-                                            <div class="website-thumb">
-                                                <img src="{{ static_asset('admin/img/theme/header2.png') }}" alt="Theme">
-                                            </div>
-
-                                            <div class="website-theme-active">
-                                                <span class="check-icon"><i class="las la-check"></i></span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End Header Section 2 -->
-
-                            <div class="col-xl-4 col-lg-6 col-sm-12">
-                                <div class="custom-radio mb-4">
-                                    <label>
-                                        <input type="radio" name="header" value="header_three" {{ setting('header') == 'header_three' ? 'checked' : '' }}>
-                                        <div class="website-theme header-section">
-                                            <div class="website-thumb">
-                                                <img src="{{ static_asset('admin/img/theme/header3.png') }}" alt="Theme">
-                                            </div>
-
-                                            <div class="website-theme-active">
-                                                <span class="check-icon"><i class="las la-check"></i></span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End Header Section 2 -->
-
-                            <div class="pageTitle">
-                                <h6 class="sub-title">{{ __('footer') }}</h6>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-6 col-sm-12">
-                                <div class="custom-radio mb-4">
-                                    <label>
-                                        <input type="radio" name="footer" value="footer_one" {{ setting('footer') == 'footer_one' ? 'checked' : '' }}>
-                                        <div class="website-theme header-section">
-                                            <div class="website-thumb">
-                                                <img src="{{ static_asset('admin/img/theme/footer.png') }}" alt="Theme">
-                                            </div>
-
-                                            <div class="website-theme-active">
-                                                <span class="check-icon"><i class="las la-check"></i></span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End Header Section 1 -->
-
-                            <div class="col-xl-4 col-lg-6 col-sm-12">
-                                <div class="custom-radio mb-4">
-                                    <label>
-                                        <input type="radio" name="footer" value="footer_two" {{ setting('footer') == 'footer_two' ? 'checked' : '' }}>
-                                        <div class="website-theme header-section">
-                                            <div class="website-thumb">
-                                                <img src="{{ static_asset('admin/img/theme/footer.png') }}" alt="Theme">
-                                            </div>
-
-                                            <div class="website-theme-active">
-                                                <span class="check-icon"><i class="las la-check"></i></span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End Header Section 2 -->
-
-                            <div class="col-xl-4 col-lg-6 col-sm-12">
-                                <div class="custom-radio mb-4">
-                                    <label>
-                                        <input type="radio" name="footer" value="footer_three" {{ setting('footer') == 'footer_three' ? 'checked' : '' }}>
-                                        <div class="website-theme header-section">
-                                            <div class="website-thumb">
-                                                <img src="{{ static_asset('admin/img/theme/footer.png') }}" alt="Theme">
-                                            </div>
-                                            <div class="website-theme-active">
-                                                <span class="check-icon"><i class="las la-check"></i></span>
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- End Header Section 2 -->
                         </div>
 
 
 
                         <div class="row mt-4">
-                            <div class="pageTitle">
-                                <h6 class="sub-title">{{ __('typography_settings') }}</h6>
-                            </div>
-                            <div class="col-xl-6 col-lg-12">
-                                <div class="select-type-v2 mb-4 ">
-                                    <label class="form-label">{{ __('headline_font') }}</label>
-                                    <select class="form-select form-select-lg mb-3 with_search" name="header_font" id="header_font">
-                                        <option value="">{{ __('select_fonts') }}</option>
-                                        @foreach(google_fonts_list() as $font_name => $font_family)
-                                            <option value="{{ $font_name }}" data-family="{{ $font_family }}" {{ setting('header_font') == $font_name ? 'selected' : '' }}><span>{{ $font_family }}</span></option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-6 col-lg-12">
-                                <div class="select-type-v2 mb-4 ">
-                                    <label class="form-label">{{ __('body_font') }}</label>
-                                    <select class="form-select form-select-lg mb-3 with_search" name="body_font" id="body_font">
-                                        <option value="">{{ __('select_fonts') }}</option>
-                                        @foreach(google_fonts_list() as $font_name => $font_family)
-                                            <option value="{{ $font_name }}" data-family="{{ $font_family }}" {{ setting('body_font') == $font_name ? 'selected' : '' }}><span>{{ $font_family }}</span></option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- End Body Font -->
-
-<!--                            <div class="col-lg-6">
-                                <label for="bodyFontSize" class="form-label">{{ __('body_font_size') }}</label>
-                                <input type="text" class="form-control rounded-2" id="bodyFontSize"
-                                       name="body_font_size" value="{{ setting('body_font_size') ? : '14' }}">
-                            </div>-->
-                            <!-- End Body Font Size -->
-
-                            <div class="pageTitle">
-                                <h6 class="sub-title">{{ __('color_settings') }}</h6>
-                            </div>
-
-                            <div class="col mb-4">
-                                <label for="theme_color" class="form-label">{{ __('theme_color') }}</label>
-                                <select class="form-select form-select-lg mb-3 with_search" name="theme_color">
-                                    <option @if(setting('theme_color') == 'default') selected @endif value="default">{{ __('default') }}</option>
-                                    <option @if(setting('theme_color') == 'blue') selected @endif value="blue">{{ __('blue') }}</option>
-                                    <option @if(setting('theme_color') == 'cyan') selected @endif value="cyan">{{ __('cyan') }}</option>
-                                    <option @if(setting('theme_color') == 'maroon') selected @endif value="maroon">{{ __('maroon') }}</option>
-                                    <option @if(setting('theme_color') == 'orange') selected @endif value="orange">{{ __('orange') }}</option>
-                                    <option @if(setting('theme_color') == 'olive') selected @endif value="olive">{{ __('olive') }}</option>
-                                    <option @if(setting('theme_color') == 'red') selected @endif value="red">{{ __('red') }}</option>
-                                    <option @if(setting('theme_color') == 'pink') selected @endif value="pink">{{ __('pink') }}</option>
-                                    <option @if(setting('theme_color') == 'purple') selected @endif value="purple">{{ __('purple') }}</option>
-                                    <option @if(setting('theme_color') == 'red') selected @endif value="red">{{ __('red') }}</option>
-                                    <option @if(setting('theme_color') == 'royal-blue') selected @endif value="royal-blue">{{ __('royal_blue') }}</option>
-                                    <option @if(setting('theme_color') == 'yellow') selected @endif value="yellow">{{ __('yellow') }}</option>
-                                </select>
-                            </div>
-
-{{--                            <div class="col-lg-6 mb-4">--}}
-{{--                                <label for="primaryColor" class="form-label">{{ __('primary_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="primaryColor" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('primary_color') ? : '#4E9F3D' }}" name="primary_color">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('primary_color') ? : '#4E9F3D' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            <!-- End Primary Color -->
-
-{{--                            <div class="col-lg-6 mb-4">--}}
-{{--                                <label for="secondaryColor" class="form-label">{{ __('secondary_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="secondaryColor" type="text"--}}
-{{--                                               class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('secondary_color') ? : '#333333' }}" name="secondary_color">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('secondary_color') ? : '#333333' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            <!-- End Secondary Color -->
-
-{{--                            <div class="col-lg-6 mb-4">--}}
-{{--                                <label for="linkColor" class="form-label">{{ __('link_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="linkColor" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('link_color') ? : '#4E9F3D' }}" name="link_color">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('link_color') ? : '#4E9F3D' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            <!-- End Link Color -->
-
-{{--                            <div class="col-lg-6 mb-4">--}}
-{{--                                <label for="hoverColor" class="form-label">{{ __('hover_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="hoverColor" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('hover_color') ? : '#333333' }}" name="hover_color">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('hover_color') ? : '#333333' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            <!-- End Hover Color -->
-
-{{--                            <div class="pageTitle">--}}
-{{--                                <h6 class="sub-title">{{ __('course_header_background') }}</h6>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-xl-3 col-lg-6 mb-4">--}}
-{{--                                <label for="color1" class="form-label">{{ __('1st_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="color1" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('course_header_bg_color1') ? : '#012A32' }}" name="course_header_bg_color1">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('course_header_bg_color1') ? : '#012A32' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-xl-3 col-lg-6 mb-4">--}}
-{{--                                <label for="color2" class="form-label">{{ __('2nd_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="color2" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('course_header_bg_color2') ? : '#00594A' }}" name="course_header_bg_color2">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('course_header_bg_color2') ? : '#00594A' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-xl-3 col-lg-6 mb-4">--}}
-{{--                                <label for="color3" class="form-label">{{ __('3rd_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="color3" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('course_header_bg_color3') ? : '#00737E' }}" name="course_header_bg_color3">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('course_header_bg_color3') ? : '#00737E' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col-xl-3 col-lg-6 mb-4">--}}
-{{--                                <label for="color4" class="form-label">{{ __('4th_color') }}</label>--}}
-{{--                                <div class="colorpicker_wrapper">--}}
-{{--                                    <div class="input-append color colorpicker-component" data-color-format="auto">--}}
-{{--                                        <input id="color4" type="text" class="input-medium form-control rounded-2"--}}
-{{--                                               value="{{ setting('course_header_bg_color4') ? : '#01735D' }}" name="course_header_bg_color4">--}}
-{{--                                        <span class="color_picker_trick">a</span>--}}
-{{--                                        <span class="add-on"><i--}}
-{{--                                                style="background-color: {{ setting('course_header_bg_color4') ? : '#01735D' }};"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
                             <div class="pageTitle">
                                 <h6 class="sub-title">{{ __('favicon') }}</h6>
                             </div>
@@ -358,9 +74,9 @@
                                             $icon = setting('favicon');
                                         @endphp
                                         @if($icon)
-                                            <img class="selected-img" src="{{ ($icon != [] && @is_file_exists($icon['image_96x96_url'])) ? static_asset($icon['image_96x96_url']) : static_asset('images/default/favicon/favicon-96x96.png') }}" alt="favicon">
+                                            <img class="selected-img" src="{{ ($icon != [] && @is_file_exists($icon['image_96x96_url'])) ? static_asset($icon['image_96x96_url']) : static_asset('images/default/favicon/faviocns.png') }}" alt="favicon">
                                         @else
-                                            <img class="selected-img" src="{{ static_asset('images/default/favicon/favicon-96x96.png') }}" alt="favicon">
+                                            <img class="selected-img" src="{{ static_asset('images/default/favicon/faviocns.png') }}" alt="favicon">
                                         @endif
                                     </div>
                                 </div>
@@ -402,7 +118,7 @@
                                         @if($preloader_logo)
                                             <img class="selected-img" src="{{ getFileLink('original_image',setting('preloader_logo')) }}" alt="preloader_logo">
                                         @else
-                                            <img class="selected-img" src="{{ static_asset('images/default/logo/preloader.png') }}" alt="preloader_logo">
+                                            <img class="selected-img" src="{{ static_asset('images/default/logo/logo.png') }}" alt="preloader_logo">
                                         @endif
                                     </div>
                                 </div>
@@ -440,16 +156,7 @@
                 $(ColorPickedDom).colorpicker('show');
             });
 
-            $(document).on('change', '#header_font', function () {
-                let family = $(this).find(':selected').data('family');
-                let url = "https://fonts.googleapis.com/css2?family="+family+":wght@100;200;300;400;500;700;800;900&display=swap";
-                $('.header_font_url').val(url);
-            });
-            $(document).on('change', '#body_font', function () {
-                let family = $(this).find(':selected').data('family');
-                let url = "https://fonts.googleapis.com/css2?family="+family+":wght@100;200;300;400;500;700;800;900&display=swap";
-                $('.body_font_url').val(url);
-            });
         });
     </script>
 @endpush
+

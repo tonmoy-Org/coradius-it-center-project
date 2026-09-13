@@ -75,9 +75,9 @@
     <meta name="description" content="">
     <meta name="author" content="SpaGreen">
 
-    <title>FacultyLMS | Installation</title>
+    <title>Installation | Coradius IT Center</title>
 
-    <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/favicon-96x96.png') }}">
+    <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
 
     <link rel='stylesheet' type='text/css' href="{{ static_asset('install/bootstrap/css/bootstrap.min.css') }}" />
     <link rel='stylesheet' type='text/css'
@@ -85,7 +85,7 @@
 
     <link rel='stylesheet' type='text/css' href="{{ static_asset('install/css/install.css?ver=1.0.0') }}" />
     <!--====== Color CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/theme/green.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/theme/coradius.css') }}">
 </head>
 
 <body>
@@ -94,9 +94,9 @@
         <div class="panel panel-install">
             <div class="panel-heading text-center">
                 @if (config('app.mobile_mode') == 'on')
-                    <h2>Installation | FACULTY - Flutter LMS App</h2>
+                    <h2>Installation | Coradius IT Center</h2>
                 @else
-                    <h2>Installation | FacultyLMS</h2>
+                    <h2>Installation | Coradius IT Center</h2>
                 @endif
 
             </div>
@@ -743,3 +743,4 @@
 </body>
 
 </html>
+

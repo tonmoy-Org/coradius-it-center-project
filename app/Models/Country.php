@@ -28,7 +28,7 @@ class Country extends Model
 
     public function getFlagIconAttribute()
     {
-        return $this->flag ? static_asset($this->flag->image) : static_asset('images/default/default-image-40x40.png');
+        return $this->iso2 ? 'https://flagcdn.com/w40/' . strtolower($this->iso2) . '.png' : static_asset('images/default/default-image-40x40.png');
     }
 
     public function scopeActive($query)

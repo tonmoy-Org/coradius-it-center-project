@@ -6,12 +6,12 @@
         <div class="dashboard-logo d-flex justify-content-center align-items-center py-20">
             <a class="logo" href="{{ route('admin.dashboard') }}">
                 <img
-                    src="{{ setting('admin_logo') && @is_file_exists(setting('admin_logo')['original_image']) ? get_media(setting('admin_logo')['original_image']) : get_media('images/default/logo/logo-green-white.png') }}"
+                    src="{{ setting('admin_logo') && @is_file_exists(setting('admin_logo')['original_image']) ? get_media(setting('admin_logo')['original_image']) : get_media('images/default/logo/logo.png') }}"
                     alt="Logo">
             </a>
             <a class="logo-icon" href="{{ route('admin.dashboard') }}">
                 <img
-                    src="{{ setting('admin_mini_logo') && @is_file_exists(setting('admin_mini_logo')['original_image']) ? get_media(setting('admin_mini_logo')['original_image']) : get_media('images/default/logo/logo-green-mini.png') }}"
+                    src="{{ setting('admin_mini_logo') && @is_file_exists(setting('admin_mini_logo')['original_image']) ? get_media(setting('admin_mini_logo')['original_image']) : get_media('images/default/logo/logo.png') }}"
                     alt="Logo">
             </a>
         </div>
@@ -26,7 +26,7 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('courses.index') || hasPermission('category.index') || hasPermission('subjects.index') || hasPermission('tag.index') || hasPermission('level.index'))
+                @if(hasPermission('courses.index'))
                     <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'active') }}">
                         <a href="#course" class="dropdown-icon" data-bs-toggle="collapse" role="button"
                            aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'true', 'false') }}"
@@ -42,29 +42,9 @@
                                        href="{{ route('courses.index') }}">{{ __('course_list') }}</a>
                                 </li>
                             @endif
-
-                            @if(hasPermission('category.index'))
-                                <li><a class="{{ menuActivation(['admin/category/*', 'admin/category'], 'active') }}"
-                                       href="{{ route('category.index') }}">{{ __('category') }}</a></li>
-                            @endif
-
-                            @if(hasPermission('subjects.index'))
-                                <li><a class="{{ menuActivation(['admin/subjects/*', 'admin/subjects'], 'active') }}"
-                                       href="{{ route('subjects.index') }}">{{ __('subject') }}</a></li>
-                            @endif
-                            @if(hasPermission('tag.index'))
-                                <li><a class="{{ menuActivation(['admin/tag/*', 'admin/tag'], 'active') }}"
-                                       href="{{ route('tag.index') }}">{{ __('tags') }}</a></li>
-                            @endif
-
-                            @if(hasPermission('level.index'))
-                                <li><a class="{{ menuActivation(['admin/level/*', 'admin/level'], 'active') }}"
-                                       href="{{ route('level.index') }}">{{ __('levels') }}</a></li>
-                            @endif
                         </ul>
                     </li>
                 @endif
-
                 @if(hasPermission('media-library.index'))
                     <li class="{{ menuActivation('admin/media-library', 'active') }}">
                         <a href="{{ route('media-library.index') }}">
@@ -90,7 +70,6 @@
                         </ul>
                     </li>
                 @endif
-
                 @if (addon_is_activated('accounts_system') && (hasPermission('accounts.index') || hasPermission('bank-accounts.index') || hasPermission('incomes.index') || hasPermission('expenses.index') || hasPermission('transfers.index')))
                     <li
                         class="{{ menuActivation(
@@ -149,24 +128,20 @@
                                 <li><a class="{{ menuActivation(['admin/accounts', 'admin/accounts/*'], 'active') }}"
                                        href="{{ route('accounts.index') }}">{{ __('accounts') }}</a></li>
                             @endif
-
                             @if(hasPermission('bank-accounts.index'))
                                 <li>
                                     <a class="{{ menuActivation(['admin/bank-accounts', 'admin/bank-accounts/*'], 'active') }}"
                                        href="{{ route('bank-accounts.index') }}">{{ __('bank_accounts') }}</a>
                                 </li>
                             @endif
-
                             @if(hasPermission('incomes.index'))
                                 <li><a class="{{ menuActivation(['admin/incomes', 'admin/incomes/*'], 'active') }}"
                                        href="{{ route('incomes.index') }}">{{ __('income') }}</a></li>
                             @endif
-
                             @if(hasPermission('expenses.index'))
                                 <li><a class="{{ menuActivation(['admin/expenses', 'admin/expenses/*'], 'active') }}"
                                        href="{{ route('expenses.index') }}">{{ __('expense') }}</a></li>
                             @endif
-
                             @if(hasPermission('transfers.index'))
                                 <li><a class="{{ menuActivation(['admin/transfers', 'admin/transfers/*'], 'active') }}"
                                        href="{{ route('transfers.index') }}">{{ __('transfer') }}</a></li>
@@ -174,61 +149,42 @@
                         </ul>
                     </li>
                 @endif
-                @if(hasPermission('pages.index') || hasPermission('success-stories.index') || hasPermission('testimonials.index') || hasPermission('brands.index'))
-                    <li class="{{ menuActivation(['admin/success-stories*', 'admin/pages', 'admin/create-404*', 'admin/pages*', 'admin/testimonials*', 'admin/brands*'], 'active') }}">
+                @if(hasPermission('pages.index') || hasPermission('success-stories.index'))
+                    <li class="{{ menuActivation(['admin/success-stories*', 'admin/pages', 'admin/create-404*', 'admin/pages*'], 'active') }}">
                         <a href="#cms_settings" class="dropdown-icon" data-bs-toggle="collapse"
-                           aria-expanded="{{ menuActivation(['admin/success-stories*', 'admin/create-404*', 'admin/pages', 'admin/pages*', 'admin/testimonials*', 'admin/brands*'], 'true', 'false') }}"
+                           aria-expanded="{{ menuActivation(['admin/success-stories*', 'admin/create-404*', 'admin/pages', 'admin/pages*'], 'true', 'false') }}"
                            aria-controls="cms_settings">
                             <i class="las la-layer-group"></i>
                             <span>{{ __('cms') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/success-stories*', 'admin/create-404*', 'admin/pages', 'admin/pages*', 'admin/testimonials*', 'admin/brands*'], 'show') }}"
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/success-stories*', 'admin/create-404*', 'admin/pages', 'admin/pages*'], 'show') }}"
                             id="cms_settings">
-
                             @if(hasPermission('pages.index'))
                                 <li><a class="{{ menuActivation('admin/pages*', 'active') }}"
                                        href="{{ route('pages.index') }}">{{ __('all_pages') }}</a></li>
                             @endif
-
                             @if(hasPermission('success-stories.index'))
                                 <li><a class="{{ menuActivation('admin/success-stories*', 'active') }}"
                                        href="{{ route('success-stories.index') }}">{{ __('success_story') }}</a></li>
                             @endif
-
-                            @if(hasPermission('testimonials.index'))
-                                <li><a class="{{ menuActivation('admin/testimonials*', 'active') }}"
-                                       href="{{ route('testimonials.index') }}">{{ __('testimonial') }}</a></li>
-                            @endif
-                            @if(hasPermission('brands.index'))
-                                <li><a class="{{ menuActivation('admin/brands*', 'active') }}"
-                                       href="{{ route('brands.index') }}">{{ __('brands') }}</a></li>
-                            @endif
                         </ul>
                     </li>
                 @endif
-
-                @if(hasPermission('website.themes') || hasPermission('theme.options') || hasPermission('header.logo') || hasPermission('hero.section') || hasPermission('footer.social-links') ||
-                    hasPermission('website.cta') || hasPermission('website.popup') || hasPermission('website.seo') || hasPermission('custom.js') || hasPermission('website.instructor_content') ||
-                    hasPermission('custom.css') || hasPermission('admin.firebase') || hasPermission('chat.messenger') || hasPermission('google.setup') || hasPermission('fb.pixel') || hasPermission('gdpr') ||
-                    hasPermission('home.page.builder'))
-
+                @if(hasPermission('theme.options') || hasPermission('hero.section') || hasPermission('footer.social-links') ||
+                    hasPermission('website.seo') || hasPermission('custom.js') || 
+                    hasPermission('custom.css') || hasPermission('google.setup') || hasPermission('fb.pixel') || hasPermission('gdpr')
+                    )
                     <li class="{{ menuActivation(
                         [
-                            'admin/home-page',
                             'admin/call-to-action',
                             'admin/social-link-setting',
                             'admin/newsletter-setting',
                             'admin/useful-link-setting',
-                            'admin/resource-link-setting',
                             'admin/quick-link-setting',
-                            'admin/apps-link-setting',
-                            'admin/payment-banner-setting',
                             'admin/copyright-setting',
                             'admin/become-instructor-content',
                             'admin/categories-of-work-section',
-                            'admin/header-logo',
                             'admin/theme-options',
-                            'admin/website-themes',
                             'admin/website-popup',
                             'admin/website-seo',
                             'admin/google-setup',
@@ -242,30 +198,22 @@
                             'admin/header-footer',
                             'admin/header-content',
                             'admin/footer-menu',
-                            'admin/firebase',
                             'admin/storage-setting',
-                            'admin/chat-messenger',
                         ],
                         'active',
                     ) }}">
                         <a href="#website_settings" class="dropdown-icon" data-bs-toggle="collapse"
                            aria-expanded="{{ menuActivation(
                             [
-                                'admin/home-page',
                                 'admin/social-link-setting',
                                 'admin/newsletter-setting',
                                 'admin/useful-link-setting',
-                                'admin/resource-link-setting',
                                 'admin/quick-link-setting',
-                                'admin/apps-link-setting',
-                                'admin/payment-banner-setting',
                                 'admin/copyright-setting',
                                 'admin/become-instructor-content',
                                 'admin/categories-of-work-section',
                                 'admin/call-to-action',
-                                'admin/header-logo',
                                 'admin/theme-options',
-                                'admin/website-themes',
                                 'admin/website-popup',
                                 'admin/website-seo',
                                 'admin/google-setup',
@@ -279,9 +227,7 @@
                                 'admin/header-footer',
                                 'admin/header-content',
                                 'admin/footer-menu',
-                                'admin/firebase',
                                 'admin/storage-setting',
-                                'admin/chat-messenger',
                             ],
                             'true',
                             'false',
@@ -292,22 +238,16 @@
                         </a>
                         <ul class="sub-menu collapse {{ menuActivation(
                         [
-                            'admin/home-page',
                             'admin/become-instructor-content',
                             'admin/call-to-action',
                             'admin/categories-of-work-section',
                             'admin/social-link-setting',
                             'admin/newsletter-setting',
                             'admin/useful-link-setting',
-                            'admin/resource-link-setting',
                             'admin/quick-link-setting',
-                            'admin/apps-link-setting',
-                            'admin/payment-banner-setting',
                             'admin/copyright-setting',
                             'admin/header-topbar',
-                            'admin/header-logo',
                             'admin/theme-options',
-                            'admin/website-themes',
                             'admin/website-popup',
                             'admin/website-seo',
                             'admin/google-setup',
@@ -321,103 +261,45 @@
                             'admin/header-content',
                             'admin/hero-section',
                             'admin/footer-menu',
-                            'admin/firebase',
                             'admin/storage-setting',
-                            'admin/chat-messenger',
                         ],
                         'show',
                     ) }}"
                             id="website_settings">
-
-                            @if(hasPermission('website.themes'))
-                                <li><a class="{{ menuActivation('admin/website-themes', 'active') }}"
-                                       href="{{ route('website.themes') }}">{{ __('website_themes') }}</a></li>
-                            @endif
-
                             @if(hasPermission('theme.options'))
                                 <li><a class="{{ menuActivation('admin/theme-options', 'active') }}"
                                        href="{{ route('theme.options') }}">{{ __('theme_options') }}</a></li>
                             @endif
-
-                            @if(hasPermission('header.logo'))
-                                <li>
-                                    <a class="{{ menuActivation(['admin/header-logo', 'admin/header-topbar', 'admin/header-menu'], 'active') }}"
-                                       href="{{ route('header.logo') }}">{{ __('header_content') }}</a></li>
-                            @endif
-
+                            
                             @if(hasPermission('hero.section'))
                                 <li><a class="{{ menuActivation('admin/hero-section', 'active') }}"
                                        href="{{ route('hero.section') }}">{{ __('hero_section') }}</a></li>
                             @endif
-
                             @if(hasPermission('footer.social-links'))
                                 <li><a class="{{ menuActivation([
                                 'admin/social-link-setting',
                                 'admin/newsletter-setting',
                                 'admin/useful-link-setting',
-                                'admin/resource-link-setting',
                                 'admin/quick-link-setting',
-                                'admin/apps-link-setting',
-                                'admin/payment-banner-setting',
                                 'admin/copyright-setting'
                             ], 'active') }}"
                                        href="{{ route('footer.social-links') }}">{{ __('footer_content') }}</a></li>
                             @endif
-
-                            @if(hasPermission('website.cta'))
-                                <li><a class="{{ menuActivation('admin/call-to-action', 'active') }}"
-                                       href="{{ route('website.cta') }}">{{ __('call_to_action_content') }}</a></li>
-                            @endif
-
-                            @if(hasPermission('website.popup'))
-                                <li><a class="{{ menuActivation('admin/website-popup', 'active') }}"
-                                       href="{{ route('website.popup') }}">{{ __('website_popup') }}</a></li>
-                            @endif
-
                             @if(hasPermission('website.seo'))
                                 <li><a class="{{ menuActivation('admin/website-seo', 'active') }}"
                                        href="{{ route('website.seo') }}">{{ __('website_seo') }}</a></li>
-                            @endif
-                            @if(hasPermission('custom.css'))
-                                <li><a class="{{ menuActivation('admin/custom-css', 'active') }}"
-                                       href="{{ route('custom.css') }}">{{ __('custom_css') }}</a></li>
                             @endif
                             @if(hasPermission('custom.js'))
                                 <li><a class="{{ menuActivation('admin/custom-js', 'active') }}"
                                        href="{{ route('custom.js') }}">{{ __('custom_js') }}</a></li>
                             @endif
-
-                            @if(hasPermission('website.instructor_content'))
-                                <li><a class="{{ menuActivation('admin/become-instructor-content', 'active') }}"
-                                       href="{{ route('website.instructor_content') }}">{{ __('instructor_content') }}</a>
-                                </li>
-                            @endif
-
                             @if(hasPermission('google.setup'))
                                 <li><a class="{{ menuActivation('admin/google-setup', 'active') }}"
                                        href="{{ route('google.setup') }}">{{ __('google_setup') }}</a></li>
                             @endif
-
                             @if(hasPermission('fb.pixel'))
                                 <li><a class="{{ menuActivation('admin/facebook-pixel', 'active') }}"
                                        href="{{ route('fb.pixel') }}">{{ __('fb_pixel') }}</a></li>
-                            @endif
-
-                            @if(hasPermission('gdpr'))
-                                <li><a class="{{ menuActivation('admin/gdpr', 'active') }}"
-                                       href="{{ route('gdpr') }}">{{ __('gdpr') }}</a></li>
-                            @endif
-                            @if(hasPermission('admin.firebase'))
-                                <li><a class="{{ menuActivation('admin/firebase', 'active') }}"
-                                       href="{{ route('admin.firebase') }}">{{ __('firebase') }}</a></li>
-                            @endif
-                            @if(hasPermission('chat.messenger'))
-                                <li><a class="{{ menuActivation('admin/chat-messenger', 'active') }}"
-                                       href="{{ route('chat.messenger') }}">{{ __('chat_messenger') }}</a></li>
-                            @endif
-                            @if(hasPermission('home.page.builder'))
-                                <li><a class="{{ menuActivation('admin/home-page', 'active') }}"
-                                       href="{{ route('home.page.builder') }}">{{ __('home_page_builder') }}</a></li>
                             @endif
                         </ul>
                     </li>
@@ -426,4 +308,3 @@
         </nav>
     </div>
 </header>
-

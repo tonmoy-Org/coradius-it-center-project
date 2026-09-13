@@ -36,7 +36,7 @@
                                 {{ __('Acceptance of Terms') }}
                             </h5>
                             <p style="color: var(--color-body); font-family: var(--body-font); line-height: 1.8;">
-                                {{ __('By accessing or purchasing courses on FacultyLMS, you agree to comply with and be bound by these Terms and Conditions.') }}
+                                {{ __('By accessing or purchasing courses on Coradius IT Center, you agree to comply with and be bound by these Terms and Conditions.') }}
                             </p>
                         </div>
 

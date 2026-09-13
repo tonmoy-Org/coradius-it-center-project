@@ -131,7 +131,7 @@
                         @endphp
                         <td style="text-align: center; padding-bottom:25px">
                             <a href="{{ url('/') }}">
-                                <img src="{{ static_asset('frontend/img/logo-white.png') }}" alt="Logo">
+                                <img src="{{ static_asset('images/default/logo/logo.png') }}" alt="Logo">
                             </a>
                         </td>
                     </tr>
@@ -197,3 +197,4 @@
 </center>
 </body>
 </html>
+

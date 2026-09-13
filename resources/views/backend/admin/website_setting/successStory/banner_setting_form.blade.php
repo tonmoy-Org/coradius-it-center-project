@@ -24,7 +24,7 @@
             <div class="col-lg-12">
                 <div class="mb-4">
                     <label for="success_page_banner_description" class="form-label">{{ __('description') }}</label>
-                    <textarea class="form-control" id="success_page_banner_description" name="success_page_banner_description" rows="3" placeholder="{{ __('description') }}">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Faculty.' }}</textarea>
+                    <textarea class="form-control" id="success_page_banner_description" name="success_page_banner_description" rows="3" placeholder="{{ __('description') }}">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Coradius IT Center.' }}</textarea>
                 </div>
             </div>
 

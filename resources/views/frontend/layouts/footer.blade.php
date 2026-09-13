@@ -126,7 +126,7 @@
                     <div class="footer-widget-item pe-lg-3">
                         <a href="{{ url('/') }}" class="brand-logo d-inline-block mb-3">
                             @php
-                                $src = setting('light_logo') && @is_file_exists(setting('light_logo')['original_image']) ? get_media(setting('light_logo')['original_image']) : get_media('images/default/logo/logo-green-white.png');
+                                $src = setting('light_logo') && @is_file_exists(setting('light_logo')['original_image']) ? get_media(setting('light_logo')['original_image']) : get_media('images/default/logo/logo.png');
                             @endphp
                             <img style="max-width: 150px;" src="{{ $src }}" alt="logo">
                         </a>
@@ -150,14 +150,14 @@
                             @if (is_array($useful_menu) && count($useful_menu) > 0)
                                 @foreach ($useful_menu as $usefulLink)
                                     <li class="mb-2">
-                                        <a href="{{ url($usefulLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
-                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                        <a href="{{ url($usefulLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
                                             {{ $usefulLink['label'] ?? '' }}
                                         </a>
                                     </li>
                                 @endforeach
                             @else
-                                <li class="mb-2"><a href="{{ url('/') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>{{ __('Home') }}</a></li>
+                                <li class="mb-2"><a href="{{ url('/') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>{{ __('Home') }}</a></li>
                             @endif
                         </ul>
                     </div>
@@ -178,28 +178,28 @@
                             @if (is_array($resource_menu) && count($resource_menu) > 0)
                                 @foreach ($resource_menu as $resourceLink)
                                     <li class="mb-2">
-                                        <a href="{{ url($resourceLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
-                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                        <a href="{{ url($resourceLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
                                             {{ $resourceLink['label'] ?? '' }}
                                         </a>
                                     </li>
                                 @endforeach
                             @else
                                 <li class="mb-2">
-                                    <a href="{{ route('privacy.policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
-                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                    <a href="{{ route('privacy.policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
                                         {{ __('Privacy Policy') }}
                                     </a>
                                 </li>
                                 <li class="mb-2">
-                                    <a href="{{ route('terms.conditions') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
-                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                    <a href="{{ route('terms.conditions') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
                                         {{ __('Terms & Condition') }}
                                     </a>
                                 </li>
                                 <li class="mb-2">
-                                    <a href="{{ route('refund.policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'">
-                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #10b981; vertical-align: middle;"></i>
+                                    <a href="{{ route('refund.policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
                                         {{ __('Refund Policy') }}
                                     </a>
                                 </li>
@@ -225,22 +225,22 @@
                         <div class="contact-info-list" style="font-size: 14.5px; color: #e2e8f0;">
                             @if(setting('contact_address', app()->getLocale()) ?: (setting('contact_address') ?: (setting('address') ?: '99 Roving St., Big City')))
                             <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-map-marker-alt me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
+                                <i class="fas fa-map-marker-alt me-2" style="color: #FF7A00; font-size: 16px; width: 20px;"></i>
                                 <span>{{ setting('contact_address', app()->getLocale()) ?: (setting('contact_address') ?: (setting('address') ?: '99 Roving St., Big City')) }}</span>
                             </div>
                             @endif
 
                             @if(setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com'))
                             <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-envelope me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
-                                <a href="mailto:{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}</a>
+                                <i class="fas fa-envelope me-2" style="color: #FF7A00; font-size: 16px; width: 20px;"></i>
+                                <a href="mailto:{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}</a>
                             </div>
                             @endif
 
                             @if(setting('contact_phone') ?: (setting('phone') ?: '+8801400620055'))
                             <div class="d-flex align-items-center">
-                                <i class="fas fa-phone me-2" style="color: #10b981; font-size: 16px; width: 20px;"></i>
-                                <a href="tel:{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}</a>
+                                <i class="fas fa-phone me-2" style="color: #FF7A00; font-size: 16px; width: 20px;"></i>
+                                <a href="tel:{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}</a>
                             </div>
                             @endif
                         </div>
@@ -394,4 +394,5 @@
         }
     });
 </script>
+
 

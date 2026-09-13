@@ -5,45 +5,45 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | {{ setting('system_title') != '' ? setting('system_title') : 'Pro Freelancers Academy' }}</title>
+    <title>@yield('title') | {{ setting('system_title') != '' ? setting('system_title') : 'Coradius IT Center' }}</title>
 
     @php
         $icon = setting('admin_favicon');
     @endphp
     @if ($icon)
         <link rel="apple-touch-icon" sizes="57x57"
-              href="{{ $icon != [] && @is_file_exists($icon['image_57x57_url']) ? static_asset($icon['image_57x57_url']) : static_asset('images/default/favicon/favicon-57x57.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_57x57_url']) ? static_asset($icon['image_57x57_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="60x60"
-              href="{{ $icon != [] && @is_file_exists($icon['image_60x60_url']) ? static_asset($icon['image_60x60_url']) : static_asset('images/default/favicon/favicon-60x60.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_60x60_url']) ? static_asset($icon['image_60x60_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="72x72"
-              href="{{ $icon != [] && @is_file_exists($icon['image_72x72_url']) ? static_asset($icon['image_72x72_url']) : static_asset('images/default/favicon/favicon-72x72.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_72x72_url']) ? static_asset($icon['image_72x72_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="76x76"
-              href="{{ $icon != [] && @is_file_exists($icon['image_76x76_url']) ? static_asset($icon['image_76x76_url']) : static_asset('images/default/favicon/favicon-76x76.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_76x76_url']) ? static_asset($icon['image_76x76_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="114x114"
-              href="{{ $icon != [] && @is_file_exists($icon['image_114x114_url']) ? static_asset($icon['image_114x114_url']) : static_asset('images/default/favicon/favicon-114x114.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_114x114_url']) ? static_asset($icon['image_114x114_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="120x120"
-              href="{{ $icon != [] && @is_file_exists($icon['image_120x120_url']) ? static_asset($icon['image_120x120_url']) : static_asset('images/default/favicon/favicon-120x120.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_120x120_url']) ? static_asset($icon['image_120x120_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="144x144"
-              href="{{ $icon != [] && @is_file_exists($icon['image_144x144_url']) ? static_asset($icon['image_144x144_url']) : static_asset('images/default/favicon/favicon-144x144.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_144x144_url']) ? static_asset($icon['image_144x144_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="152x152"
-              href="{{ $icon != [] && @is_file_exists($icon['image_152x152_url']) ? static_asset($icon['image_152x152_url']) : static_asset('images/default/favicon/favicon-152x152.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_152x152_url']) ? static_asset($icon['image_152x152_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="apple-touch-icon" sizes="180x180"
-              href="{{ $icon != [] && @is_file_exists($icon['image_180x180_url']) ? static_asset($icon['image_180x180_url']) : static_asset('images/default/favicon/favicon-180x180.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_180x180_url']) ? static_asset($icon['image_180x180_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="icon" type="image/png" sizes="192x192"
-              href="{{ $icon != [] && @is_file_exists($icon['image_192x192_url']) ? static_asset($icon['image_192x192_url']) : static_asset('images/favicon-192x192.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_192x192_url']) ? static_asset($icon['image_192x192_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="icon" type="image/png" sizes="32x32"
-              href="{{ $icon != [] && @is_file_exists($icon['image_32x32_url']) ? static_asset($icon['image_32x32_url']) : static_asset('images/default/favicon/favicon-32x32.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_32x32_url']) ? static_asset($icon['image_32x32_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="icon" type="image/png" sizes="96x96"
-              href="{{ $icon != [] && @is_file_exists($icon['image_96x96_url']) ? static_asset($icon['image_96x96_url']) : static_asset('images/default/favicon/favicon-96x96.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_96x96_url']) ? static_asset($icon['image_96x96_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="icon" type="image/png" sizes="16x16"
-              href="{{ $icon != [] && @is_file_exists($icon['image_16x16_url']) ? static_asset($icon['image_16x16_url']) : static_asset('images/default/favicon/favicon-16x16.png') }}">
+              href="{{ $icon != [] && @is_file_exists($icon['image_16x16_url']) ? static_asset($icon['image_16x16_url']) : static_asset('images/default/favicon/faviocns.png') }}">
         <link rel="manifest" href="{{ static_asset('images/default/favicon/manifest.json') }}">
 
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage"
-              content="{{ $icon != [] && @is_file_exists($icon['image_144x144_url']) ? static_asset($icon['image_144x144_url']) : static_asset('images/default/favicon/favicon-144x144.png') }}">
+              content="{{ $icon != [] && @is_file_exists($icon['image_144x144_url']) ? static_asset($icon['image_144x144_url']) : static_asset('images/default/favicon/faviocns.png') }}">
     @else
-        <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/favicon-96x96.png') }}">
+        <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
     <!-- CSS Files -->
     <!--====== LineAwesome ======-->
@@ -60,9 +60,9 @@
     <!--====== AppCSS ======-->
     @stack('css_asset')
     <link rel="stylesheet" href="{{ static_asset('admin/css/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ static_asset('admin/css/app.css') }}?v={{ setting('current_version') }}">
-    <link rel="stylesheet" href="{{ static_asset('admin/css/style.css') }}?v={{ setting('current_version') }}">
-    <link rel="stylesheet" href="{{ static_asset('admin/css/responsive.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('admin/css/app.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ static_asset('admin/css/style.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ static_asset('admin/css/responsive.min.css') }}?v={{ time() }}">
     @stack('css')
     <style>
         .note-editor .note-editable ul {
@@ -88,6 +88,43 @@
             display: list-item !important;
             list-style-position: outside !important;
             margin-left: 1rem !important;
+        }
+        :root {
+            --bs-primary: #014bb4 !important;
+            --bs-primary-rgb: 1, 75, 180 !important;
+            --bs-sidebar-menu-active: #014bb4 !important;
+            --sg-sidebar-menu-active: #014bb4 !important;
+            --bs-btn-hover-color: #014bb4 !important;
+            --bs-btn-hover-border-color: #014bb4 !important;
+            --bs-link-color: #014bb4 !important;
+            --bs-link-hover-color: #013a8c !important;
+            --sg-primary: #014bb4 !important;
+            --bs-body-bg-color: #ebf2fc !important;
+            --sg-body-bg-color: #ebf2fc !important;
+            --bs-table-header-bg-color: #dae8f9 !important;
+            --sg-table-header-bg-color: #dae8f9 !important;
+        }
+        
+        .btn-primary, .button-primary {
+            background-color: var(--bs-primary) !important;
+            border-color: var(--bs-primary) !important;
+        }
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+        .button-primary:hover, .button-primary:focus, .button-primary:active {
+            background-color: var(--bs-link-hover-color) !important;
+            border-color: var(--bs-link-hover-color) !important;
+        }
+        .bg-primary {
+            background-color: var(--bs-primary) !important;
+        }
+        .text-primary {
+            color: var(--bs-primary) !important;
+        }
+        .sidebar-menu li a.active, .sidebar-menu li a:hover {
+            color: var(--bs-primary) !important;
+        }
+        .sidebar-menu li a.active i, .sidebar-menu li a:hover i {
+            color: var(--bs-primary) !important;
         }
     </style>
 </head>
@@ -175,3 +212,6 @@
 </body>
 
 </html>
+
+
+

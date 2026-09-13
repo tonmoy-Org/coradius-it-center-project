@@ -1,20 +1,8 @@
 @extends('backend.layouts.base')
 @section('base.content')
-    @if (Auth::check() && auth()->user()->role_id == 2)
-        @include('backend.instructor.partials.sidebar')
-    @elseif (Auth::check() && auth()->user()->role_id == 5)
-        @include('backend.organization.partials.sidebar')
-    @else
-        @include('backend.layouts.sidebar')
-    @endif
+    @include('backend.layouts.sidebar')
     <main class="main-wrapper">
-        @if (Auth::check() && auth()->user()->role_id == 2)
-            @include('backend.instructor.partials.header')
-        @elseif (Auth::check() && auth()->user()->role_id == 5)
-            @include('backend.organization.partials.header')
-        @else
-            @include('backend.layouts.header')
-        @endif
+        @include('backend.layouts.header')
         <div class="main-content-wrapper">
             @yield('content')
         </div>

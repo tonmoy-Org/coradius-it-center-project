@@ -310,7 +310,7 @@
                         <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
                             {{ setting('success_page_banner_title') ?: 'Real People. Real Learning. Real Success.' }}
                         </h2>
-                        <p class="text-muted font-16">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Faculty.' }}</p>
+                        <p class="text-muted font-16">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Coradius IT Center.' }}</p>
                     </div>
                     <img src="{{ $successBannerUrl }}" alt="Success Banner" class="img-fluid w-100" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; max-height: 500px; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
                 </div>

@@ -30,7 +30,7 @@ hr{
     font-size: 20px;
 }
 .status.fa-check-circle-o{
-    color: #00b393;
+    color: #0056D2;
 }
 .status.fa-times-circle-o{
     color: #d73b3b;
@@ -41,7 +41,7 @@ hr{
     border-bottom: none;
 }
 .tab-title.active{
-    background: #f60002;
+    background: #0056D2;
     color: #fff;
 }
 .form-group{
@@ -61,28 +61,30 @@ hr{
     margin: 20px 0;
 }
 .panel-install>.panel-heading{
-    background: (81.05deg, #264d3f, #08261c)!important;
-    color: #93a4c3;
+    background: linear-gradient(135deg, #072C66 0%, #031638 100%) !important;
+    color: #ffffff;
     border-bottom: none;
 }
 .no-padding{
     padding: 0;
 }
 .btn-info{
-    background-color: #f60002;
+    background: #0056D2;
     border: none;
     width: 100%;
     padding: 15px;
+    font-weight: 600;
+    color: #ffffff;
 }
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active
 {
-    background-color: #00b3a2 !important;
+    background: linear-gradient(135deg, #FF7A00 0%, #E06B00 100%) !important;
     border: none !important;
 }
 .btn-info[disabled]{
-    background-color: #24BFA4 !important;
+    background-color: #94A3B8 !important;
     border: none !important;
 }
 label{

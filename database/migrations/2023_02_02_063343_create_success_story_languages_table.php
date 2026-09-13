@@ -27,7 +27,7 @@ return new class extends Migration
             'success_story_id' => 1,
             'title'            => 'Success Story',
             'lang'             => 'en',
-            'description'      => 'It took a long time for me to locate an excellent platform for my online schools. Faculty is a solid platform that
+            'description'      => 'It took a long time for me to locate an excellent platform for my online schools. Coradius IT Center is a solid platform that
                                 is simple to use and set up, as well as economical for those just getting started',
         ]);
     }

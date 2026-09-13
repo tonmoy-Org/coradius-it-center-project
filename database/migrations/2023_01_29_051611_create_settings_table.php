@@ -27,7 +27,7 @@ return new class extends Migration
         $data = [
             [
                 'title'      => 'system_name',
-                'value'      => '"Faculty - Learning Management System"',
+                'value'      => '"Coradius IT Center - Learning Management System"',
                 'status'     => 1,
                 'lang'       => 'en',
                 'created_at' => $now,
@@ -211,7 +211,7 @@ return new class extends Migration
             ],
             [
                 'title'      => 'primary_color',
-                'value'      => '"#4E9F3D"',
+                'value'      => '"#0056D2"',
                 'status'     => 1,
                 'lang'       => 'en',
                 'created_at' => $now,
@@ -219,7 +219,7 @@ return new class extends Migration
             ],
             [
                 'title'      => 'secondary_color',
-                'value'      => '"#333333"',
+                'value'      => '"#FF7A00"',
                 'status'     => 1,
                 'lang'       => 'en',
                 'created_at' => $now,
@@ -227,7 +227,7 @@ return new class extends Migration
             ],
             [
                 'title'      => 'link_color',
-                'value'      => '"#4E9F3D"',
+                'value'      => '"#0056D2"',
                 'status'     => 1,
                 'lang'       => 'en',
                 'created_at' => $now,
@@ -235,7 +235,7 @@ return new class extends Migration
             ],
             [
                 'title'      => 'hover_color',
-                'value'      => '"#333333"',
+                'value'      => '"#FF7A00"',
                 'status'     => 1,
                 'lang'       => 'en',
                 'created_at' => $now,
