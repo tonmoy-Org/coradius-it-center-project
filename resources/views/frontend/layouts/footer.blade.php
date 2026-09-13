@@ -1,7 +1,5 @@
-@php
-    $showNewsletter = request()->routeIs('home') 
-        || request()->is('/') 
-        || isHome();
+﻿@php
+    $showNewsletter = (request()->routeIs('home') || request()->is('/') || isHome()) && setting('show_newsletter') == 1;
 
     $userIp = request()->ip();
     $cacheKey = 'sticky_promo_timer_v2_' . str_replace(':', '_', $userIp);
@@ -32,10 +30,10 @@
                 <!-- Column 1: Newsletter Title & Description -->
                 <div class="col-lg-6 col-md-12">
                     <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
-                        {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
+                        {{ setting('newsletter_title', app()->getLocale()) }}
                     </h3>
                     <p class="mb-0" style="color: #4b5563; font-size: 14px; line-height: 1.5;">
-                        {{ setting('newsletter_description', app()->getLocale()) ?: (setting('newsletter_description') ?: __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')) }}
+                        {{ setting('newsletter_description', app()->getLocale()) ?: setting('newsletter_description') }}
                     </p>
                 </div>
 
@@ -394,5 +392,6 @@
         }
     });
 </script>
+
 
 

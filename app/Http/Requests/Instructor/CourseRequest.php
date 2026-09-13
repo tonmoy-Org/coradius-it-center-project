@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Requests\Instructor;
 
@@ -25,12 +25,6 @@ class CourseRequest extends FormRequest
     {
         $rules = [
             'title'           => 'required',
-            'category_id'     => 'required',
-            'language_id'     => 'required',
-            'level_id'        => 'required',
-            'organization_id' => 'required',
-            'instructor_ids'  => 'required',
-            'duration'        => 'required',
             'price'           => 'nullable|numeric',
             'meta_image'      => 'nullable|integer',
         ];
@@ -51,3 +45,4 @@ class CourseRequest extends FormRequest
         }
     }
 }
+

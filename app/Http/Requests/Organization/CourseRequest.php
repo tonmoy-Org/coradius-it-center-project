@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Requests\Organization;
 
@@ -25,12 +25,6 @@ class CourseRequest extends FormRequest
     {
         $rules = [
             'title'           => 'required',
-            'category_id'     => 'required',
-            'language_id'     => 'required',
-            'level_id'        => 'required',
-            'organization_id' => 'required',
-            'instructor_ids'  => 'required',
-            'duration'        => 'required',
             'price'           => 'required_without:is_free',
             'discount_type'   => 'required_with:is_discountable',
             'discount'        => 'required_with:is_discountable',
@@ -45,3 +39,4 @@ class CourseRequest extends FormRequest
         return $rules;
     }
 }
+

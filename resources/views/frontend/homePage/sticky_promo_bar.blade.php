@@ -1,12 +1,12 @@
-@php
+﻿@php
     $showStickyBar = setting('show_sticky_promo_bar');
-    $title = setting('sticky_promo_title') ?: 'অফার শেষ হওয়ার আগেই কিনুন';
+    $title = setting('sticky_promo_title');
     
     $mcSettings = [];
     if (isset($course) && $course) {
         $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
     }
-    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : (setting('sticky_promo_btn_text') ?: 'Enroll Now');
+    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : setting('sticky_promo_btn_text');
     $btnText = $heroBtnText;
     $rawBtnLink = setting('sticky_promo_btn_link');
     if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
@@ -430,3 +430,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 @endif
+

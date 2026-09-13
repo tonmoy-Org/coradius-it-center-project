@@ -155,172 +155,6 @@
                                     </div>
                                     <!-- End Course Subtitle -->
 
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="select_category"
-                                                       class="form-label">{{ __('select_category') }}</label>
-                                                <select id="select_category" name="category_id"
-                                                        data-route="{{ route('ajax.categories') }}"
-                                                        class="form-select-lg rounded-0 mb-3"
-                                                        aria-label=".form-select-lg example">
-                                                    @if ($category)
-                                                        <option value="{{ $category->id }}" selected>
-                                                            {{ $category->title }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('category_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Category -->
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="courseType"
-                                                       class="form-label">{{ __('course_type') }}</label>
-                                                <select id="courseType" name="course_type"
-                                                        class="form-select form-select-lg mb-3 without_search selectcourse"
-                                                        aria-label=".form-select-lg">
-
-                                                    <option value="course"
-                                                        {{ old('course_type', $course->course_type) == 'course' ? 'selected' : '' }}>
-                                                        {{ __('course') }}</option>
-                                                    <option value="live_class"
-                                                        {{ old('course_type', $course->course_type) == 'live_class' ? 'selected' : '' }}>
-                                                        {{ __('live_class') }}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Type -->
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="language_id" class="form-label">{{ __('language') }}</label>
-                                                <select id="language_id"
-                                                        class="form-select form-select-lg mb-3 with_search"
-                                                        name="language_id">
-                                                    <option value="">{{ __('select_language') }}</option>
-                                                    @foreach ($languages as $language)
-                                                        <option value="{{ $language->id }}"
-                                                            {{ old('language_id', $course->language_id) == $language->id ? 'selected' : '' }}>
-                                                            {{ $language->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('language_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Language -->
-
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="courseLevel"
-                                                       class="form-label">{{ __('course_level') }}</label>
-                                                <select id="courseLevel"
-                                                        class="form-select form-select-lg mb-3 with_search"
-                                                        name="level_id"
-                                                        aria-label=".form-select-lg">
-                                                    <option value="">{{ __('select_level') }}</option>
-                                                    @foreach ($levels as $level)
-                                                        <option value="{{ $level->id }}"
-                                                            {{ old('level_id', $course->level_id) == $level->id ? 'selected' : '' }}>
-                                                            {{ $level->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('level_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Level -->
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="ins_by_org"
-                                                       class="form-label">{{ __('select_organization') }}</label>
-                                                <select id="ins_by_org" name="organization_id"
-                                                        data-route="{{ route('ajax.organizations') }}"
-                                                        class="form-select-lg rounded-0 mb-3 with_search"
-                                                        aria-label=".form-select-lg example"
-                                                        data-url="{{ route('ajax.instructors') }}">
-                                                    <option value="">{{ __('select_organization') }}</option>
-                                                    @if ($organization)
-                                                        <option value="{{ $organization->id }}" selected>
-                                                            {{ $organization->org_name }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('organization_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Organisation -->
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="instructor_ids"
-                                                       class="form-label">{{ __('instructor') }}</label>
-                                                <select id="instructor_ids" name="instructor_ids[]" multiple
-                                                        class="form-select form-select-lg mb-3 without_search"
-                                                        aria-label=".form-select-lg">
-                                                    @foreach ($instructors as $instructor)
-                                                        <option value="{{ $instructor->id }}"
-                                                            {{ old('instructor_ids', $course->instructor_ids) && in_array($instructor->id, old('instructor_ids', $course->instructor_ids)) ? 'selected' : '' }}>
-                                                            {{ $instructor->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('instructor_ids') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Instructor -->
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <label for="courseDuration"
-                                                   class="form-label">{{ __('course_duration') }}</label>
-                                            <input type="text" class="form-control rounded-2" id="courseDuration"
-                                                   name="duration"
-                                                   value="{{ old('duration', $course->duration) }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('duration') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Duration -->
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="multi-select-v2 mb-4">
-                                            <label for="tag" class="form-label">{{ __('course_tag') }}</label>
-                                            <select id="tag" multiple
-                                                    class="form-select form-select-lg mb-3 with_search" name="tags[]"
-                                                    aria-label=".form-select-lg">
-                                                @foreach ($tags as $tag)
-                                                    <option value="{{ $tag->id }}"
-                                                        {{ old('tags', $course->tags) && in_array($tag->id, old('tags', $course->tags)) ? 'selected' : '' }}>
-                                                        {{ $tag->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Tag -->
-
                                     <div class="col-lg-12">
                                         <div class="mb-4">
                                             <div class="d-flex justify-content-between">
@@ -383,43 +217,17 @@
                                                       name="description">{!! old('description', $course->description) !!}</textarea>
                                         </div>
 
-                                        <div class="row mt-3">
-                                            <div class="custom-checkbox mt-12 col-6">
-                                                <label>
-                                                    <input type="checkbox" value="1" name="is_private"
-                                                        {{ old('is_private', $course->is_private) == 1 ? 'checked' : '' }}>
-                                                    <span>{{ __('private_course') }}</span>
-                                                </label>
-                                            </div>
-                                            <div class="col-6 d-flex align-items-center">
-                                                <label class="col-6 text-end px-4" for="course_status">Change
-                                                    Status</label>
-                                                <div class="col-6">
-                                                    <select name="status" id="course_status"
-                                                            class="form-control form-select form-select-lg mb-3 without_search">
-                                                        <option
-                                                            {{ $course->status == 'draft' ? 'selected' : '' }}
-                                                            value="draft">Draft
-                                                        </option>
-                                                        <option
-                                                            {{ $course->status == 'in_review' ? 'selected' : '' }}
-                                                            value="in_review">In
-                                                            Review
-                                                        </option>
-                                                        <option
-                                                            {{ $course->status == 'rejected' ? 'selected' : '' }}
-                                                            value="rejected">Rejected
-                                                        </option>
-                                                        <option
-                                                            {{ $course->status == 'approved' ? 'selected' : '' }}
-                                                            value="approved">Approved
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                                                <!-- Hidden inputs for status and private course to maintain existing data without showing UI -->
+                                        <input type="hidden" name="is_private" value="{{ $course->is_private }}">
+                                        <input type="hidden" name="status" value="{{ $course->status }}">
                                     </div>
                                     <!-- End Description -->
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
                                 </div>
                             </div>
                             <!-- End Basic Course Information -->
@@ -563,7 +371,7 @@
                                     <!-- Section 2: Course Description Right Feature Card -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Course Description Right Box Settings</span>
+                                            <span class="form-label m-0">Course Description Right Box Settings</span>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
@@ -574,7 +382,7 @@
                                                                 {{ !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
                                                             <label for="show_desc_right_box"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_desc_right_box">Show Course Description Right Box</label>
+                                                        <label class="form-label mb-0 cursor-pointer" for="show_desc_right_box">Show Course Description Right Box</label>
                                                     </div>
                                                 </div>
 
@@ -587,37 +395,37 @@
 
                                                 <!-- 3 Timeline Steps -->
                                                 <div class="col-12 mb-4">
-                                                    <label class="form-label mb-2 fw-semibold">Timeline Steps</label>
+                                                    <label class="form-label">Timeline Steps</label>
                                                     <div class="row g-3">
                                                         <div class="col-md-4">
                                                             <div class="p-3 bg-light rounded-3 border">
-                                                                <h6 class="fw-bold mb-2 text-primary font-14">Step 1</h6>
-                                                                <label class="form-label font-12 text-muted">Title</label>
+                                                                <label class="form-label mb-2">Step 1</label>
+                                                                <label class="form-label">Title</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_1_title]" class="form-control rounded-2 bg-white mb-2"
                                                                        value="{{ $defDescStep1Title }}">
-                                                                <label class="form-label font-12 text-muted">Subtitle</label>
+                                                                <label class="form-label">Subtitle</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_1_sub]" class="form-control rounded-2 bg-white"
                                                                        value="{{ $defDescStep1Sub }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="p-3 bg-light rounded-3 border">
-                                                                <h6 class="fw-bold mb-2 text-primary font-14">Step 2</h6>
-                                                                <label class="form-label font-12 text-muted">Title</label>
+                                                                <label class="form-label mb-2">Step 2</label>
+                                                                <label class="form-label">Title</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_2_title]" class="form-control rounded-2 bg-white mb-2"
                                                                        value="{{ $defDescStep2Title }}">
-                                                                <label class="form-label font-12 text-muted">Subtitle</label>
+                                                                <label class="form-label">Subtitle</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_2_sub]" class="form-control rounded-2 bg-white"
                                                                        value="{{ $defDescStep2Sub }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="p-3 bg-light rounded-3 border">
-                                                                <h6 class="fw-bold mb-2 text-primary font-14">Step 3</h6>
-                                                                <label class="form-label font-12 text-muted">Title</label>
+                                                                <label class="form-label mb-2">Step 3</label>
+                                                                <label class="form-label">Title</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_3_title]" class="form-control rounded-2 bg-white mb-2"
                                                                        value="{{ $defDescStep3Title }}">
-                                                                <label class="form-label font-12 text-muted">Subtitle</label>
+                                                                <label class="form-label">Subtitle</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_3_sub]" class="form-control rounded-2 bg-white"
                                                                        value="{{ $defDescStep3Sub }}">
                                                             </div>
@@ -627,20 +435,20 @@
 
                                                 <!-- Highlight Banner Card -->
                                                 <div class="col-12">
-                                                    <label class="form-label mb-2 fw-semibold">Highlight Banner Card</label>
+                                                    <label class="form-label">Highlight Banner Card</label>
                                                     <div class="row g-3">
                                                         <div class="col-md-3">
-                                                            <label class="form-label font-12 text-muted">Icon / Emoji</label>
+                                                            <label class="form-label">Icon / Emoji</label>
                                                             <input type="text" name="masterclass_settings[desc_banner_icon]" class="form-control rounded-2"
                                                                    value="{{ $defDescBannerIcon }}">
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <label class="form-label font-12 text-muted">Card Heading</label>
+                                                            <label class="form-label">Card Heading</label>
                                                             <input type="text" name="masterclass_settings[desc_banner_title]" class="form-control rounded-2"
                                                                    value="{{ $defDescBannerTitle }}">
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <label class="form-label font-12 text-muted">Card Subtitle</label>
+                                                            <label class="form-label">Card Subtitle</label>
                                                             <input type="text" name="masterclass_settings[desc_banner_sub]" class="form-control rounded-2"
                                                                    value="{{ $defDescBannerSub }}">
                                                         </div>
@@ -650,6 +458,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                                         </div> <!-- End masterclass-single-page-wrapper -->
                                     </div>
                                     <div class="tab-pane fade {{ $request_tab == 'benefits' ? 'show active' : '' }}"
@@ -658,7 +471,7 @@
                                     <!-- Section 3: Benefits Section -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Benefits & Target Audience</span>
+                                            <span class="form-label m-0">Benefits & Target Audience</span>
                                             <button type="button" class="btn sg-btn-primary btn-sm rounded-2" id="add_new_benefit_btn">
                                                 Add New Benefit Point <i class="las la-plus ms-1"></i>
                                             </button>
@@ -672,7 +485,7 @@
                                                                 {{ !empty($mcSettings['show_benefits_section']) ? 'checked' : '' }}>
                                                             <label for="show_benefits_section"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_benefits_section">Show Benefits & Target Audience Section</label>
+                                                        <label class="form-label mb-0 cursor-pointer" for="show_benefits_section">Show Benefits & Target Audience Section</label>
                                                     </div>
                                                 </div>
 
@@ -701,6 +514,11 @@
                                             </div>
                                         </div>
                                      </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                                         </div> <!-- End masterclass-single-page-wrapper -->
                                     </div>
                                     <div class="tab-pane fade {{ $request_tab == 'gift_banner' ? 'show active' : '' }}"
@@ -709,7 +527,7 @@
                                     <!-- Section 4: Special Bonus Gift -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Special Gift Banner Offer</span>
+                                            <span class="form-label m-0">Special Gift Banner Offer</span>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
@@ -720,7 +538,7 @@
                                                                 {{ isset($mcSettings['show_special_gift']) ? ($mcSettings['show_special_gift'] ? 'checked' : '') : (empty($mcSettings['hide_special_gift']) ? 'checked' : '') }}>
                                                             <label for="show_gift"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_gift">Show Special Gift Banner Card</label>
+                                                        <label class="form-label mb-0 cursor-pointer" for="show_gift">Show Special Gift Banner Card</label>
                                                     </div>
                                                 </div>
 
@@ -785,11 +603,11 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-8">
-                                                                        <label class="form-label small">Text/Quote</label>
+                                                                        <label class="form-label">Text/Quote</label>
                                                                         <textarea name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][text]" class="form-control rounded-2 bg-white summernote" rows="2">{{ $gqItem['text'] ?? '' }}</textarea>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <label class="form-label small">Price</label>
+                                                                        <label class="form-label">Price</label>
                                                                         <input type="text" name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][price]" class="form-control rounded-2 bg-white" value="{{ $gqItem['price'] ?? '' }}">
                                                                     </div>
                                                                 </div>
@@ -802,6 +620,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                                         </div> <!-- End masterclass-single-page-wrapper -->
                                     </div>
                                     <div class="tab-pane fade {{ $request_tab == 'offer_breakdown' ? 'show active' : '' }}"
@@ -810,19 +633,17 @@
                                     <!-- Section 3.5: Offer Breakdown -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Offer Breakdown Section</span>
+                                            <span class="form-label m-0">Offer Breakdown Section</span>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
                                                 <div class="col-12 mb-3">
                                                     <div class="d-flex align-items-center gap-2">
                                                         <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[breakdown_status]" value="1"
-                                                                   id="breakdown_status"
-                                                                   {{ !empty($mcSettings['breakdown_status']) ? 'checked' : '' }}>
+                                                            <input type="checkbox" name="masterclass_settings[breakdown_status]" value="1" id="breakdown_status" {{ !empty($mcSettings['breakdown_status']) ? 'checked' : '' }}>
                                                             <label for="breakdown_status"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="breakdown_status">Show Offer Breakdown Section</label>
+                                                        <label class="form-label mb-0 cursor-pointer" for="breakdown_status">Show Offer Breakdown Section</label>
                                                     </div>
                                                 </div>
 
@@ -865,6 +686,11 @@
                                             </div>
                                         </div>
                                      </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                                         </div> <!-- End masterclass-single-page-wrapper -->
                                     </div>
                                     <div class="tab-pane fade {{ $request_tab == 'ad_banners' ? 'show active' : '' }}"
@@ -873,13 +699,13 @@
                                     <!-- Section 10: Masterclass Ad Banners (1 & 2) -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Ad Banners</span>
+                                            <span class="form-label m-0">Ad Banners</span>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
                                                 <!-- Banner 1 -->
                                                 <div class="col-12">
-                                                    <label class="form-label font-15  mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
+                                                    <label class="form-label mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
                                                     <div class="d-flex align-items-center gap-2">
@@ -888,7 +714,7 @@
                                                                 {{ !empty($mcSettings['ad_banner_1_status']) ? 'checked' : '' }}>
                                                             <label for="ad_banner_1_status"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="ad_banner_1_status">Enable Ad Banner 1</label>
+                                                        <label class="form-label mb-0 cursor-pointer" for="ad_banner_1_status">Enable Ad Banner 1</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -919,7 +745,7 @@
 
                                                 <!-- Banner 2 -->
                                                 <div class="col-12 mt-3">
-                                                    <label class="form-label font-15  mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
+                                                    <label class="form-label mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
                                                     <div class="d-flex align-items-center gap-2">
@@ -928,7 +754,7 @@
                                                                 {{ !empty($mcSettings['ad_banner_2_status']) ? 'checked' : '' }}>
                                                             <label for="ad_banner_2_status"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="ad_banner_2_status">Enable Ad Banner 2</label>
+                                                        <label class="form-label mb-0 cursor-pointer" for="ad_banner_2_status">Enable Ad Banner 2</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -959,6 +785,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                                         </div> <!-- End masterclass-single-page-wrapper -->
                                     </div>
                                     <div class="tab-pane fade {{ $request_tab == 'support' ? 'show active' : '' }}"
@@ -968,7 +799,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
-                                        <button type="submit" class="btn sg-btn-primary px-4"><i class="las la-save me-1"></i> {{ __('update') }} {{ __('masterclass') }}</button>
+
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -1060,6 +892,12 @@
                                                 <span class="">{{ __('downloadable') }}</span>
                                             </label>
                                         </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -1162,6 +1000,12 @@
                                     <!-- End Date Range Picker -->
                                 </div>
                                 <!-- End Product images section -->
+
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                             </div>
                             <!-- End Course Pricing -->
 
@@ -1179,7 +1023,7 @@
                                                     {{ !isset($mcSettings['show_curriculum_section']) || !empty($mcSettings['show_curriculum_section']) ? 'checked' : '' }}>
                                                 <label for="show_curriculum_section"></label>
                                             </div>
-                                            <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_curriculum_section">{{ __('Show Curriculum Section on Landing Page') }}</label>
+                                            <label class="form-label mb-0 cursor-pointer" for="show_curriculum_section">{{ __('Show Curriculum Section on Landing Page') }}</label>
                                         </div>
                                         <div class="form-group">
                                             <label for="curriculum_title" class="form-label">{{ __('Curriculum Section Title') }}</label>
@@ -1391,6 +1235,11 @@
                                     </div>
 
                                 </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                             </div>
                             <!-- End Curriculum Tab -->
 
@@ -1517,6 +1366,11 @@
                                     <!-- End Meeting Password -->
 
                                 </div>
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                    </div>
+                                </div>
                             </div>
                             <!-- End Live Class Tab -->
 
@@ -1532,7 +1386,7 @@
                                         <!-- FAQ Section Title & Settings -->
                                         <div class="card mb-4 mt-2 border-0 shadow-sm">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-3">{{ __('FAQ Section Title & Tag') }}</h5>
+                                                <span class="form-label mb-3 d-block">{{ __('FAQ Section Title & Tag') }}</span>
                                                 
                                                 <div class="form-group mb-3">
                                                     <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
@@ -1552,7 +1406,7 @@
                                         <!-- FAQ Image Upload -->
                                         <div class="card mb-4 mt-2 border-0 shadow-sm">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-3">{{ __('FAQ Section Image') }}</h5>
+                                                <span class="form-label mb-3 d-block">{{ __('FAQ Section Image') }}</span>
                                                 <p class="text-muted mb-4">{{ __('Upload an image to display on the right side of the FAQ section on the single course page.') }}</p>
                                                 @include('backend.common.media-input', [
                                                     'title' => __('FAQ Image'),
@@ -1787,11 +1641,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <label class="form-label small">Text/Quote</label>
+                                <label class="form-label">Text/Quote</label>
                                 <textarea name="masterclass_settings[gift_quotes_list][${index}][text]" class="form-control rounded-2 bg-white summernote" rows="2"></textarea>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label small">Price</label>
+                                <label class="form-label">Price</label>
                                 <input type="text" name="masterclass_settings[gift_quotes_list][${index}][price]" class="form-control rounded-2 bg-white">
                             </div>
                         </div>
@@ -2160,3 +2014,14 @@
         }
     </script>
 @endpush
+
+
+
+
+
+
+
+
+
+
+
