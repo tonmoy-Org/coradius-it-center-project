@@ -74,7 +74,7 @@
         font-weight: 800 !important;
         line-height: 1.1;
         letter-spacing: -0.02em;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-family: var(--header-font, "Outfit", "Hind Siliguri", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
     }
     .counter-bottom-wave {
         position: absolute;
@@ -88,24 +88,21 @@
         border-bottom-right-radius: 14px;
     }
     @media (max-width: 767.98px) {
-        .hero-area {
-            padding-bottom: 25px !important;
-        }
         .counter-section-standalone {
-            padding-top: 25px !important;
-            padding-bottom: 0px !important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
         .course-description-section {
-            padding-top: 25px !important;
-            padding-bottom: 25px !important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
         .about-me-section {
-            padding-top: 25px !important;
-            padding-bottom: 25px !important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
         .categories-of-work-section {
-            padding-top: 25px !important;
-            padding-bottom: 25px !important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
         .counter-card-box {
             padding: 22px 10px 28px 10px !important;
@@ -193,29 +190,84 @@ document.addEventListener('DOMContentLoaded', function() {
     const counterElements = document.querySelectorAll('.counter-number[data-count]');
     if (!counterElements.length) return;
 
+    const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    const arDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+    function toAsciiDigits(str) {
+        return str
+            .replace(/[০-৯]/g, d => bnDigits.indexOf(d))
+            .replace(/[٠-٩]/g, d => arDigits.indexOf(d));
+    }
+
+    function toBanglaDigits(str) {
+        return str.replace(/[0-9]/g, d => bnDigits[d]);
+    }
+
+    function toArabicDigits(str) {
+        return str.replace(/[0-9]/g, d => arDigits[d]);
+    }
+
     function animateCounter(el) {
-        const rawString = el.getAttribute('data-count') || el.innerText;
-        const match = rawString.match(/([0-9]+(?:\.[0-9]+)?)/);
+        if (el.dataset.counterAnimated === 'true') return;
+        el.dataset.counterAnimated = 'true';
+
+        const rawString = (el.getAttribute('data-count') || el.innerText || '').trim();
+        if (!rawString) return;
+
+        // Match numeric part across English (0-9), Bangla (০-৯), and Arabic (٠-٩) digits
+        const match = rawString.match(/([0-9\u09E6-\u09EF\u0660-\u0669]+(?:,[0-9\u09E6-\u09EF\u0660-\u0669]+)*(?:\.[0-9\u09E6-\u09EF\u0660-\u0669]+)?)/);
         if (!match) return;
 
-        const targetNum = parseFloat(match[0]);
-        const numStr = match[0];
-        const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
-        
+        const rawMatched = match[0];
+        const isBangla = /[\u09E6-\u09EF]/.test(rawMatched);
+        const isArabic = /[\u0660-\u0669]/.test(rawMatched);
+        const hasCommas = rawMatched.includes(',');
+
+        // Convert matched digits to ASCII for calculation
+        const asciiMatched = toAsciiDigits(rawMatched);
+        const cleanNumberStr = asciiMatched.replace(/,/g, '');
+        const targetNum = parseFloat(cleanNumberStr);
+        if (isNaN(targetNum)) return;
+
+        // Determine decimal precision if present
+        const decimalParts = cleanNumberStr.split('.');
+        const decimals = decimalParts.length > 1 ? decimalParts[1].length : 0;
+
         const prefix = rawString.substring(0, match.index);
-        const suffix = rawString.substring(match.index + match[0].length);
+        const suffix = rawString.substring(match.index + rawMatched.length);
 
         const duration = 2000;
         const startTime = performance.now();
 
+        // Helper to format numbers with commas and appropriate digit locale
+        function formatVal(val) {
+            let numStr = decimals > 0 ? val.toFixed(decimals) : Math.floor(val).toString();
+            if (hasCommas) {
+                const parts = numStr.split('.');
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                numStr = parts.join('.');
+            }
+            if (isBangla) {
+                return toBanglaDigits(numStr);
+            }
+            if (isArabic) {
+                return toArabicDigits(numStr);
+            }
+            return numStr;
+        }
+
+        // Initialize display to starting state
+        el.innerText = prefix + formatVal(0) + suffix;
+
         function update(currentTime) {
             const elapsedTime = currentTime - startTime;
             const progress = Math.min(elapsedTime / duration, 1);
-            
+
+            // Smooth cubic ease-out
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentNum = easeProgress * targetNum;
 
-            el.innerText = prefix + currentNum.toFixed(decimals) + suffix;
+            el.innerText = prefix + formatVal(currentNum) + suffix;
 
             if (progress < 1) {
                 requestAnimationFrame(update);

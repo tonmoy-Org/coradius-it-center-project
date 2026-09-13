@@ -34,13 +34,13 @@
                                         <div class="col-md-6 col-12">
                                             <label for="sticky_promo_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Promo Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_title" name="sticky_promo_title"
-                                                   value="{{ setting('sticky_promo_title', $lang) ?: setting('sticky_promo_title') }}">
+                                                   value="{{ setting('sticky_promo_title', $lang) }}">
                                         </div>
 
                                         <div class="col-md-6 col-12">
                                             <label for="sticky_promo_btn_text" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Button Text') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_btn_text" name="sticky_promo_btn_text"
-                                                   value="{{ setting('sticky_promo_btn_text', $lang) ?: setting('sticky_promo_btn_text') }}">
+                                                   value="{{ setting('sticky_promo_btn_text', $lang) }}">
                                         </div>
 
                                         <div class="col-md-6 col-12">

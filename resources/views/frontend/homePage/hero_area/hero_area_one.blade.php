@@ -594,8 +594,8 @@
     }
 
     .course-description-section {
-        padding-top: 25px !important;
-        padding-bottom: 20px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
 
     .description-card {

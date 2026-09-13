@@ -9,12 +9,11 @@
     
     $title = !empty($mcSettings['sticky_promo_title']) 
         ? $mcSettings['sticky_promo_title'] 
-        : (setting('sticky_promo_title', app()->getLocale()) ?: setting('sticky_promo_title'));
+        : setting('sticky_promo_title', app()->getLocale());
     
-    $heroBtnText = !empty($mcSettings['overview_btn_text']) 
+    $btnText = !empty($mcSettings['overview_btn_text']) 
         ? $mcSettings['overview_btn_text'] 
-        : (setting('sticky_promo_btn_text', app()->getLocale()) ?: setting('sticky_promo_btn_text'));
-    $btnText = $heroBtnText;
+        : setting('sticky_promo_btn_text', app()->getLocale());
     $rawBtnLink = setting('sticky_promo_btn_link');
     if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
         $btnLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
@@ -289,7 +288,7 @@
         <div class="sticky-promo-anchor"></div>
         <div class="sticky-promo-wrapper sp-banner">
             <div class="sp-inner-container">
-                @if(!empty($title))
+                @if(!empty(trim($title ?? '')))
                 <div class="sp-left">
                     <h3>{{ $title }}</h3>
                 </div>
@@ -310,7 +309,7 @@
                         </div>
                     </div>
                 </div>
-                @if(!empty($btnText))
+                @if(!empty(trim($btnText ?? '')))
                  <div class="sp-right">
                     <a href="{{ $btnLink }}" class="template-btn btn-enroll position-relative">
                         <!-- Border Beam SVG -->

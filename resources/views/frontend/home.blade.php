@@ -34,10 +34,6 @@
     @media (max-width: 767.98px) {
         /* Standardized Section Vertical Spacing (38px top & bottom) */
         .home-page-sections > section,
-        section.about-me-section,
-        section.categories-of-work-section,
-        section.benefits-section,
-        section.special-gift-section,
         section.what-you-learn-section,
         section.syllabus-section,
         section.success-banner-section,
@@ -48,6 +44,14 @@
         section.order-form-section {
             padding-top: 38px !important;
             padding-bottom: 38px !important;
+        }
+
+        section.about-me-section,
+        section.categories-of-work-section,
+        section.benefits-section,
+        section.special-gift-section {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
 
         /* Hero Area Mobile Padding */
@@ -129,10 +133,6 @@
     @media (max-width: 575.98px) {
         /* Extra small devices (compact phones) */
         .home-page-sections > section,
-        section.about-me-section,
-        section.categories-of-work-section,
-        section.benefits-section,
-        section.special-gift-section,
         section.what-you-learn-section,
         section.syllabus-section,
         section.success-banner-section,
@@ -143,6 +143,14 @@
         section.order-form-section {
             padding-top: 30px !important;
             padding-bottom: 30px !important;
+        }
+
+        section.about-me-section,
+        section.categories-of-work-section,
+        section.benefits-section,
+        section.special-gift-section {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
 
         section.hero-area {

@@ -32,7 +32,7 @@
                                         <div class="col-md-6 col-12">
                                             <label for="footer_get_in_touch_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Footer Get In Touch Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="footer_get_in_touch_title" name="footer_get_in_touch_title"
-                                                   value="{{ setting('footer_get_in_touch_title', $lang) ?: (setting('footer_get_in_touch_title') ?: 'Get In Touch') }}">
+                                                   value="{{ setting('footer_get_in_touch_title', $lang) }}">
                                         </div>
 
                                         <div class="col-md-6 col-12">
@@ -45,35 +45,35 @@
                                         <div class="col-md-6 col-12">
                                             <label for="contact_address" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Contact Address') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_address" name="contact_address"
-                                                   value="{{ setting('contact_address',$lang) ?: (setting('contact_address') ?: '99 Roving St., Big City') }}">
+                                                   value="{{ setting('contact_address',$lang) }}">
                                         </div>
 
                                         <!-- Contact Phone Number -->
                                         <div class="col-md-6 col-12">
                                             <label for="contact_phone" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Contact Phone Number') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_phone" name="contact_phone"
-                                                   value="{{ setting('contact_phone') ?: '+123-234-1234' }}">
+                                                   value="{{ setting('contact_phone') ?: '' }}">
                                         </div>
 
                                         <!-- Phone Schedule / Hours -->
                                         <div class="col-md-4 col-12">
                                             <label for="contact_phone_schedule" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Phone Schedule / Hours') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_phone_schedule" name="contact_phone_schedule"
-                                                   value="{{ setting('contact_phone_schedule', $lang) ?: (setting('contact_phone_schedule') ?: 'Mon - Fri: 9:00 AM - 6:00 PM') }}">
+                                                   value="{{ setting('contact_phone_schedule', $lang) }}">
                                         </div>
 
                                         <!-- Contact Email Address -->
                                         <div class="col-md-4 col-12">
                                             <label for="contact_email" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Contact Email Address') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_email" name="contact_email"
-                                                   value="{{ setting('contact_email') ?: 'Hello@Awesomesite.Com' }}">
+                                                   value="{{ setting('contact_email') ?: '' }}">
                                         </div>
 
                                         <!-- Email Response Info -->
                                         <div class="col-md-4 col-12">
                                             <label for="contact_email_response" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Email Response Info') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_email_response" name="contact_email_response"
-                                                   value="{{ setting('contact_email_response', $lang) ?: (setting('contact_email_response') ?: 'We reply within 24 hours') }}">
+                                                   value="{{ setting('contact_email_response', $lang) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                         <div class="col-md-6 col-12">
                                             <label for="contact_banner_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Top Banner Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_banner_title" name="contact_banner_title"
-                                                   value="{{ setting('contact_banner_title', $lang) ?: (setting('contact_banner_title') ?: 'Contact Us') }}">
+                                                   value="{{ setting('contact_banner_title', $lang) }}">
                                         </div>
 
 
@@ -102,12 +102,12 @@
                                         <div class="col-md-6 col-12">
                                             <label for="contact_location_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Map Card Badge Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_location_title" name="contact_location_title"
-                                                   value="{{ setting('contact_location_title', $lang) ?: (setting('contact_location_title') ?: 'Our Location') }}">
+                                                   value="{{ setting('contact_location_title', $lang) }}">
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <label for="contact_location_subtitle" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Map Card Badge Subtitle') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_location_subtitle" name="contact_location_subtitle"
-                                                   value="{{ setting('contact_location_subtitle', $lang) ?: (setting('contact_location_subtitle') ?: 'We\'d love to hear from you!') }}">
+                                                   value="{{ setting('contact_location_subtitle', $lang) }}">
                                         </div>
 
                                         <!-- Company Map URL / Address / Embed Code -->
