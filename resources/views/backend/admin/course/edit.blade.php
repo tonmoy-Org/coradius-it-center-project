@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('Home Landing Page Setup'))
 @section('content')
     <div class="container-fluid">
@@ -353,22 +353,20 @@
                                     $defOverviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : '';
                                     $defHideOverviewSection = !empty($mcSettings['hide_overview_section']);
 
-                                    $defDescRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : '';
-                                    $defDescStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : '';
-                                    $defDescStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : '';
-                                    $defDescStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : '';
-                                    $defDescStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : '';
-                                    $defDescStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : '';
-                                    $defDescStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : '';
-                                    $defDescBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '';
-                                    $defDescBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '';
-                                    $defDescBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : '';
-
-
+                                    $defDescRightTitle  = $mcSettings['desc_right_title'] ?? '';
+                                    $defDescStep1Title  = $mcSettings['desc_step_1_title'] ?? '';
+                                    $defDescStep1Sub    = $mcSettings['desc_step_1_sub'] ?? '';
+                                    $defDescStep2Title  = $mcSettings['desc_step_2_title'] ?? '';
+                                    $defDescStep2Sub    = $mcSettings['desc_step_2_sub'] ?? '';
+                                    $defDescStep3Title  = $mcSettings['desc_step_3_title'] ?? '';
+                                    $defDescStep3Sub    = $mcSettings['desc_step_3_sub'] ?? '';
+                                    $defDescBannerIcon  = $mcSettings['desc_banner_icon'] ?? '';
+                                    $defDescBannerTitle = $mcSettings['desc_banner_title'] ?? '';
+                                    $defDescBannerSub   = $mcSettings['desc_banner_sub'] ?? '';
                                 @endphp
                                 
                                 <div class="masterclass-single-page-wrapper">
-                                    <!-- Section 2: Course Description Right Feature Card -->
+                                    <!-- Course Description Right Feature Card -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
                                             <span class="form-label m-0">Course Description Right Box Settings</span>
@@ -378,8 +376,9 @@
                                                 <div class="col-12 mb-4">
                                                     <div class="d-flex align-items-center gap-2">
                                                         <div class="setting-check">
+                                                            <input type="hidden" name="masterclass_settings[show_desc_right_box]" value="0">
                                                             <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
-                                                                {{ !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
+                                                                {{ !isset($mcSettings['show_desc_right_box']) || !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
                                                             <label for="show_desc_right_box"></label>
                                                         </div>
                                                         <label class="form-label mb-0 cursor-pointer" for="show_desc_right_box">Show Course Description Right Box</label>
@@ -480,9 +479,12 @@
                                             <div class="row gx-20">
                                                 <div class="col-12 mb-4">
                                                     <div class="d-flex align-items-center gap-2">
+                                                        <input type="hidden" name="masterclass_settings[show_benefits_section]" value="0">
+                                                        <input type="hidden" name="masterclass_settings[benefits_status]" id="hidden_benefits_status" value="{{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 1 : 0 }}">
                                                         <div class="setting-check">
                                                             <input type="checkbox" name="masterclass_settings[show_benefits_section]" value="1" id="show_benefits_section"
-                                                                {{ !empty($mcSettings['show_benefits_section']) ? 'checked' : '' }}>
+                                                                {{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 'checked' : '' }}
+                                                                onchange="document.getElementById('hidden_benefits_status').value = this.checked ? 1 : 0;">
                                                             <label for="show_benefits_section"></label>
                                                         </div>
                                                         <label class="form-label mb-0 cursor-pointer" for="show_benefits_section">Show Benefits & Target Audience Section</label>
@@ -1395,10 +1397,22 @@
                                                     <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
                                                 </div>
 
-                                                <div class="form-group mb-0">
+                                                <div class="form-group mb-3">
                                                     <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
                                                     <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
                                                            value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="faq_badge_title" class="form-label">{{ __('FAQ Image Floating Badge Title') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_badge_title]" id="faq_badge_title" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_badge_title'] ?? '' }}">
+                                                </div>
+
+                                                <div class="form-group mb-0">
+                                                    <label for="faq_badge_subtitle" class="form-label">{{ __('FAQ Image Floating Badge Subtitle') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_badge_subtitle]" id="faq_badge_subtitle" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_badge_subtitle'] ?? '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -1406,19 +1420,36 @@
                                         <!-- FAQ Image Upload -->
                                         <div class="card mb-4 mt-2 border-0 shadow-sm">
                                             <div class="card-body">
-                                                <span class="form-label mb-3 d-block">{{ __('FAQ Section Image') }}</span>
-                                                <p class="text-muted mb-4">{{ __('Upload an image to display on the right side of the FAQ section on the single course page.') }}</p>
-                                                @include('backend.common.media-input', [
-                                                    'title' => __('FAQ Image'),
-                                                    'name' => 'faq_image_media_id',
-                                                    'col' => 'col-12',
-                                                    'size' => '(800x600)',
-                                                    'image' => old('faq_image_media_id', $course->faq_image_media_id),
-                                                    'label' => __('FAQ Image'),
-                                                    'edit' => $course,
-                                                    'image_object' => $course->faq_image,
-                                                    'media_id' => $course->faq_image_media_id,
-                                                ])
+                                                <span class="form-label mb-2 d-block">{{ __('FAQ Section Image') }}</span>
+                                                <p class="text-muted mb-3">{{ __('Upload an image to display on the right side of the FAQ section.') }}</p>
+                                                
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">{{ __('Upload Direct Image File') }}</label>
+                                                        <input type="file" name="faq_image_file" class="form-control rounded-2" accept="image/*">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">{{ __('Custom Image URL or Path') }}</label>
+                                                        <input type="text" name="masterclass_settings[faq_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['faq_image_url'] ?? '' }}" placeholder="">
+                                                    </div>
+                                                </div>
+
+                                                @php
+                                                    $currentFaqImg = !empty($mcSettings['faq_image_url']) ? dynamic_asset($mcSettings['faq_image_url']) : '';
+                                                    if (!$currentFaqImg && !empty($course->faq_image)) {
+                                                        $currentFaqImg = getFileLink('original_image', $course->faq_image);
+                                                    }
+                                                    if (!$currentFaqImg || str_contains($currentFaqImg, 'default')) {
+                                                        $currentFaqImg = static_asset('images/faq/faq_classroom.jpg');
+                                                    }
+                                                @endphp
+                                                @if($currentFaqImg)
+                                                <div class="mt-3">
+                                                    <label class="form-label d-block text-muted mb-1">{{ __('Current Image Preview') }}</label>
+                                                    <img src="{{ $currentFaqImg }}" alt="FAQ Image" style="max-width: 220px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
 

@@ -1,4 +1,4 @@
-﻿@php
+@php
     $mcSettings = $mcSettings ?? (old('masterclass_settings') ?: []);
     if (!is_array($mcSettings)) {
         $mcSettings = json_decode($mcSettings ?? '[]', true) ?: [];

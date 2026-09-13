@@ -502,6 +502,31 @@ class WebsiteSettingController extends Controller
 
         try {
             $this->setting->update($request);
+
+            // Synchronize all active language records for about_me text fields so dashboard changes apply globally
+            $aboutMeKeys = [
+                'about_me_tag',
+                'about_me_title',
+                'about_me_description',
+                'about_me_btn_text',
+                'about_me_btn_url',
+            ];
+
+            $allLanguages = \App\Models\Language::all();
+            foreach ($aboutMeKeys as $key) {
+                if ($request->has($key)) {
+                    $val = $request->input($key, '') ?? '';
+                    foreach ($allLanguages as $langItem) {
+                        \App\Models\Setting::updateOrCreate(
+                            ['title' => $key, 'lang' => $langItem->locale],
+                            ['value' => $val]
+                        );
+                    }
+                }
+            }
+
+            \Illuminate\Support\Facades\Cache::flush();
+
             Toastr::success(__('update_successful'));
             $data = [
                 'success' => __('update_successful'),
@@ -567,6 +592,74 @@ class WebsiteSettingController extends Controller
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
 
+            return back();
+        }
+    }
+
+    public function saveStickyPromoSection(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.sticky_promo');
+        }
+
+        if (config('app.demo_mode')) {
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        try {
+            $this->setting->update($request);
+
+            $promoKeys = [
+                'show_sticky_promo_bar',
+                'sticky_promo_title',
+                'sticky_promo_btn_text',
+                'sticky_promo_btn_link',
+            ];
+
+            $allLanguages = \App\Models\Language::all();
+            foreach ($promoKeys as $key) {
+                if ($request->has($key)) {
+                    $val = $request->input($key, '') ?? '';
+                    \App\Models\Setting::updateOrCreate(
+                        ['title' => $key, 'lang' => 'en'],
+                        ['value' => $val]
+                    );
+                    foreach ($allLanguages as $langItem) {
+                        \App\Models\Setting::updateOrCreate(
+                            ['title' => $key, 'lang' => $langItem->locale],
+                            ['value' => $val]
+                        );
+                    }
+                }
+            }
+
+            \Illuminate\Support\Facades\Cache::flush();
+
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return back();
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            if ($request->ajax()) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
             return back();
         }
     }

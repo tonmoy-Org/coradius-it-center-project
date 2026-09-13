@@ -5,7 +5,16 @@
         if(!is_array($mcSettings)) $mcSettings = [];
     }
 
-    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'Who Is This {Masterclass} For?';
+    $showBenefits = true;
+    if (isset($mcSettings['show_benefits_section'])) {
+        $showBenefits = !empty($mcSettings['show_benefits_section']);
+    } elseif (isset($mcSettings['benefits_status'])) {
+        $showBenefits = !empty($mcSettings['benefits_status']);
+    }
+@endphp
+@if($showBenefits)
+@php
+    $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
 
     $stripEmojis = function($text) {
         if (empty($text)) return '';
@@ -107,9 +116,11 @@
 <section class="benefits-section p-t-60 p-b-60" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
+            @if(!empty($benefitsTitle))
             <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">
                 {!! format_title_highlight($benefitsTitle) !!}
             </h2>
+            @endif
 
             <div class="row g-4 justify-content-center">
                 @foreach($benefits as $idx => $benefit)
@@ -199,3 +210,4 @@
         </div>
     </div>
 </section>
+@endif

@@ -164,21 +164,25 @@
                             $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
                             if(!is_array($mcSettings)) $mcSettings = [];
                         }
-                        $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : __('Frequently Asked Questions');
-                        $faqSubtitle = !empty($mcSettings['faq_subtitle']) ? $mcSettings['faq_subtitle'] : __('POPULAR QUESTIONS');
+                        $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : '';
+                        $faqSubtitle = !empty($mcSettings['faq_subtitle']) ? $mcSettings['faq_subtitle'] : '';
+                        $faqBadgeTitle = !empty($mcSettings['faq_badge_title']) ? $mcSettings['faq_badge_title'] : '';
+                        $faqBadgeSubtitle = !empty($mcSettings['faq_badge_subtitle']) ? $mcSettings['faq_badge_subtitle'] : '';
                     @endphp
+                    @if(!empty($faqSubtitle) || !empty($faqTitle))
                     <div class="common-heading m-b-30">
-                        @if($faqSubtitle)
+                        @if(!empty($faqSubtitle))
                             <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
-                                {{ __($faqSubtitle) }}
+                                {{ $faqSubtitle }}
                             </span>
                         @endif
-                        @if($faqTitle)
+                        @if(!empty($faqTitle))
                             <h2 class="fw-bold m-b-0" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
-                                {!! format_title_highlight(__($faqTitle)) !!}
+                                {!! format_title_highlight($faqTitle) !!}
                             </h2>
                         @endif
                     </div>
+                    @endif
                     
                     <div class="accordion custom-faq-accordion" id="courseFaqAccordion">
                         @foreach($course->faqs as $key => $faq)
@@ -212,27 +216,36 @@
             <div class="col-lg-6 col-md-12 ps-lg-5" data-aos="fade-left" data-aos-delay="200">
                 @php
                     $faqImgUrl = '';
-                    if (!empty($course->faq_image)) {
+                    if (!empty($mcSettings['faq_image_url'])) {
+                        $faqImgUrl = dynamic_asset($mcSettings['faq_image_url']);
+                    }
+                    if (!$faqImgUrl && !empty($course->faq_image)) {
                         $faqImgUrl = getFileLink('original_image', $course->faq_image);
                     }
                     if (!$faqImgUrl || str_contains($faqImgUrl, 'default')) {
-                        $faqImgUrl = static_asset('frontend/img/section/faq_illustration.png');
+                        $faqImgUrl = static_asset('images/faq/faq_classroom.jpg');
                     }
                 @endphp
 
-                <div class="faq-image-card">
-                    <img src="{{ $faqImgUrl }}" alt="Frequently Asked Questions">
+                <div class="faq-image-card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
+                    <img src="{{ $faqImgUrl }}" alt="{{ $faqTitle ?: 'FAQ' }}" style="border-radius: 12px; min-height: 500px; width: 100%; object-fit: cover;">
                     
+                    @if(!empty($faqBadgeTitle) || !empty($faqBadgeSubtitle))
                     <div class="faq-badge-floating d-flex">
                         <div class="faq-badge-icon d-flex align-items-center justify-content-center" 
                              style="width: 46px; height: 46px; border-radius: 8px; background: var(--color-blue-tint, #EAF2FE); color: var(--color-primary, #0056D2); font-size: 1.3rem;">
                             <i class="fas fa-question-circle"></i>
                         </div>
                         <div>
-                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">Any Doubts or Questions?</h5>
-                            <span style="color: #4B5A72; font-size: 0.85rem;">We are here to support your learning journey</span>
+                            @if(!empty($faqBadgeTitle))
+                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">{{ $faqBadgeTitle }}</h5>
+                            @endif
+                            @if(!empty($faqBadgeSubtitle))
+                            <span style="color: #4B5A72; font-size: 0.85rem;">{{ $faqBadgeSubtitle }}</span>
+                            @endif
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
 

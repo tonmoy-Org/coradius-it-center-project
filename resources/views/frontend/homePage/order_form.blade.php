@@ -5,25 +5,28 @@
         if(!is_array($mcSettings)) $mcSettings = [];
     }
 
-    $orderFormTitle = 'Join the Masterclass by filling out the form below.';
-    $orderFormSubtitle = 'Give valid information';
+    $orderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : '';
+    $orderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : '';
     
-    $nameLabel = 'Your Full Name';
-    $namePlaceholder = 'Your Full Name';
-    $phoneLabel = 'Mobile Number';
-    $phonePlaceholder = 'Mobile Number';
-    $emailLabel = 'Email address';
-    $emailPlaceholder = 'Email address';
+    $nameLabel = !empty($mcSettings['name_label']) ? $mcSettings['name_label'] : (!empty($mcSettings['order_name_label']) ? $mcSettings['order_name_label'] : __('Your Full Name'));
+    $namePlaceholder = !empty($mcSettings['name_placeholder']) ? $mcSettings['name_placeholder'] : (!empty($mcSettings['order_name_placeholder']) ? $mcSettings['order_name_placeholder'] : '');
+    $phoneLabel = !empty($mcSettings['phone_label']) ? $mcSettings['phone_label'] : (!empty($mcSettings['order_phone_label']) ? $mcSettings['order_phone_label'] : __('Mobile Number'));
+    $phonePlaceholder = !empty($mcSettings['phone_placeholder']) ? $mcSettings['phone_placeholder'] : (!empty($mcSettings['order_phone_placeholder']) ? $mcSettings['order_phone_placeholder'] : '');
+    $emailLabel = !empty($mcSettings['email_label']) ? $mcSettings['email_label'] : (!empty($mcSettings['order_email_label']) ? $mcSettings['order_email_label'] : __('Email address'));
+    $emailPlaceholder = !empty($mcSettings['email_placeholder']) ? $mcSettings['email_placeholder'] : (!empty($mcSettings['order_email_placeholder']) ? $mcSettings['order_email_placeholder'] : '');
     
-    $addressLabel = 'Full Address';
-    $addressPlaceholder = 'Full Address';
-    $passwordLabel = 'Create account password';
-    $passwordPlaceholder = '.........';
-    $termsLabel = 'I have read and agree to the website\'s Terms and Refund Policy';
+    $addressLabel = !empty($mcSettings['address_label']) ? $mcSettings['address_label'] : (!empty($mcSettings['order_address_label']) ? $mcSettings['order_address_label'] : __('Full Address'));
+    $addressPlaceholder = !empty($mcSettings['address_placeholder']) ? $mcSettings['address_placeholder'] : (!empty($mcSettings['order_address_placeholder']) ? $mcSettings['order_address_placeholder'] : '');
+    $passwordLabel = !empty($mcSettings['password_label']) ? $mcSettings['password_label'] : (!empty($mcSettings['order_password_label']) ? $mcSettings['order_password_label'] : __('Create account password'));
+    $passwordPlaceholder = !empty($mcSettings['password_placeholder']) ? $mcSettings['password_placeholder'] : (!empty($mcSettings['order_password_placeholder']) ? $mcSettings['order_password_placeholder'] : '');
+    $termsLabel = !empty($mcSettings['terms_label']) ? $mcSettings['terms_label'] : (!empty($mcSettings['order_terms_label']) ? $mcSettings['order_terms_label'] : '');
 
-    $privacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.';
-    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'PAY NOW';
-    $payNowBtnText = $heroBtnText;
+    $privacyNotice = !empty($mcSettings['privacy_notice']) ? $mcSettings['privacy_notice'] : '';
+    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : __('PAY NOW');
+    $payNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : (!empty($mcSettings['order_btn_text']) ? $mcSettings['order_btn_text'] : $heroBtnText);
+    
+    $billingDetailsTitle = !empty($mcSettings['billing_details_title']) ? $mcSettings['billing_details_title'] : __('Billing Details');
+    $yourOrderTitle = !empty($mcSettings['order_summary_title']) ? $mcSettings['order_summary_title'] : (!empty($mcSettings['your_order_title']) ? $mcSettings['your_order_title'] : __('Your Order'));
     
     $is_enrolled = false;
     if(auth()->check() && isset($course)) {
@@ -66,19 +69,21 @@
                         <div class="coupon-section mb-5">
                             <div class="d-flex align-items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                                <span class="text-dark" style="font-weight: 500;">Have a coupon?</span>
-                                <a href="javascript:void(0)" class="text-decoration-none coupon-toggle" style="color: var(--color-primary, #0056D2); font-weight: 500;" onclick="document.querySelector('.coupon-form-wrapper').style.display = document.querySelector('.coupon-form-wrapper').style.display === 'none' ? 'block' : 'none'">Click here to enter your code</a>
+                                <span class="text-dark" style="font-weight: 500;">{{ __('Have a coupon?') }}</span>
+                                <a href="javascript:void(0)" class="text-decoration-none coupon-toggle" style="color: var(--color-primary, #0056D2); font-weight: 500;" onclick="document.querySelector('.coupon-form-wrapper').style.display = document.querySelector('.coupon-form-wrapper').style.display === 'none' ? 'block' : 'none'">{{ __('Click here to enter your code') }}</a>
                             </div>
                             <div class="coupon-form-wrapper mt-4 p-4 shadow-sm" style="display: none; transition: all 0.3s ease; border: 1px dashed #e2e8f0; border-radius: 4px;">
-                                <p class="text-muted small mb-3">If you have a coupon code, please apply it below.</p>
+                                <p class="text-muted small mb-3">{{ __('If you have a coupon code, please apply it below.') }}</p>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <input type="text" id="guest_coupon_code" class="form-control" placeholder="Coupon code" style="height: 45px; border: 1px solid #e2e8f0; border-radius: 4px; max-width: 300px; flex: 1 1 180px;">
-                                    <button type="button" class="template-btn apply-coupon-btn px-4 border-0" id="apply_guest_coupon_btn" style="height: 45px; border-radius: 4px; line-height: 1;">Apply</button>
+                                    <input type="text" id="guest_coupon_code" class="form-control" placeholder="{{ __('Coupon code') }}" style="height: 45px; border: 1px solid #e2e8f0; border-radius: 4px; max-width: 300px; flex: 1 1 180px;">
+                                    <button type="button" class="template-btn apply-coupon-btn px-4 border-0" id="apply_guest_coupon_btn" style="height: 45px; border-radius: 4px; line-height: 1;">{{ __('Apply') }}</button>
                                 </div>
                             </div>
                         </div>
 
-                        <h4 class="fw-bold mb-4" style="color: #0A1E3F; font-size: 22px;">Billing Details</h4>
+                        @if(!empty($billingDetailsTitle))
+                        <h4 class="fw-bold mb-4" style="color: #0A1E3F; font-size: 22px;">{{ $billingDetailsTitle }}</h4>
+                        @endif
                         
                         <div class="mb-4">
                             <label class="form-label fw-semibold text-dark mb-2">{{ $nameLabel }} <span class="text-danger">*</span></label>
@@ -125,14 +130,16 @@
                     
                     <!-- Right Column: Your Order -->
                     <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
-                        <h4 class="fw-bold mb-4" style="color: #0A1E3F; font-size: 22px;">Your Order</h4>
+                        @if(!empty($yourOrderTitle))
+                        <h4 class="fw-bold mb-4" style="color: #0A1E3F; font-size: 22px;">{{ $yourOrderTitle }}</h4>
+                        @endif
                         
                         <div class="order-summary-box mb-4">
                             <table class="table border-bottom" style="margin-bottom: 0;">
                                 <thead>
                                     <tr>
-                                        <th class="border-0 fw-bold" style="padding: 12px 0;">Product</th>
-                                        <th class="border-0 fw-bold text-end" style="padding: 12px 0;">Subtotal</th>
+                                        <th class="border-0 fw-bold" style="padding: 12px 0;">{{ __('Product') }}</th>
+                                        <th class="border-0 fw-bold text-end" style="padding: 12px 0;">{{ __('Subtotal') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -151,19 +158,19 @@
                                         </td>
                                     </tr>
                                     <tr class="border-top">
-                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">Subtotal</td>
+                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">{{ __('Subtotal') }}</td>
                                         <td class="py-3 border-0 text-end fw-semibold" style="padding-right: 0;">
                                             {{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}
                                         </td>
                                     </tr>
                                     <tr class="border-top coupon-discount-row" style="display: none;">
-                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">Discount</td>
+                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">{{ __('Discount') }}</td>
                                         <td class="py-3 border-0 text-end fw-semibold text-danger" style="padding-right: 0;" id="order_discount">
                                             -
                                         </td>
                                     </tr>
                                     <tr class="border-top">
-                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">Total</td>
+                                        <td class="py-3 border-0 fw-bold text-dark" style="padding-left: 0;">{{ __('Total') }}</td>
                                         <td class="py-3 border-0 text-end fw-bold" style="padding-right: 0; font-size: 20px; color: #0056D2;" id="order_total">
                                             {{ $course->is_free ? __('free') : get_price($course->price, userCurrency()) }}
                                         </td>
@@ -175,13 +182,15 @@
 
                         
                         <div class="mb-4">
+                            @if(!empty($privacyNotice))
                             <div class="text-muted small mb-3" style="font-size: 13px; line-height: 1.6;">
-                                {!! $privacyNotice ?: 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.' !!}
+                                {!! $privacyNotice !!}
                             </div>
+                            @endif
                             <div class="d-flex align-items-start gap-2">
                                 <input type="checkbox" name="agree" id="agree_terms" required style="margin-top: 4px; width: 16px; height: 16px;">
                                 <label for="agree_terms" class="fw-semibold text-dark small" style="cursor: pointer;">
-                                    {!! $termsLabel !!} <a href="{{ route('terms.conditions') }}" target="_blank" class="text-primary text-decoration-none">Terms</a> and <a href="{{ route('refund.policy') }}" target="_blank" class="text-primary text-decoration-none">Refund Policy</a>
+                                    {!! !empty($termsLabel) ? $termsLabel : __('I have read and agree to the website\'s') !!} <a href="{{ route('terms.conditions') }}" target="_blank" class="text-primary text-decoration-none">{{ __('Terms') }}</a> {{ __('and') }} <a href="{{ route('refund.policy') }}" target="_blank" class="text-primary text-decoration-none">{{ __('Refund Policy') }}</a>
                                 </label>
                             </div>
                         </div>
