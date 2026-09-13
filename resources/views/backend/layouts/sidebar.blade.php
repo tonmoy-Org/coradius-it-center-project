@@ -141,18 +141,22 @@
                     </li>
                 @endif
                 @if(hasPermission('coupons.index') && setting('coupon_system'))
-                    <li class="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create'], 'active') }}">
+                    <li class="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}">
                         <a href="#coupon" class="dropdown-icon" data-bs-toggle="collapse" role="button"
-                           aria-expanded="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create'], 'true', 'false') }}"
+                           aria-expanded="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'true', 'false') }}"
                            aria-controls="coupon">
                             <i class="las la-th"></i>
                             <span>{{ __('marketing') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create'], 'show') }}"
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'show') }}"
                             id="coupon">
                             <li>
                                 <a class="{{ menuActivation(['admin/coupons', 'admin/coupons/*'], 'active') }}"
                                    href="{{ route('coupons.index') }}">{{ __('all_coupons') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ menuActivation(['admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}"
+                                   href="{{ route('marketing-leads.index') }}">Marketing Leads</a>
                             </li>
                         </ul>
                     </li>
@@ -254,7 +258,7 @@
                     </li>
                 @endif
                 @if(hasPermission('theme.options') || hasPermission('hero.section') || hasPermission('footer.social-links') ||
-                    hasPermission('website.seo') || hasPermission('custom.js') || 
+                    hasPermission('custom.js') || 
                     hasPermission('custom.css') || hasPermission('google.setup') || hasPermission('fb.pixel') || hasPermission('gdpr')
                     )
                     <li class="{{ menuActivation(
@@ -263,13 +267,11 @@
                             'admin/social-link-setting',
                             'admin/newsletter-setting',
                             'admin/useful-link-setting',
-                            'admin/quick-link-setting',
                             'admin/copyright-setting',
                             'admin/become-instructor-content',
                             'admin/categories-of-work-section',
                             'admin/theme-options',
                             'admin/website-popup',
-                            'admin/website-seo',
                             'admin/google-setup',
                             'admin/custom-js',
                             'admin/custom-css',
@@ -291,14 +293,12 @@
                                 'admin/social-link-setting',
                                 'admin/newsletter-setting',
                                 'admin/useful-link-setting',
-                                'admin/quick-link-setting',
                                 'admin/copyright-setting',
                                 'admin/become-instructor-content',
                                 'admin/categories-of-work-section',
                                 'admin/call-to-action',
                                 'admin/theme-options',
                                 'admin/website-popup',
-                                'admin/website-seo',
                                 'admin/google-setup',
                                 'admin/custom-js',
                                 'admin/custom-css',
@@ -327,12 +327,10 @@
                             'admin/social-link-setting',
                             'admin/newsletter-setting',
                             'admin/useful-link-setting',
-                            'admin/quick-link-setting',
                             'admin/copyright-setting',
                             'admin/header-topbar',
                             'admin/theme-options',
                             'admin/website-popup',
-                            'admin/website-seo',
                             'admin/google-setup',
                             'admin/custom-js',
                             'admin/custom-css',
@@ -360,14 +358,9 @@
                                 'admin/social-link-setting',
                                 'admin/newsletter-setting',
                                 'admin/useful-link-setting',
-                                'admin/quick-link-setting',
                                 'admin/copyright-setting'
                             ], 'active') }}"
                                        href="{{ route('footer.social-links') }}">{{ __('footer_content') }}</a></li>
-                            @endif
-                            @if(hasPermission('website.seo'))
-                                <li><a class="{{ menuActivation('admin/website-seo', 'active') }}"
-                                       href="{{ route('website.seo') }}">{{ __('website_seo') }}</a></li>
                             @endif
                             @if(hasPermission('custom.js'))
                                 <li><a class="{{ menuActivation('admin/custom-js', 'active') }}"

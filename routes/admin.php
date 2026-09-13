@@ -178,6 +178,12 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         /*------==== Marketing ------------------======= */
         //coupons
         Route::resource('coupons', CouponController::class)->except(['show']);
+        
+        // Marketing Leads
+        Route::get('marketing-leads', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'index'])->name('marketing-leads.index');
+        Route::post('marketing-leads/webhook', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'saveWebhook'])->name('marketing-leads.webhook.save');
+        Route::get('marketing-leads/export', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'export'])->name('marketing-leads.export');
+        Route::delete('marketing-leads/{id}', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'destroy'])->name('marketing-leads.destroy');
 
 
 
