@@ -227,7 +227,7 @@
                     
                     <div class="mb-4">
                         <label class="modern-label">আপনার নাম <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="modern-input @error('name') is-invalid @enderror" value="{{ old('name', auth()->check() ? auth()->user()->first_name : '') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
+                        <input type="text" name="name" class="modern-input @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
                         @error('name')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -235,7 +235,7 @@
 
                     <div class="mb-4">
                         <label class="modern-label">ইমেইল <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="modern-input @error('email') is-invalid @enderror" value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
+                        <input type="email" name="email" class="modern-input @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
                         @error('email')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -243,7 +243,7 @@
 
                     <div class="mb-4">
                         <label class="modern-label">মোবাইল নাম্বার <span class="text-danger">*</span></label>
-                        <input type="tel" name="phone" class="modern-input @error('phone') is-invalid @enderror" value="{{ old('phone', auth()->check() ? auth()->user()->phone : '') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
+                        <input type="tel" name="phone" class="modern-input @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
                         @error('phone')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
