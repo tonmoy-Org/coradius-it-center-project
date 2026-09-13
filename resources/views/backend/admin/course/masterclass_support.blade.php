@@ -7,6 +7,9 @@
     $supportStatus = !empty($mcSettings['support_status']);
     $supportTitle = old('masterclass_settings.support_title', $mcSettings['support_title'] ?? '');
     $supportTitleIcon = old('masterclass_settings.support_title_icon', $mcSettings['support_title_icon'] ?? '');
+    if (empty($supportTitleIcon) || preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon) || str_starts_with($supportTitleIcon, 'http')) {
+        $supportTitleIcon = 'fas fa-headset';
+    }
     $supportSubtitle = old('masterclass_settings.support_subtitle', $mcSettings['support_subtitle'] ?? '');
     $supportDescription = old('masterclass_settings.support_description', $mcSettings['support_description'] ?? '');
     $supportImageUrl = old('masterclass_settings.support_image_url_custom', $mcSettings['support_image_url'] ?? '');
@@ -34,10 +37,6 @@
         }
     }
 
-    // Bottom strip banner
-    $stripIcon = old('masterclass_settings.support_strip_icon', $mcSettings['support_strip_icon'] ?? '');
-    $stripText1 = old('masterclass_settings.support_strip_text_1', $mcSettings['support_strip_text_1'] ?? '');
-    $stripText2 = old('masterclass_settings.support_strip_text_2', $mcSettings['support_strip_text_2'] ?? '');
 @endphp
 
 <style>
@@ -98,18 +97,9 @@
 
             <!-- Title Icon -->
             <div class="col-lg-6 col-md-6 mb-4">
-                <label class="form-label">Title Icon Class (FontAwesome / RemixIcon / BoxIcons)</label>
-                <input type="text" name="masterclass_settings[support_title_icon]" class="form-control rounded-2 mb-2"
-                       value="{{ $supportTitleIcon }}">
-                @include('backend.common.media-input', [
-                    'title' => 'Title Icon Image',
-                    'label' => 'Or Select Icon Image',
-                    'for' => 'image',
-                    'name' => 'support_title_icon_media_id',
-                    'col' => 'col-12',
-                    'size' => '',
-                    'image' => $mcSettings['support_title_icon_media_id'] ?? ''
-                ])
+                <label class="form-label">Title Icon</label>
+                <input type="text" name="masterclass_settings[support_title_icon]" class="form-control rounded-2"
+                       value="{{ $supportTitleIcon }}" placeholder="fas fa-headset">
             </div>
 
             <!-- Subtitle -->
@@ -125,7 +115,7 @@
                 <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3">{{ $supportDescription }}</textarea>
             </div>
 
-            <!-- Support Image Upload & URL -->
+            <!-- Support Image Upload -->
             <div class="col-lg-12 mb-4">
                 @include('backend.common.media-input', [
                     'title' => 'Support Image',
@@ -136,11 +126,6 @@
                     'size' => '',
                     'image' => $mcSettings['support_image_media_id'] ?? ''
                 ])
-                <div class="mt-2">
-                    <label class="form-label small text-muted mb-1">Or Custom Support Image URL</label>
-                    <input type="text" name="masterclass_settings[support_image_url_custom]" class="form-control rounded-2"
-                           value="{{ $mcSettings['support_image_url'] ?? '' }}">
-                </div>
             </div>
 
             <!-- Dynamic Feature Cards -->
@@ -247,12 +232,7 @@
                                 <input type="file" name="support_channel_icon_files[{{ $cIdx }}]"
                                        class="form-control font-12 bg-white mb-2 support-channel-icon-file-input" accept="image/*">
 
-                                <label class="form-label">Team Avatars Image</label>
-                                <input type="file" name="support_channel_avatar_files[{{ $cIdx }}]"
-                                       class="form-control form-control-sm rounded-2 bg-white mb-1 support-channel-file-input" accept="image/*">
-                                <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][team_avatar]"
-                                       class="form-control form-control-sm rounded-2 bg-white mb-2 support-channel-avatar-input"
-                                       value="{{ $chCard['team_avatar'] ?? '' }}">
+
 
                                 <label class="form-label">Team Status Label</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][team_label]"
@@ -278,25 +258,6 @@
                 </div>
             </div>
 
-            <!-- Bottom Banner Strip -->
-            <div class="col-12 mb-3">
-                <label class="form-label mb-3 border-bottom pb-2 w-100">Bottom Banner Strip</label>
-            </div>
-            <div class="col-md-2 mb-4">
-                <label class="form-label">Badge Icon</label>
-                <input type="text" name="masterclass_settings[support_strip_icon]" class="form-control rounded-2"
-                       value="{{ $stripIcon }}">
-            </div>
-            <div class="col-md-5 mb-4">
-                <label class="form-label">Left Text</label>
-                <input type="text" name="masterclass_settings[support_strip_text_1]" class="form-control rounded-2"
-                       value="{{ $stripText1 }}">
-            </div>
-            <div class="col-md-5 mb-4">
-                <label class="form-label">Right Highlight Text</label>
-                <input type="text" name="masterclass_settings[support_strip_text_2]" class="form-control rounded-2"
-                       value="{{ $stripText2 }}">
-            </div>
 
         </div>
     </div>
@@ -400,8 +361,6 @@
                     $(this).find('.support-channel-desc-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][desc]');
                     $(this).find('.support-channel-icon-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][icon]');
                     $(this).find('.support-channel-icon-file-input').attr('name', 'support_channel_icon_files[' + index + ']');
-                    $(this).find('.support-channel-file-input').attr('name', 'support_channel_avatar_files[' + index + ']');
-                    $(this).find('.support-channel-avatar-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][team_avatar]');
                     $(this).find('.support-channel-label-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][team_label]');
                     $(this).find('.support-channel-btn-text-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][btn_text]');
                     $(this).find('.support-channel-url-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][url]');
@@ -452,13 +411,6 @@
                             <label class="form-label">Upload Icon</label>
                             <input type="file" name="support_channel_icon_files[${nextIndex}]"
                                    class="form-control font-12 bg-white mb-2 support-channel-icon-file-input" accept="image/*">
-
-                            <label class="form-label">Team Avatars Image</label>
-                            <input type="file" name="support_channel_avatar_files[${nextIndex}]"
-                                   class="form-control form-control-sm rounded-2 bg-white mb-1 support-channel-file-input" accept="image/*">
-                            <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][team_avatar]"
-                                   class="form-control form-control-sm rounded-2 bg-white mb-2 support-channel-avatar-input"
-                                   value="">
 
                             <label class="form-label">Team Status Label</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][team_label]"

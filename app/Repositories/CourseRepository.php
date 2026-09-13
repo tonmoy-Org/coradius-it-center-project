@@ -432,11 +432,16 @@ class CourseRepository
                 $mc['ad_banner_2_image_url'] = $mc['ad_banner_2_image_url_custom'];
             }
 
-            if (request('support_image_media_id')) {
-                $media = \App\Models\MediaLibrary::find(request('support_image_media_id'));
-                if ($media && !empty($media->image_variants)) {
-                    $mc['support_image_url'] = getFileLink('original_image', $media->image_variants);
-                    $mc['support_image_media_id'] = request('support_image_media_id');
+            if (request()->has('support_image_media_id')) {
+                if (request('support_image_media_id')) {
+                    $media = \App\Models\MediaLibrary::find(request('support_image_media_id'));
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['support_image_url'] = getFileLink('original_image', $media->image_variants);
+                        $mc['support_image_media_id'] = request('support_image_media_id');
+                    }
+                } else {
+                    $mc['support_image_url'] = '';
+                    $mc['support_image_media_id'] = '';
                 }
             } elseif (request()->hasFile('support_image_file')) {
                 $response = $this->saveImage(request()->file('support_image_file'), 'course');
@@ -458,11 +463,19 @@ class CourseRepository
                 $mc['faq_image_url'] = $mc['faq_image_url_custom'];
             }
 
-            if (request('support_title_icon_media_id')) {
-                $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
-                if ($media && !empty($media->image_variants)) {
-                    $mc['support_title_icon'] = getFileLink('original_image', $media->image_variants);
-                    $mc['support_title_icon_media_id'] = request('support_title_icon_media_id');
+            if (isset($mc['support_title_icon'])) {
+                unset($mc['support_title_icon_media_id']);
+            }
+            if (request()->has('support_title_icon_media_id')) {
+                if (request('support_title_icon_media_id')) {
+                    $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['support_title_icon'] = getFileLink('original_image', $media->image_variants);
+                        $mc['support_title_icon_media_id'] = request('support_title_icon_media_id');
+                    }
+                } else {
+                    $mc['support_title_icon'] = '';
+                    $mc['support_title_icon_media_id'] = '';
                 }
             } elseif (request()->hasFile('support_title_icon_file')) {
                 $response = $this->saveImage(request()->file('support_title_icon_file'), 'course');

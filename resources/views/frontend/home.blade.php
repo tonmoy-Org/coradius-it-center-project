@@ -368,7 +368,9 @@
     @endif
 
     <!--====== Start Success Story Section ======-->
+    @if((string)setting('success_section_status') !== '0')
     @include('frontend.homePage.success')
+    @endif
 
     <!--====== Start Offer Breakdown Section (Today's Value Breakdown) ======-->
     @if(!isset($mcSettings['breakdown_status']) || $mcSettings['breakdown_status'] == 1)

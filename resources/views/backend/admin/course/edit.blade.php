@@ -368,23 +368,17 @@
                                 <div class="masterclass-single-page-wrapper">
                                     <!-- Course Description Right Feature Card -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label m-0">Course Description Right Box Settings</span>
+                                        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                                            <label class="form-label m-0 cursor-pointer" for="show_desc_right_box">Course Description Right Box Settings</label>
+                                            <div class="setting-check m-0">
+                                                <input type="hidden" name="masterclass_settings[show_desc_right_box]" value="0">
+                                                <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
+                                                    {{ !isset($mcSettings['show_desc_right_box']) || !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
+                                                <label for="show_desc_right_box" class="m-0"></label>
+                                            </div>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
-                                                <div class="col-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="hidden" name="masterclass_settings[show_desc_right_box]" value="0">
-                                                            <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
-                                                                {{ !isset($mcSettings['show_desc_right_box']) || !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
-                                                            <label for="show_desc_right_box"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="show_desc_right_box">Show Course Description Right Box</label>
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Top Subtitle / Heading</label>
                                                     <input type="text" name="masterclass_settings[desc_right_title]" class="form-control rounded-2"

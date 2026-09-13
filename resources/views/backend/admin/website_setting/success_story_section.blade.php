@@ -15,10 +15,10 @@
                             <div class="row gx-20">
 <div class="col-12 col-lg-12">
     <div class="d-flex justify-content-between align-items-center gap-12 sandbox_mode_div mb-4">
-        <input type="hidden" name="success_section_status" value="{{ setting('success_section_status') === '0' ? 0 : 1 }}">
-        <label class="form-label" for="success_section_status">Enable Section</label>
+        <input type="hidden" name="success_section_status" value="0">
+        <label class="form-label" for="success_section_status">{{ __('Enable Section') }}</label>
         <div class="setting-check">
-            <input type="checkbox" value="1" id="success_section_status"
+            <input type="checkbox" name="success_section_status" value="1" id="success_section_status"
                    class="sandbox_mode" {{ setting('success_section_status') === '0' ? '' : 'checked' }}>
             <label for="success_section_status"></label>
         </div>

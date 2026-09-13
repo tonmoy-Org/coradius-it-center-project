@@ -11,7 +11,10 @@
 
     if ($supportStatus) {
         $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
-        $supportTitleIcon = !empty($mcSettings['support_title_icon']) ? $mcSettings['support_title_icon'] : '';
+        $supportTitleIcon = !empty($mcSettings['support_title_icon']) ? $mcSettings['support_title_icon'] : 'fas fa-headset';
+        if (preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon) || str_starts_with($supportTitleIcon, 'http') || str_contains($supportTitleIcon, 'images/') || str_contains($supportTitleIcon, 'uploads/')) {
+            $supportTitleIcon = 'fas fa-headset';
+        }
         $supportSubtitle = !empty($mcSettings['support_subtitle']) ? $mcSettings['support_subtitle'] : '';
         $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
 
@@ -63,10 +66,6 @@
             }
         }
 
-        // Bottom Strip
-        $stripIcon = $mcSettings['support_strip_icon'] ?? '';
-        $stripText1 = !empty($mcSettings['support_strip_text_1']) ? $mcSettings['support_strip_text_1'] : '';
-        $stripText2 = !empty($mcSettings['support_strip_text_2']) ? $mcSettings['support_strip_text_2'] : '';
 
         $renderIcon = function($icon, $defaultClass = '') {
             $icon = trim($icon ?: $defaultClass);
@@ -113,8 +112,23 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--color-primary, #0056D2);
+        color: #00A66C;
         font-size: 26px;
+        line-height: 1;
+        max-width: 36px;
+        max-height: 36px;
+        flex-shrink: 0;
+        vertical-align: middle;
+    }
+
+    .mc-support-title-icon img {
+        width: 30px !important;
+        height: 30px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+        object-fit: contain !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
     }
 
     /* Subtitle / Semi-heading */
@@ -310,7 +324,10 @@
     }
 
     .mc-avatar-fb {
-        background-color: #1877F2;
+        background-color: #ffffff;
+        color: #1877F2;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
 
     .mc-avatar-wa {
@@ -362,56 +379,6 @@
 
 
 
-    /* Bottom Banner Strip */
-    .mc-support-footer-strip {
-        margin-top: 26px;
-        background: transparent;
-        border: 1px solid #C7DCFA;
-        border-radius: 12px;
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        text-align: center;
-        box-shadow: none;
-    }
-
-    .mc-footer-heart-badge {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background-color: #0056D2;
-        color: #ffffff;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        flex-shrink: 0;
-    }
-
-    .mc-footer-strip-text {
-        font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif) !important;
-        font-size: 14.5px;
-        color: #064e3b;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .mc-footer-strip-sep {
-        color: #94a3b8;
-        font-weight: 300;
-        margin: 0 4px;
-    }
-
-    .mc-footer-strip-highlight {
-        font-weight: 500;
-        color: #064e3b;
-    }
 
     /* ==========================================================================
        RESPONSIVE DESIGN BREAKPOINTS
@@ -434,6 +401,11 @@
         .mc-support-title {
             font-size: 34px !important;
             margin-bottom: 14px !important;
+        }
+
+        .mc-support-title-icon img {
+            width: 32px !important;
+            height: 32px !important;
         }
 
         .mc-support-img {
@@ -459,6 +431,11 @@
 
         .mc-support-title-icon {
             font-size: 24px;
+        }
+
+        .mc-support-title-icon img {
+            width: 28px !important;
+            height: 28px !important;
         }
 
         .mc-support-subtitle {
@@ -618,14 +595,6 @@
 
 
 
-        .mc-support-footer-strip {
-            padding: 12px 18px;
-            gap: 10px;
-        }
-
-        .mc-footer-strip-text {
-            font-size: 14px;
-        }
     }
 
     /* 4. Small Tablets & Landscape Mobile (576px - 767px) */
@@ -643,6 +612,11 @@
 
         .mc-support-title-icon {
             font-size: 22px;
+        }
+
+        .mc-support-title-icon img {
+            width: 24px !important;
+            height: 24px !important;
         }
 
         .mc-support-subtitle {
@@ -703,19 +677,6 @@
             margin-bottom: 16px;
         }
 
-        .mc-support-footer-strip {
-            padding: 12px 16px;
-            gap: 8px;
-            flex-direction: column;
-        }
-
-        .mc-footer-strip-sep {
-            display: none;
-        }
-
-        .mc-footer-strip-text {
-            font-size: 13.5px;
-        }
     }
 
     /* 5. Mobile Phones (max-width: 575px) */
@@ -734,6 +695,11 @@
 
         .mc-support-title-icon {
             font-size: 20px;
+        }
+
+        .mc-support-title-icon img {
+            width: 22px !important;
+            height: 22px !important;
         }
 
         .mc-support-subtitle {
@@ -859,35 +825,17 @@
             font-size: 11.5px;
         }
 
-        .mc-support-footer-strip {
-            margin-top: 20px;
-            flex-direction: column;
-            padding: 12px 14px;
-            gap: 6px;
-            border-radius: 10px;
-        }
-
-        .mc-footer-heart-badge {
-            width: 22px;
-            height: 22px;
-            font-size: 11px;
-        }
-
-        .mc-footer-strip-sep {
-            display: none;
-        }
-
-        .mc-footer-strip-text {
-            font-size: 13px;
-            line-height: 1.45;
-            text-align: center;
-        }
     }
 
     /* 6. Extra-Small Mobile Screens (max-width: 380px) */
     @media (max-width: 380px) {
         .mc-support-title {
             font-size: 20px !important;
+        }
+
+        .mc-support-title-icon img {
+            width: 20px !important;
+            height: 20px !important;
         }
 
         .mc-support-subtitle {
@@ -946,9 +894,6 @@
 
 
 
-        .mc-footer-strip-text {
-            font-size: 12px;
-        }
     }
 </style>
 
@@ -963,9 +908,7 @@
                 <!-- Main Title with Headset Icon -->
                 <h2 class="mc-support-title" data-aos="fade-up">
                     <span>{!! format_title_highlight($supportTitle) !!}</span>
-                    @if(!empty($supportTitleIcon))
-                    <span class="mc-support-title-icon">{!! $renderIcon($supportTitleIcon, 'fas fa-headset') !!}</span>
-                    @endif
+                    <span class="mc-support-title-icon"><i class="{{ (!empty($supportTitleIcon) && !str_starts_with($supportTitleIcon, 'http') && !preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon)) ? $supportTitleIcon : 'fas fa-headset' }}"></i></span>
                 </h2>
                 @endif
 
@@ -1090,27 +1033,6 @@
             </div>
         @endif
 
-        @if(!empty($stripText1) || !empty($stripText2))
-        <!-- Bottom Full-Width Strip Banner -->
-        <div class="mc-support-footer-strip" data-aos="fade-up" data-aos-delay="150">
-            @if(!empty($stripIcon))
-            <div class="mc-footer-heart-badge">
-                {!! $renderIcon($stripIcon, 'fas fa-heart') !!}
-            </div>
-            @endif
-            <div class="mc-footer-strip-text">
-                @if(!empty($stripText1))
-                <span>{{ $stripText1 }}</span>
-                @endif
-                @if(!empty($stripText1) && !empty($stripText2))
-                <span class="mc-footer-strip-sep">|</span>
-                @endif
-                @if(!empty($stripText2))
-                <span class="mc-footer-strip-highlight">{{ $stripText2 }}</span>
-                @endif
-            </div>
-        </div>
-        @endif
     </div>
 </section>
 @endif

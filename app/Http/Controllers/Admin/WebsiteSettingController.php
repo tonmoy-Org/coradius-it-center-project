@@ -606,8 +606,21 @@ class WebsiteSettingController extends Controller
 
     public function saveSuccessStorySection(Request $request)
     {
+        if ($request->isMethod('get')) {
+            return redirect()->route('website.success_story_section');
+        }
+
         if (config('app.demo_mode')) {
-            Toastr::info(__('this_function_is_disabled_in_demo_server'));
+            $data = [
+                'status' => 'danger',
+                'error'  => __('this_function_is_disabled_in_demo_server'),
+                'title'  => 'error',
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+            Toastr::error(__('this_function_is_disabled_in_demo_server'));
             return back();
         }
 
@@ -618,9 +631,54 @@ class WebsiteSettingController extends Controller
             'success_section_btn_url' => 'nullable|string|max:255',
         ]);
 
-        $this->settings->update($request->except('_token', 'lang', 'is_modal', 'site_lang'), $request->lang);
-        Toastr::success(__('update_successful'));
-        return redirect()->route('website.success_story_section');
+        try {
+            $this->setting->update($request);
+
+            $successStoryKeys = [
+                'success_section_status',
+                'success_section_eyebrow',
+                'success_section_title',
+                'success_section_description',
+                'success_section_btn_text',
+                'success_section_btn_url',
+            ];
+
+            $allLanguages = \App\Models\Language::all();
+            foreach ($successStoryKeys as $key) {
+                if ($request->has($key)) {
+                    $val = $request->input($key, '') ?? '';
+                    \App\Models\Setting::updateOrCreate(
+                        ['title' => $key, 'lang' => 'en'],
+                        ['value' => $val]
+                    );
+                    foreach ($allLanguages as $langItem) {
+                        \App\Models\Setting::updateOrCreate(
+                            ['title' => $key, 'lang' => $langItem->locale],
+                            ['value' => $val]
+                        );
+                    }
+                }
+            }
+
+            \Illuminate\Support\Facades\Cache::flush();
+
+            Toastr::success(__('update_successful'));
+            $data = [
+                'success' => __('update_successful'),
+            ];
+
+            if ($request->ajax()) {
+                return response()->json($data);
+            }
+
+            return redirect()->route('website.success_story_section');
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            if ($request->ajax()) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+            return back();
+        }
     }
 
     public function saveStickyPromoSection(Request $request)
