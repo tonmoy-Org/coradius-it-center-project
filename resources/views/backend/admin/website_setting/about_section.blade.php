@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('about_me_section'))
 @section('content')
     <section class="oftions">
@@ -73,20 +73,16 @@
                                 </div>
 
                                 <!-- Image Upload -->
-                                <div class="col-lg-12 input_file_div mb-3">
-                                    <div class="mb-3">
-                                        <label for="about_me_image" class="form-label mb-1">{{ __('image') }} (600x600)</label>
-                                        <label for="about_me_image" class="file-upload-text">
-                                            <p></p>
-                                            <span class="file-btn">{{ __('choose_file') }}</span>
-                                        </label>
-                                        <input class="d-none file_picker" type="file" name="about_me_image" id="about_me_image">
-                                    </div>
-                                    <div class="selected-files d-flex flex-wrap gap-20">
-                                        <div class="selected-files-item">
-                                            <img class="selected-img" src="{{ getFileLink('80x80', setting('about_me_image')) }}" alt="about me image">
-                                        </div>
-                                    </div>
+                                <div class="col-lg-12 mb-3">
+                                    @include('backend.common.media-input', [
+                                        'title' => __('image'),
+                                        'label' => __('image'),
+                                        'for' => 'image',
+                                        'name' => 'about_me_image',
+                                        'col' => 'col-12',
+                                        'size' => '(600x600)',
+                                        'image' => setting('about_me_image')
+                                    ])
                                 </div>
 
                                 <!-- Status Switch -->

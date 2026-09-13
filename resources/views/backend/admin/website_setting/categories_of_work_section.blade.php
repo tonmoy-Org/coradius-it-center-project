@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('categories_of_work_section'))
 @section('content')
     <section class="oftions">
@@ -63,13 +63,15 @@
                                                             <textarea class="form-control summernote" rows="4" name="categories_of_work_cards[{{ $index }}][content]">{!! $card['content'] ?? '' !!}</textarea>
                                                         </div>
                                                         <div class="col-md-12 mb-3">
-                                                            <label class="form-label">{{ __('Image (Optional)') }}</label>
-                                                            <input type="file" class="form-control" name="categories_of_work_cards[{{ $index }}][image]" accept="image/*">
-                                                            @if(!empty($card['image']))
-                                                                <div class="mt-2">
-                                                                    <img src="{{ asset($card['image']) }}" alt="Card Image" style="max-height: 80px;">
-                                                                </div>
-                                                            @endif
+                                                            @include('backend.common.media-input', [
+                                                                'title' => __('Image (Optional)'),
+                                                                'label' => __('Image (Optional)'),
+                                                                'for' => 'image',
+                                                                'name' => "categories_of_work_cards[$index][media_id]",
+                                                                'col' => 'col-12',
+                                                                'size' => '',
+                                                                'image' => $card['media_id'] ?? ($card['image'] ?? '')
+                                                            ])
                                                         </div>
                                                     </div>
                                                 </div>
@@ -93,9 +95,11 @@
             </div>
         </div>
     </section>
+    @include('backend.common.gallery-modal')
 @endsection
 
 @push('js')
+<script src="{{ static_asset('admin/js/media.js') }}"></script>
 <script>
     $(document).ready(function() {
         let cardIndex = {{ count(is_array(setting('categories_of_work_cards')) ? setting('categories_of_work_cards') : []) }};
@@ -122,9 +126,20 @@
                             <label class="form-label">{{ __('Content (Modules/Text)') }}</label>
                             <textarea class="form-control summernote" rows="4" name="categories_of_work_cards[${cardIndex}][content]"></textarea>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">{{ __('Image (Optional)') }}</label>
-                            <input type="file" class="form-control" name="categories_of_work_cards[${cardIndex}][image]" accept="image/*">
+                        <div class="col-md-12 mb-3 custom-image">
+                            <div class="mb-4 gallery-modal" data-for="image" data-selection="single">
+                                <label class="form-label mb-1">{{ __('Image (Optional)') }}</label>
+                                <label class="file-upload-text">
+                                    <p><span class="file_selected">0 </span>{{ __('files_selected') }}</p>
+                                    <span class="file-btn">{{ __('choose_file') }}</span>
+                                </label>
+                                <input class="d-none" type="hidden" name="categories_of_work_cards[${cardIndex}][media_id]" value="">
+                            </div>
+                            <div class="selected-files d-flex flex-wrap gap-20">
+                                <div class="selected-files-item d-none">
+                                    <img class="selected-img" src="{{ static_asset('images/default/default-image-80x80.png') }}" alt="preview">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,9 +175,9 @@
 </script>
 @endpush
 
-
-
-
-
-
-
+@push('css_asset')
+    <link rel="stylesheet" href="{{ static_asset('admin/css/dropzone.min.css') }}">
+@endpush
+@push('js_asset')
+    <script src="{{ static_asset('admin/js/dropzone.min.js') }}"></script>
+@endpush

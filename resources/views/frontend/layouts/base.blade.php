@@ -398,8 +398,8 @@
                 preloader.classList.add("preloader-finish");
             });
         </script>
-@endif
-
+    @endif
+</head>
 <body>
 @if (setting('disable_preloader') != '1')
     <div class="preloader">

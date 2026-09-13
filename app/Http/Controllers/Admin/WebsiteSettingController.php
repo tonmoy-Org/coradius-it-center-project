@@ -571,6 +571,33 @@ class WebsiteSettingController extends Controller
         }
     }
 
+    public function successStorySection(Request $request)
+    {
+        $data['title'] = __('Success Story Section');
+        $data['active_setting'] = 'success_story_section';
+        $data['lang'] = request()->lang ?? setting('default_language');
+        return view('backend.admin.website_setting.success_story_section', $data);
+    }
+
+    public function saveSuccessStorySection(Request $request)
+    {
+        if (config('app.demo_mode')) {
+            Toastr::info(__('this_function_is_disabled_in_demo_server'));
+            return back();
+        }
+
+        $request->validate([
+            'success_section_eyebrow' => 'nullable|string|max:255',
+            'success_section_title' => 'nullable|string|max:255',
+            'success_section_btn_text' => 'nullable|string|max:255',
+            'success_section_btn_url' => 'nullable|string|max:255',
+        ]);
+
+        $this->settings->update($request->except('_token', 'lang', 'is_modal', 'site_lang'), $request->lang);
+        Toastr::success(__('update_successful'));
+        return redirect()->route('website.success_story_section');
+    }
+
     public function saveCategoriesOfWorkSection(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -599,7 +626,13 @@ class WebsiteSettingController extends Controller
 
             if (is_array($cards)) {
                 foreach ($cards as $key => $card) {
-                    if ($request->hasFile("categories_of_work_cards.{$key}.image")) {
+                    if (!empty($card['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($card['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $cards[$key]['image'] = getFileLink('original_image', $media->image_variants);
+                            $cards[$key]['media_id'] = $card['media_id'];
+                        }
+                    } elseif ($request->hasFile("categories_of_work_cards.{$key}.image")) {
                         $image = $request->file("categories_of_work_cards.{$key}.image");
                         $filename = time() . '_' . $key . '.' . $image->getClientOriginalExtension();
                         $image->move(public_path('images/home_sections'), $filename);
@@ -607,6 +640,9 @@ class WebsiteSettingController extends Controller
                     } elseif (isset($existing_cards[$key]['image'])) {
                         // Keep existing image if not uploaded new
                         $cards[$key]['image'] = $existing_cards[$key]['image'];
+                        if (isset($existing_cards[$key]['media_id'])) {
+                            $cards[$key]['media_id'] = $existing_cards[$key]['media_id'];
+                        }
                     }
 
                     // Remove any remaining UploadedFile objects to prevent serialization errors

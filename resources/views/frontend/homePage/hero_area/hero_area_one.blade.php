@@ -1,4 +1,4 @@
-﻿@php
+@php
     $lang = App::getLocale();
 @endphp
 
@@ -16,15 +16,7 @@
             <div class="col-xl-11 col-lg-12 col-md-12">
                 <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
                     
-                    {{-- Subject --}}
-                    @if($hero_course->subject)
-                        <div class="mb-3">
-                            <a href="javascript:void(0)" style="text-decoration: none; display: inline-block;">
-                                <span class="badge hero-badge hero-badge-animated" style="background-color: rgba(0, 86, 210, 0.2); color: #3B8AF2; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(59, 138, 242, 0.35); cursor: pointer;">{{ trim($hero_course->subject->title) }}</span>
-                            </a>
-                        </div>
-                    @endif
-                    
+
                     {{-- Title first --}}
                     <h1 class="hero-title mb-2" style="color: #ffffff;">{{ $hero_course->title }}</h1>
 
@@ -533,7 +525,7 @@
 /* Mobile Viewport Styles (< 768px) */
 @media (max-width: 767.98px) {
     .hero-area {
-        padding-top: 88px !important;
+        padding-top: 36px !important;
         padding-bottom: 30px !important;
     }
 

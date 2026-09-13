@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.master')
+@extends('frontend.layouts.master')
 @section('title', __('home'))
 
 @push('css')
@@ -8,6 +8,29 @@
        Standardizes vertical cadence, container gutters, and heading spacing
        across all landing page sections on mobile and tablet devices.
        ========================================================================== */
+    /* Completely eliminate top white gap & reset body/header spacing */
+    html, body {
+        margin: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    header, .template-header, .header-navigation, .header-area {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    section.hero-area {
+        margin-top: 0 !important;
+        padding-top: 40px !important;
+        display: flow-root;
+    }
+
+    section.hero-area > *:first-child {
+        margin-top: 0 !important;
+    }
+
     @media (max-width: 767.98px) {
         /* Standardized Section Vertical Spacing (38px top & bottom) */
         .home-page-sections > section,
@@ -27,9 +50,9 @@
             padding-bottom: 38px !important;
         }
 
-        /* Hero Area Mobile Padding (Clears fixed/absolute header without overlap) */
+        /* Hero Area Mobile Padding */
         section.hero-area {
-            padding-top: 88px !important;
+            padding-top: 36px !important;
             padding-bottom: 36px !important;
         }
 
@@ -123,7 +146,7 @@
         }
 
         section.hero-area {
-            padding-top: 80px !important;
+            padding-top: 28px !important;
             padding-bottom: 28px !important;
         }
 

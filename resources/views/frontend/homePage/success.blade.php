@@ -18,6 +18,7 @@
     $successTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : (isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : (setting('success_section_title') ?: __('What Says My Students About The Platform')));
     $successBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : (setting('success_section_btn_text') ?: __('Join Now'));
     $successBtnUrl   = !empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : (setting('success_section_btn_url') ?: '#register');
+    $successSubtitle = !empty($mcSettings['success_description']) ? $mcSettings['success_description'] : setting('success_section_description');
 @endphp
 <style>
     /* Equal Height Card Container */
@@ -234,9 +235,9 @@
                         </h2>
                     @endif
                     @if(!empty($successSubtitle))
-                        <p class="m-b-25" style="color: #4B5A72; font-size: 16px; line-height: 1.7;">
-                            {{ $successSubtitle }}
-                        </p>
+                        <div class="m-b-25" style="color: #4B5A72; font-size: 16px; line-height: 1.7;">
+                            {!! $successSubtitle !!}
+                        </div>
                     @endif
                     @if(!empty($successBtnText))
                         <a href="{{ $successBtnUrl }}" class="template-btn" style="border-radius: 8px;">

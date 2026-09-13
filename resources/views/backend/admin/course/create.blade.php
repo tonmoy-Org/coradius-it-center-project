@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('add_new_course'))
 @section('content')
     <div class="container-fluid">
@@ -354,24 +354,20 @@
                                                            value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
-                                                    <label class="form-label mb-2">Banner Image 1 (1200x300)</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Upload Image File</label>
-                                                            <input type="file" name="ad_banner_1_file" class="form-control rounded-2" accept="image/*">
-                                                        </div>
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Or Image URL / Link</label>
-                                                            <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
-                                                        </div>
+                                                    @include('backend.common.media-input', [
+                                                        'title' => 'Ad Banner 1 Image',
+                                                        'label' => 'Banner Image 1',
+                                                        'for' => 'image',
+                                                        'name' => 'ad_banner_1_media_id',
+                                                        'col' => 'col-12',
+                                                        'size' => '(1200x300)',
+                                                        'image' => $mcSettings['ad_banner_1_media_id'] ?? ''
+                                                    ])
+                                                    <div class="mt-2">
+                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
+                                                        <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
                                                     </div>
-                                                    @if(!empty($mcSettings['ad_banner_1_image_url']))
-                                                        <div class="mt-2">
-                                                            <label class="small text-muted d-block mb-1">Current Banner 1 Preview:</label>
-                                                            <img src="{{ $mcSettings['ad_banner_1_image_url'] }}" alt="Ad Banner 1 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
-                                                        </div>
-                                                    @endif
                                                 </div>
 
                                                 <!-- Banner 2 -->
@@ -394,24 +390,20 @@
                                                            value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
-                                                    <label class="form-label mb-2">Banner Image 2 (1200x300)</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Upload Image File</label>
-                                                            <input type="file" name="ad_banner_2_file" class="form-control rounded-2" accept="image/*">
-                                                        </div>
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Or Image URL / Link</label>
-                                                            <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
-                                                        </div>
+                                                    @include('backend.common.media-input', [
+                                                        'title' => 'Ad Banner 2 Image',
+                                                        'label' => 'Banner Image 2',
+                                                        'for' => 'image',
+                                                        'name' => 'ad_banner_2_media_id',
+                                                        'col' => 'col-12',
+                                                        'size' => '(1200x300)',
+                                                        'image' => $mcSettings['ad_banner_2_media_id'] ?? ''
+                                                    ])
+                                                    <div class="mt-2">
+                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
+                                                        <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
                                                     </div>
-                                                    @if(!empty($mcSettings['ad_banner_2_image_url']))
-                                                        <div class="mt-2">
-                                                            <label class="small text-muted d-block mb-1">Current Banner 2 Preview:</label>
-                                                            <img src="{{ $mcSettings['ad_banner_2_image_url'] }}" alt="Ad Banner 2 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
-                                                        </div>
-                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

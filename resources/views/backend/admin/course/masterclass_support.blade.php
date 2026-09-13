@@ -1,4 +1,4 @@
-﻿@php
+@php
     $mcSettings = $mcSettings ?? (old('masterclass_settings') ?: []);
     if (!is_array($mcSettings)) {
         $mcSettings = json_decode($mcSettings ?? '[]', true) ?: [];
@@ -98,11 +98,18 @@
 
             <!-- Title Icon -->
             <div class="col-lg-6 col-md-6 mb-4">
-                <label class="form-label">Title Icon Class</label>
+                <label class="form-label">Title Icon Class (FontAwesome / RemixIcon / BoxIcons)</label>
                 <input type="text" name="masterclass_settings[support_title_icon]" class="form-control rounded-2 mb-2"
                        value="{{ $supportTitleIcon }}">
-                <label class="form-label small text-muted mb-1">Upload Title Icon</label>
-                <input type="file" name="support_title_icon_file" class="form-control form-control-sm rounded-2" accept="image/*">
+                @include('backend.common.media-input', [
+                    'title' => 'Title Icon Image',
+                    'label' => 'Or Select Icon Image',
+                    'for' => 'image',
+                    'name' => 'support_title_icon_media_id',
+                    'col' => 'col-12',
+                    'size' => '',
+                    'image' => $mcSettings['support_title_icon_media_id'] ?? ''
+                ])
             </div>
 
             <!-- Subtitle -->
@@ -119,21 +126,22 @@
             </div>
 
             <!-- Support Image Upload & URL -->
-            <div class="col-lg-6 mb-4">
-                <label class="form-label">Upload Support Image File</label>
-                <input type="file" name="support_image_file" class="form-control rounded-2" accept="image/*">
-            </div>
-            <div class="col-lg-6 mb-4">
-                <label class="form-label">Support Image URL</label>
-                <input type="text" name="masterclass_settings[support_image_url_custom]" class="form-control rounded-2"
-                       value="{{ $mcSettings['support_image_url'] ?? '' }}">
-            </div>
-            @if(!empty($mcSettings['support_image_url']))
-                <div class="col-12 mb-4">
-                    <label class="small text-muted d-block mb-1">Current Support Image Preview:</label>
-                    <img src="{{ dynamic_asset($mcSettings['support_image_url']) }}" alt="Support Image Preview" class="rounded border p-1" style="max-height: 100px; object-fit: contain; background: #f8fafc;" onerror="this.onerror=null; this.src='{{ static_asset('images/support/support_right_top.png') }}';">
+            <div class="col-lg-12 mb-4">
+                @include('backend.common.media-input', [
+                    'title' => 'Support Image',
+                    'label' => 'Support Image',
+                    'for' => 'image',
+                    'name' => 'support_image_media_id',
+                    'col' => 'col-12',
+                    'size' => '',
+                    'image' => $mcSettings['support_image_media_id'] ?? ''
+                ])
+                <div class="mt-2">
+                    <label class="form-label small text-muted mb-1">Or Custom Support Image URL</label>
+                    <input type="text" name="masterclass_settings[support_image_url_custom]" class="form-control rounded-2"
+                           value="{{ $mcSettings['support_image_url'] ?? '' }}">
                 </div>
-            @endif
+            </div>
 
             <!-- Dynamic Feature Cards -->
             <div class="col-12 mb-4">

@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('Home Landing Page Setup'))
 @section('content')
     <div class="container-fluid">
@@ -723,24 +723,20 @@
                                                            value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
-                                                    <label class="form-label mb-2">Banner Image 1 (1200x300)</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Upload Image File</label>
-                                                            <input type="file" name="ad_banner_1_file" class="form-control rounded-2" accept="image/*">
-                                                        </div>
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Or Image URL / Link</label>
-                                                            <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
-                                                        </div>
+                                                    @include('backend.common.media-input', [
+                                                        'title' => 'Ad Banner 1 Image',
+                                                        'label' => 'Banner Image 1',
+                                                        'for' => 'image',
+                                                        'name' => 'ad_banner_1_media_id',
+                                                        'col' => 'col-12',
+                                                        'size' => '(1200x300)',
+                                                        'image' => $mcSettings['ad_banner_1_media_id'] ?? ''
+                                                    ])
+                                                    <div class="mt-2">
+                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
+                                                        <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
                                                     </div>
-                                                    @if(!empty($mcSettings['ad_banner_1_image_url']))
-                                                        <div class="mt-2">
-                                                            <label class="small text-muted d-block mb-1">Current Banner 1 Preview:</label>
-                                                            <img src="{{ $mcSettings['ad_banner_1_image_url'] }}" alt="Ad Banner 1 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
-                                                        </div>
-                                                    @endif
                                                 </div>
 
                                                 <!-- Banner 2 -->
@@ -763,24 +759,20 @@
                                                            value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
-                                                    <label class="form-label mb-2">Banner Image 2 (1200x300)</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Upload Image File</label>
-                                                            <input type="file" name="ad_banner_2_file" class="form-control rounded-2" accept="image/*">
-                                                        </div>
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Or Image URL / Link</label>
-                                                            <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
-                                                        </div>
+                                                    @include('backend.common.media-input', [
+                                                        'title' => 'Ad Banner 2 Image',
+                                                        'label' => 'Banner Image 2',
+                                                        'for' => 'image',
+                                                        'name' => 'ad_banner_2_media_id',
+                                                        'col' => 'col-12',
+                                                        'size' => '(1200x300)',
+                                                        'image' => $mcSettings['ad_banner_2_media_id'] ?? ''
+                                                    ])
+                                                    <div class="mt-2">
+                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
+                                                        <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
                                                     </div>
-                                                    @if(!empty($mcSettings['ad_banner_2_image_url']))
-                                                        <div class="mt-2">
-                                                            <label class="small text-muted d-block mb-1">Current Banner 2 Preview:</label>
-                                                            <img src="{{ $mcSettings['ad_banner_2_image_url'] }}" alt="Ad Banner 2 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
-                                                        </div>
-                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -1384,42 +1376,38 @@
                                     <div class="col-lg-12">
                                         
                                         <!-- FAQ Section Title & Settings -->
-                                        <div class="card mb-4 mt-2 border-0 shadow-sm">
-                                            <div class="card-body">
-                                                <span class="form-label mb-3 d-block">{{ __('FAQ Section Title & Tag') }}</span>
-                                                
-                                                <div class="form-group mb-3">
-                                                    <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
-                                                    <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_title'] ?? '' }}">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
-                                                </div>
+                                        <div class="mb-4 mt-2">
+                                            <span class="form-label mb-3 d-block">{{ __('FAQ Section Title & Tag') }}</span>
+                                            
+                                            <div class="form-group mb-3">
+                                                <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
+                                                <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
+                                                       value="{{ $mcSettings['faq_title'] ?? '' }}">
+                                                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
+                                            </div>
 
-                                                <div class="form-group mb-0">
-                                                    <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
-                                                    <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
-                                                </div>
+                                            <div class="form-group mb-0">
+                                                <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
+                                                <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
+                                                       value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
                                             </div>
                                         </div>
 
                                         <!-- FAQ Image Upload -->
-                                        <div class="card mb-4 mt-2 border-0 shadow-sm">
-                                            <div class="card-body">
-                                                <span class="form-label mb-3 d-block">{{ __('FAQ Section Image') }}</span>
-                                                <p class="text-muted mb-4">{{ __('Upload an image to display on the right side of the FAQ section on the single course page.') }}</p>
-                                                @include('backend.common.media-input', [
-                                                    'title' => __('FAQ Image'),
-                                                    'name' => 'faq_image_media_id',
-                                                    'col' => 'col-12',
-                                                    'size' => '(800x600)',
-                                                    'image' => old('faq_image_media_id', $course->faq_image_media_id),
-                                                    'label' => __('FAQ Image'),
-                                                    'edit' => $course,
-                                                    'image_object' => $course->faq_image,
-                                                    'media_id' => $course->faq_image_media_id,
-                                                ])
-                                            </div>
+                                        <div class="mb-4 mt-2">
+                                            <span class="form-label mb-3 d-block">{{ __('FAQ Section Image') }}</span>
+                                            <p class="text-muted mb-4">{{ __('Upload an image to display on the right side of the FAQ section on the single course page.') }}</p>
+                                            @include('backend.common.media-input', [
+                                                'title' => __('FAQ Image'),
+                                                'name' => 'faq_image_media_id',
+                                                'col' => 'col-12',
+                                                'size' => '(800x600)',
+                                                'image' => old('faq_image_media_id', $course->faq_image_media_id),
+                                                'label' => __('FAQ Image'),
+                                                'edit' => $course,
+                                                'image_object' => $course->faq_image,
+                                                'media_id' => $course->faq_image_media_id,
+                                            ])
                                         </div>
 
                                         <div class="oftions-content-right mb-20">
@@ -1481,16 +1469,8 @@
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button" id="faq_back_btn"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="{{ $course->course_type == 'live_class' ? '#courseLiveClass' : '#courseCurriculum' }}">{{ __('back') }}</a>
-
-
+                                        <div class="d-flex justify-content-end align-items-center mt-30">
                                             <div class="d-flex align-items-center gap-3">
-                                                <button type="submit"
-                                                        class="btn sg-btn-primary mr-1">{{ __('update') }}</button>
-
                                                 <button type="submit" name="save_and_published" value="1"
                                                         class="btn sg-btn-primary">{{ __('save_&_publish') }}</button>
                                             </div>
