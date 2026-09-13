@@ -128,6 +128,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         Route::get('categories-of-work-section', [WebsiteSettingController::class, 'categoriesOfWorkSection'])->name('website.categories_of_work_section');
         Route::get('newsletter-section', [WebsiteSettingController::class, 'newsletterSection'])->name('website.newsletter_section');
         Route::get('sticky-promo-section', [WebsiteSettingController::class, 'stickyPromoSection'])->name('website.sticky_promo');
+        Route::match(['get', 'post'], 'save-sticky-promo-section', [WebsiteSettingController::class, 'saveStickyPromoSection'])->name('website.sticky_promo.save');
         Route::get('success-story-section', [WebsiteSettingController::class, 'successStorySection'])->name('website.success_story_section');
         Route::match(['get', 'post'], 'save-success-story-section', [WebsiteSettingController::class, 'saveSuccessStorySection'])->name('website.success_story_section.save');
         Route::match(['get', 'post'], 'save-categories-of-work-section', [WebsiteSettingController::class, 'saveCategoriesOfWorkSection'])->name('website.categories_of_work_section.save');

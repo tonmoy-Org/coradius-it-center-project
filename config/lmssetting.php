@@ -53,6 +53,8 @@ return [
         'about_me_btn_text',
         'about_me_btn_url',
         'categories_of_work_title',
+        'sticky_promo_title',
+        'sticky_promo_btn_text',
         'single_course_tag',
         'single_course_title',
         'single_course_description_1',

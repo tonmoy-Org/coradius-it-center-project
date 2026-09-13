@@ -3,12 +3,14 @@
     
     $counterItems = setting('counter_items');
     if (!is_array($counterItems) || empty($counterItems)) {
-        $counterItems = [
-            ['title' => setting('counter_1_title') ?: 'Total Course', 'count' => setting('counter_1_count') ?: '22 +'],
-            ['title' => setting('counter_2_title') ?: 'Instructors',  'count' => setting('counter_2_count') ?: '9 +'],
-            ['title' => setting('counter_3_title') ?: 'Learners',     'count' => setting('counter_3_count') ?: '413 +'],
-            ['title' => setting('counter_4_title') ?: 'Satisfied',    'count' => setting('counter_4_count') ?: '2.03 %'],
-        ];
+        $counterItems = [];
+        for ($c = 1; $c <= 4; $c++) {
+            $t = setting("counter_{$c}_title");
+            $v = setting("counter_{$c}_count");
+            if (!empty($t) || !empty($v)) {
+                $counterItems[] = ['title' => $t ?: '', 'count' => $v ?: ''];
+            }
+        }
     }
 @endphp
 

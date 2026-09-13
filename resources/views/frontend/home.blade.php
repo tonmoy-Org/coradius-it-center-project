@@ -173,6 +173,13 @@
 @endpush
 
 @section('base.content')
+    @php
+        $mcSettings = [];
+        if (isset($course) && $course) {
+            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+            if (!is_array($mcSettings)) $mcSettings = [];
+        }
+    @endphp
     @if(!isset($mcSettings['basic_info_status']) || $mcSettings['basic_info_status'] == 1)
     @include('frontend.homePage.hero_area.hero_area_one')
     @endif
@@ -188,7 +195,15 @@
     @include('frontend.homePage.categories_of_work')
 
     <!--====== Start Benefits Section ======-->
-    @if(!isset($mcSettings['benefits_status']) || $mcSettings['benefits_status'] == 1)
+    @php
+        $showBenefits = true;
+        if (isset($mcSettings['show_benefits_section'])) {
+            $showBenefits = !empty($mcSettings['show_benefits_section']);
+        } elseif (isset($mcSettings['benefits_status'])) {
+            $showBenefits = !empty($mcSettings['benefits_status']);
+        }
+    @endphp
+    @if($showBenefits)
     @include('frontend.homePage.benefits')
     @endif
 

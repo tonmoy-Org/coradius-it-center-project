@@ -29,10 +29,10 @@
             <div class="row align-items-center g-4">
                 <!-- Column 1: Newsletter Title & Description -->
                 <div class="col-lg-6 col-md-12">
-                    <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
-                        {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
+                    <h3 class="fw-bold mb-2" style="color: #0A1E3F; font-size: 24px; line-height: 1.2;">
+                        {{ setting('newsletter_title', app()->getLocale()) ?: (setting('newsletter_title') ?: __('Subscribe Newsletter')) }}
                     </h3>
-                    <p class="mb-0" style="color: #4b5563; font-size: 14px; line-height: 1.5;">
+                    <p class="mb-0" style="color: #4B5A72; font-size: 14px; line-height: 1.5;">
                         {{ setting('newsletter_description', app()->getLocale()) ?: (setting('newsletter_description') ?: __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')) }}
                     </p>
                 </div>
