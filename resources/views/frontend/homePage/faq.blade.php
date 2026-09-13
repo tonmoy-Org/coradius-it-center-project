@@ -2,21 +2,21 @@
 @if(isset($course) && count($course->faqs) > 0)
 <style>
     .custom-faq-accordion .accordion-item {
-        border: 1px solid #E5E7EB;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 8px !important;
         margin-bottom: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         overflow: hidden;
         transition: all 0.3s ease;
-        background: #ffffff;
+        background: var(--color-white, #ffffff);
     }
     .custom-faq-accordion .accordion-item:hover {
-        border-color: #10b981;
-        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.08);
+        border-color: var(--color-primary, #0056D2);
+        box-shadow: 0 8px 20px rgba(0, 86, 210, 0.08);
     }
     .custom-faq-accordion .accordion-button {
-        background-color: #ffffff;
-        color: #1a1b4b;
+        background-color: var(--color-white, #ffffff);
+        color: var(--color-text-ink, #0A1E3F);
         font-weight: 700;
         font-size: 17px;
         padding: 22px 26px;
@@ -27,8 +27,8 @@
         justify-content: space-between;
     }
     .custom-faq-accordion .accordion-button:not(.collapsed) {
-        color: #10b981;
-        background-color: #ffffff;
+        color: var(--color-primary, #0056D2);
+        background-color: var(--color-white, #ffffff);
     }
     .custom-faq-accordion .accordion-button::after {
         display: none;
@@ -37,8 +37,8 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background-color: #F3F4F6;
-        color: #1a1b4b;
+        background-color: var(--color-blue-tint, #EAF2FE);
+        color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -49,13 +49,13 @@
         margin-left: 15px;
     }
     .custom-faq-accordion .accordion-button:not(.collapsed) .faq-toggle-icon {
-        background-color: #10b981;
+        background-color: var(--color-primary, #0056D2);
         color: #ffffff;
         transform: rotate(45deg);
     }
     .custom-faq-accordion .accordion-body {
-        background-color: #ffffff;
-        color: #64748b;
+        background-color: var(--color-white, #ffffff);
+        color: var(--color-text-secondary, #4B5A72);
         font-size: 15px;
         line-height: 1.75;
         padding: 0 26px 24px 26px;
@@ -169,12 +169,12 @@
                     @endphp
                     <div class="common-heading m-b-30">
                         @if($faqSubtitle)
-                            <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                            <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                                 {{ __($faqSubtitle) }}
                             </span>
                         @endif
                         @if($faqTitle)
-                            <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
+                            <h2 class="fw-bold m-b-0" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
                                 {!! format_title_highlight(__($faqTitle)) !!}
                             </h2>
                         @endif
@@ -198,9 +198,9 @@
                                  class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}" 
                                  aria-labelledby="headingFaq{{ $key }}" 
                                  data-bs-parent="#courseFaqAccordion">
-                                <div class="accordion-body">
-                                    {!! $faq->answer !!}
-                                </div>
+                                 <div class="accordion-body">
+                                     {!! $faq->answer !!}
+                                 </div>
                             </div>
                         </div>
                         @endforeach
@@ -225,12 +225,12 @@
                     
                     <div class="faq-badge-floating d-flex">
                         <div class="faq-badge-icon d-flex align-items-center justify-content-center" 
-                             style="width: 46px; height: 46px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 1.3rem;">
+                             style="width: 46px; height: 46px; border-radius: 8px; background: var(--color-blue-tint, #EAF2FE); color: var(--color-primary, #0056D2); font-size: 1.3rem;">
                             <i class="fas fa-question-circle"></i>
                         </div>
                         <div>
-                            <h5 class="fw-bold mb-0" style="color: #1a1b4b; font-size: 1rem;">Any Doubts or Questions?</h5>
-                            <span class="text-secondary" style="font-size: 0.85rem;">We are here to support your learning journey</span>
+                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">Any Doubts or Questions?</h5>
+                            <span style="color: #4B5A72; font-size: 0.85rem;">We are here to support your learning journey</span>
                         </div>
                     </div>
                 </div>

@@ -58,11 +58,6 @@
                                 <span
                                     class="default-tab-count {{ $step_3_error && !$step_2_error ? 'bg-danger text-white' : '' }}">{{ __('4') }}</span>{{ __('pricing') }}</a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="seo" data-bs-toggle="pill" data-bs-target="#courseSEO"
-                                role="tab" aria-controls="courseSEO" aria-selected="false">
-                                <span class="default-tab-count">{{ __('5') }}</span>{{ __('seo') }}</a>
-                        </li>
                         
                     </ul>
                     <!-- End Add New Course tab menu -->
@@ -78,7 +73,7 @@
                                             <label for="courseTitle" class="form-label">{{ __('course_title') }}</label>
                                             <input type="text" value="{{ old('title') }}"
                                                 class="form-control rounded-2 ai_content_name" id="courseTitle"
-                                                name="title" placeholder="{{ __('enter_course_title') }}">
+                                                name="title">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('title') }}</p>
                                             </div>
@@ -89,195 +84,10 @@
                                     <div class="col-lg-6">
                                         <div class="mb-4">
                                             <label for="courseSubtitle" class="form-label">Course Subtitle</label>
-                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" placeholder="Enter Course Subtitle" value="{{ old('course_subtitle') }}">
+                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" value="{{ old('course_subtitle') }}">
                                         </div>
                                     </div>
                                     <!-- End Course Subtitle -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="select_category"
-                                                    class="form-label">{{ __('select_category') }}</label>
-                                                <select id="select_category" name="category_id"
-                                                    data-route="{{ route('ajax.categories') }}"
-                                                    placeholder="{{ __('select_category') }}"
-                                                    class="multiple-select-1 form-select-lg rounded-0 mb-3"
-                                                    aria-label=".form-select-lg example">
-                                                    @if ($category)
-                                                        <option value="{{ $category->id }}" selected>
-                                                            {{ $category->title }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('category_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Category -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="courseType" class="form-label">{{ __('course_type') }}</label>
-                                                <select id="courseType" name="course_type"
-                                                    class="form-select form-select-lg mb-3 without_search"
-                                                    aria-label=".form-select-lg">
-                                                    <option value="course"
-                                                        {{ old('course_type') == 'course' ? 'selected' : '' }}>
-                                                        {{ __('course') }}</option>
-                                                    <option value="live_class"
-                                                        {{ old('course_type') == 'live_class' ? 'selected' : '' }}>
-                                                        {{ __('live_class') }}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Type -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="language_id" class="form-label">{{ __('language') }}</label>
-                                                <select id="language_id"
-                                                    class="form-select form-select-lg mb-3 with_search"
-                                                    name="language_id">
-                                                    <option value="">{{ __('select_language') }}</option>
-                                                    @foreach ($languages as $language)
-                                                        <option value="{{ $language->id }}"
-                                                            {{ old('language_id') == $language->id ? 'selected' : '' }}>
-                                                            {{ $language->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('language_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Language -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="select_subject"
-                                                    class="form-label">{{ __('select_subject') }}</label>
-                                                <select id="select_subject" name="subject_id"
-                                                    placeholder="{{ __('select_subject') }}"
-                                                    data-route="{{ route('ajax.subjects') }}"
-                                                    class="multiple-select-1 form-select-lg rounded-0 mb-3"
-                                                    aria-label=".form-select-lg example">
-                                                    @if ($subject)
-                                                        <option value="{{ $subject->id }}" selected>
-                                                            {{ $subject->title }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('subject_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Subject -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="courseLevel"
-                                                    class="form-label">{{ __('course_level') }}</label>
-                                                <select id="courseLevel"
-                                                    class="form-select form-select-lg mb-3 with_search" name="level_id"
-                                                    aria-label=".form-select-lg">
-                                                    <option value="">{{ __('select_level') }}</option>
-                                                    @foreach ($levels as $level)
-                                                        <option value="{{ $level->id }}"
-                                                            {{ old('level_id') == $level->id ? 'selected' : '' }}>
-                                                            {{ $level->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('level_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Level -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="ins_by_org"
-                                                    class="form-label">{{ __('select_organization') }}</label>
-                                                <select id="ins_by_org" name="organization_id"
-                                                    data-route="{{ route('ajax.organizations') }}"
-                                                    class="form-select-lg rounded-0 mb-3 with_search"
-                                                    aria-label=".form-select-lg example"
-                                                    data-url="{{ route('ajax.instructors') }}">
-                                                    <option value="">{{ __('select_organization') }}</option>
-                                                    @if ($organization)
-                                                        <option value="{{ $organization->id }}" selected>
-                                                            {{ $organization->org_name }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('organization_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Organisation -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="instructor_ids"
-                                                    class="form-label">{{ __('instructor') }}</label>
-                                                <select id="instructor_ids" name="instructor_ids[]" multiple
-                                                    class="form-select form-select-lg mb-3 without_search"
-                                                    aria-label=".form-select-lg">
-                                                    @foreach ($instructors as $instructor)
-                                                        <option value="{{ $instructor->id }}"
-                                                            {{ old('instructor_ids') && in_array($instructor->id, old('instructor_ids')) ? 'selected' : '' }}>
-                                                            {{ $instructor->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('instructor_ids') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Instructor -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <label for="courseDuration"
-                                                class="form-label">{{ __('course_duration') }}</label>
-                                            <input type="text" class="form-control rounded-2" id="courseDuration"
-                                                name="duration" placeholder="{{ __('72_hours') }}"
-                                                value="{{ old('duration') }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('duration') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Duration -->
-                                    <div class="col-lg-6">
-                                        <div class="multi-select-v2 mb-4">
-                                            <label for="tag" class="form-label">{{ __('course_tag') }}</label>
-                                            <select id="tag" multiple
-                                                class="form-select form-select-lg mb-3 with_search" name="tags[]"
-                                                aria-label=".form-select-lg" placeholder="{{ __('select_tags') }}">
-                                                @foreach ($tags as $tag)
-                                                    <option value="{{ $tag->id }}"
-                                                        {{ old('tags') && in_array($tag->id, old('tags')) ? 'selected' : '' }}>
-                                                        {{ $tag->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- End Course Tag -->
 
                                     <div class="col-lg-12">
                                         <div class="mb-4">
@@ -291,8 +101,7 @@
                                                     'use_case' => 'short description for course',
                                                 ])
                                             </div>
-                                            <textarea class="form-control ai_short_description" name="short_description" id="shortDescription"
-                                                placeholder="{{ __('enter_short_description') }}">{{ old('short_description') }}</textarea>
+                                            <textarea class="form-control ai_short_description" name="short_description" id="shortDescription">{{ old('short_description') }}</textarea>
                                         </div>
                                     </div>
                                     <!-- End Short Description -->
@@ -300,7 +109,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-4">
                                             <label for="descriptionSubtitle" class="form-label">Description Subtitle</label>
-                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" placeholder="Enter Description Subtitle" value="{{ old('description_subtitle') }}">
+                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" value="{{ old('description_subtitle') }}">
                                         </div>
                                     </div>
                                     <!-- End Description Subtitle -->
@@ -427,7 +236,7 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Benefits Section Heading</label>
                                                 <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                                           value="{{ $defBenefitsTitle }}" placeholder="?? ???????????? ??? ?????">
+                                                           value="{{ $defBenefitsTitle }}">
                                             </div>
 
                                             <label class="form-label mb-2">Benefit Points (এই মাস্টারক্লাস কার কার জন্য)</label>
@@ -436,7 +245,7 @@
                                                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                                                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">{{ $bIdx + 1 }}</span></span>
                                                         <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $bItem }}" placeholder="?????? / ???????? ?????...">
+                                                                       value="{{ $bItem }}">
                                                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                                                             <i class="las la-trash-alt fs-5"></i>
                                                         </a>
@@ -468,49 +277,47 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Pill / Badge Text</label>
                                                     <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
-                                                           value="{{ $defGiftBadge }}" placeholder="🎁 যারা join করবেন তাদের জন্য special gift">
+                                                           value="{{ $defGiftBadge }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Title</label>
                                                     <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — সম্পূর্ণ FREE করার সুযোগ">
+                                                           value="{{ $defGiftTitle }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Original Gift Value</label>
                                                     <input type="text" name="masterclass_settings[gift_value]" class="form-control rounded-2"
-                                                           value="{{ $defGiftValue }}" placeholder="৳১০,০০০">
+                                                           value="{{ $defGiftValue }}">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Description</label>
-                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
+                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3">{{ $defGiftDescription }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Quote Callout Box</label>
-                                                    <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="এই কোর্সে আমি ই-কমার্স বিজনেস, ডিজিটাল মার্কেটিং এর বিভিন্ন বিষয় নিয়ে আলোচনা করেছি...">{{ $defGiftQuote }}</textarea>
+                                                    <textarea name="masterclass_settings[gift_quote]" class="form-control rounded-2 summernote" rows="3">{{ $defGiftQuote }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Footer Note Text</label>
                                                     <input type="text" name="masterclass_settings[gift_footer_note]" class="form-control rounded-2"
-                                                           value="{{ $defGiftFooterNote }}" placeholder="যারা একদম নতুন আছেন তারাও এই কোর্স থেকে বেনিফিটেড হতে পারবে।">
+                                                           value="{{ $defGiftFooterNote }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Red CTA Button Text</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                           value="{{ $defGiftCtaText }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Red CTA Button Link</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_link]" class="form-control rounded-2"
-                                                           value="{{ $defGiftCtaLink }}" placeholder="e.g. #register or https://...">
+                                                           value="{{ $defGiftCtaLink }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -544,27 +351,23 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Ad Banner Link URL 1</label>
                                                     <input type="text" name="masterclass_settings[ad_banner_1_link]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}" placeholder="https://example.com/promotion1">
+                                                           value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
-                                                    <label class="form-label mb-2">Banner Image 1 (1200x300)</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Upload Image File</label>
-                                                            <input type="file" name="ad_banner_1_file" class="form-control rounded-2" accept="image/*">
-                                                        </div>
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Or Image URL / Link</label>
-                                                            <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}" placeholder="https://example.com/banner1.jpg">
-                                                        </div>
+                                                    @include('backend.common.media-input', [
+                                                        'title' => 'Ad Banner 1 Image',
+                                                        'label' => 'Banner Image 1',
+                                                        'for' => 'image',
+                                                        'name' => 'ad_banner_1_media_id',
+                                                        'col' => 'col-12',
+                                                        'size' => '(1200x300)',
+                                                        'image' => $mcSettings['ad_banner_1_media_id'] ?? ''
+                                                    ])
+                                                    <div class="mt-2">
+                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
+                                                        <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
                                                     </div>
-                                                    @if(!empty($mcSettings['ad_banner_1_image_url']))
-                                                        <div class="mt-2">
-                                                            <label class="small text-muted d-block mb-1">Current Banner 1 Preview:</label>
-                                                            <img src="{{ $mcSettings['ad_banner_1_image_url'] }}" alt="Ad Banner 1 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
-                                                        </div>
-                                                    @endif
                                                 </div>
 
                                                 <!-- Banner 2 -->
@@ -584,27 +387,23 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Ad Banner Link URL 2</label>
                                                     <input type="text" name="masterclass_settings[ad_banner_2_link]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}" placeholder="https://example.com/promotion2">
+                                                           value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
-                                                    <label class="form-label mb-2">Banner Image 2 (1200x300)</label>
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Upload Image File</label>
-                                                            <input type="file" name="ad_banner_2_file" class="form-control rounded-2" accept="image/*">
-                                                        </div>
-                                                        <div class="col-lg-6 mb-2">
-                                                            <label class="form-label mb-1">Or Image URL / Link</label>
-                                                            <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}" placeholder="https://example.com/banner2.jpg">
-                                                        </div>
+                                                    @include('backend.common.media-input', [
+                                                        'title' => 'Ad Banner 2 Image',
+                                                        'label' => 'Banner Image 2',
+                                                        'for' => 'image',
+                                                        'name' => 'ad_banner_2_media_id',
+                                                        'col' => 'col-12',
+                                                        'size' => '(1200x300)',
+                                                        'image' => $mcSettings['ad_banner_2_media_id'] ?? ''
+                                                    ])
+                                                    <div class="mt-2">
+                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
+                                                        <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
                                                     </div>
-                                                    @if(!empty($mcSettings['ad_banner_2_image_url']))
-                                                        <div class="mt-2">
-                                                            <label class="small text-muted d-block mb-1">Current Banner 2 Preview:</label>
-                                                            <img src="{{ $mcSettings['ad_banner_2_image_url'] }}" alt="Ad Banner 2 Preview" class="rounded border w-100" style="max-height: 80px; object-fit: cover;">
-                                                        </div>
-                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -675,7 +474,7 @@
                                         <div class="mb-4">
                                             <label for="videoLink" class="form-label">{{ __('video_link') }}</label>
                                             <input type="text" class="form-control rounded-2" name="video_link"
-                                                id="videoLink" placeholder="{{ __('enter_video_link') }}"
+                                                id="videoLink"
                                                 value="{{ old('video') }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('video_link') }}</p>
@@ -745,8 +544,7 @@
                                         <div class="mb-4">
                                             <label for="coursePrice" class="form-label">{{ __('course_price') }}</label>
                                             <input type="number" class="form-control rounded-2" id="coursePrice"
-                                                name="price" value="{{ old('price') }}"
-                                                placeholder="{{ __('enter_course_price') }}">
+                                                name="price" value="{{ old('price') }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('price') }}</p>
                                             </div>
@@ -760,7 +558,7 @@
                                             <label for="discountType" class="form-label">{{ __('discount') }}</label>
 
                                             <div class="customDiscountField">
-                                                <input type="text" class="form-control rounded-2" placeholder="e.g.20"
+                                                <input type="text" class="form-control rounded-2"
                                                     id="discountType" name="discount" value="{{ old('discount') }}">
 
                                                 <div class="select-type-v2 selectField">
@@ -792,8 +590,7 @@
                                             <label for="dateRangePicker"
                                                 class="form-label">{{ __('discount_period') }}</label>
                                             <input id="dateRangePicker" name="discount_period" type="text"
-                                                class="form-control rounded-2" value="{{ old('discount_period') }}"
-                                                placeholder="{{ __('select_date') }}">
+                                                class="form-control rounded-2" value="{{ old('discount_period') }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="dateRange_error error">{{ $errors->first('price') }}</p>
                                             </div>
@@ -807,8 +604,7 @@
                                                 <label for="renew_after"
                                                     class="form-label">{{ __('access_validity') }}</label>
                                                 <input type="number" class="form-control rounded-2" id="renew_after"
-                                                    name="renew_after" value="{{ old('renew_after') }}"
-                                                    placeholder="e.g.90">
+                                                    name="renew_after" value="{{ old('renew_after') }}">
                                                 <div class="nk-block-des text-danger">
                                                     <p class="dateRange_error error">{{ $errors->first('renew_after') }}
                                                     </p>
@@ -824,8 +620,7 @@
                                                 class="btn sg-btn-outline-primary btn_action"
                                                 data-bs-target="#courseMediaImages">{{ __('back') }}</a>
 
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                                data-bs-target="#courseSEO">{{ __('next') }}</a>
+                                            <button type="submit" class="btn sg-btn-primary">{{ __('submit') }}</button>
                                         </div>
                                     </div>
                                     <!-- End Next Page BTN -->
@@ -833,34 +628,6 @@
                                 <!-- End Product images section -->
                             </div>
                             <!-- End Course Pricing -->
-
-                            <div class="tab-pane fade" id="courseSEO" role="tabpanel" aria-labelledby="seo"
-                                tabindex="0">
-                                <div class="row gx-20">
-                                    @include('components.meta-fields', [
-                                        'meta_title_class' => 'col-lg-6',
-                                        'meta_description_class' => 'col-lg-12',
-                                        'meta_keywords_class' => 'col-lg-6',
-                                        'meta_image_class' => 'col-lg-12',
-                                        'meta_title' => old('meta_title'),
-                                        'meta_keywords' => old('meta_keywords'),
-                                        'meta_description' => old('meta_description'),
-                                        'meta_image' => old('meta_image'),
-                                        'edit' => true,
-                                    ])
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                                class="btn sg-btn-outline-primary btn_action"
-                                                data-bs-target="#coursePricing">{{ __('back') }}</a>
-
-                                            <button type="submit" class="btn sg-btn-primary">{{ __('submit') }}</button>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
-                                </div>
-                            </div>
-                            <!-- End Course SEO -->
 
                             
                         </div>
@@ -893,7 +660,6 @@
             });
 
             searchCategory($('#select_category'));
-            searchSubjects($('#select_subject'));
             searchOrganization($('#ins_by_org'));
             $(document).on('input change', '#mc_total_seats_input', function () {
                 let totalSeats = parseInt($(this).val()) || 0;
@@ -966,7 +732,7 @@
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
-                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white">
                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                             <i class="las la-trash-alt fs-5"></i>
                         </a>
@@ -992,17 +758,15 @@
                             <div class="col-md-3 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Icon Class</label>
                                 <input type="text" name="masterclass_settings[gold_info_points][${idx}][icon]" class="form-control rounded-2 bg-white"
-                                       value="fas fa-check-circle" placeholder="e.g. fas fa-video">
+                                       value="fas fa-check-circle">
                             </div>
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Title / Label</label>
-                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white"
-                                       placeholder="যেমন: Zoom লাইভ 104">
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white">
                             </div>
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Subtitle / Value</label>
-                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white"
-                                       placeholder="যেমন: অনলাইন সেশন / 4h 40min">
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white">
                             </div>
                             <div class="col-md-1 col-12 text-end">
                                 <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>
@@ -1038,7 +802,7 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <label class="form-label small mb-1 font-13 fw-normal text-muted">Link / URL</label>
-                                <input type="text" name="masterclass_settings[support_icons_list][${index}][url]" class="form-control form-control-sm rounded-2 fw-normal" placeholder="https://facebook.com/yourpage or https://wa.me/...">
+                                <input type="text" name="masterclass_settings[support_icons_list][${index}][url]" class="form-control form-control-sm rounded-2 fw-normal">
                             </div>
                         </div>
                     </div>
@@ -1055,4 +819,5 @@
         });
     </script>
 @endpush
+
 

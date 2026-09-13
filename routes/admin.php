@@ -90,9 +90,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
 
 
-        //website hero
-        Route::get('hero-section', [WebsiteSettingController::class, 'heroSection'])->name('hero.section');
-        Route::post('hero-section', [WebsiteSettingController::class, 'updateHeroSection'])->name('hero.section');
+
 
         //website footer-content
         Route::get('footer-content', [FooterSettingController::class, 'footerContent'])->name('footer.content');
@@ -128,14 +126,16 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         //website categories of work section setting
         Route::get('categories-of-work-section', [WebsiteSettingController::class, 'categoriesOfWorkSection'])->name('website.categories_of_work_section');
+        Route::get('newsletter-section', [WebsiteSettingController::class, 'newsletterSection'])->name('website.newsletter_section');
+        Route::get('sticky-promo-section', [WebsiteSettingController::class, 'stickyPromoSection'])->name('website.sticky_promo');
+        Route::get('success-story-section', [WebsiteSettingController::class, 'successStorySection'])->name('website.success_story_section');
+        Route::match(['get', 'post'], 'save-success-story-section', [WebsiteSettingController::class, 'saveSuccessStorySection'])->name('website.success_story_section.save');
         Route::match(['get', 'post'], 'save-categories-of-work-section', [WebsiteSettingController::class, 'saveCategoriesOfWorkSection'])->name('website.categories_of_work_section.save');
 
         //website why choose section setting
         Route::match(['get', 'post'], 'save-why-choose-section', [WebsiteSettingController::class, 'saveWhyChooseSection'])->name('website.why_choose_section.save');
 
-        //website success video section setting
-        Route::get('success-video-section', [WebsiteSettingController::class, 'successVideoSection'])->name('website.success_video_section');
-        Route::match(['get', 'post'], 'save-success-video-section', [WebsiteSettingController::class, 'saveSuccessVideoSection'])->name('website.success_video_section.save');
+
 
         //website ad banner section setting
         Route::get('ad-banner-section', [WebsiteSettingController::class, 'adBannerSection'])->name('website.ad_banner_section');
@@ -178,6 +178,12 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         /*------==== Marketing ------------------======= */
         //coupons
         Route::resource('coupons', CouponController::class)->except(['show']);
+        
+        // Marketing Leads
+        Route::get('marketing-leads', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'index'])->name('marketing-leads.index');
+        Route::post('marketing-leads/webhook', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'saveWebhook'])->name('marketing-leads.webhook.save');
+        Route::get('marketing-leads/export', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'export'])->name('marketing-leads.export');
+        Route::delete('marketing-leads/{id}', [\App\Http\Controllers\Admin\MarketingLeadController::class, 'destroy'])->name('marketing-leads.destroy');
 
 
 

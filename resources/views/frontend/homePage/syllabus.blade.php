@@ -12,36 +12,36 @@
 @if(isset($course) && $course->sections->count() > 0 && $showCurriculumSection)
 <style>
     .custom-syllabus-accordion .accordion-item {
-        border: 1px solid #E5E7EB;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 8px !important;
         margin-bottom: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         overflow: hidden;
         transition: all 0.3s ease;
-        background: #ffffff;
+        background: var(--color-white, #ffffff);
     }
     .custom-syllabus-accordion .accordion-item:hover {
-        border-color: #10b981;
-        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.08);
+        border-color: var(--color-primary, #0056D2);
+        box-shadow: 0 8px 20px rgba(0, 86, 210, 0.08);
     }
     .custom-syllabus-accordion .accordion-button {
-        background: #ffffff !important;
-        color: #1a1b4b !important;
+        background: var(--color-white, #ffffff) !important;
+        color: var(--color-text-ink, #0A1E3F) !important;
         font-weight: 700;
         font-size: 16px;
         padding: 20px 24px;
         box-shadow: none !important;
     }
     .custom-syllabus-accordion .accordion-button:not(.collapsed) {
-        background: rgba(16, 185, 129, 0.08) !important;
-        color: #10b981 !important;
-        border-bottom: 1px solid rgba(16, 185, 129, 0.2) !important;
+        background: var(--color-blue-tint, #EAF2FE) !important;
+        color: var(--color-primary, #0056D2) !important;
+        border-bottom: 1px solid var(--color-border-tint, #C7DCFA) !important;
     }
     .custom-syllabus-accordion .accordion-button::after {
         background-size: 1rem;
     }
     .custom-syllabus-accordion .accordion-body {
-        background: #ffffff !important;
+        background: var(--color-white, #ffffff) !important;
         padding: 0;
     }
 </style>
@@ -49,7 +49,7 @@
 <section class="syllabus-section p-t-60 p-b-60 position-relative overflow-hidden bg-white" id="syllabus">
     <div class="container container-1278">
         <div class="common-heading text-center m-b-40" data-aos="fade-up">
-            <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 28px; line-height: 1.25;">
+            <h2 class="fw-bold m-b-0" style="color: var(--color-text-ink, #0A1E3F); font-size: 28px; line-height: 1.25;">
                 {!! format_title_highlight($curriculumTitle) !!}
             </h2>
         </div>
@@ -97,7 +97,7 @@
                                                         <span class="fw-medium text-dark fs-6">{{ $lesson->title }}</span>
                                                         
                                                         @if($lesson->is_free == 1)
-                                                            <span class="badge bg-success ms-2">{{ __('free') }}</span>
+                                                            <span class="badge ms-2" style="background-color: #0056D2; color: #ffffff;">{{ __('free') }}</span>
                                                         @endif
                                                     </div>
                                                     <span class="small text-muted fw-semibold">{{ $lesson->duration }}</span>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="section" tabindex="-1" aria-labelledby="sectionLabel" aria-hidden="true">
+﻿<div class="modal fade" id="section" tabindex="-1" aria-labelledby="sectionLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <h6 class="sub-title create_sub_title">{{ __('add_module') }}</h6>
@@ -12,8 +12,7 @@
                         <div class="col-12">
                             <div class="mb-4">
                                 <label for="section_title" class="form-label">{{ __('title') }}</label>
-                                <input type="text" class="form-control rounded-2 currency_name" id="section_title"
-                                    placeholder="{{ __('enter_title') }}" name="title" value="{{ old('title') }}">
+                                <input type="text" class="form-control rounded-2 currency_name" id="section_title" name="title" value="{{ old('title') }}">
                                 <div class="nk-block-des text-danger">
                                     <p class="title_error error"></p>
                                 </div>
@@ -58,8 +57,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('title') }}</label>
-                            <input type="text" name="title" class="form-control rounded-2" id="videoLessonTitle"
-                                placeholder="{{ __('enter_title') }}">
+                            <input type="text" name="title" class="form-control rounded-2" id="videoLessonTitle">
                             <div class="nk-block-des text-danger">
                                 <p class="title_error error"></p>
                             </div>
@@ -103,8 +101,7 @@
                     <div class="col-6 lesson_link d-none">
                         <div class="mb-4">
                             <label class="form-label">{{ __('link') }}</label>
-                            <input type="text" class="form-control rounded-2" name="source_data"
-                                placeholder="https://">
+                            <input type="text" class="form-control rounded-2" name="source_data">
                             <div class="nk-block-des text-danger">
                                 <p class="source_data_error error"></p>
                             </div>
@@ -115,8 +112,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('duration') }}</label>
-                            <input type="text" name="duration" class="form-control rounded-2"
-                                placeholder="hh:mm:ss">
+                            <input type="text" name="duration" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="duration_error error"></p>
                             </div>
@@ -127,7 +123,7 @@
                     <div class="col-lg-12">
                         <div class="mb-4">
                             <label class="form-label">{{ __('description') }}</label>
-                            <textarea class="form-control" name="description" placeholder="{{ __('enter_description') }}"></textarea>
+                            <textarea class="form-control" name="description"></textarea>
                         </div>
                     </div>
                     <!-- End Course Description -->
@@ -177,7 +173,7 @@
                         <div class="mb-4">
                             <label class="form-label">{{ __('title') }}</label>
                             <input type="text" name="title" class="form-control rounded-2"
-                                id="videoLessonTitle" placeholder="{{ __('enter_title') }}">
+                                id="videoLessonTitle">
                             <div class="nk-block-des text-danger">
                                 <p class="title_error error"></p>
                             </div>
@@ -221,8 +217,7 @@
                     <div class="col-6 lesson_link d-none">
                         <div class="mb-4">
                             <label class="form-label">{{ __('link') }}</label>
-                            <input type="text" class="form-control rounded-2" name="source_data"
-                                placeholder="https://">
+                            <input type="text" class="form-control rounded-2" name="source_data">
                             <div class="nk-block-des text-danger">
                                 <p class="source_data_error error"></p>
                             </div>
@@ -233,8 +228,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('duration') }}</label>
-                            <input type="text" name="duration" class="form-control rounded-2"
-                                placeholder="hh:mm:ss">
+                            <input type="text" name="duration" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="duration_error error"></p>
                             </div>
@@ -245,7 +239,7 @@
                     <div class="col-lg-12">
                         <div class="mb-4">
                             <label class="form-label">{{ __('description') }}</label>
-                            <textarea class="form-control" name="description" placeholder="{{ __('enter_description') }}"></textarea>
+                            <textarea class="form-control" name="description"></textarea>
                         </div>
                     </div>
                     <!-- End Course Description -->
@@ -295,7 +289,7 @@
                         <div class="mb-4">
                             <label class="form-label">{{ __('title') }}</label>
                             <input type="text" name="title" class="form-control rounded-2"
-                                id="videoLessonTitle" placeholder="{{ __('enter_title') }}">
+                                id="videoLessonTitle">
                             <div class="nk-block-des text-danger">
                                 <p class="title_error error"></p>
                             </div>
@@ -339,8 +333,7 @@
                     <div class="col-6 lesson_link d-none">
                         <div class="mb-4">
                             <label class="form-label">{{ __('link') }}</label>
-                            <input type="text" class="form-control rounded-2" name="source_data"
-                                placeholder="https://">
+                            <input type="text" class="form-control rounded-2" name="source_data">
                             <div class="nk-block-des text-danger">
                                 <p class="source_data_error error"></p>
                             </div>
@@ -351,7 +344,7 @@
                     <div class="col-lg-12">
                         <div class="mb-4">
                             <label class="form-label">{{ __('description') }}</label>
-                            <textarea class="form-control" name="description" placeholder="{{ __('enter_description') }}"></textarea>
+                            <textarea class="form-control" name="description"></textarea>
                         </div>
                     </div>
                     <!-- End Course Description -->
@@ -431,8 +424,7 @@
                         <div class="col-12">
                             <div class="mb-4">
                                 <label for="question" class="form-label">{{ __('question') }}</label>
-                                <input type="text" class="form-control rounded-2" id="question"
-                                    placeholder="{{ __('enter_question') }}" name="question">
+                                <input type="text" class="form-control rounded-2" id="question" name="question">
                                 <div class="nk-block-des text-danger">
                                     <p class="question_error error"></p>
                                 </div>
@@ -441,7 +433,7 @@
                         <div class="col-12">
                             <div class="editor-wrapper mb-4">
                                 <label for="answer" class="form-label">{{ __('answer') }}</label>
-                                <textarea class="summernote" id="answer" placeholder="{{ __('enter_answer') }}" name="answer"></textarea>
+                                <textarea class="summernote" id="answer" name="answer"></textarea>
                                 <div class="nk-block-des text-danger">
                                     <p class="answer_error error"></p>
                                 </div>
@@ -486,8 +478,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('title') }}</label>
-                            <input type="text" name="title" class="form-control rounded-2"
-                                placeholder="{{ __('enter_title') }}">
+                            <input type="text" name="title" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="title_error error"></p>
                             </div>
@@ -497,8 +488,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('duration') }} ({{ __('in_minutes') }})</label>
-                            <input type="number" name="duration" class="form-control rounded-2"
-                                placeholder="e.g.30">
+                            <input type="number" name="duration" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="duration_error error"></p>
                             </div>
@@ -507,8 +497,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('total_marks') }}</label>
-                            <input type="number" name="total_marks" class="form-control rounded-2"
-                                placeholder="e.g.100">
+                            <input type="number" name="total_marks" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="total_marks_error error"></p>
                             </div>
@@ -517,8 +506,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('pass_marks') }}</label>
-                            <input type="number" name="pass_marks" class="form-control rounded-2"
-                                placeholder="e.g.50">
+                            <input type="number" name="pass_marks" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="pass_marks_error error"></p>
                             </div>
@@ -561,8 +549,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('title') }}</label>
-                            <input type="text" name="title" class="form-control rounded-2"
-                                placeholder="{{ __('enter_title') }}">
+                            <input type="text" name="title" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="title_error error"></p>
                             </div>
@@ -636,8 +623,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('total_marks') }}</label>
-                            <input type="number" name="total_marks" class="form-control rounded-2"
-                                placeholder="e.g.100">
+                            <input type="number" name="total_marks" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="total_marks_error error"></p>
                             </div>
@@ -646,8 +632,7 @@
                     <div class="col-6">
                         <div class="mb-4">
                             <label class="form-label">{{ __('pass_marks') }}</label>
-                            <input type="number" name="pass_marks" class="form-control rounded-2"
-                                placeholder="e.g.50">
+                            <input type="number" name="pass_marks" class="form-control rounded-2">
                             <div class="nk-block-des text-danger">
                                 <p class="pass_marks_error error"></p>
                             </div>
@@ -724,7 +709,7 @@
                         <div class="mb-4">
                             <label for="title" class="form-label">Resource Title</label>
                             <input type="text" class="form-control rounded-2" id="title" name="title"
-                                required placeholder="Title here">
+                                required>
                         </div>
                     </div>
                     <!-- End Title -->

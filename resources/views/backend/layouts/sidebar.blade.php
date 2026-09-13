@@ -26,22 +26,109 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('courses.index'))
-                    <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'active') }}">
-                        <a href="#course" class="dropdown-icon" data-bs-toggle="collapse" role="button"
-                           aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'true', 'false') }}"
-                           aria-controls="course">
-                            <i class="las la-book"></i>
-                            <span>{{ __('course') }}</span>
+                @if(hasPermission('courses.index') || hasPermission('success-stories.index'))
+                    <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/success-stories*', 'admin/success-story-section'], 'active') }}">
+                        <a href="#home_landing" class="dropdown-icon" data-bs-toggle="collapse" role="button"
+                           aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/success-stories*', 'admin/success-story-section'], 'true', 'false') }}"
+                           aria-controls="home_landing">
+                            <i class="las la-desktop"></i>
+                            <span>{{ __('Home Landing Page') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'show') }}"
-                            id="course">
-                            @if(hasPermission('courses.index'))
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/success-stories*', 'admin/success-story-section'], 'show') }}"
+                            id="home_landing">
+                            @php
+                                $firstCourse = \App\Models\Course::first();
+                                $landingId = $firstCourse ? $firstCourse->id : 1;
+                                $currTab = request()->query('tab', 'basic');
+                            @endphp
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'basic' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'basic']) }}">{{ __('Basic Info') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'mediaImages' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'mediaImages']) }}">{{ __('Media') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'desc_right_box' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'desc_right_box']) }}">{{ __('Description') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.about_section') }}"
+                                   class="{{ request()->routeIs('website.about_section') ? 'active' : '' }}">
+                                    {{ __('About Me') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.categories_of_work_section') }}"
+                                   class="{{ request()->routeIs('website.categories_of_work_section') ? 'active' : '' }}">
+                                    {{ __('Categories') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'benefits' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'benefits']) }}">{{ __('Benefits') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'gift_banner' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'gift_banner']) }}">{{ __('Gift Banner') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'ad_banners' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'ad_banners']) }}">{{ __('Banners') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'curriculum' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'curriculum']) }}">{{ __('Curriculum') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.success_story_section') }}"
+                                   class="{{ request()->routeIs('website.success_story_section') ? 'active' : '' }}">
+                                    {{ __('Story Section') }}
+                                </a>
+                            </li>
+                            @if(hasPermission('success-stories.index'))
                                 <li>
-                                    <a class="{{ menuActivation(['admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'active') }}"
-                                       href="{{ route('courses.index') }}">{{ __('course_list') }}</a>
+                                    <a href="{{ route('success-stories.index') }}"
+                                       class="{{ request()->routeIs('success-stories.*') ? 'active' : '' }}">
+                                        {{ __('success_story') }}
+                                    </a>
                                 </li>
                             @endif
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'offer_breakdown' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'offer_breakdown']) }}">{{ __('Breakdown') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'faq' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'faq']) }}">{{ __('FAQ') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'support' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'support']) }}">{{ __('Support') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'pricing' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'pricing']) }}">{{ __('Pricing') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.counter_section') }}"
+                                   class="{{ request()->routeIs('website.counter_section') ? 'active' : '' }}">
+                                    {{ __('Counter') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.newsletter_section') }}"
+                                   class="{{ request()->routeIs('website.newsletter_section') ? 'active' : '' }}">
+                                    {{ __('Newsletter') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.sticky_promo') }}"
+                                   class="{{ request()->routeIs('website.sticky_promo') ? 'active' : '' }}">
+                                    {{ __('Sticky Promo') }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -54,18 +141,22 @@
                     </li>
                 @endif
                 @if(hasPermission('coupons.index') && setting('coupon_system'))
-                    <li class="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create'], 'active') }}">
+                    <li class="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}">
                         <a href="#coupon" class="dropdown-icon" data-bs-toggle="collapse" role="button"
-                           aria-expanded="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create'], 'true', 'false') }}"
+                           aria-expanded="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'true', 'false') }}"
                            aria-controls="coupon">
                             <i class="las la-th"></i>
                             <span>{{ __('marketing') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create'], 'show') }}"
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'show') }}"
                             id="coupon">
                             <li>
                                 <a class="{{ menuActivation(['admin/coupons', 'admin/coupons/*'], 'active') }}"
                                    href="{{ route('coupons.index') }}">{{ __('all_coupons') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ menuActivation(['admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}"
+                                   href="{{ route('marketing-leads.index') }}">Marketing Leads</a>
                             </li>
                         </ul>
                     </li>
@@ -149,29 +240,25 @@
                         </ul>
                     </li>
                 @endif
-                @if(hasPermission('pages.index') || hasPermission('success-stories.index'))
-                    <li class="{{ menuActivation(['admin/success-stories*', 'admin/pages', 'admin/create-404*', 'admin/pages*'], 'active') }}">
+                @if(hasPermission('pages.index'))
+                    <li class="{{ menuActivation(['admin/pages', 'admin/create-404*', 'admin/pages*'], 'active') }}">
                         <a href="#cms_settings" class="dropdown-icon" data-bs-toggle="collapse"
-                           aria-expanded="{{ menuActivation(['admin/success-stories*', 'admin/create-404*', 'admin/pages', 'admin/pages*'], 'true', 'false') }}"
+                           aria-expanded="{{ menuActivation(['admin/create-404*', 'admin/pages', 'admin/pages*'], 'true', 'false') }}"
                            aria-controls="cms_settings">
                             <i class="las la-layer-group"></i>
                             <span>{{ __('cms') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/success-stories*', 'admin/create-404*', 'admin/pages', 'admin/pages*'], 'show') }}"
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/create-404*', 'admin/pages', 'admin/pages*'], 'show') }}"
                             id="cms_settings">
                             @if(hasPermission('pages.index'))
                                 <li><a class="{{ menuActivation('admin/pages*', 'active') }}"
                                        href="{{ route('pages.index') }}">{{ __('all_pages') }}</a></li>
                             @endif
-                            @if(hasPermission('success-stories.index'))
-                                <li><a class="{{ menuActivation('admin/success-stories*', 'active') }}"
-                                       href="{{ route('success-stories.index') }}">{{ __('success_story') }}</a></li>
-                            @endif
                         </ul>
                     </li>
                 @endif
                 @if(hasPermission('theme.options') || hasPermission('hero.section') || hasPermission('footer.social-links') ||
-                    hasPermission('website.seo') || hasPermission('custom.js') || 
+                    hasPermission('custom.js') || 
                     hasPermission('custom.css') || hasPermission('google.setup') || hasPermission('fb.pixel') || hasPermission('gdpr')
                     )
                     <li class="{{ menuActivation(
@@ -180,13 +267,11 @@
                             'admin/social-link-setting',
                             'admin/newsletter-setting',
                             'admin/useful-link-setting',
-                            'admin/quick-link-setting',
                             'admin/copyright-setting',
                             'admin/become-instructor-content',
                             'admin/categories-of-work-section',
                             'admin/theme-options',
                             'admin/website-popup',
-                            'admin/website-seo',
                             'admin/google-setup',
                             'admin/custom-js',
                             'admin/custom-css',
@@ -208,14 +293,12 @@
                                 'admin/social-link-setting',
                                 'admin/newsletter-setting',
                                 'admin/useful-link-setting',
-                                'admin/quick-link-setting',
                                 'admin/copyright-setting',
                                 'admin/become-instructor-content',
                                 'admin/categories-of-work-section',
                                 'admin/call-to-action',
                                 'admin/theme-options',
                                 'admin/website-popup',
-                                'admin/website-seo',
                                 'admin/google-setup',
                                 'admin/custom-js',
                                 'admin/custom-css',
@@ -244,12 +327,10 @@
                             'admin/social-link-setting',
                             'admin/newsletter-setting',
                             'admin/useful-link-setting',
-                            'admin/quick-link-setting',
                             'admin/copyright-setting',
                             'admin/header-topbar',
                             'admin/theme-options',
                             'admin/website-popup',
-                            'admin/website-seo',
                             'admin/google-setup',
                             'admin/custom-js',
                             'admin/custom-css',
@@ -271,23 +352,15 @@
                                        href="{{ route('theme.options') }}">{{ __('theme_options') }}</a></li>
                             @endif
                             
-                            @if(hasPermission('hero.section'))
-                                <li><a class="{{ menuActivation('admin/hero-section', 'active') }}"
-                                       href="{{ route('hero.section') }}">{{ __('hero_section') }}</a></li>
-                            @endif
+
                             @if(hasPermission('footer.social-links'))
                                 <li><a class="{{ menuActivation([
                                 'admin/social-link-setting',
                                 'admin/newsletter-setting',
                                 'admin/useful-link-setting',
-                                'admin/quick-link-setting',
                                 'admin/copyright-setting'
                             ], 'active') }}"
                                        href="{{ route('footer.social-links') }}">{{ __('footer_content') }}</a></li>
-                            @endif
-                            @if(hasPermission('website.seo'))
-                                <li><a class="{{ menuActivation('admin/website-seo', 'active') }}"
-                                       href="{{ route('website.seo') }}">{{ __('website_seo') }}</a></li>
                             @endif
                             @if(hasPermission('custom.js'))
                                 <li><a class="{{ menuActivation('admin/custom-js', 'active') }}"

@@ -3,7 +3,7 @@
 @section('content')
     <section class="course-details-area p-b-50">
         <!-- Full width theme color header -->
-        <div class="course-details-header-wrapper p-t-60 p-b-95 p-t-md-40 p-b-md-50">
+        <div class="course-details-header-wrapper p-t-60 p-b-95 p-t-md-40 p-b-md-50" style="background: linear-gradient(180deg, var(--color-hero-bg-start, #001F5C) 0%, var(--color-hero-bg-end, #0B1226) 100%);">
             <div class="container container-1278">
                 <div class="row">
                     <div class="col-lg-12 text-center">

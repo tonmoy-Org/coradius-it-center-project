@@ -3,7 +3,7 @@
 
 @section('content')
     <!--====== Page Header ======-->
-    <section class="page-header-area p-t-80 p-b-80" style="background-color: #110B3A;">
+    <section class="page-header-area p-t-80 p-b-80" style="background: linear-gradient(180deg, var(--color-hero-bg-start, #001F5C) 0%, var(--color-hero-bg-end, #0B1226) 100%);">
         <div class="container container-1278">
             <div class="row align-items-center text-center">
                 <div class="col-12">

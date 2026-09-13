@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('header_content'))
 @section('content')
     <section class="oftions">
@@ -208,7 +208,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mt-30">
                                         <button type="button" class="btn btn-primary" id="add-menu-item">Add More</button>
-                                        <button type="submit" class="btn btn-primary">{{ __('update') }}</button>
+                                        <button type="submit" class="btn btn-primary">{{ __('save_&_publish') }}</button>
                                         @include('backend.common.loading-btn',['class' => 'btn btn-primary'])
                                     </div>
                                 </div>
@@ -273,3 +273,4 @@
 
         </script>
     @endpush
+

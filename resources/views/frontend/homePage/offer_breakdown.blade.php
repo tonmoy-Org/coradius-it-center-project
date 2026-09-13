@@ -107,10 +107,10 @@ Future Updates (if applicable) | FREE";
 
     .mc-breakdown-light-card {
         background: #ffffff;
-        border: 2px solid #10b981;
+        border: 2px solid #0056D2;
         border-radius: 20px;
         padding: 28px 24px;
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 35px rgba(0, 86, 210, 0.08);
         max-width: 800px;
         margin: 0 auto;
     }
@@ -120,7 +120,7 @@ Future Updates (if applicable) | FREE";
     }
 
     .mc-bd-light-eyebrow {
-        color: #1a1b4b;
+        color: #0A1E3F;
         font-size: 26px;
         font-weight: 700;
         margin-bottom: 6px;
@@ -128,7 +128,7 @@ Future Updates (if applicable) | FREE";
     }
 
     .mc-bd-light-title {
-        color: #1a1b4b;
+        color: #0A1E3F;
         font-size: 26px;
         font-weight: 700;
         text-align: center;
@@ -137,15 +137,15 @@ Future Updates (if applicable) | FREE";
     }
 
     .mc-bd-light-title mark, .mc-bd-light-title .highlight {
-        background: #d1fae5;
-        color: #047857;
+        background: var(--color-blue-tint, #EAF2FE);
+        color: var(--color-primary, #0056D2);
         padding: 2px 8px;
         border-radius: 6px;
     }
 
     .mc-bd-light-items-box {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
+        background: var(--color-white, #ffffff);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 16px;
         padding: 4px 16px;
         margin-bottom: 20px;
@@ -167,12 +167,12 @@ Future Updates (if applicable) | FREE";
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        background: #ecfdf5;
-        border: 1px solid #a7f3d0;
+        background: var(--color-blue-tint, #EAF2FE);
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #059669;
+        color: var(--color-primary, #0056D2);
         font-size: 1.1rem;
         flex-shrink: 0;
     }
@@ -180,13 +180,13 @@ Future Updates (if applicable) | FREE";
     .mc-bd-light-item-title {
         font-size: 0.98rem;
         font-weight: 700;
-        color: #1e293b;
+        color: var(--color-text-ink, #0A1E3F);
         line-height: 1.35;
     }
 
     .mc-bd-light-item-sub {
         font-size: 0.82rem;
-        color: #64748b;
+        color: var(--color-text-secondary, #4B5A72);
         margin-top: 2px;
         font-weight: 400;
     }
@@ -194,14 +194,14 @@ Future Updates (if applicable) | FREE";
     .mc-bd-light-item-val {
         font-size: 1.1rem;
         font-weight: 800;
-        color: #059669;
+        color: var(--color-primary, #0056D2);
         white-space: nowrap;
     }
 
-    /* Light Mint Green Offer Discount Box */
+    /* Light Blue Offer Discount Box */
     .mc-bd-light-discount-box {
-        background: #ecfdf5;
-        border: 2px solid #10b981;
+        background: var(--color-blue-tint, #EAF2FE);
+        border: 2px solid var(--color-primary, #0056D2);
         border-radius: 16px;
         position: relative;
         padding: 24px 24px 20px 24px;
@@ -212,13 +212,13 @@ Future Updates (if applicable) | FREE";
         position: absolute;
         top: -13px;
         left: 20px;
-        background: linear-gradient(90deg, #f59e0b, #d97706);
+        background: var(--color-accent-orange, #FF7A00);
         color: #ffffff;
         font-size: 0.85rem;
         font-weight: 800;
         padding: 4px 16px;
         border-radius: 6px;
-        box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 4px 10px rgba(255, 122, 0, 0.3);
         display: flex;
         align-items: center;
         gap: 6px;
@@ -230,7 +230,7 @@ Future Updates (if applicable) | FREE";
     }
 
     .mc-bd-light-offer-heading {
-        color: #065f46;
+        color: #0A1E3F;
         font-size: 1rem;
         font-weight: 700;
         margin-bottom: 4px;
@@ -239,7 +239,7 @@ Future Updates (if applicable) | FREE";
     .mc-bd-light-price-huge {
         font-size: 2.35rem;
         font-weight: 900;
-        color: #047857;
+        color: #FF7A00;
         line-height: 1.15;
         margin-bottom: 6px;
         letter-spacing: -0.5px;
@@ -247,7 +247,7 @@ Future Updates (if applicable) | FREE";
 
     .mc-bd-light-timer-text {
         font-size: 0.88rem;
-        color: #047857;
+        color: #0056D2;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -255,11 +255,11 @@ Future Updates (if applicable) | FREE";
     }
 
     .mc-bd-light-divider {
-        border-right: 1px solid #a7f3d0;
+        border-right: 1px solid #C7DCFA;
     }
 
     .mc-bd-light-orig-label {
-        color: #64748b;
+        color: #8A96A8;
         font-size: 0.95rem;
         font-weight: 600;
         margin-bottom: 2px;
@@ -268,7 +268,7 @@ Future Updates (if applicable) | FREE";
     .mc-bd-light-orig-price {
         font-size: 1.6rem;
         font-weight: 800;
-        color: #047857;
+        color: #8A96A8;
         position: relative;
         display: inline-block;
         margin-bottom: 8px;
@@ -276,7 +276,7 @@ Future Updates (if applicable) | FREE";
     }
 
     .mc-bd-light-saved-box {
-        border: 1px dashed #10b981;
+        border: 1px dashed #0056D2;
         background: #ffffff;
         border-radius: 12px;
         padding: 10px 18px;
@@ -287,7 +287,7 @@ Future Updates (if applicable) | FREE";
 
     .mc-bd-light-saved-label {
         font-size: 0.85rem;
-        color: #475569;
+        color: #4B5A72;
         font-weight: 600;
         margin-bottom: 1px;
     }
@@ -295,46 +295,24 @@ Future Updates (if applicable) | FREE";
     .mc-bd-light-saved-val {
         font-size: 1.35rem;
         font-weight: 900;
-        color: #047857;
+        color: #0056D2;
         line-height: 1.15;
     }
 
     .mc-bd-light-saved-pct {
         font-size: 0.85rem;
-        color: #059669;
+        color: #FF7A00;
         font-weight: 700;
     }
 
     .mc-bd-light-security-note {
-        color: #64748b;
+        color: #8A96A8;
         font-size: 0.88rem;
         margin-top: 10px;
         font-weight: 500;
     }
 
-    .mc-bd-light-card .get-access-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 13px 32px !important;
-        font-size: 1.05rem !important;
-        font-weight: 800 !important;
-        line-height: 1.2 !important;
-        border-radius: 12px !important;
-        background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important;
-        border: none !important;
-        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35) !important;
-        transition: all 0.3s ease !important;
-        color: #ffffff !important;
-        text-decoration: none !important;
-    }
 
-    .mc-bd-light-card .get-access-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(16, 185, 129, 0.45) !important;
-        color: #ffffff !important;
-    }
 
     @media (max-width: 767px) {
         .mc-breakdown-light-card {
@@ -349,7 +327,7 @@ Future Updates (if applicable) | FREE";
         }
         .mc-bd-light-divider {
             border-right: none;
-            border-bottom: 1px solid #a7f3d0;
+            border-bottom: 1px solid #C7DCFA;
             padding-bottom: 14px;
             margin-bottom: 14px;
         }

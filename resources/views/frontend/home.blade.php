@@ -8,6 +8,55 @@
        Standardizes vertical cadence, container gutters, and heading spacing
        across all landing page sections on mobile and tablet devices.
        ========================================================================== */
+    /* Completely eliminate top white gap & reset body/header spacing */
+    html, body {
+        margin: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    /* Make the landing page width narrower as per client requirement */
+    @media (min-width: 992px) {
+        .container.container-1278 {
+            max-width: 1080px !important;
+        }
+    }
+    
+    /* Enforce 8px border-radius for all sections on the home page */
+    .home-page-sections .card, .home-page-sections .cow-wrapper, .home-page-sections .cow-card,
+    .home-page-sections .mc-special-gift-card, .home-page-sections .about-me-card,
+    .home-page-sections .instructor-card, .home-page-sections .description-card,
+    .home-page-sections .highlight-banner-card, .home-page-sections .mc-breakdown-light-card,
+    .home-page-sections .mc-content-card, .home-page-sections .faq-card, .home-page-sections .faq-image-card img,
+    .home-page-sections .mc-benefits-card-wrapper, .home-page-sections .mc-target-audience-card-light,
+    .home-page-sections .mc-support-feature-card, .home-page-sections .mc-channel-card,
+    .home-page-sections .custom-testimonial-card, .home-page-sections .counter-card-box,
+    .home-page-sections .coupon-banner-wrapper img, .home-page-sections .ad-banner-section-1 img,
+    .home-page-sections .ad-banner-section-2 img, .home-page-sections .success-banner-section img,
+    .hero-area .hero-video-wrapper, .hero-area .hero-video-wrapper video,
+    .hero-area .hero-video-wrapper iframe, .hero-area .hero-video-wrapper img,
+    .lead-card, .rounded-3, .rounded-4, .rounded-5,
+    [style*="border-radius: 10px"], [style*="border-radius: 12px"], 
+    [style*="border-radius: 16px"], [style*="border-radius: 20px"] {
+        border-radius: 8px !important;
+    }
+
+    header, .template-header, .header-navigation, .header-area {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    section.hero-area {
+        margin-top: 0 !important;
+        padding-top: 40px !important;
+        display: flow-root;
+    }
+
+    section.hero-area > *:first-child {
+        margin-top: 0 !important;
+    }
+
     @media (max-width: 767.98px) {
         /* Standardized Section Vertical Spacing (38px top & bottom) */
         .home-page-sections > section,
@@ -27,9 +76,9 @@
             padding-bottom: 38px !important;
         }
 
-        /* Hero Area Mobile Padding (Clears fixed/absolute header without overlap) */
+        /* Hero Area Mobile Padding */
         section.hero-area {
-            padding-top: 88px !important;
+            padding-top: 36px !important;
             padding-bottom: 36px !important;
         }
 
@@ -123,7 +172,7 @@
         }
 
         section.hero-area {
-            padding-top: 80px !important;
+            padding-top: 28px !important;
             padding-bottom: 28px !important;
         }
 
@@ -150,7 +199,9 @@
 @endpush
 
 @section('base.content')
+    @if(!isset($mcSettings['basic_info_status']) || $mcSettings['basic_info_status'] == 1)
     @include('frontend.homePage.hero_area.hero_area_one')
+    @endif
 
     <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
@@ -163,10 +214,14 @@
     @include('frontend.homePage.categories_of_work')
 
     <!--====== Start Benefits Section ======-->
+    @if(!isset($mcSettings['benefits_status']) || $mcSettings['benefits_status'] == 1)
     @include('frontend.homePage.benefits')
+    @endif
 
     <!--====== Start Special Gift Section ======-->
+    @if(!isset($mcSettings['gift_banner_status']) || $mcSettings['gift_banner_status'] == 1)
     @include('frontend.homePage.special_gift')
+    @endif
 
 
     <!--====== Start Ad Banner 1 (Upper Home Section) ======-->
@@ -189,7 +244,8 @@
         }
         $b1Url = dynamic_asset($b1Url);
     @endphp
-    @if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
+    @if(!isset($mcSettings['banners_status']) || $mcSettings['banners_status'] == 1)
+@if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
     <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
@@ -206,19 +262,20 @@
         </div>
     </section>
     @endif
+@endif
 
 
     <!--====== Start What You Will Learn ======-->
     @if(isset($course) && $course && $course->outcomes)
-    <section class="what-you-learn-section p-t-60 p-b-60 position-relative" style="background-color: #F9FAFB;">
+    <section class="what-you-learn-section p-t-60 p-b-60 position-relative" style="background-color: var(--color-blue-tint, #EAF2FE);">
         <div class="container container-1278">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="common-heading text-center m-b-40" data-aos="fade-up">
-                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: var(--color-primary, #0056D2); letter-spacing: 1.5px; font-size: 14px;">
                             {{ __('WHAT YOU WILL LEARN') }}
                         </span>
-                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-0" style="color: var(--color-text-ink, #0A1E3F); font-size: 38px; line-height: 1.25;">
                             {{ __('Course Outcomes & Key Takeaways') }}
                         </h2>
                     </div>
@@ -228,12 +285,12 @@
                             .learn-outcomes-content * {
                                 font-size: 14.5px !important;
                                 line-height: 1.65 !important;
-                                color: #334155 !important;
+                                color: var(--color-text-secondary, #4B5A72) !important;
                             }
                         }
                     </style>
-                    <div class="card shadow-lg border-0 p-4 p-md-5" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; background: #ffffff;">
-                        <div class="learn-outcomes-content" style="color: #475569; font-size: 16px; line-height: 1.8;">
+                    <div class="card shadow-lg border-0 p-4 p-md-5" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; background: var(--color-white, #ffffff); border: 1px solid var(--color-border-tint, #D9E8FC) !important;">
+                        <div class="learn-outcomes-content" style="color: var(--color-text-secondary, #4B5A72); font-size: 16px; line-height: 1.8;">
                             {!! $course->outcomes !!}
                         </div>
                     </div>
@@ -251,10 +308,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="common-heading text-center m-b-40" data-aos="fade-up">
-                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                             {{ __('MEET YOUR INSTRUCTOR') }}
                         </span>
-                        <h2 class="fw-bold m-b-0" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-0" style="color: #0A1E3F; font-size: 38px; line-height: 1.25;">
                             {{ __('Learn From An Expert Mentor') }}
                         </h2>
                     </div>
@@ -263,14 +320,14 @@
                         <img src="{{ getFileLink('100x100', $course->instructor->image) }}" 
                              class="rounded-circle mb-4 shadow" 
                              alt="{{ $course->instructor->name }}" 
-                             style="width: 130px; height: 130px; object-fit: cover; border: 4px solid #10b981; padding: 3px;">
+                             style="width: 130px; height: 130px; object-fit: cover; border: 4px solid #0056D2; padding: 3px;">
                         
-                        <h3 class="fw-bold mb-1" style="color: #1a1b4b; font-size: 24px;">{{ $course->instructor->name }}</h3>
-                        <span class="d-inline-block fw-semibold mb-4 px-3 py-1 rounded-pill" style="background: rgba(16, 185, 129, 0.12); color: #10b981; font-size: 14px;">
+                        <h3 class="fw-bold mb-1" style="color: #0A1E3F; font-size: 24px;">{{ $course->instructor->name }}</h3>
+                        <span class="d-inline-block fw-semibold mb-4 px-3 py-1 rounded-pill" style="background: var(--color-blue-tint, #EAF2FE); color: var(--color-primary, #0056D2); font-size: 14px;">
                             {{ $course->instructor->instructor->designation ?? 'Lead Instructor' }}
                         </span>
                         
-                        <div class="text-secondary" style="line-height: 1.8; color: #64748b; font-size: 15.5px;">
+                        <div class="text-secondary" style="line-height: 1.8; color: #4B5A72; font-size: 15.5px;">
                             {!! $course->instructor->about !!}
                         </div>
                     </div>
@@ -286,7 +343,9 @@
 
 
     <!--====== Start Syllabus Section ======-->
+    @if(!isset($mcSettings['curriculum_status']) || $mcSettings['curriculum_status'] == 1)
     @include('frontend.homePage.syllabus')
+    @endif
 
     <!--====== Start Success Banner Section ======-->
     @php
@@ -304,10 +363,10 @@
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
                     <div class="common-heading text-center m-b-40" data-aos="fade-up">
-                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #10b981; letter-spacing: 1.5px; font-size: 14px;">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                             {{ setting('success_page_banner_tag') ?: 'Success Stories' }}
                         </span>
-                        <h2 class="fw-bold m-b-20" style="color: #1a1b4b; font-size: 38px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-20" style="color: #0A1E3F; font-size: 38px; line-height: 1.25;">
                             {{ setting('success_page_banner_title') ?: 'Real People. Real Learning. Real Success.' }}
                         </h2>
                         <p class="text-muted font-16">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Coradius IT Center.' }}</p>
@@ -323,7 +382,9 @@
     @include('frontend.homePage.success')
 
     <!--====== Start Offer Breakdown Section (Today's Value Breakdown) ======-->
+    @if(!isset($mcSettings['breakdown_status']) || $mcSettings['breakdown_status'] == 1)
     @include('frontend.homePage.offer_breakdown')
+    @endif
 
     <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
     @php
@@ -346,7 +407,8 @@
         $b2Url = dynamic_asset($b2Url);
     @endphp
 
-    @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
+    @if(!isset($mcSettings['banners_status']) || $mcSettings['banners_status'] == 1)
+@if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
     <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
@@ -363,12 +425,17 @@
         </div>
     </section>
     @endif
+@endif
 
     <!--====== Start FAQ Section ======-->
+    @if(!isset($mcSettings['faq_status']) || $mcSettings['faq_status'] == 1)
     @include('frontend.homePage.faq')
+    @endif
 
     <!--====== Start Support Section ======-->
+    @if(!isset($mcSettings['support_status']) || $mcSettings['support_status'] == 1)
     @include('frontend.homePage.support')
+    @endif
 
 
 
@@ -386,7 +453,7 @@
             }
             .coupon-code-badge:hover {
                 transform: translateX(-50%) scale(1.05) !important;
-                box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35) !important;
+                box-shadow: 0 6px 18px rgba(0, 86, 210, 0.35) !important;
             }
             .coupon-code-badge:active {
                 transform: translateX(-50%) scale(0.98) !important;
@@ -423,14 +490,14 @@
             <div class="row justify-content-center">
                 <div class="col-12 text-center" data-aos="fade-up">
                     <div class="coupon-banner-wrapper position-relative d-inline-block">
-                        <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #10b981;">
+                        <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #0056D2;">
                         <div class="coupon-code-badge position-absolute"
                              id="bannerCouponBadge"
                              onclick="copyCouponCode('{{ $active_banner_coupon->code }}', this)"
                              title="Click to copy coupon code"
-                             style="bottom: -15px; left: 50%; transform: translateX(-50%); background: #1a1b4b; color: white; padding: 8px 24px; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid #10b981;">
-                            CODE: <span style="color: #10b981;">{{ $active_banner_coupon->code }}</span>
-                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;">
+                             style="bottom: -15px; left: 50%; transform: translateX(-50%); background: #001F5C; color: white; padding: 8px 24px; border-radius: 30px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 2px solid #0056D2;">
+                            CODE: <span style="color: #FF7A00;">{{ $active_banner_coupon->code }}</span>
+                            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                             </svg>
@@ -450,13 +517,13 @@
             if (element) {
                 const originalContent = element.innerHTML;
                 element.innerHTML = '<span style="color: #ffffff;"><svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -3px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!</span>';
-                element.style.background = '#10b981';
-                element.style.borderColor = '#047857';
+                element.style.background = '#0056D2';
+                element.style.borderColor = '#0056D2';
 
                 setTimeout(function() {
                     element.innerHTML = originalContent;
-                    element.style.background = '#1a1b4b';
-                    element.style.borderColor = '#10b981';
+                    element.style.background = '#001F5C';
+                    element.style.borderColor = '#0056D2';
                 }, 2000);
             }
 
@@ -496,7 +563,9 @@
     @endif
 
     <!--====== Start Order Form Section ======-->
+    @if(!isset($mcSettings['pricing_status']) || $mcSettings['pricing_status'] == 1)
     @include('frontend.homePage.order_form')
+    @endif
 
 
 
@@ -506,4 +575,6 @@
     </div>
     @include('frontend.layouts.footer')
 @endsection
+
+
 

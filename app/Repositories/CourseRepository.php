@@ -101,7 +101,13 @@ class CourseRepository
                 $mc['overview_image_url'] = $mc['overview_image_url_custom'];
             }
 
-            if (request()->hasFile('ad_banner_1_file')) {
+            if (request('ad_banner_1_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('ad_banner_1_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['ad_banner_1_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['ad_banner_1_media_id'] = request('ad_banner_1_media_id');
+                }
+            } elseif (request()->hasFile('ad_banner_1_file')) {
                 $response = $this->saveImage(request()->file('ad_banner_1_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['ad_banner_1_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -110,7 +116,13 @@ class CourseRepository
                 $mc['ad_banner_1_image_url'] = $mc['ad_banner_1_image_url_custom'];
             }
 
-            if (request()->hasFile('ad_banner_2_file')) {
+            if (request('ad_banner_2_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('ad_banner_2_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['ad_banner_2_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['ad_banner_2_media_id'] = request('ad_banner_2_media_id');
+                }
+            } elseif (request()->hasFile('ad_banner_2_file')) {
                 $response = $this->saveImage(request()->file('ad_banner_2_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['ad_banner_2_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -119,7 +131,13 @@ class CourseRepository
                 $mc['ad_banner_2_image_url'] = $mc['ad_banner_2_image_url_custom'];
             }
 
-            if (request()->hasFile('support_image_file')) {
+            if (request('support_image_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('support_image_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['support_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['support_image_media_id'] = request('support_image_media_id');
+                }
+            } elseif (request()->hasFile('support_image_file')) {
                 $response = $this->saveImage(request()->file('support_image_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['support_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -128,7 +146,13 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
-            if (request()->hasFile('support_title_icon_file')) {
+            if (request('support_title_icon_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['support_title_icon'] = getFileLink('original_image', $media->image_variants);
+                    $mc['support_title_icon_media_id'] = request('support_title_icon_media_id');
+                }
+            } elseif (request()->hasFile('support_title_icon_file')) {
                 $response = $this->saveImage(request()->file('support_title_icon_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['support_title_icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -347,7 +371,13 @@ class CourseRepository
                 $mc['overview_image_url'] = $mc['overview_image_url_custom'];
             }
 
-            if (request()->hasFile('ad_banner_1_file')) {
+            if (request('ad_banner_1_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('ad_banner_1_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['ad_banner_1_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['ad_banner_1_media_id'] = request('ad_banner_1_media_id');
+                }
+            } elseif (request()->hasFile('ad_banner_1_file')) {
                 $response = $this->saveImage(request()->file('ad_banner_1_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['ad_banner_1_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -356,7 +386,13 @@ class CourseRepository
                 $mc['ad_banner_1_image_url'] = $mc['ad_banner_1_image_url_custom'];
             }
 
-            if (request()->hasFile('ad_banner_2_file')) {
+            if (request('ad_banner_2_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('ad_banner_2_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['ad_banner_2_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['ad_banner_2_media_id'] = request('ad_banner_2_media_id');
+                }
+            } elseif (request()->hasFile('ad_banner_2_file')) {
                 $response = $this->saveImage(request()->file('ad_banner_2_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['ad_banner_2_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -365,7 +401,13 @@ class CourseRepository
                 $mc['ad_banner_2_image_url'] = $mc['ad_banner_2_image_url_custom'];
             }
 
-            if (request()->hasFile('support_image_file')) {
+            if (request('support_image_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('support_image_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['support_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['support_image_media_id'] = request('support_image_media_id');
+                }
+            } elseif (request()->hasFile('support_image_file')) {
                 $response = $this->saveImage(request()->file('support_image_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['support_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -374,7 +416,13 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
-            if (request()->hasFile('support_title_icon_file')) {
+            if (request('support_title_icon_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['support_title_icon'] = getFileLink('original_image', $media->image_variants);
+                    $mc['support_title_icon_media_id'] = request('support_title_icon_media_id');
+                }
+            } elseif (request()->hasFile('support_title_icon_file')) {
                 $response = $this->saveImage(request()->file('support_title_icon_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['support_title_icon'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
