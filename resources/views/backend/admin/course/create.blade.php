@@ -58,11 +58,6 @@
                                 <span
                                     class="default-tab-count {{ $step_3_error && !$step_2_error ? 'bg-danger text-white' : '' }}">{{ __('4') }}</span>{{ __('pricing') }}</a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="seo" data-bs-toggle="pill" data-bs-target="#courseSEO"
-                                role="tab" aria-controls="courseSEO" aria-selected="false">
-                                <span class="default-tab-count">{{ __('5') }}</span>{{ __('seo') }}</a>
-                        </li>
                         
                     </ul>
                     <!-- End Add New Course tab menu -->
@@ -158,28 +153,6 @@
                                     </div>
                                     <!-- End Language -->
 
-                                    <div class="col-lg-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="select_subject"
-                                                    class="form-label">{{ __('select_subject') }}</label>
-                                                <select id="select_subject" name="subject_id"
-                                                    placeholder="{{ __('select_subject') }}"
-                                                    data-route="{{ route('ajax.subjects') }}"
-                                                    class="multiple-select-1 form-select-lg rounded-0 mb-3"
-                                                    aria-label=".form-select-lg example">
-                                                    @if ($subject)
-                                                        <option value="{{ $subject->id }}" selected>
-                                                            {{ $subject->title }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('subject_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Subject -->
 
                                     <div class="col-lg-6">
                                         <div class="mb-4">
@@ -824,8 +797,7 @@
                                                 class="btn sg-btn-outline-primary btn_action"
                                                 data-bs-target="#courseMediaImages">{{ __('back') }}</a>
 
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                                data-bs-target="#courseSEO">{{ __('next') }}</a>
+                                            <button type="submit" class="btn sg-btn-primary">{{ __('submit') }}</button>
                                         </div>
                                     </div>
                                     <!-- End Next Page BTN -->
@@ -833,34 +805,6 @@
                                 <!-- End Product images section -->
                             </div>
                             <!-- End Course Pricing -->
-
-                            <div class="tab-pane fade" id="courseSEO" role="tabpanel" aria-labelledby="seo"
-                                tabindex="0">
-                                <div class="row gx-20">
-                                    @include('components.meta-fields', [
-                                        'meta_title_class' => 'col-lg-6',
-                                        'meta_description_class' => 'col-lg-12',
-                                        'meta_keywords_class' => 'col-lg-6',
-                                        'meta_image_class' => 'col-lg-12',
-                                        'meta_title' => old('meta_title'),
-                                        'meta_keywords' => old('meta_keywords'),
-                                        'meta_description' => old('meta_description'),
-                                        'meta_image' => old('meta_image'),
-                                        'edit' => true,
-                                    ])
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                                class="btn sg-btn-outline-primary btn_action"
-                                                data-bs-target="#coursePricing">{{ __('back') }}</a>
-
-                                            <button type="submit" class="btn sg-btn-primary">{{ __('submit') }}</button>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
-                                </div>
-                            </div>
-                            <!-- End Course SEO -->
 
                             
                         </div>
@@ -893,7 +837,6 @@
             });
 
             searchCategory($('#select_category'));
-            searchSubjects($('#select_subject'));
             searchOrganization($('#ins_by_org'));
             $(document).on('input change', '#mc_total_seats_input', function () {
                 let totalSeats = parseInt($(this).val()) || 0;

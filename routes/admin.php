@@ -90,9 +90,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
 
 
-        //website hero
-        Route::get('hero-section', [WebsiteSettingController::class, 'heroSection'])->name('hero.section');
-        Route::post('hero-section', [WebsiteSettingController::class, 'updateHeroSection'])->name('hero.section');
+
 
         //website footer-content
         Route::get('footer-content', [FooterSettingController::class, 'footerContent'])->name('footer.content');
@@ -133,9 +131,7 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
         //website why choose section setting
         Route::match(['get', 'post'], 'save-why-choose-section', [WebsiteSettingController::class, 'saveWhyChooseSection'])->name('website.why_choose_section.save');
 
-        //website success video section setting
-        Route::get('success-video-section', [WebsiteSettingController::class, 'successVideoSection'])->name('website.success_video_section');
-        Route::match(['get', 'post'], 'save-success-video-section', [WebsiteSettingController::class, 'saveSuccessVideoSection'])->name('website.success_video_section.save');
+
 
         //website ad banner section setting
         Route::get('ad-banner-section', [WebsiteSettingController::class, 'adBannerSection'])->name('website.ad_banner_section');

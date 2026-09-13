@@ -85,18 +85,13 @@
                                     class="default-tab-count {{ $step_3_error  ? 'bg-danger text-white' : '' }}">4</span>{{ __('pricing') }}
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link tab_change {{ $request_tab == 'seo' ? 'active' : '' }} {{ $step_1_error || $step_2_error || $step_3_error }}"
-                               data-tab="seo" id="seo" data-bs-toggle="pill" data-bs-target="#courseSEO"
-                               role="tab" aria-controls="courseSEO" aria-selected="false">
-                                <span class="default-tab-count">5</span>{{ __('seo') }}</a>
-                        </li>
+
 
                         <li class="nav-item" role="presentation">
                             <a class="nav-link tab_change {{ $step_1_error || $step_2_error || $step_3_error }} {{ $request_tab == 'curriculum' ? 'active' : '' }}"
                                data-tab="curriculum" id="curriculum" data-bs-toggle="pill"
                                data-bs-target="#courseCurriculum" role="tab" aria-controls="courseCurriculum"
-                               aria-selected="false"><span class="default-tab-count ">6</span> {{ __('curriculum') }}
+                               aria-selected="false"><span class="default-tab-count ">5</span> {{ __('curriculum') }}
                             </a>
                         </li>
                         <li class="nav-item {{ $course->course_type == 'live_class' ? '' : 'd-none' }}"
@@ -105,53 +100,21 @@
                             <a class="nav-link tab_change {{ $step_6_error ? 'text-danger ' : '' }} {{ $request_tab == 'LiveClass' ? 'active' : '' }}"
                                data-tab="live_class" id="live_class" data-bs-toggle="pill"
                                data-bs-target="#courseLiveClass" role="tab" aria-controls="courseLiveClass"
-                               aria-selected="false"><span class="default-tab-count {{ $step_6_error ? 'bg-danger text-white' : '' }}"> 7 </span> {{ __('Live Class') }}
+                               aria-selected="false"><span class="default-tab-count {{ $step_6_error ? 'bg-danger text-white' : '' }}"> 6 </span> {{ __('Live Class') }}
                             </a>
                         </li>
 
 
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link tab_change {{ $step_1_error || $step_2_error || $step_3_error }} {{ $request_tab == 'assignment' ? 'active' : '' }}"
-                               data-tab="assignment" id="assignment" data-bs-toggle="pill"
-                               data-bs-target="#courseAssignment" role="tab" aria-controls="courseAssignment"
-                               aria-selected="false">
-                                <span class="default-tab-count courseAssignmentIndex">
-                                    @if ($course->course_type == 'live_class')
-                                        {{ 8 }}
-                                    @else
-                                        {{ 7 }}
-                                    @endif
-                                </span>
-                                {{-- <span class="default-tab-count num_live">6 </span> --}}
 
-                                {{ __('assignment') }}
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link tab_change {{ $step_1_error || $step_2_error || $step_3_error }} {{ $request_tab == 'resource' ? 'active' : '' }}"
-                               data-tab="resource" id="resource" data-bs-toggle="pill" data-bs-target="#courseResource"
-                               role="tab" aria-controls="courseResource" aria-selected="false">
-                                {{-- <span class="default-tab-count order">8 </span>
-                                <span class="default-tab-count num_live">6</span> --}}
-                                <span class="default-tab-count courseresourceIndex">
-                                    @if ($course->course_type == 'live_class')
-                                        {{ 9 }}
-                                    @else
-                                        {{ 8 }}
-                                    @endif
-                                </span>
-                                {{ __('resource') }}
-                            </a>
-                        </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link tab_change {{ $step_1_error || $step_2_error || $step_3_error }} {{ $request_tab == 'faq' ? 'active' : '' }}"
                                data-tab="faq" id="faq" data-bs-toggle="pill" data-bs-target="#courseFAQ"
                                role="tab" aria-controls="courseFAQ" aria-selected="false">
                                 <span class="default-tab-count coursefaqIndex">
                                     @if ($course->course_type == 'live_class')
-                                        {{ 10 }}
+                                        {{ 7 }}
                                     @else
-                                        {{ 9 }}
+                                        {{ 6 }}
                                     @endif
                                 </span>
                                 {{ __('faq') }}
@@ -258,29 +221,6 @@
                                     </div>
                                     <!-- End Language -->
 
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="select_subject"
-                                                       class="form-label">{{ __('select_subject') }}</label>
-                                                <select id="select_subject" name="subject_id"
-                                                        placeholder="{{ __('select_subject') }}"
-                                                        data-route="{{ route('ajax.subjects') }}"
-                                                        class="form-select-lg rounded-0 mb-3"
-                                                        aria-label=".form-select-lg example">
-                                                    @if ($subject)
-                                                        <option value="{{ $subject->id }}"
-                                                                @if ($subject->id == $course->subject_id) selected @endif>
-                                                            {{ $subject->title }}</option>
-                                                    @endif
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('subject_id') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Subject -->
 
                                     <div class="col-lg-6 col-md-6">
                                         <div class="mb-4">
@@ -638,11 +578,7 @@
                                     $defDescBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '$1,000+ প্রতি মাসে আয় করুন!';
                                     $defDescBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : 'প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।';
 
-                                    $defSuccessEyebrow  = !empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : 'SUCCESS STORIES';
-                                    $defSuccessTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : 'What Says My Students About The Platform';
-                                    $defSuccessSubtitle = !empty($mcSettings['success_subtitle']) ? $mcSettings['success_subtitle'] : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.';
-                                    $defSuccessBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : 'View All Success Stories';
-                                    $defSuccessBtnUrl   = !empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : url('success');
+
                                 @endphp
                                 
                                 <div class="masterclass-single-page-wrapper">
@@ -762,42 +698,6 @@
                                         </div>
                                      </div>
 
-                                    <!-- Section: Success Stories Header Settings -->
-                                    <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label font-16 fw-normal text-dark m-0">Success Stories Section Settings</span>
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="row gx-20">
-                                                <div class="col-lg-6 mb-4">
-                                                    <label class="form-label">Eyebrow Badge Title</label>
-                                                    <input type="text" name="masterclass_settings[success_eyebrow]" class="form-control rounded-2"
-                                                           value="{{ $defSuccessEyebrow }}" placeholder="SUCCESS STORIES">
-                                                </div>
-                                                <div class="col-lg-6 mb-4">
-                                                    <label class="form-label">Main Title</label>
-                                                    <input type="text" name="masterclass_settings[success_title]" class="form-control rounded-2"
-                                                           value="{{ $defSuccessTitle }}" placeholder="What Says My Students About The Platform">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>&lt;mark&gt;word&lt;/mark&gt;</code> or <code>{word}</code> to highlight words.</small>
-                                                </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <label class="form-label">Subtitle / Description</label>
-                                                    <textarea name="masterclass_settings[success_subtitle]" class="form-control rounded-2" rows="3"
-                                                              placeholder="Lorem ipsum dolor sit amet...">{{ $defSuccessSubtitle }}</textarea>
-                                                </div>
-                                                <div class="col-lg-6 mb-4 mb-lg-0">
-                                                    <label class="form-label">Button Text</label>
-                                                    <input type="text" name="masterclass_settings[success_btn_text]" class="form-control rounded-2"
-                                                           value="{{ $defSuccessBtnText }}" placeholder="View All Success Stories">
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="form-label">Button Link URL</label>
-                                                    <input type="text" name="masterclass_settings[success_btn_url]" class="form-control rounded-2"
-                                                           value="{{ $defSuccessBtnUrl }}" placeholder="{{ url('success') }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- Section 4: Special Bonus Gift -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
@@ -1274,7 +1174,7 @@
                                                data-bs-target="#courseMediaImages">{{ __('back') }}</a>
 
                                             <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseSEO">{{ __('next') }}</a>
+                                               data-bs-target="#courseCurriculum">{{ __('next') }}</a>
                                         </div>
                                     </div>
                                     <!-- End Next Page BTN -->
@@ -1282,33 +1182,6 @@
                                 <!-- End Product images section -->
                             </div>
                             <!-- End Course Pricing -->
-
-                            <div
-                                class="tab-pane fade tab-pane fade {{ $request_tab == 'seo' ? 'show active' : '' }} {{ $step_1_error || $step_2_error || $step_3_error }}"
-                                id="courseSEO" role="tabpanel" aria-labelledby="seo" tabindex="0">
-                                <div class="row gx-20">
-                                    @include('components.meta-fields', [
-                                        'meta_title_class' => 'col-lg-6 col-md-6',
-                                        'meta_description_class' => 'col-lg-12',
-                                        'meta_keywords_class' => 'col-lg-6',
-                                        'meta_image_class' => 'col-lg-12',
-                                        'meta_title' => old('meta_title', $course->meta_title),
-                                        'meta_keywords' => old('meta_keywords', $course->meta_keywords),
-                                        'meta_description' => old('meta_description', $course->meta_description),
-                                        'meta_image' => $course->meta_image,
-                                        'edit' => $course,
-                                    ])
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#coursePricing">{{ __('back') }}</a>
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseCurriculum">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
-                                </div>
-                            </div>
 
                             <!-- start Curriculum Tab -->
                             <div
@@ -1540,9 +1413,9 @@
                                         <div class="d-flex justify-content-between align-items-center mt-30">
                                             <a href="#" type="button"
                                                class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseSEO">{{ __('back') }}</a>
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseAssignment">{{ __('next') }}</a>
+                                               data-bs-target="#coursePricing">{{ __('back') }}</a>
+                                            <a href="#" type="button" id="curriculum_next_btn" class="btn sg-btn-primary btn_action"
+                                               data-bs-target="{{ $course->course_type == 'live_class' ? '#courseLiveClass' : '#courseFAQ' }}">{{ __('next') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1681,89 +1554,14 @@
                                                class="btn sg-btn-outline-primary btn_action"
                                                data-bs-target="#courseCurriculum">{{ __('back') }}</a>
                                             <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseAssignment">{{ __('next') }}</a>
+                                               data-bs-target="#courseFAQ">{{ __('next') }}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- End Live Class Tab -->
 
-                            <!-- Start assignment Tab -->
-                            <div
-                                class="tab-pane fade {{ $request_tab == 'assignment' ? 'show active' : '' }} {{ $step_1_error || $step_2_error || $step_3_error }}"
-                                id="courseAssignment" role="tabpanel" aria-labelledby="assignment" tabindex="0">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-5 col-sm-12">
-                                    </div>
 
-                                    <div class="col-lg-7 col-md-7 col-sm-12">
-                                        <div class="oftions-content-right mb-20">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#add_assignment"
-                                               class="d-flex align-items-center button-default gap-2">
-                                                <i class="las la-plus"></i>
-                                                <span>{{ __('add_assignment') }}</span>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="default-list-table edit-course yajra-dataTable">
-                                            {{ $dataTable->table() }}
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseCurriculum">{{ __('back') }}</a>
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseResource">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- End Assignment Tab -->
-
-
-                            <!-- Start Resource Tab -->
-                            <div
-                                class="tab-pane fade {{ $request_tab == 'resource' ? 'show active' : '' }} {{ $step_1_error || $step_2_error || $step_3_error }}"
-                                id="courseResource" role="tabpanel" aria-labelledby="resource" tabindex="0">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-5 col-sm-12">
-                                    </div>
-
-                                    <div class="col-lg-7 col-md-7 col-sm-12">
-                                        <div class="oftions-content-right mb-20">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#resourcesAddModal"
-                                               class="d-flex align-items-center button-default gap-2">
-                                                <i class="las la-plus"></i>
-                                                <span>{{ __('add_resource') }}</span>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div id="resourceListContainer" class="row gy-20">
-                                            @include('backend.admin.course.resource_list')
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseAssignment">{{ __('back') }}</a>
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseFAQ">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- End Resource Tab -->
 
                             <!-- Start faq Tab -->
                             <div
@@ -1873,9 +1671,9 @@
 
                                     <div class="col-lg-12">
                                         <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
+                                            <a href="#" type="button" id="faq_back_btn"
                                                class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseResource">{{ __('back') }}</a>
+                                               data-bs-target="{{ $course->course_type == 'live_class' ? '#courseLiveClass' : '#courseCurriculum' }}">{{ __('back') }}</a>
 
 
                                             <div class="d-flex align-items-center gap-3">
@@ -1937,7 +1735,6 @@
         $(document).ready(function () {
             searchCategory($('#select_category'));
             searchOrganization($('#ins_by_org'));
-            searchSubjects($('#select_subject'));
             $(document).on('click', "#mgCourse-tabContent a.btn_action, .mc-step-btn", function (e) {
                 e.preventDefault();
                 let target = $(this).attr('data-bs-target');
@@ -2108,9 +1905,6 @@
                 });
             });
 
-            /*$(document).on('click', "#select_subject", function () {
-                searchSubjects($('#select_subject'));
-            });*/
 
             let sections = document.getElementById("editCourse");
             if (sections) {
@@ -2250,22 +2044,21 @@
             });
             /*$(document).on('click', "#basicInformation", function () {
                 searchCategory($('#select_category'));
-                searchSubjects($('#select_subject'));
                 searchOrganization($('#ins_by_org'));
             });*/
             $(document).on('change','#courseType',function () {
                 var selectedValue = $(this).val();
                 if (selectedValue === 'live_class') {
                     $("#notLiveClass").removeClass('d-none');
-                    $('.courseAssignmentIndex').text(numbeonelive);
-                    $('.courseresourceIndex').text(numbertwoLive);
-                    $('.coursefaqIndex').text(numberthreeLive);
+                    $('.coursefaqIndex').text(7);
+                    $('#curriculum_next_btn').attr('data-bs-target', '#courseLiveClass');
+                    $('#faq_back_btn').attr('data-bs-target', '#courseLiveClass');
 
                 } else if (selectedValue === 'course') {
                     $("#notLiveClass").addClass('d-none');
-                    $('.courseAssignmentIndex').text(numbeone);
-                    $('.courseresourceIndex').text(numbertwo);
-                    $('.coursefaqIndex').text(numberThree);
+                    $('.coursefaqIndex').text(6);
+                    $('#curriculum_next_btn').attr('data-bs-target', '#courseFAQ');
+                    $('#faq_back_btn').attr('data-bs-target', '#courseCurriculum');
 
                 }
             });

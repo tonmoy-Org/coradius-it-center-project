@@ -271,10 +271,7 @@
                                        href="{{ route('theme.options') }}">{{ __('theme_options') }}</a></li>
                             @endif
                             
-                            @if(hasPermission('hero.section'))
-                                <li><a class="{{ menuActivation('admin/hero-section', 'active') }}"
-                                       href="{{ route('hero.section') }}">{{ __('hero_section') }}</a></li>
-                            @endif
+
                             @if(hasPermission('footer.social-links'))
                                 <li><a class="{{ menuActivation([
                                 'admin/social-link-setting',

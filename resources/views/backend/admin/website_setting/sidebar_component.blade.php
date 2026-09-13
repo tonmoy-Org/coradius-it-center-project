@@ -12,15 +12,7 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('hero.section'))
-                    <li>
-                        <a href="{{ route('hero.section') }}"
-                           class="{{ request()->routeIs('hero.section') ? 'active' : '' }}">
-                            <span class="icon"><i class="las la-hand-point-up"></i></span>
-                            <span>{{ __('hero_section') }}</span>
-                        </a>
-                    </li>
-                @endif
+
                 @if(hasPermission('footer.social-links'))
 
                     <li>
@@ -70,13 +62,7 @@
                         <span>{{ __('Categories of Work Section') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('website.success_video_section') }}"
-                       class="{{ request()->routeIs('website.success_video_section') ? 'active' : '' }}">
-                        <span class="icon"><i class="las la-play-circle"></i></span>
-                        <span>{{ __('success_video_section') }}</span>
-                    </a>
-                </li>
+
 
                 @if(hasPermission('google.setup'))
                     <li>
