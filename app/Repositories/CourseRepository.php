@@ -506,6 +506,11 @@ class CourseRepository
         return $course;
     }
 
+    public function first()
+    {
+        return Course::first();
+    }
+
     public function find($id)
     {
         return Course::withAvg('reviews', 'rating')->withCount('reviews')->withCount('enrolls')->find($id);
