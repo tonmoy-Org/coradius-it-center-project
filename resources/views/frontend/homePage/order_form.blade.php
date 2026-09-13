@@ -150,13 +150,30 @@
             flex-direction: column;
         }
         .lead-info-side {
-            padding: 40px 30px;
+            padding: 30px 20px;
         }
         .lead-form-side {
-            padding: 40px 30px;
+            padding: 30px 20px;
         }
         .lead-title {
-            font-size: 26px;
+            font-size: 22px !important;
+            line-height: 1.35 !important;
+        }
+        .form-heading {
+            font-size: 22px !important;
+            line-height: 1.35 !important;
+        }
+        .lead-badge {
+            font-size: 13px !important;
+        }
+        .lead-desc,
+        .form-subheading,
+        .feature-list li {
+            font-size: 13.5px !important;
+            line-height: 1.75 !important;
+        }
+        .modern-label {
+            font-size: 13.5px !important;
         }
     }
 </style>

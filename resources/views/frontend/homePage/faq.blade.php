@@ -10,6 +10,9 @@
         transition: all 0.3s ease;
         background: var(--color-white, #ffffff);
     }
+    .custom-faq-accordion .accordion-item:last-child {
+        margin-bottom: 0 !important;
+    }
     .custom-faq-accordion .accordion-item:hover {
         border-color: var(--color-primary, #0056D2);
         box-shadow: 0 8px 20px rgba(0, 86, 210, 0.08);
@@ -92,11 +95,18 @@
     /* Mobile & Tablet Responsive Media Queries */
     @media (max-width: 991.98px) {
         .faq-section {
-            padding-top: 40px !important;
-            padding-bottom: 40px !important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+        .faq-section .row.g-5 {
+            --bs-gutter-y: 0 !important;
+            row-gap: 0 !important;
+        }
+        .faq-section .faq-content-wrap {
+            margin-bottom: 15px !important;
         }
         .faq-image-card {
-            margin-top: 25px;
+            margin-top: 15px !important;
             border-width: 4px;
         }
         .faq-image-card img {

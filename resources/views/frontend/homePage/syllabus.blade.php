@@ -20,6 +20,9 @@
         transition: all 0.3s ease;
         background: var(--color-white, #ffffff);
     }
+    .custom-syllabus-accordion .accordion-item:last-child {
+        margin-bottom: 0 !important;
+    }
     .custom-syllabus-accordion .accordion-item:hover {
         border-color: var(--color-primary, #0056D2);
         box-shadow: 0 8px 20px rgba(0, 86, 210, 0.08);

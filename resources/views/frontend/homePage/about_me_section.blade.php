@@ -63,6 +63,15 @@
         line-height: 1.7 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
     }
+
+    @media (max-width: 767.98px) {
+        .about-me-description-content,
+        .about-me-description-content p,
+        .about-me-description-content li {
+            font-size: 13.5px !important;
+            line-height: 1.75 !important;
+        }
+    }
 </style>
 
 @if($status !== '0')

@@ -29,8 +29,6 @@
                     foreach ($step_3_errors as $step3) {
                         if ($errors->has($step3)) {
                             $step_3_error = true;
-                            if(!$step_1_error)
-                                $request_tab = 'pricing';
                             break;
                         }
                     }
@@ -75,14 +73,6 @@
                                aria-selected="false">
                                 <span
                                     class="default-tab-count {{ $step_2_error  ? 'bg-danger text-white' : '' }}">3</span>{{ __('media_images') }}
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link tab_change {{ $request_tab == 'pricing' ? 'active ' : '' }} {{ $step_3_error ? 'text-danger' : '' }}"
-                               data-tab="pricing" id="pricing" data-bs-toggle="pill" data-bs-target="#coursePricing"
-                               role="tab" aria-controls="coursePricing" aria-selected="false">
-                                <span
-                                    class="default-tab-count {{ $step_3_error  ? 'bg-danger text-white' : '' }}">4</span>{{ __('pricing') }}
                             </a>
                         </li>
 
@@ -891,111 +881,14 @@
                             </div>
                             <!-- End Course Media Images -->
 
-                            <div class="tab-pane fade {{ $request_tab == 'pricing' ? 'show active' : '' }} {{ $step_3_error && !$step_2_error ? 'show active' : '' }}"
-                                 id="coursePricing" role="tabpanel" aria-labelledby="pricing" tabindex="0">
-                                <div class="row gx-20">
-                                    <div class="col-lg-6">
-                                        <div class="price-checkbox d-flex gap-12 mb-4">
-                                            <label for="is_free">{{ __('free_course') }}</label>
-                                            <div class="setting-check">
-                                                <input type="checkbox" id="is_free" name="is_free" value="1"
-                                                    {{ old('is_free', $course->is_free) == 1 ? 'checked' : '' }}>
-                                                <label for="is_free"></label>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="price-checkbox d-flex gap-12 mb-4 not_free_div {{ old('is_free', $course->is_free) == 1 ? 'd-none' : '' }}">
-                                            <label for="discountable_course">{{ __('discountable_course') }}</label>
-                                            <div class="setting-check">
-                                                <input type="checkbox" id="discountable_course" name="is_discountable"
-                                                       value="1"
-                                                    {{ old('is_discountable', $course->is_discountable) == 1 ? 'checked' : '' }}>
-                                                <label for="discountable_course"></label>
-                                            </div>
-                                        </div>
+                            <!-- Preserved course pricing fields to ensure course saving, updates and checkout function seamlessly -->
+                            <input type="hidden" name="is_free" value="{{ old('is_free', $course->is_free) }}">
+                            <input type="hidden" name="price" value="{{ old('price', $course->price) }}">
+                            <input type="hidden" name="is_discountable" value="{{ old('is_discountable', $course->is_discountable) }}">
+                            <input type="hidden" name="discount_type" value="{{ old('discount_type', $course->discount_type) }}">
+                            <input type="hidden" name="discount_amount" value="{{ old('discount_amount', $course->discount_amount) }}">
+                            <input type="hidden" name="discount_period" value="{{ old('discount_period', $course->discount_period) }}">
 
-                                    </div>
-                                    <!-- End Free Course Option -->
-
-                                    <div class="col-lg-6 not_free_div {{ old('is_free', $course->is_free) == 1 ? 'd-none' : '' }}">
-                                        <div class="mb-4">
-                                            <label for="price" class="form-label">{{ __('price') }}</label>
-                                            <input type="text" class="form-control rounded-2" id="price" name="price"
-                                                   value="{{ old('price', $course->price) }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('price') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Price -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable', $course->is_discountable) == 1 && old('is_free', $course->is_free) == 0 ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="discount_type"
-                                                       class="form-label">{{ __('discount_type') }}</label>
-
-                                                <select class="form-select form-select-lg mb-3 without_search"
-                                                        id="discount_type" name="discount_type">
-                                                    <option value="">{{ __('select_discount_type') }}</option>
-                                                    <option value="flat"
-                                                        {{ old('discount_type', $course->discount_type) == 'flat' ? 'selected' : '' }}>
-                                                        {{ __('flat') }}</option>
-                                                    <option value="percentage"
-                                                        {{ old('discount_type', $course->discount_type) == 'percentage' ? 'selected' : '' }}>
-                                                        {{ __('percentage') }}</option>
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('discount_type') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Discount Type -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable', $course->is_discountable) == 1 && old('is_free', $course->is_free) == 0 ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <label for="discount_amount"
-                                                   class="form-label">{{ __('discount_amount') }}</label>
-                                            <input type="text" class="form-control rounded-2" id="discount_amount"
-                                                   name="discount_amount"
-                                                   value="{{ old('discount_amount', $course->discount_amount) }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('discount_amount') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Discount Amount -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable', $course->is_discountable) == 1 && old('is_free', $course->is_free) == 0 ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <label for="liveClassDateRangePicker"
-                                                   class="form-label">{{ __('discount_period') }}</label>
-
-                                            <div class="date-picker-div text-start">
-                                                <input type="text" class="form-control" name="discount_period"
-                                                       id="liveClassDateRangePicker"
-                                                       value="{{ old('discount_period', $course->discount_period) }}">
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('discount_period') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Date Range Picker -->
-                                </div>
-                                <!-- End Product images section -->
-
-                                <div class="col-lg-12">
-                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
-                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Course Pricing -->
 
                             <!-- start Curriculum Tab -->
                             <div

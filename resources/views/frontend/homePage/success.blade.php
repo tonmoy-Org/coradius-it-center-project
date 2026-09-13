@@ -141,6 +141,27 @@
         width: 24px;
         border-radius: 6px;
     }
+
+    /* Mobile/Tablet Stack Spacing (15px bottom + 15px top = 30px) */
+    @media (max-width: 991.98px) {
+        .success-story-section .common-heading {
+            margin-bottom: 0 !important;
+        }
+        .success-story-section .row.g-5 {
+            --bs-gutter-y: 0 !important;
+            row-gap: 0 !important;
+        }
+        .success-story-section .col-lg-5.order-1 {
+            margin-top: 0 !important;
+            margin-bottom: 15px !important;
+            padding-bottom: 0 !important;
+        }
+        .success-story-section .col-lg-7.order-2 {
+            margin-top: 15px !important;
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+        }
+    }
 </style>
 
 <section class="success-story-section p-t-60 p-b-60 position-relative" id="success" style="background-color: #ffffff;">

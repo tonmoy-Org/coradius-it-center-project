@@ -563,22 +563,22 @@
     }
 
     .hero-title {
-        font-size: 24px !important;
-        line-height: 1.4 !important;
+        font-size: 22px !important;
+        line-height: 1.35 !important;
         font-weight: 700 !important;
         margin-bottom: 8px !important;
     }
 
     .hero-subtitle {
-        font-size: 16px !important;
+        font-size: 17px !important;
         line-height: 1.45 !important;
         font-weight: 600 !important;
         margin-bottom: 12px !important;
     }
 
     .hero-description {
-        font-size: 14px !important;
-        line-height: 1.65 !important;
+        font-size: 13.5px !important;
+        line-height: 1.75 !important;
         font-weight: 400 !important;
         margin-bottom: 16px !important;
     }
