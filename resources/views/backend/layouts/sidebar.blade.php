@@ -27,21 +27,94 @@
                     </li>
                 @endif
                 @if(hasPermission('courses.index'))
-                    <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'active') }}">
-                        <a href="#course" class="dropdown-icon" data-bs-toggle="collapse" role="button"
-                           aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'true', 'false') }}"
-                           aria-controls="course">
-                            <i class="las la-book"></i>
-                            <span>{{ __('course') }}</span>
+                    <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section'], 'active') }}">
+                        <a href="#home_landing" class="dropdown-icon" data-bs-toggle="collapse" role="button"
+                           aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section'], 'true', 'false') }}"
+                           aria-controls="home_landing">
+                            <i class="las la-desktop"></i>
+                            <span>{{ __('Home Landing Page') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'show') }}"
-                            id="course">
-                            @if(hasPermission('courses.index'))
-                                <li>
-                                    <a class="{{ menuActivation(['admin/courses/*', 'admin/courses', 'admin/quizzes*'], 'active') }}"
-                                       href="{{ route('courses.index') }}">{{ __('course_list') }}</a>
-                                </li>
-                            @endif
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section'], 'show') }}"
+                            id="home_landing">
+                            @php
+                                $firstCourse = \App\Models\Course::first();
+                                $landingId = $firstCourse ? $firstCourse->id : 1;
+                                $currTab = request()->query('tab', 'basic');
+                            @endphp
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'basic' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'basic']) }}">1. {{ __('Basic Info') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'desc_right_box' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'desc_right_box']) }}">2. {{ __('Description') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'benefits' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'benefits']) }}">3. {{ __('Benefits') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'gift_banner' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'gift_banner']) }}">4. {{ __('Gift Banner') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'offer_breakdown' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'offer_breakdown']) }}">5. {{ __('Breakdown') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'ad_banners' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'ad_banners']) }}">6. {{ __('Banners') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'support' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'support']) }}">7. {{ __('Support') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'mediaImages' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'mediaImages']) }}">8. {{ __('Media') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'pricing' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'pricing']) }}">9. {{ __('Pricing') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'curriculum' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'curriculum']) }}">10. {{ __('Curriculum') }}</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'faq' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'faq']) }}">11. {{ __('FAQ') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.counter_section') }}"
+                                   class="{{ request()->routeIs('website.counter_section') ? 'active' : '' }}">
+                                    12. {{ __('Counter') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.about_section') }}"
+                                   class="{{ request()->routeIs('website.about_section') ? 'active' : '' }}">
+                                    13. {{ __('About Me') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.categories_of_work_section') }}"
+                                   class="{{ request()->routeIs('website.categories_of_work_section') ? 'active' : '' }}">
+                                    14. {{ __('Categories') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.newsletter_section') }}"
+                                   class="{{ request()->routeIs('website.newsletter_section') ? 'active' : '' }}">
+                                    15. {{ __('Newsletter') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('website.sticky_promo') }}"
+                                   class="{{ request()->routeIs('website.sticky_promo') ? 'active' : '' }}">
+                                    16. {{ __('Sticky Promo') }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -271,10 +344,7 @@
                                        href="{{ route('theme.options') }}">{{ __('theme_options') }}</a></li>
                             @endif
                             
-                            @if(hasPermission('hero.section'))
-                                <li><a class="{{ menuActivation('admin/hero-section', 'active') }}"
-                                       href="{{ route('hero.section') }}">{{ __('hero_section') }}</a></li>
-                            @endif
+
                             @if(hasPermission('footer.social-links'))
                                 <li><a class="{{ menuActivation([
                                 'admin/social-link-setting',

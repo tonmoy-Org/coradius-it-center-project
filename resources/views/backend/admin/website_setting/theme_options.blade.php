@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('theme_options'))
 @section('content')
     <!-- Product Details -->
@@ -9,7 +9,7 @@
                 <h3 class="section-title">{{ __('theme_options') }}</h3>
                 <div class="bg-white redious-border p-20 p-sm-30">
                     <form action="{{ route('theme.options') }}" method="post" class="form">@csrf
-                        <div class="row">
+                        <div class="row d-none">
                             <div class="pageTitle">
                                 <h6 class="sub-title">Website Mode</h6>
                             </div>
@@ -125,7 +125,7 @@
                             </div>
 
                             <div class="d-flex justify-content-start align-items-center mt-30">
-                                <button type="submit" class="btn sg-btn-primary">{{ __('update') }}</button>
+                                <button type="submit" class="btn sg-btn-primary">{{ __('save_&_publish') }}</button>
                                 @include('backend.common.loading-btn',['class' => 'btn sg-btn-primary'])
                             </div>
                         </div>
@@ -159,4 +159,5 @@
         });
     </script>
 @endpush
+
 

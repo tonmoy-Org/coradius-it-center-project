@@ -1,7 +1,8 @@
+﻿@if(setting('categories_of_work_status') !== '0')
 @php
     $cards = setting('categories_of_work_cards');
     $cards = is_array($cards) ? $cards : [];
-    $title = setting('categories_of_work_title') ?: 'The categories of work.';
+    $title = setting('categories_of_work_title');
 @endphp
 
 @if(count($cards) > 0 || $title)
@@ -188,3 +189,6 @@
     </div>
 </section>
 @endif
+
+@endif
+

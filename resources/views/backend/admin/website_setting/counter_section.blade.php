@@ -1,22 +1,24 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('Counter Section'))
 @section('content')
     <section class="options">
         <div class="container-fluid">
             <div class="row">
-                @include('backend.admin.website_setting.sidebar_component')
-                <div class="col-xxl-9 col-lg-8 col-md-8">
-                    <h3 class="section-title">{{ __('Counter Section') }}</h3>
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 class="section-title mb-0" style="font-weight: 500;">{{ __('Counter Section') }}</h3>
+
+                    </div>
                     <div class="bg-white redious-border p-20 p-sm-30">
-                        <form action="{{ route('website.counter_section.save') }}" method="POST" class="form" enctype="multipart/form-data">@csrf
+                        <form action="{{ route('website.counter_section.save') }}" id="setting-form" method="POST" class="form" enctype="multipart/form-data">@csrf
                             <div class="row gx-20">
                                 <input type="hidden" value="0" class="is_modal" name="is_modal">
 
                                 <!-- Enable / Disable Section Status -->
                                 <div class="col-12 mb-4">
-                                    <div class="d-flex align-items-center gap-12 sandbox_mode_div">
+                                    <div class="d-flex justify-content-between align-items-center gap-12 sandbox_mode_div">
                                         <input type="hidden" name="counter_section_status" value="{{ setting('counter_section_status') === '0' ? 0 : 1 }}">
-                                        <label class="form-label mb-0 fw-semibold" for="counter_section_status">{{ __('status') }} (Show Counter Section)</label>
+                                        <label class="form-label mb-0 fw-semibold" for="counter_section_status">Enable Section</label>
                                         <div class="setting-check">
                                             <input type="checkbox" value="1" id="counter_section_status"
                                                    class="sandbox_mode" {{ setting('counter_section_status') === '0' ? '' : 'checked' }}>
@@ -30,8 +32,8 @@
                                 <!-- Counter Items Container -->
                                 <div class="col-12">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="fw-bold mb-0">{{ __('Counter Items') }}</h5>
-                                        <button type="button" class="btn sg-btn-primary" id="add_counter_item_btn" style="background-color: #25ab7c !important; border-color: #25ab7c !important; color: #ffffff !important;">
+                                        <span class="form-label mb-0 d-block">{{ __('Counter Items') }}</span>
+                                        <button type="button" class="btn sg-btn-primary" id="add_counter_item_btn">
                                             <i class="las la-plus"></i> {{ __('Add Counter Item') }}
                                         </button>
                                     </div>
@@ -53,7 +55,7 @@
                                             <div class="card mb-4 counter-item-card" data-index="{{ $index }}">
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <h6 class="fw-bold mb-0">Counter Item <span class="item-number">{{ $index + 1 }}</span></h6>
+                                                        <span class="form-label mb-0">Counter Item <span class="item-number">{{ $index + 1 }}</span></span>
                                                         <button type="button" class="btn btn-sm text-danger remove-item-btn p-0 border-0 bg-transparent" title="{{ __('delete') }}"><i class="las la-trash-alt" style="font-size: 24px;"></i></button>
                                                     </div>
                                                     
@@ -77,8 +79,8 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-start align-items-center mt-30">
-                                    <button type="submit" class="btn sg-btn-primary" style="background-color: #25ab7c !important; border-color: #25ab7c !important; color: #ffffff !important;">{{ __('save') }}</button>
+                                <div class="d-flex justify-content-end align-items-center mt-30">
+                                    <button type="submit" class="btn sg-btn-primary">{{ __('save_&_publish') }}</button>
                                     @include('backend.common.loading-btn', ['class' => 'btn sg-btn-primary'])
                                 </div>
                             </div>
@@ -101,7 +103,7 @@
             <div class="card mb-4 counter-item-card" data-index="${itemIndex}">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="fw-bold mb-0">Counter Item <span class="item-number">${nextNumber}</span></h6>
+                        <span class="form-label mb-0">Counter Item <span class="item-number">${nextNumber}</span></span>
                         <button type="button" class="btn btn-sm text-danger remove-item-btn p-0 border-0 bg-transparent" title="{{ __('delete') }}"><i class="las la-trash-alt" style="font-size: 24px;"></i></button>
                     </div>
                     <div class="row">
@@ -139,3 +141,9 @@
     });
 </script>
 @endpush
+
+
+
+
+
+

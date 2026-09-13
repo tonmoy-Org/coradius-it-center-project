@@ -1,4 +1,4 @@
-<div class="col-xxl-3 col-lg-4 col-md-4">
+﻿<div class="col-xxl-3 col-lg-4 col-md-4">
     <h3 class="section-title"{{ __('theme_option') }}></h3>
     <div class="bg-white redious-border py-3 py-sm-30 mb-30">
         <div class="email-tamplate-sidenav">
@@ -12,15 +12,7 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('hero.section'))
-                    <li>
-                        <a href="{{ route('hero.section') }}"
-                           class="{{ request()->routeIs('hero.section') ? 'active' : '' }}">
-                            <span class="icon"><i class="las la-hand-point-up"></i></span>
-                            <span>{{ __('hero_section') }}</span>
-                        </a>
-                    </li>
-                @endif
+
                 @if(hasPermission('footer.social-links'))
 
                     <li>
@@ -49,34 +41,8 @@
                         </a>
                     </li>
                 @endif
-                <li>
-                    <a href="{{ route('website.counter_section') }}"
-                       class="{{ request()->routeIs('website.counter_section') ? 'active' : '' }}">
-                        <span class="icon"><i class="las la-calculator"></i></span>
-                        <span>{{ __('Counter Section') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('website.about_section') }}"
-                       class="{{ request()->routeIs('website.about_section') ? 'active' : '' }}">
-                        <span class="icon"><i class="las la-user-tie"></i></span>
-                        <span>{{ __('about_me_section') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('website.categories_of_work_section') }}"
-                       class="{{ request()->routeIs('website.categories_of_work_section') ? 'active' : '' }}">
-                        <span class="icon"><i class="las la-list"></i></span>
-                        <span>{{ __('Categories of Work Section') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('website.success_video_section') }}"
-                       class="{{ request()->routeIs('website.success_video_section') ? 'active' : '' }}">
-                        <span class="icon"><i class="las la-play-circle"></i></span>
-                        <span>{{ __('success_video_section') }}</span>
-                    </a>
-                </li>
+
+
 
                 @if(hasPermission('google.setup'))
                     <li>
@@ -99,3 +65,4 @@
         </div>
     </div>
 </div>
+

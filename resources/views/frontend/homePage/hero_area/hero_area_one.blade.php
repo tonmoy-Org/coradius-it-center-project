@@ -1,4 +1,4 @@
-@php
+﻿@php
     $lang = App::getLocale();
 @endphp
 
@@ -95,6 +95,7 @@
 @include('frontend.homePage.counter_section')
 
 @if(isset($hero_course->description) && !empty(strip_tags($hero_course->description)))
+@if(!isset($mcSettings['description_status']) || $mcSettings['description_status'] == 1)
 <section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
         <div class="description-card p-4 p-md-5 position-relative overflow-hidden" 
@@ -191,6 +192,7 @@
         </div>
     </div>
 </section>
+@endif
 @endif
 
 @push('js')
@@ -659,3 +661,4 @@
     </div>
 </section>
 @endif
+

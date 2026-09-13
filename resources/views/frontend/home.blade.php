@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master')
+﻿@extends('frontend.layouts.master')
 @section('title', __('home'))
 
 @push('css')
@@ -150,7 +150,9 @@
 @endpush
 
 @section('base.content')
+    @if(!isset($mcSettings['basic_info_status']) || $mcSettings['basic_info_status'] == 1)
     @include('frontend.homePage.hero_area.hero_area_one')
+    @endif
 
     <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
@@ -163,10 +165,14 @@
     @include('frontend.homePage.categories_of_work')
 
     <!--====== Start Benefits Section ======-->
+    @if(!isset($mcSettings['benefits_status']) || $mcSettings['benefits_status'] == 1)
     @include('frontend.homePage.benefits')
+    @endif
 
     <!--====== Start Special Gift Section ======-->
+    @if(!isset($mcSettings['gift_banner_status']) || $mcSettings['gift_banner_status'] == 1)
     @include('frontend.homePage.special_gift')
+    @endif
 
 
     <!--====== Start Ad Banner 1 (Upper Home Section) ======-->
@@ -189,7 +195,8 @@
         }
         $b1Url = dynamic_asset($b1Url);
     @endphp
-    @if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
+    @if(!isset($mcSettings['banners_status']) || $mcSettings['banners_status'] == 1)
+@if($b1Url && $b1Status && !str_contains($b1Url, 'default'))
     <section class="ad-banner-section-1 p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
@@ -206,6 +213,7 @@
         </div>
     </section>
     @endif
+@endif
 
 
     <!--====== Start What You Will Learn ======-->
@@ -286,7 +294,9 @@
 
 
     <!--====== Start Syllabus Section ======-->
+    @if(!isset($mcSettings['curriculum_status']) || $mcSettings['curriculum_status'] == 1)
     @include('frontend.homePage.syllabus')
+    @endif
 
     <!--====== Start Success Banner Section ======-->
     @php
@@ -323,7 +333,9 @@
     @include('frontend.homePage.success')
 
     <!--====== Start Offer Breakdown Section (Today's Value Breakdown) ======-->
+    @if(!isset($mcSettings['breakdown_status']) || $mcSettings['breakdown_status'] == 1)
     @include('frontend.homePage.offer_breakdown')
+    @endif
 
     <!--====== Start Ad Banner 2 (Lower Home Section) ======-->
     @php
@@ -346,7 +358,8 @@
         $b2Url = dynamic_asset($b2Url);
     @endphp
 
-    @if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
+    @if(!isset($mcSettings['banners_status']) || $mcSettings['banners_status'] == 1)
+@if($b2Url && $b2Status && !str_contains($b2Url, 'default'))
     <section class="ad-banner-section-2 p-t-60 p-b-60 bg-white overflow-hidden">
         <div class="container container-1278">
             <div class="row justify-content-center">
@@ -363,12 +376,17 @@
         </div>
     </section>
     @endif
+@endif
 
     <!--====== Start FAQ Section ======-->
+    @if(!isset($mcSettings['faq_status']) || $mcSettings['faq_status'] == 1)
     @include('frontend.homePage.faq')
+    @endif
 
     <!--====== Start Support Section ======-->
+    @if(!isset($mcSettings['support_status']) || $mcSettings['support_status'] == 1)
     @include('frontend.homePage.support')
+    @endif
 
 
 
@@ -496,7 +514,9 @@
     @endif
 
     <!--====== Start Order Form Section ======-->
+    @if(!isset($mcSettings['pricing_status']) || $mcSettings['pricing_status'] == 1)
     @include('frontend.homePage.order_form')
+    @endif
 
 
 
@@ -506,4 +526,6 @@
     </div>
     @include('frontend.layouts.footer')
 @endsection
+
+
 

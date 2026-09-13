@@ -539,6 +539,38 @@ class WebsiteSettingController extends Controller
         }
     }
 
+    public function newsletterSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.newsletter_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function stickyPromoSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.sticky_promo', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
     public function saveCategoriesOfWorkSection(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -687,64 +719,7 @@ class WebsiteSettingController extends Controller
         }
     }
 
-    public function successVideoSection(Request $request)
-    {
-        try {
-            $data = [
-                'languages' => $this->language->all(),
-                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
-            ];
 
-            return view('backend.admin.website_setting.success_video_section', $data);
-        } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
-
-            return back();
-        }
-    }
-
-    public function saveSuccessVideoSection(Request $request)
-    {
-        if ($request->isMethod('get')) {
-            return redirect()->route('website.success_video_section');
-        }
-
-        if (config('app.demo_mode')) {
-            $data = [
-                'status' => 'danger',
-                'error'  => __('this_function_is_disabled_in_demo_server'),
-                'title'  => 'error',
-            ];
-
-            if ($request->ajax()) {
-                return response()->json($data);
-            }
-            Toastr::error(__('this_function_is_disabled_in_demo_server'));
-            return back();
-        }
-
-        try {
-            $this->setting->update($request);
-            Toastr::success(__('update_successful'));
-            $data = [
-                'success' => __('update_successful'),
-            ];
-
-            if ($request->ajax()) {
-                return response()->json($data);
-            }
-
-            return back();
-        } catch (\Exception $e) {
-            if ($request->ajax()) {
-                return response()->json([
-                    'error' => $e->getMessage(),
-                ]);
-            }
-            Toastr::error($e->getMessage());
-            return back();
-        }
-    }
 
     public function adBannerSection(Request $request)
     {
@@ -1209,53 +1184,7 @@ class WebsiteSettingController extends Controller
         }
     }
 
-    public function heroSection(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
-    {
-        $languages     = app('languages');
 
-        if ($request->lang) {
-            if (App::getLocale() == 1) {
-                $lang = 'en';
-            } else {
-                $lang = App::getLocale();
-            }
-        } else {
-            $lang = App::getLocale();
-        }
-        $menu_language = headerFooterMenu('header_menu', 'en');
-        $active_header = setting('header');
-
-        return view('backend.admin.website_setting.hero_setting.'.$active_header, compact('languages', 'lang', 'menu_language'));
-    }
-
-    public function updateHeroSection(Request $request): JsonResponse
-    {
-        if (config('app.demo_mode')) {
-            $data = [
-                'status' => 'danger',
-                'error'  => __('this_function_is_disabled_in_demo_server'),
-                'title'  => 'error',
-            ];
-
-            return response()->json($data);
-        }
-
-        try {
-            $this->setting->update($request);
-            Toastr::success(__('update_successful'));
-            $data = [
-                'success' => __('update_successful'),
-            ];
-
-            return response()->json($data);
-        } catch (\Exception $e) {
-            $data = [
-                'error' => $e->getMessage(),
-            ];
-
-            return response()->json($data);
-        }
-    }
 
     public function counterSection(Request $request)
     {

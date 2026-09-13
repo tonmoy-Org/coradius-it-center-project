@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('success_video_section'))
 @section('content')
     <section class="oftions">
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-start align-items-center mt-30 col-12">
-                                    <button type="submit" class="btn sg-btn-primary">{{ __('update') }}</button>
+                                    <button type="submit" class="btn sg-btn-primary">{{ __('save_&_publish') }}</button>
                                     @include('backend.common.loading-btn', ['class' => 'btn sg-btn-primary'])
                                 </div>
 
@@ -128,3 +128,4 @@
 @push('js_asset')
     <script src="{{ static_asset('admin/js/dropzone.min.js') }}"></script>
 @endpush
+
