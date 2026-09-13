@@ -60,20 +60,28 @@
     @media (max-width: 767.98px) {
         /* Standardized Section Vertical Spacing (38px top & bottom) */
         .home-page-sections > section,
-        section.about-me-section,
-        section.categories-of-work-section,
-        section.benefits-section,
-        section.special-gift-section,
         section.what-you-learn-section,
-        section.syllabus-section,
         section.success-banner-section,
-        section.success-story-section,
         section.offer-breakdown-section,
-        section.faq-section,
         section.mc-support-section-wrapper,
         section.order-form-section {
             padding-top: 38px !important;
             padding-bottom: 38px !important;
+        }
+
+        section.about-me-section,
+        section.categories-of-work-section,
+        section.benefits-section,
+        section.special-gift-section,
+        section.syllabus-section,
+        section.success-story-section,
+        section.faq-section {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+
+        .custom-syllabus-accordion .accordion-item:last-child {
+            margin-bottom: 0 !important;
         }
 
         /* Hero Area Mobile Padding */
@@ -109,6 +117,122 @@
         .cow-title {
             margin-bottom: 22px !important;
             font-size: 22px !important;
+        }
+
+        /* ==========================================================================
+           AUTHORITATIVE MOBILE TYPOGRAPHY SCALE (4 TIERS)
+           Tier 1: Main Section Headings (22px, Bold 700, line-height 1.35)
+           Tier 2: Card & Sub-Headings (17px, Semi-Bold 600, line-height 1.45)
+           Tier 3: Badges, Tags & Eyebrows (13px, Medium/Semi-Bold, line-height 1.3)
+           Tier 4: Body Text & Paragraphs (13.5px, Regular 400, line-height 1.75)
+           ========================================================================== */
+
+        /* Tier 1: Main Headings (22px) */
+        .hero-title,
+        .hero-area .hero-title,
+        .common-heading h1,
+        .common-heading h2,
+        .course-section-title,
+        .cow-title,
+        .about-me-text-block h2,
+        .about-me-text-block h3,
+        .mc-special-gift-card h2,
+        .syllabus-section h2,
+        .success-banner-section h2,
+        .success-story-section h2,
+        .mc-bd-light-eyebrow,
+        .mc-bd-light-title,
+        .faq-section h2,
+        .faq-content-wrap h2,
+        .mc-support-title,
+        .lead-title,
+        .form-heading {
+            font-size: 22px !important;
+            font-weight: 700 !important;
+            line-height: 1.35 !important;
+        }
+
+        /* Tier 2: Card & Sub-Headings (17px) */
+        .hero-subtitle,
+        .cow-card-title,
+        .mc-audience-title-light,
+        .mc-new-benefit-card h4,
+        .custom-syllabus-accordion .accordion-button,
+        .custom-faq-accordion .accordion-button,
+        .custom-testimonial-card .author-details h6,
+        .mc-bd-light-item-title,
+        .counter-label,
+        .mc-channel-info-title,
+        .mc-support-subtitle,
+        .order-form-section h4,
+        .order-summary-box h4,
+        .order-form-title,
+        .footer-widget-item .widget-title {
+            font-size: 17px !important;
+            font-weight: 600 !important;
+            line-height: 1.45 !important;
+        }
+
+        /* Tier 3: Badges, Tags & Eyebrows (13px) */
+        .sub-title,
+        .common-heading .sub-title,
+        .hero-badge,
+        .mc-gift-pill,
+        .lead-badge,
+        .secure-badge,
+        .badge-pill,
+        .pill-tag,
+        .mc-audience-check-note-light,
+        .author-details span,
+        .sp-left h3,
+        .sp-right .btn-enroll {
+            font-size: 13px !important;
+            line-height: 1.3 !important;
+        }
+
+        /* Tier 4: Body Text & Paragraphs (13.5px) */
+        body,
+        p,
+        .hero-description,
+        .hero-area p,
+        .about-me-description-content,
+        .about-me-description-content p,
+        .about-me-description-content li,
+        .cow-card-content,
+        .cow-card-content p,
+        .cow-card-content li,
+        .mc-audience-desc-light,
+        .learn-outcomes-content,
+        .learn-outcomes-content *,
+        .custom-syllabus-accordion .accordion-body,
+        .custom-syllabus-accordion .accordion-body li,
+        .custom-syllabus-accordion .course-playlist span,
+        .custom-testimonial-card p,
+        .mc-callout-quote,
+        .mc-callout-quote .quote-text,
+        .quote-text,
+        .quote-desc,
+        .gift-description,
+        .mc-bd-light-item-sub,
+        .breakdown-text,
+        .custom-faq-accordion .accordion-body,
+        .custom-faq-accordion .accordion-body *,
+        .faq-badge-floating span,
+        .mc-support-description,
+        .mc-support-description p,
+        .mc-channel-info-desc,
+        .mc-feature-desc,
+        .lead-desc,
+        .feature-list li,
+        .form-subheading,
+        .modern-label,
+        .footer-widget-item p,
+        .footer-widget-item ul li a,
+        .contact-info-list span,
+        .contact-info-list div,
+        .footer-bottom span {
+            font-size: 13.5px !important;
+            line-height: 1.75 !important;
         }
 
         /* Internal Card Padding & Responsive Alignment */
@@ -150,25 +274,63 @@
         .order-form-section input[type="password"] {
             font-size: 16px !important;
         }
+
+        /* Success Story Mobile Stack Gap (15px bottom + 15px top = 30px) */
+        .success-story-section .common-heading {
+            margin-bottom: 0 !important;
+        }
+        .success-story-section .row.g-5 {
+            --bs-gutter-y: 0 !important;
+            row-gap: 0 !important;
+        }
+        .success-story-section .col-lg-5.order-1 {
+            margin-top: 0 !important;
+            margin-bottom: 15px !important;
+            padding-bottom: 0 !important;
+        }
+        .success-story-section .col-lg-7.order-2 {
+            margin-top: 15px !important;
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* FAQ Mobile Column Gap (15px bottom + 15px top = 30px) */
+        .custom-faq-accordion .accordion-item:last-child {
+            margin-bottom: 0 !important;
+        }
+        .faq-section .row.g-5 {
+            --bs-gutter-y: 0 !important;
+            row-gap: 0 !important;
+        }
+        .faq-section .faq-content-wrap {
+            margin-bottom: 15px !important;
+        }
+        .faq-section .faq-image-card {
+            margin-top: 15px !important;
+        }
     }
 
     @media (max-width: 575.98px) {
         /* Extra small devices (compact phones) */
         .home-page-sections > section,
-        section.about-me-section,
-        section.categories-of-work-section,
-        section.benefits-section,
-        section.special-gift-section,
         section.what-you-learn-section,
-        section.syllabus-section,
         section.success-banner-section,
-        section.success-story-section,
         section.offer-breakdown-section,
-        section.faq-section,
         section.mc-support-section-wrapper,
         section.order-form-section {
             padding-top: 30px !important;
             padding-bottom: 30px !important;
+        }
+
+        section.about-me-section,
+        section.categories-of-work-section,
+        section.benefits-section,
+        section.special-gift-section,
+        section.syllabus-section,
+        section.success-story-section,
+        section.faq-section {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
 
         section.hero-area {
@@ -199,6 +361,13 @@
 @endpush
 
 @section('base.content')
+    @php
+        $mcSettings = [];
+        if (isset($course) && $course) {
+            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+            if (!is_array($mcSettings)) $mcSettings = [];
+        }
+    @endphp
     @if(!isset($mcSettings['basic_info_status']) || $mcSettings['basic_info_status'] == 1)
     @include('frontend.homePage.hero_area.hero_area_one')
     @endif
@@ -214,7 +383,15 @@
     @include('frontend.homePage.categories_of_work')
 
     <!--====== Start Benefits Section ======-->
-    @if(!isset($mcSettings['benefits_status']) || $mcSettings['benefits_status'] == 1)
+    @php
+        $showBenefits = true;
+        if (isset($mcSettings['show_benefits_section'])) {
+            $showBenefits = !empty($mcSettings['show_benefits_section']);
+        } elseif (isset($mcSettings['benefits_status'])) {
+            $showBenefits = !empty($mcSettings['benefits_status']);
+        }
+    @endphp
+    @if($showBenefits)
     @include('frontend.homePage.benefits')
     @endif
 
@@ -283,8 +460,8 @@
                         @media (max-width: 768px) {
                             .learn-outcomes-content,
                             .learn-outcomes-content * {
-                                font-size: 14.5px !important;
-                                line-height: 1.65 !important;
+                                font-size: 13.5px !important;
+                                line-height: 1.75 !important;
                                 color: var(--color-text-secondary, #4B5A72) !important;
                             }
                         }
@@ -379,7 +556,9 @@
     @endif
 
     <!--====== Start Success Story Section ======-->
+    @if((string)setting('success_section_status') !== '0')
     @include('frontend.homePage.success')
+    @endif
 
     <!--====== Start Offer Breakdown Section (Today's Value Breakdown) ======-->
     @if(!isset($mcSettings['breakdown_status']) || $mcSettings['breakdown_status'] == 1)
@@ -563,9 +742,7 @@
     @endif
 
     <!--====== Start Order Form Section ======-->
-    @if(!isset($mcSettings['pricing_status']) || $mcSettings['pricing_status'] == 1)
     @include('frontend.homePage.order_form')
-    @endif
 
 
 

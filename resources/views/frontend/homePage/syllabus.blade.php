@@ -5,7 +5,7 @@
         if(!is_array($mcSettings)) $mcSettings = [];
     }
     $showCurriculumSection = !isset($mcSettings['show_curriculum_section']) || !empty($mcSettings['show_curriculum_section']);
-    $curriculumTitle = !empty($mcSettings['curriculum_title']) ? $mcSettings['curriculum_title'] : __('Course Syllabus');
+    $curriculumTitle = !empty($mcSettings['curriculum_title']) ? $mcSettings['curriculum_title'] : '';
 @endphp
 
 <!--====== Start Syllabus Section ======-->
@@ -19,6 +19,9 @@
         overflow: hidden;
         transition: all 0.3s ease;
         background: var(--color-white, #ffffff);
+    }
+    .custom-syllabus-accordion .accordion-item:last-child {
+        margin-bottom: 0 !important;
     }
     .custom-syllabus-accordion .accordion-item:hover {
         border-color: var(--color-primary, #0056D2);
@@ -48,11 +51,13 @@
 
 <section class="syllabus-section p-t-60 p-b-60 position-relative overflow-hidden bg-white" id="syllabus">
     <div class="container container-1278">
+        @if(!empty($curriculumTitle))
         <div class="common-heading text-center m-b-40" data-aos="fade-up">
             <h2 class="fw-bold m-b-0" style="color: var(--color-text-ink, #0A1E3F); font-size: 28px; line-height: 1.25;">
                 {!! format_title_highlight($curriculumTitle) !!}
             </h2>
         </div>
+        @endif
         
         <div class="accordion custom-syllabus-accordion accordion-flush" id="curriculumAccordion">
             @foreach($course->sections as $key => $section)

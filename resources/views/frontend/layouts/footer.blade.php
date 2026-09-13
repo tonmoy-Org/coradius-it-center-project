@@ -26,19 +26,36 @@
     <div class="container container-1278">
         <div class="newsletter-card shadow-none" 
              style="background-color: {{ setting('promo_banner_bg_color') ?: 'var(--color-blue-tint, #EAF2FE)' }}; border: 1px solid var(--color-border-hover, #C7DCFA); border-radius: 12px; padding: 35px 40px;">
-            <div class="row align-items-center g-4">
+            @php
+                $newsletterTitle = setting('newsletter_title', app()->getLocale());
+                if ($newsletterTitle === null || $newsletterTitle === '') {
+                    $newsletterTitle = setting('newsletter_title');
+                }
+                $newsletterDesc = setting('newsletter_description', app()->getLocale());
+                if ($newsletterDesc === null || $newsletterDesc === '') {
+                    $newsletterDesc = setting('newsletter_description');
+                }
+                $hasNewsletterText = !empty(trim($newsletterTitle ?? '')) || !empty(trim($newsletterDesc ?? ''));
+            @endphp
+            <div class="row align-items-center g-4 {{ !$hasNewsletterText ? 'justify-content-center' : '' }}">
+                @if($hasNewsletterText)
                 <!-- Column 1: Newsletter Title & Description -->
                 <div class="col-lg-6 col-md-12">
-                    <h3 class="fw-bold mb-2" style="color: #1a1b4b; font-size: 24px; line-height: 1.2;">
-                        {{ setting('newsletter_title', app()->getLocale()) ?: __('Subscribe Newsletter') }}
+                    @if(!empty(trim($newsletterTitle ?? '')))
+                    <h3 class="fw-bold mb-2" style="color: #0A1E3F; font-size: 24px; line-height: 1.2;">
+                        {{ $newsletterTitle }}
                     </h3>
-                    <p class="mb-0" style="color: #4b5563; font-size: 14px; line-height: 1.5;">
-                        {{ setting('newsletter_description', app()->getLocale()) ?: (setting('newsletter_description') ?: __('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')) }}
+                    @endif
+                    @if(!empty(trim($newsletterDesc ?? '')))
+                    <p class="mb-0" style="color: #4B5A72; font-size: 14px; line-height: 1.5;">
+                        {{ $newsletterDesc }}
                     </p>
+                    @endif
                 </div>
+                @endif
 
                 <!-- Column 2: Admission Now Countdown Timer -->
-                <div class="col-lg-6 col-md-12 mt-4 mt-lg-0 d-flex flex-column align-items-center align-items-lg-end justify-content-center">
+                <div class="{{ $hasNewsletterText ? 'col-lg-6' : 'col-lg-8' }} col-md-12 mt-4 mt-lg-0 d-flex flex-column align-items-center {{ $hasNewsletterText ? 'align-items-lg-end' : 'align-items-lg-center' }} justify-content-center">
                     @php
                         $getAccessRawLink = setting('get_access_btn_link');
                         if (empty($getAccessRawLink) || $getAccessRawLink === '#register' || $getAccessRawLink === '#') {
@@ -51,14 +68,18 @@
                             $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
                         }
                         $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : null;
-                        $getAccessTitle = $heroBtnText ?: (setting('get_access_btn_title', app()->getLocale()) ?: (setting('get_access_btn_title') ?: __('get_access')));
+                        
+                        $getAccessTitle = $heroBtnText ?: setting('get_access_btn_title', app()->getLocale());
+                        if ($getAccessTitle === null || $getAccessTitle === '') {
+                            $getAccessTitle = setting('get_access_btn_title');
+                        }
+                        
                         $countdownTitle = setting('promo_banner_countdown_title', app()->getLocale());
+                        if ($countdownTitle === null || $countdownTitle === '') {
+                            $countdownTitle = setting('promo_banner_countdown_title');
+                        }
                     @endphp
                     
-                    @if($countdownTitle)
-                    <div class="mb-3 fw-bold text-center w-100" style="color: #0A1E3F; font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
-                    @endif
-
                     <style>
                         .footer-timer-item {
                             width: 45px; height: 50px; min-width: 40px;
@@ -82,9 +103,14 @@
                             }
                         }
                     </style>
-                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-end gap-2 gap-lg-3 flex-wrap flex-lg-nowrap w-100">
+
+                    <div class="d-inline-flex flex-column align-items-center text-center">
+                        @if(!empty(trim($countdownTitle ?? '')))
+                        <div class="mb-2 fw-bold text-center w-100" style="color: #0A1E3F; font-size: 1.3rem; letter-spacing: 0.5px;">{{ $countdownTitle }}</div>
+                        @endif
+
                         <!-- Timer -->
-                        <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-2 order-1 flex-nowrap" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
+                        <div class="mini-countdown d-flex justify-content-center gap-1 gap-md-2 flex-nowrap mb-3" id="promoCountdownFooter" data-target="{{ $countdownDate }}">
                             <div class="bg-white rounded shadow-sm p-1 p-md-2 text-center d-flex flex-column align-items-center justify-content-center footer-timer-item">
                                 <h4 class="hours m-0 fw-bold" style="color: #FF7A00; line-height: 1.1;">00</h4>
                                 <span class="small text-secondary fw-bold" style="letter-spacing: 0.5px;">HRS</span>
@@ -99,12 +125,14 @@
                             </div>
                         </div>
 
-                        <!-- Button -->
-                        <div class="text-center flex-shrink-0 order-2 mt-2 mt-lg-0">
-                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center footer-btn-cta" style="font-weight: 600; text-decoration: none; border-radius: 6px; white-space: nowrap;">
+                        <!-- Button (Below Counter) -->
+                        @if(!empty(trim($getAccessTitle ?? '')))
+                        <div class="text-center w-100">
+                            <a href="{{ $getAccessLink }}" class="template-btn get-access-btn d-inline-flex align-items-center justify-content-center footer-btn-cta" style="font-weight: 600; text-decoration: none; border-radius: 6px; white-space: nowrap; width: 100%; min-width: 160px; max-width: 220px; padding: 10px 24px;">
                                 <span>{{ $getAccessTitle }}</span>
                             </a>
                         </div>
+                        @endif
                     </div>
                 </div>
 
@@ -129,9 +157,17 @@
                             @endphp
                             <img style="max-width: 150px;" src="{{ $src }}" alt="logo">
                         </a>
+                        @php
+                            $footerLogoDesc = setting('footer_logo_description', app()->getLocale());
+                            if ($footerLogoDesc === null || $footerLogoDesc === '') {
+                                $footerLogoDesc = setting('footer_logo_description');
+                            }
+                        @endphp
+                        @if(!empty(trim($footerLogoDesc ?? '')))
                         <p style="color: #94a3b8; font-size: 14.5px; line-height: 1.7; margin-bottom: 20px;">
-                            {{ setting('footer_logo_description', app()->getLocale()) ?: (setting('footer_logo_description') ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id erat eget nisl eleifend tristique in eu ipsum. Aliquam condimentum dictum magna in molestie.') }}
+                            {{ $footerLogoDesc }}
                         </p>
+                        @endif
                     </div>
                 </div>
 
@@ -139,12 +175,18 @@
                 @if(setting('show_useful_link', 1) != 0)
                 @php
                     $useful_menu = headerFooterMenu('footer_useful_link_menu', app()->getLocale()) ?: (headerFooterMenu('footer_useful_link_menu') ?: setting('footer_useful_link_menu'));
+                    $usefulLinkTitle = setting('useful_link_title', app()->getLocale());
+                    if ($usefulLinkTitle === null || $usefulLinkTitle === '') {
+                        $usefulLinkTitle = setting('useful_link_title');
+                    }
                 @endphp
                 <div class="col-lg-2 col-md-3 col-6">
                     <div class="footer-widget-item">
+                        @if(!empty(trim($usefulLinkTitle ?? '')))
                         <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
-                            {{ setting('useful_link_title', app()->getLocale()) ?: (setting('useful_link_title') ?: __('Useful Links')) }}
+                            {{ $usefulLinkTitle }}
                         </h5>
+                        @endif
                         <ul class="list-unstyled mb-0" style="font-size: 14.5px;">
                             @if (is_array($useful_menu) && count($useful_menu) > 0)
                                 @foreach ($useful_menu as $usefulLink)
@@ -167,12 +209,18 @@
                 @if(setting('show_resource_link', 1) != 0)
                 @php
                     $resource_menu = headerFooterMenu('footer_resource_link_menu', app()->getLocale()) ?: (headerFooterMenu('footer_resource_link_menu') ?: setting('footer_resource_link_menu'));
+                    $resourceLinkTitle = setting('resource_link_title', app()->getLocale());
+                    if ($resourceLinkTitle === null || $resourceLinkTitle === '') {
+                        $resourceLinkTitle = setting('resource_link_title');
+                    }
                 @endphp
                 <div class="col-lg-2 col-md-3 col-6">
                     <div class="footer-widget-item">
+                        @if(!empty(trim($resourceLinkTitle ?? '')))
                         <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
-                            {{ setting('resource_link_title', app()->getLocale()) ?: (setting('resource_link_title') ?: __('Resources')) }}
+                            {{ $resourceLinkTitle }}
                         </h5>
+                        @endif
                         <ul class="list-unstyled mb-0" style="font-size: 14.5px;">
                             @if (is_array($resource_menu) && count($resource_menu) > 0)
                                 @foreach ($resource_menu as $resourceLink)
@@ -211,9 +259,17 @@
                 <!-- Column 4: Get In Touch / Contact Information -->
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-widget-item ps-lg-3">
+                        @php
+                            $getInTouchTitle = setting('footer_get_in_touch_title', app()->getLocale());
+                            if ($getInTouchTitle === null || $getInTouchTitle === '') {
+                                $getInTouchTitle = setting('footer_get_in_touch_title');
+                            }
+                        @endphp
+                        @if(!empty(trim($getInTouchTitle ?? '')))
                         <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
-                            {{ setting('footer_get_in_touch_title', app()->getLocale()) ?: (setting('footer_get_in_touch_title') ?: __('Get In Touch')) }}
+                            {{ $getInTouchTitle }}
                         </h5>
+                        @endif
                         
                         @if(setting('footer_get_in_touch_desc', app()->getLocale()) && setting('footer_get_in_touch_desc', app()->getLocale()) != 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')
                         <p style="color: #94a3b8; font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">
@@ -222,24 +278,33 @@
                         @endif
                         
                         <div class="contact-info-list" style="font-size: 14.5px; color: #e2e8f0;">
-                            @if(setting('contact_address', app()->getLocale()) ?: (setting('contact_address') ?: (setting('address') ?: '99 Roving St., Big City')))
+                            @php
+                                $contactAddress = setting('contact_address', app()->getLocale());
+                                if ($contactAddress === null || $contactAddress === '') {
+                                    $contactAddress = setting('contact_address') ?: setting('address');
+                                }
+                                $contactEmail = setting('contact_email') ?: setting('email');
+                                $contactPhone = setting('contact_phone') ?: setting('phone');
+                            @endphp
+
+                            @if(!empty(trim($contactAddress ?? '')))
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fas fa-map-marker-alt me-2" style="color: #FF7A00; font-size: 16px; width: 20px;"></i>
-                                <span>{{ setting('contact_address', app()->getLocale()) ?: (setting('contact_address') ?: (setting('address') ?: '99 Roving St., Big City')) }}</span>
+                                <span>{{ $contactAddress }}</span>
                             </div>
                             @endif
 
-                            @if(setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com'))
+                            @if(!empty(trim($contactEmail ?? '')))
                             <div class="d-flex align-items-center mb-2">
                                 <i class="fas fa-envelope me-2" style="color: #FF7A00; font-size: 16px; width: 20px;"></i>
-                                <a href="mailto:{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_email') ?: (setting('email') ?: 'Hello@Awesomesite.Com') }}</a>
+                                <a href="mailto:{{ $contactEmail }}" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ $contactEmail }}</a>
                             </div>
                             @endif
 
-                            @if(setting('contact_phone') ?: (setting('phone') ?: '+8801400620055'))
+                            @if(!empty(trim($contactPhone ?? '')))
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-phone me-2" style="color: #FF7A00; font-size: 16px; width: 20px;"></i>
-                                <a href="tel:{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ setting('contact_phone') ?: (setting('phone') ?: '+8801400620055') }}</a>
+                                <a href="tel:{{ $contactPhone }}" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;">{{ $contactPhone }}</a>
                             </div>
                             @endif
                         </div>
@@ -287,7 +352,15 @@
                             .footer-social-link.tg:hover { background-color: #0088cc !important; }
                         </style>
                         <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
-                            <span class="fw-bold" style="color: #ffffff; font-size: 16px;">{{ setting('follow_us_title', app()->getLocale()) ?: (setting('follow_us_title') ?: __('Follow Us :')) }}</span>
+                            @php
+                                $followUsTitle = setting('follow_us_title', app()->getLocale());
+                                if ($followUsTitle === null || $followUsTitle === '') {
+                                    $followUsTitle = setting('follow_us_title');
+                                }
+                            @endphp
+                            @if(!empty(trim($followUsTitle ?? '')))
+                            <span class="fw-bold" style="color: #ffffff; font-size: 16px;">{{ $followUsTitle }}</span>
+                            @endif
                             <div class="social-links-list d-flex gap-2">
                                 @if(setting('facebook_link'))
                                 <a href="{{ setting('facebook_link') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link fb" title="Facebook" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fab fa-facebook-f" style="font-size: 14px;"></i></a>
@@ -312,9 +385,17 @@
                     <!-- Right: Copyright Text -->
                     <div class="col-md-6 col-12 text-center text-md-end ms-auto">
                         @if(setting('show_copyright', 1) != 0)
+                        @php
+                            $copyrightTitle = setting('copyright_title', app()->getLocale());
+                            if ($copyrightTitle === null || $copyrightTitle === '') {
+                                $copyrightTitle = setting('copyright_title');
+                            }
+                        @endphp
+                        @if(!empty(trim($copyrightTitle ?? '')))
                         <span style="color: #94a3b8; font-size: 14px;">
-                            {{ setting('copyright_title', app()->getLocale()) ?: (setting('copyright_title') ?: 'Copyright @ 2022 All Rights Reserved to SpaGreen') }}
+                            {{ $copyrightTitle }}
                         </span>
+                        @endif
                         @endif
                     </div>
 

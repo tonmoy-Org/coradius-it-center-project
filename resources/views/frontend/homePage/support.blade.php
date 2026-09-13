@@ -10,108 +10,62 @@
     $supportStatus = !isset($mcSettings['support_status']) || !empty($mcSettings['support_status']);
 
     if ($supportStatus) {
-        $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : 'লাইফটাইম সাপোর্ট';
+        $supportTitle = !empty($mcSettings['support_title']) ? $mcSettings['support_title'] : '';
         $supportTitleIcon = !empty($mcSettings['support_title_icon']) ? $mcSettings['support_title_icon'] : 'fas fa-headset';
-        $supportSubtitle = !empty($mcSettings['support_subtitle']) 
-            ? $mcSettings['support_subtitle'] 
-            : 'কোর্স শেষ হলেও আপনার শেখার পথ শেষ হবে না।';
-
-        $supportDescription = !empty($mcSettings['support_description']) 
-            ? $mcSettings['support_description'] 
-            : 'আমাদের এক্সপার্ট সাপোর্ট ইন্সট্রাক্টর টিম প্রতিদিন আপনাকে লাইভ জুম সেশনের মাধ্যমে প্রতিটি কোডিং সমস্যা সমাধানে সাহায্য করবে।';
+        if (preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon) || str_starts_with($supportTitleIcon, 'http') || str_contains($supportTitleIcon, 'images/') || str_contains($supportTitleIcon, 'uploads/')) {
+            $supportTitleIcon = 'fas fa-headset';
+        }
+        $supportSubtitle = !empty($mcSettings['support_subtitle']) ? $mcSettings['support_subtitle'] : '';
+        $supportDescription = !empty($mcSettings['support_description']) ? $mcSettings['support_description'] : '';
 
         $supportImageUrl = !empty($mcSettings['support_image_url']) 
             ? dynamic_asset($mcSettings['support_image_url']) 
-            : asset('images/support/support_right_top.png');
+            : '';
 
         // Feature Cards (Dynamic List)
         $featureCards = [];
         if (!empty($mcSettings['support_features_list']) && is_array($mcSettings['support_features_list'])) {
-            $featureCards = array_values($mcSettings['support_features_list']);
+            $featureCards = array_values(array_filter($mcSettings['support_features_list'], function($item) {
+                return !empty($item['title']) || !empty($item['desc']);
+            }));
         } else {
-            $f1Icon = $mcSettings['support_feature_1_icon'] ?? 'fas fa-comment-dots';
-            $f1Title = $mcSettings['support_feature_1_title'] ?? 'ডাইরেক্ট সাপোর্ট';
-            $f1Desc = $mcSettings['support_feature_1_desc'] ?? 'যেকোনো কোর্স-রিলেটেড সমস্যায় সরাসরি সাপোর্ট পাবেন আমাদের টিমের কাছ থেকে।';
-
-            $f2Icon = $mcSettings['support_feature_2_icon'] ?? 'fas fa-video';
-            $f2Title = $mcSettings['support_feature_2_title'] ?? '1-to-1 লাইভ হেল্প';
-            $f2Desc = $mcSettings['support_feature_2_desc'] ?? 'প্রয়োজনে জুম মিটিংয়ের মাধ্যমে লাইভে সমস্যার সমাধান নিন সহজেই।';
-
-            $f3Icon = $mcSettings['support_feature_3_icon'] ?? 'fas fa-infinity';
-            $f3Title = $mcSettings['support_feature_3_title'] ?? 'লাইফটাইম এক্সেস';
-            $f3Desc = $mcSettings['support_feature_3_desc'] ?? 'কোর্স একবার কিনলে আজীবন সাপোর্ট ও মেন্টর গাইডলাইন পেতে থাকবেন।';
-
-            $featureCards = [
-                ['title' => $f1Title, 'icon' => $f1Icon, 'desc' => $f1Desc],
-                ['title' => $f2Title, 'icon' => $f2Icon, 'desc' => $f2Desc],
-                ['title' => $f3Title, 'icon' => $f3Icon, 'desc' => $f3Desc],
-            ];
-        }
-
-        // Divider
-        $supportDividerText = $mcSettings['support_divider_text'] ?? 'সাপোর্ট নিতে যোগাযোগ করুন';
-
-        // Channels List (Dynamic)
-        $channelCards = [];
-        if (!empty($mcSettings['support_channels_list']) && is_array($mcSettings['support_channels_list'])) {
-            $channelCards = array_values($mcSettings['support_channels_list']);
-        } else {
-            $channelCards = [
-                [
-                    'title' => $mcSettings['support_channel_1_title'] ?? 'ফেসবুক সাপোর্ট',
-                    'desc' => $mcSettings['support_channel_1_desc'] ?? 'আমাদের ফেসবুক পেজে মেসেজ করুন',
-                    'icon' => $mcSettings['support_channel_1_icon'] ?? 'fab fa-facebook-f',
-                    'team_avatar' => $mcSettings['support_channel_1_team_avatar'] ?? 'images/support/support_avatars.png',
-                    'team_label' => $mcSettings['support_channel_1_team_label'] ?? 'সক্রিয় সাপোর্ট টিম',
-                    'btn_text' => $mcSettings['support_channel_1_btn_text'] ?? 'মেসেজ করুন',
-                    'url' => $mcSettings['support_channel_1_url'] ?? ($mcSettings['support_facebook_url'] ?? setting('facebook_link') ?? '#'),
-                    'is_highlighted' => 0
-                ],
-                [
-                    'title' => $mcSettings['support_channel_2_title'] ?? 'হোয়াটসঅ্যাপ সাপোর্ট',
-                    'desc' => $mcSettings['support_channel_2_desc'] ?? 'দ্রুত উত্তর পেতে আমাদের হোয়াটসঅ্যাপে নক দিন',
-                    'icon' => $mcSettings['support_channel_2_icon'] ?? 'fab fa-whatsapp',
-                    'team_avatar' => $mcSettings['support_channel_2_team_avatar'] ?? 'images/support/support_avatars.png',
-                    'team_label' => $mcSettings['support_channel_2_team_label'] ?? 'দ্রুত রেসপন্স',
-                    'btn_text' => $mcSettings['support_channel_2_btn_text'] ?? 'হোয়াটসঅ্যাপে নক দিন',
-                    'url' => $mcSettings['support_channel_2_url'] ?? ($mcSettings['support_whatsapp_url'] ?? setting('whatsapp_link') ?? '#'),
-                    'is_highlighted' => 1
-                ],
-                [
-                    'title' => $mcSettings['support_channel_3_title'] ?? 'টেলিগ্রাম সাপোর্ট',
-                    'desc' => $mcSettings['support_channel_3_desc'] ?? 'সাপোর্ট কমিউনিটিতে যুক্ত হয়ে সবার সাথে থাকুন',
-                    'icon' => $mcSettings['support_channel_3_icon'] ?? 'fab fa-telegram-plane',
-                    'team_avatar' => $mcSettings['support_channel_3_team_avatar'] ?? 'images/support/support_avatars.png',
-                    'team_label' => $mcSettings['support_channel_3_team_label'] ?? 'অ্যাক্টিভ কমিউনিটি',
-                    'btn_text' => $mcSettings['support_channel_3_btn_text'] ?? 'টেলিগ্রামে যোগ দিন',
-                    'url' => $mcSettings['support_channel_3_url'] ?? ($mcSettings['support_telegram_url'] ?? setting('telegram_link') ?? '#'),
-                    'is_highlighted' => 0
-                ]
-            ];
-        }
-
-        // Backward compatibility
-        if (!empty($mcSettings['support_icons_list']) && is_array($mcSettings['support_icons_list'])) {
-            foreach ($mcSettings['support_icons_list'] as $sItem) {
-                $u = strtolower($sItem['url'] ?? '');
-                if (empty($mcSettings['support_channel_1_url']) && (str_contains($u, 'facebook.com') || str_contains($u, 'fb.com'))) {
-                    $fbUrl = $sItem['url'];
-                } elseif (empty($mcSettings['support_channel_2_url']) && (str_contains($u, 'wa.me') || str_contains($u, 'whatsapp.com'))) {
-                    $waUrl = $sItem['url'];
-                } elseif (empty($mcSettings['support_channel_3_url']) && (str_contains($u, 't.me') || str_contains($u, 'telegram.'))) {
-                    $tgUrl = $sItem['url'];
+            for ($i = 1; $i <= 3; $i++) {
+                if (!empty($mcSettings["support_feature_{$i}_title"]) || !empty($mcSettings["support_feature_{$i}_desc"])) {
+                    $featureCards[] = [
+                        'title' => $mcSettings["support_feature_{$i}_title"] ?? '',
+                        'icon'  => $mcSettings["support_feature_{$i}_icon"] ?? 'fas fa-check-circle',
+                        'desc'  => $mcSettings["support_feature_{$i}_desc"] ?? '',
+                    ];
                 }
             }
         }
 
-        if (!empty($waUrl) && $waUrl !== '#' && !str_contains($waUrl, 'http') && is_numeric(preg_replace('/[^0-9]/', '', $waUrl))) {
-            $waUrl = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $waUrl);
+        // Divider
+        $supportDividerText = !empty($mcSettings['support_divider_text']) ? $mcSettings['support_divider_text'] : '';
+
+        // Channels List (Dynamic)
+        $channelCards = [];
+        if (!empty($mcSettings['support_channels_list']) && is_array($mcSettings['support_channels_list'])) {
+            $channelCards = array_values(array_filter($mcSettings['support_channels_list'], function($ch) {
+                return !empty($ch['title']) || !empty($ch['desc']) || !empty($ch['url']);
+            }));
+        } else {
+            for ($i = 1; $i <= 3; $i++) {
+                if (!empty($mcSettings["support_channel_{$i}_title"]) || !empty($mcSettings["support_channel_{$i}_url"])) {
+                    $channelCards[] = [
+                        'title' => $mcSettings["support_channel_{$i}_title"] ?? '',
+                        'desc' => $mcSettings["support_channel_{$i}_desc"] ?? '',
+                        'icon' => $mcSettings["support_channel_{$i}_icon"] ?? 'fas fa-comments',
+                        'team_avatar' => $mcSettings["support_channel_{$i}_team_avatar"] ?? '',
+                        'team_label' => $mcSettings["support_channel_{$i}_team_label"] ?? '',
+                        'btn_text' => $mcSettings["support_channel_{$i}_btn_text"] ?? '',
+                        'url' => $mcSettings["support_channel_{$i}_url"] ?? '#',
+                        'is_highlighted' => !empty($mcSettings["support_channel_{$i}_is_highlighted"]) ? 1 : 0
+                    ];
+                }
+            }
         }
 
-        // Bottom Strip
-        $stripIcon = $mcSettings['support_strip_icon'] ?? 'fas fa-heart';
-        $stripText1 = $mcSettings['support_strip_text_1'] ?? 'আপনি একা নন, আমরা আছি আপনার সাথে সবসময়।';
-        $stripText2 = $mcSettings['support_strip_text_2'] ?? 'আপনার সফলতাই আমাদের লক্ষ্য।';
 
         $renderIcon = function($icon, $defaultClass = '') {
             $icon = trim($icon ?: $defaultClass);
@@ -158,8 +112,23 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: var(--color-primary, #0056D2);
+        color: #00A66C;
         font-size: 26px;
+        line-height: 1;
+        max-width: 36px;
+        max-height: 36px;
+        flex-shrink: 0;
+        vertical-align: middle;
+    }
+
+    .mc-support-title-icon img {
+        width: 30px !important;
+        height: 30px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
+        object-fit: contain !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
     }
 
     /* Subtitle / Semi-heading */
@@ -355,7 +324,10 @@
     }
 
     .mc-avatar-fb {
-        background-color: #1877F2;
+        background-color: #ffffff;
+        color: #1877F2;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
 
     .mc-avatar-wa {
@@ -407,56 +379,6 @@
 
 
 
-    /* Bottom Banner Strip */
-    .mc-support-footer-strip {
-        margin-top: 26px;
-        background: transparent;
-        border: 1px solid #C7DCFA;
-        border-radius: 12px;
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        text-align: center;
-        box-shadow: none;
-    }
-
-    .mc-footer-heart-badge {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background-color: #0056D2;
-        color: #ffffff;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        flex-shrink: 0;
-    }
-
-    .mc-footer-strip-text {
-        font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif) !important;
-        font-size: 14.5px;
-        color: #064e3b;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .mc-footer-strip-sep {
-        color: #94a3b8;
-        font-weight: 300;
-        margin: 0 4px;
-    }
-
-    .mc-footer-strip-highlight {
-        font-weight: 500;
-        color: #064e3b;
-    }
 
     /* ==========================================================================
        RESPONSIVE DESIGN BREAKPOINTS
@@ -479,6 +401,11 @@
         .mc-support-title {
             font-size: 34px !important;
             margin-bottom: 14px !important;
+        }
+
+        .mc-support-title-icon img {
+            width: 32px !important;
+            height: 32px !important;
         }
 
         .mc-support-img {
@@ -504,6 +431,11 @@
 
         .mc-support-title-icon {
             font-size: 24px;
+        }
+
+        .mc-support-title-icon img {
+            width: 28px !important;
+            height: 28px !important;
         }
 
         .mc-support-subtitle {
@@ -663,14 +595,6 @@
 
 
 
-        .mc-support-footer-strip {
-            padding: 12px 18px;
-            gap: 10px;
-        }
-
-        .mc-footer-strip-text {
-            font-size: 14px;
-        }
     }
 
     /* 4. Small Tablets & Landscape Mobile (576px - 767px) */
@@ -688,6 +612,11 @@
 
         .mc-support-title-icon {
             font-size: 22px;
+        }
+
+        .mc-support-title-icon img {
+            width: 24px !important;
+            height: 24px !important;
         }
 
         .mc-support-subtitle {
@@ -748,19 +677,6 @@
             margin-bottom: 16px;
         }
 
-        .mc-support-footer-strip {
-            padding: 12px 16px;
-            gap: 8px;
-            flex-direction: column;
-        }
-
-        .mc-footer-strip-sep {
-            display: none;
-        }
-
-        .mc-footer-strip-text {
-            font-size: 13.5px;
-        }
     }
 
     /* 5. Mobile Phones (max-width: 575px) */
@@ -779,6 +695,11 @@
 
         .mc-support-title-icon {
             font-size: 20px;
+        }
+
+        .mc-support-title-icon img {
+            width: 22px !important;
+            height: 22px !important;
         }
 
         .mc-support-subtitle {
@@ -904,35 +825,17 @@
             font-size: 11.5px;
         }
 
-        .mc-support-footer-strip {
-            margin-top: 20px;
-            flex-direction: column;
-            padding: 12px 14px;
-            gap: 6px;
-            border-radius: 10px;
-        }
-
-        .mc-footer-heart-badge {
-            width: 22px;
-            height: 22px;
-            font-size: 11px;
-        }
-
-        .mc-footer-strip-sep {
-            display: none;
-        }
-
-        .mc-footer-strip-text {
-            font-size: 13px;
-            line-height: 1.45;
-            text-align: center;
-        }
     }
 
     /* 6. Extra-Small Mobile Screens (max-width: 380px) */
     @media (max-width: 380px) {
         .mc-support-title {
             font-size: 20px !important;
+        }
+
+        .mc-support-title-icon img {
+            width: 20px !important;
+            height: 20px !important;
         }
 
         .mc-support-subtitle {
@@ -991,9 +894,6 @@
 
 
 
-        .mc-footer-strip-text {
-            font-size: 12px;
-        }
     }
 </style>
 
@@ -1002,22 +902,29 @@
         <!-- Top Half: Content + Right Top Image -->
         <div class="row align-items-center g-4">
             <!-- Left Side: Content -->
+            <!-- Left Side: Content -->
             <div class="col-lg-6 col-md-12 text-start">
+                @if(!empty($supportTitle))
                 <!-- Main Title with Headset Icon -->
                 <h2 class="mc-support-title" data-aos="fade-up">
                     <span>{!! format_title_highlight($supportTitle) !!}</span>
-                    <span class="mc-support-title-icon">{!! $renderIcon($supportTitleIcon, 'fas fa-headset') !!}</span>
+                    <span class="mc-support-title-icon"><i class="{{ (!empty($supportTitleIcon) && !str_starts_with($supportTitleIcon, 'http') && !preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon)) ? $supportTitleIcon : 'fas fa-headset' }}"></i></span>
                 </h2>
+                @endif
 
+                @if(!empty($supportSubtitle))
                 <!-- Subtitle -->
                 <p class="mc-support-subtitle" data-aos="fade-up" data-aos-delay="50">
                     {{ $supportSubtitle }}
                 </p>
+                @endif
 
+                @if(!empty($supportDescription))
                 <!-- Description -->
                 <div class="mc-support-description" data-aos="fade-up" data-aos-delay="100">
                     {!! $supportDescription !!}
                 </div>
+                @endif
 
                 @if(!empty($featureCards) && count($featureCards) > 0)
                     <!-- Dynamic Feature Cards -->
@@ -1044,12 +951,15 @@
                 @endif
             </div>
 
+            @if(!empty($supportImageUrl))
             <!-- Right Top Side: Restored to exact previous image size (max-height: 520px / 400px) -->
             <div class="col-lg-6 col-md-12 text-center text-lg-end mc-support-img-wrapper justify-content-center justify-content-lg-end" data-aos="fade-left" data-aos-delay="150">
-                <img src="{{ $supportImageUrl }}" alt="সাপোর্ট টিম ও মেন্টর" class="mc-support-img img-fluid">
+                <img src="{{ $supportImageUrl }}" alt="{{ $supportTitle ?: 'Support' }}" class="mc-support-img img-fluid">
             </div>
+            @endif
         </div>
 
+        @if(!empty($supportDividerText))
         <!-- Middle Section: Divider with Title -->
         <div class="mc-support-divider-section" data-aos="fade-up">
             <span class="mc-support-divider-line"></span>
@@ -1060,6 +970,7 @@
             </div>
             <span class="mc-support-divider-line"></span>
         </div>
+        @endif
 
         @if(!empty($channelCards) && count($channelCards) > 0)
             <!-- Bottom Row: Dynamic Support Channel Cards -->
@@ -1069,9 +980,9 @@
                         $cTitle = $chCard['title'] ?? '';
                         $cDesc = $chCard['desc'] ?? '';
                         $cIcon = $chCard['icon'] ?? 'fas fa-comments';
-                        $cAvatar = !empty($chCard['team_avatar']) ? dynamic_asset($chCard['team_avatar']) : asset('images/support/support_avatars.png');
-                        $cLabel = $chCard['team_label'] ?? 'সক্রিয় টিম';
-                        $cBtnText = $chCard['btn_text'] ?? 'যোগাযোগ করুন';
+                        $cAvatar = !empty($chCard['team_avatar']) ? dynamic_asset($chCard['team_avatar']) : '';
+                        $cLabel = $chCard['team_label'] ?? '';
+                        $cBtnText = $chCard['btn_text'] ?? __('Contact Us');
                         $cUrl = $chCard['url'] ?? '#';
                         $isHigh = !empty($chCard['is_highlighted']);
 
@@ -1092,35 +1003,36 @@
                                     {!! $renderIcon($cIcon, 'fas fa-comments') !!}
                                 </div>
                                 <div>
+                                    @if(!empty($cTitle))
                                     <h4 class="mc-channel-info-title">{{ $cTitle }}</h4>
+                                    @endif
+                                    @if(!empty($cDesc))
                                     <p class="mc-channel-info-desc">{{ $cDesc }}</p>
+                                    @endif
                                 </div>
                             </div>
+                            @if(!empty($cAvatar) || !empty($cLabel))
                             <div class="mc-channel-team-row">
+                                @if(!empty($cAvatar))
                                 <img src="{{ $cAvatar }}" alt="{{ $cLabel }}" class="mc-team-avatars-img">
+                                @endif
+                                @if(!empty($cLabel))
                                 <span class="mc-team-status-label">{{ $cLabel }}</span>
+                                @endif
                             </div>
+                            @endif
                         </div>
+                        @if(!empty($cBtnText))
                         <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="template-btn w-100">
                             <span>{{ $cBtnText }}</span>
                             <i class="fas fa-arrow-right ms-2"></i>
                         </a>
+                        @endif
                     </div>
                 @endforeach
             </div>
         @endif
 
-        <!-- Bottom Full-Width Strip Banner -->
-        <div class="mc-support-footer-strip" data-aos="fade-up" data-aos-delay="150">
-            <div class="mc-footer-heart-badge">
-                {!! $renderIcon($stripIcon, 'fas fa-heart') !!}
-            </div>
-            <div class="mc-footer-strip-text">
-                <span>{{ $stripText1 }}</span>
-                <span class="mc-footer-strip-sep">|</span>
-                <span class="mc-footer-strip-highlight">{{ $stripText2 }}</span>
-            </div>
-        </div>
     </div>
 </section>
 @endif

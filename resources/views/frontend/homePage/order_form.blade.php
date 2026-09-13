@@ -6,7 +6,7 @@
     }
 
     $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'Get Free Access Now';
-    $payNowBtnText = $heroBtnText;
+    $payNowBtnText = !empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : (!empty($mcSettings['order_btn_text']) ? $mcSettings['order_btn_text'] : $heroBtnText);
     
     $is_enrolled = false;
     if(auth()->check() && isset($course)) {
@@ -149,13 +149,30 @@
             flex-direction: column;
         }
         .lead-info-side {
-            padding: 40px 30px;
+            padding: 30px 20px;
         }
         .lead-form-side {
-            padding: 40px 30px;
+            padding: 30px 20px;
         }
         .lead-title {
-            font-size: 26px;
+            font-size: 22px !important;
+            line-height: 1.35 !important;
+        }
+        .form-heading {
+            font-size: 22px !important;
+            line-height: 1.35 !important;
+        }
+        .lead-badge {
+            font-size: 13px !important;
+        }
+        .lead-desc,
+        .form-subheading,
+        .feature-list li {
+            font-size: 13.5px !important;
+            line-height: 1.75 !important;
+        }
+        .modern-label {
+            font-size: 13.5px !important;
         }
     }
 </style>
@@ -179,7 +196,11 @@
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            স্টেপ-বাই-স্টেপ ভিডিও টিউটোরিয়াল
+                            ফ্রি রিসোর্স ও গাইডলাইন
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            মোবাইল এবং ডেস্কটপ ফ্রেন্ডলি
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -206,7 +227,7 @@
                     
                     <div class="mb-4">
                         <label class="modern-label">আপনার নাম <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="modern-input @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
+                        <input type="text" name="name" class="modern-input @error('name') is-invalid @enderror" value="{{ old('name', auth()->check() ? auth()->user()->first_name : '') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
                         @error('name')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -214,7 +235,7 @@
 
                     <div class="mb-4">
                         <label class="modern-label">ইমেইল <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="modern-input @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
+                        <input type="email" name="email" class="modern-input @error('email') is-invalid @enderror" value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
                         @error('email')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -222,7 +243,7 @@
 
                     <div class="mb-4">
                         <label class="modern-label">মোবাইল নাম্বার <span class="text-danger">*</span></label>
-                        <input type="tel" name="phone" class="modern-input @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
+                        <input type="tel" name="phone" class="modern-input @error('phone') is-invalid @enderror" value="{{ old('phone', auth()->check() ? auth()->user()->phone : '') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
                         @error('phone')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -246,6 +267,7 @@
                         আপনার তথ্য ১০০% নিরাপদ এবং কারও সাথে শেয়ার করা হবে না।
                     </div>
                 </form>
+            </div>
         </div>
     </div>
 </section>

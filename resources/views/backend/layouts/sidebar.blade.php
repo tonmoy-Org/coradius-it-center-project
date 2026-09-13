@@ -108,10 +108,6 @@
                                    href="{{ route('courses.edit', [$landingId, 'tab' => 'support']) }}">{{ __('Support') }}</a>
                             </li>
                             <li>
-                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'pricing' ? 'active' : '' }}"
-                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'pricing']) }}">{{ __('Pricing') }}</a>
-                            </li>
-                            <li>
                                 <a href="{{ route('website.counter_section') }}"
                                    class="{{ request()->routeIs('website.counter_section') ? 'active' : '' }}">
                                     {{ __('Counter') }}

@@ -1,10 +1,10 @@
 @php
     $lang = app()->getLocale();
     $status = setting('about_me_status');
-    $tag = setting('about_me_tag', $lang) ?: 'ABOUT ME';
-    $title = setting('about_me_title', $lang) ?: 'I\'m Teaching Online For About 5+ Years On Programming';
-    $desc1 = setting('about_me_description', $lang) ?: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non.';
-    $desc2 = setting('about_me_description_2', $lang) ?: 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.';
+    $tag = setting('about_me_tag', $lang);
+    $title = setting('about_me_title', $lang);
+    $desc1 = setting('about_me_description', $lang);
+    $desc2 = setting('about_me_description_2', $lang);
     
     $mcSettings = [];
     if (isset($course) && $course) {
@@ -15,7 +15,7 @@
     }
     
     $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : null;
-    $btnText = $heroBtnText ?: (setting('about_me_btn_text', $lang) ?: 'Enroll Now');
+    $btnText = $heroBtnText ?: setting('about_me_btn_text', $lang);
     $rawBtnUrl = setting('about_me_btn_url', $lang);
     if (empty($rawBtnUrl) || $rawBtnUrl === '#') {
         $btnUrl = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
@@ -29,7 +29,7 @@
         $aboutImgUrl = getFileLink('original_image', $aboutImgSetting);
     }
     if (!$aboutImgUrl || str_contains($aboutImgUrl, 'default')) {
-        $aboutImgUrl = static_asset('frontend/img/hero/hero-v5-masonry-1.jpg');
+        $aboutImgUrl = static_asset('images/about/about_me_instructor.jpg');
     }
 @endphp
 
@@ -62,6 +62,15 @@
         font-size: 16px !important;
         line-height: 1.7 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
+    }
+
+    @media (max-width: 767.98px) {
+        .about-me-description-content,
+        .about-me-description-content p,
+        .about-me-description-content li {
+            font-size: 13.5px !important;
+            line-height: 1.75 !important;
+        }
     }
 </style>
 

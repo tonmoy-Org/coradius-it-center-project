@@ -75,6 +75,18 @@ class CourseRepository
 
         if (arrayCheck('masterclass_settings', $request)) {
             $mc = $request['masterclass_settings'];
+            if (isset($mc['description_status'])) {
+                $mc['description_status'] = !empty($mc['description_status']) ? 1 : 0;
+            }
+            if (isset($mc['show_desc_right_box'])) {
+                $mc['show_desc_right_box'] = !empty($mc['show_desc_right_box']) ? 1 : 0;
+            }
+            if (isset($mc['description_subtitle']) && $mc['description_subtitle'] !== '') {
+                $request['description_subtitle'] = $mc['description_subtitle'];
+            }
+            if (isset($mc['description_content']) && $mc['description_content'] !== '') {
+                $request['description'] = $mc['description_content'];
+            }
             $mc['show_special_gift'] = isset($mc['show_special_gift']) ? 1 : 0;
             unset($mc['hide_special_gift']);
             $mc['hide_explainer'] = isset($mc['hide_explainer']) ? 1 : 0;
@@ -345,6 +357,18 @@ class CourseRepository
 
         if (arrayCheck('masterclass_settings', $request)) {
             $mc = $request['masterclass_settings'];
+            if (isset($mc['description_status'])) {
+                $mc['description_status'] = !empty($mc['description_status']) ? 1 : 0;
+            }
+            if (isset($mc['show_desc_right_box'])) {
+                $mc['show_desc_right_box'] = !empty($mc['show_desc_right_box']) ? 1 : 0;
+            }
+            if (isset($mc['description_subtitle']) && $mc['description_subtitle'] !== '') {
+                $request['description_subtitle'] = $mc['description_subtitle'];
+            }
+            if (isset($mc['description_content']) && $mc['description_content'] !== '') {
+                $request['description'] = $mc['description_content'];
+            }
             $mc['show_special_gift'] = isset($mc['show_special_gift']) ? 1 : 0;
             unset($mc['hide_special_gift']);
             $mc['hide_explainer'] = isset($mc['hide_explainer']) ? 1 : 0;
@@ -356,6 +380,13 @@ class CourseRepository
             $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
             $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
+            if (isset($mc['show_benefits_section'])) {
+                $mc['show_benefits_section'] = !empty($mc['show_benefits_section']) ? 1 : 0;
+                $mc['benefits_status'] = $mc['show_benefits_section'];
+            } elseif (isset($mc['benefits_status'])) {
+                $mc['benefits_status'] = !empty($mc['benefits_status']) ? 1 : 0;
+                $mc['show_benefits_section'] = $mc['benefits_status'];
+            }
 
             if (request()->hasFile('overview_image_file')) {
                 $response = $this->saveImage(request()->file('overview_image_file'), 'course');
@@ -401,11 +432,16 @@ class CourseRepository
                 $mc['ad_banner_2_image_url'] = $mc['ad_banner_2_image_url_custom'];
             }
 
-            if (request('support_image_media_id')) {
-                $media = \App\Models\MediaLibrary::find(request('support_image_media_id'));
-                if ($media && !empty($media->image_variants)) {
-                    $mc['support_image_url'] = getFileLink('original_image', $media->image_variants);
-                    $mc['support_image_media_id'] = request('support_image_media_id');
+            if (request()->has('support_image_media_id')) {
+                if (request('support_image_media_id')) {
+                    $media = \App\Models\MediaLibrary::find(request('support_image_media_id'));
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['support_image_url'] = getFileLink('original_image', $media->image_variants);
+                        $mc['support_image_media_id'] = request('support_image_media_id');
+                    }
+                } else {
+                    $mc['support_image_url'] = '';
+                    $mc['support_image_media_id'] = '';
                 }
             } elseif (request()->hasFile('support_image_file')) {
                 $response = $this->saveImage(request()->file('support_image_file'), 'course');
@@ -416,11 +452,30 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
-            if (request('support_title_icon_media_id')) {
-                $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
-                if ($media && !empty($media->image_variants)) {
-                    $mc['support_title_icon'] = getFileLink('original_image', $media->image_variants);
-                    $mc['support_title_icon_media_id'] = request('support_title_icon_media_id');
+            if (request()->hasFile('faq_image_file')) {
+                $response = $this->saveImage(request()->file('faq_image_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['faq_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                    $course->faq_image = $response['images'];
+                    $request['faq_image'] = $response['images'];
+                }
+            } elseif (!empty($mc['faq_image_url_custom'])) {
+                $mc['faq_image_url'] = $mc['faq_image_url_custom'];
+            }
+
+            if (isset($mc['support_title_icon'])) {
+                unset($mc['support_title_icon_media_id']);
+            }
+            if (request()->has('support_title_icon_media_id')) {
+                if (request('support_title_icon_media_id')) {
+                    $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['support_title_icon'] = getFileLink('original_image', $media->image_variants);
+                        $mc['support_title_icon_media_id'] = request('support_title_icon_media_id');
+                    }
+                } else {
+                    $mc['support_title_icon'] = '';
+                    $mc['support_title_icon_media_id'] = '';
                 }
             } elseif (request()->hasFile('support_title_icon_file')) {
                 $response = $this->saveImage(request()->file('support_title_icon_file'), 'course');
@@ -552,6 +607,11 @@ class CourseRepository
         }
 
         return $course;
+    }
+
+    public function first()
+    {
+        return Course::first();
     }
 
     public function find($id)

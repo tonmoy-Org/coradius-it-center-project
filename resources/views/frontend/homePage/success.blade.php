@@ -14,9 +14,10 @@
             : json_decode($hero_course->masterclass_settings, true);
     }
 
-    $successEyebrow  = !empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : (setting('success_section_eyebrow') ?: __('SUCCESS STORIES'));
-    $successTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : (isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : (setting('success_section_title') ?: __('What Says My Students About The Platform')));
-    $successBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : (setting('success_section_btn_text') ?: __('Join Now'));
+    $successEyebrow  = !empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : (setting('success_section_eyebrow') ?: '');
+    $successTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : (isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : (setting('success_section_title') ?: ''));
+    $heroBtnText     = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : null;
+    $successBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : ($heroBtnText ?: setting('success_section_btn_text'));
     $successBtnUrl   = !empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : (setting('success_section_btn_url') ?: '#register');
     $successSubtitle = !empty($mcSettings['success_description']) ? $mcSettings['success_description'] : setting('success_section_description');
 @endphp
@@ -139,6 +140,27 @@
         background: var(--color-primary, #0056D2);
         width: 24px;
         border-radius: 6px;
+    }
+
+    /* Mobile/Tablet Stack Spacing (15px bottom + 15px top = 30px) */
+    @media (max-width: 991.98px) {
+        .success-story-section .common-heading {
+            margin-bottom: 0 !important;
+        }
+        .success-story-section .row.g-5 {
+            --bs-gutter-y: 0 !important;
+            row-gap: 0 !important;
+        }
+        .success-story-section .col-lg-5.order-1 {
+            margin-top: 0 !important;
+            margin-bottom: 15px !important;
+            padding-bottom: 0 !important;
+        }
+        .success-story-section .col-lg-7.order-2 {
+            margin-top: 15px !important;
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+        }
     }
 </style>
 

@@ -36,12 +36,12 @@
     $giftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '';
     $giftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : '';
     $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '';
-    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'Enroll Now';
+    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : '';
     $giftCtaText = !empty($mcSettings['gift_cta_text']) ? $mcSettings['gift_cta_text'] : $heroBtnText;
     $giftCtaLink = !empty($mcSettings['gift_cta_link']) ? $mcSettings['gift_cta_link'] : '';
 @endphp
 
-@if($showSpecialGift)
+@if($showSpecialGift && (!empty($giftTitle) || !empty($giftBadge) || !empty($giftDescription)))
 <style>
     .mc-special-gift-card {
         background-color: var(--color-blue-tint, #EAF2FE);
@@ -114,7 +114,7 @@
                                 <span style="position: absolute; width: 120%; height: 2px; background: red; top: 50%; left: -10%; transform: rotate(20deg);"></span>
                                 {{ $formatCurrencyText($giftValue) }}
                             </span>
-                            <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">FREE</span>
+                            <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">{{ __('FREE') }}</span>
                         </div>
                     @endif
 
@@ -151,11 +151,13 @@
                         $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : ((request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register'));
                         $finalGiftCtaLink = !empty($giftCtaLink) ? $giftCtaLink : $heroBtnUrl;
                     @endphp
+                    @if(!empty($giftCtaText))
                     <div class="text-center w-100 mt-4">
                         <a href="{{ $finalGiftCtaLink }}" class="template-btn get-access-btn">
                             {{ $giftCtaText }}
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

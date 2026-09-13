@@ -20,16 +20,7 @@
         return trim(preg_replace('/[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F780}-\x{1F7FF}\x{1F800}-\x{1F8FF}\x{1F900}-\x{1F9FF}\x{1FA00}-\x{1FA6F}\x{1FA70}-\x{1FAFF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}]/u', '', $text));
     };
 
-    $defaultItems = "কোর্স ০১: ফ্রিল্যান্স স্মার্ট সিস্টেম \n Daily Income | ৳৩,০০০
-কোর্স ০২: ইউটিউব অটোমেশন কোর্স \n USA Channel | ৳৮,০০০
-কোর্স ০৩: AI - Passive Income | ৳৩,০০০
-Live Support Class with Mentor | ৳২,০০০
-Life Time Course Access | ৳২,০০০
-30k Bonus Resources & Materials | FREE
-Certificate of Participation | ৳৯৯০
-Future Updates (if applicable) | FREE";
-
-    $rawItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : $defaultItems;
+    $rawItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : '';
 
     $breakdownRows = [];
     $cleanItems = str_replace(['</p>', '<br>', '<br/>', '<br />'], "\n", $rawItems);
@@ -64,10 +55,10 @@ Future Updates (if applicable) | FREE";
         }
     }
 
-    $todayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : "Today's {Value} Breakdown";
-    $subheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : "Today's Special Token Price: Only ৳২,৯৯০";
-    $originalPrice = !empty($mcSettings['breakdown_original_price']) ? $mcSettings['breakdown_original_price'] : "৳১৪,৯৮০/-";
-    $ribbonText = !empty($mcSettings['breakdown_ribbon_text']) ? $mcSettings['breakdown_ribbon_text'] : "আজই স্পেশাল ডিসকাউন্ট";
+    $todayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : '';
+    $subheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : '';
+    $originalPrice = !empty($mcSettings['breakdown_original_price']) ? $mcSettings['breakdown_original_price'] : '';
+    $ribbonText = !empty($mcSettings['breakdown_ribbon_text']) ? $mcSettings['breakdown_ribbon_text'] : '';
 
     // Strip all emojis
     $todayTitle = $stripEmojis($todayTitle);
@@ -351,23 +342,28 @@ Future Updates (if applicable) | FREE";
     <div class="container container-1278">
         <div class="mc-breakdown-light-card text-center" data-aos="fade-up">
             
+            @php
+                $titleLines = array_values(array_filter(preg_split('/\r\n|\r|\n|<br\s*\/?>/i', $todayTitle)));
+                $eyebrowText = count($titleLines) > 1 ? trim($titleLines[0]) : '';
+                $mainTitleText = count($titleLines) > 1 ? trim($titleLines[1]) : (count($titleLines) == 1 ? trim($titleLines[0] ?? '') : $todayTitle);
+                
+                $eyebrowText = $stripEmojis($eyebrowText);
+                $mainTitleText = $stripEmojis($mainTitleText);
+            @endphp
+            @if(!empty($eyebrowText) || !empty($mainTitleText))
             <div class="mc-bd-light-header">
-                @php
-                    $titleLines = array_values(array_filter(preg_split('/\r\n|\r|\n|<br\s*\/?>/i', $todayTitle)));
-                    $eyebrowText = count($titleLines) > 1 ? trim($titleLines[0]) : '';
-                    $mainTitleText = count($titleLines) > 1 ? trim($titleLines[1]) : (count($titleLines) == 1 ? trim($titleLines[0] ?? '') : $todayTitle);
-                    
-                    $eyebrowText = $stripEmojis($eyebrowText);
-                    $mainTitleText = $stripEmojis($mainTitleText);
-                @endphp
                 @if(!empty($eyebrowText))
                     <div class="mc-bd-light-eyebrow">{!! format_title_highlight($formatCurrencyText($eyebrowText)) !!}</div>
                 @endif
+                @if(!empty($mainTitleText))
                 <h3 class="mc-bd-light-title">
                     {!! format_title_highlight($formatCurrencyText($mainTitleText)) !!}
                 </h3>
+                @endif
             </div>
+            @endif
             
+            @if(count($breakdownRows) > 0)
             <div class="mc-bd-light-items-box text-start">
                 @foreach($breakdownRows as $idx => $row)
                     @php
@@ -405,15 +401,20 @@ Future Updates (if applicable) | FREE";
                     </div>
                 @endforeach
             </div>
+            @endif
             
+            @if(!empty($subheading) || !empty($originalPrice))
             <div class="mc-bd-light-discount-box">
+                @if(!empty($ribbonText))
                 <div class="mc-bd-light-ribbon">
                     <i class="fas fa-tag"></i>
                     <span>{{ $ribbonText }}</span>
                 </div>
+                @endif
                 
                 <div class="row align-items-center gy-3">
-                    <div class="col-md-6 text-center text-md-start mc-bd-light-divider pe-md-4">
+                    @if(!empty($subheading))
+                    <div class="col-md-{{ !empty($originalPrice) ? '6' : '12' }} text-center text-md-start {{ !empty($originalPrice) ? 'mc-bd-light-divider pe-md-4' : '' }}">
                         <div class="mc-bd-light-offer-heading">এখনই কোর্সটি কিনুন মাত্র</div>
                         <div class="mc-bd-light-price-huge">{{ $formatCurrencyText($subheading) }}</div>
                         <div class="mc-bd-light-timer-text">
@@ -421,9 +422,10 @@ Future Updates (if applicable) | FREE";
                             <span>সীমিত সময়ের অফার – এখনই সুযোগ নিন!</span>
                         </div>
                     </div>
+                    @endif
                     
                     @if(!empty($originalPrice))
-                        <div class="col-md-6 text-center ps-md-4 d-flex flex-column align-items-center justify-content-center">
+                        <div class="col-md-{{ !empty($subheading) ? '6' : '12' }} text-center ps-md-4 d-flex flex-column align-items-center justify-content-center">
                             <div class="mc-bd-light-orig-label">আসল মূল্য</div>
                             <div class="mc-bd-light-orig-price">
                                 <span style="position: absolute; width: 110%; height: 2px; background: #ef4444; top: 50%; left: -5%; transform: rotate(-12deg);"></span>
@@ -443,24 +445,31 @@ Future Updates (if applicable) | FREE";
                     @endif
                 </div>
             </div>
+            @endif
             
             @php
-                $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'Enroll Now';
+                $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : '';
                 $heroBtnUrl = !empty($mcSettings['overview_btn_url']) ? $mcSettings['overview_btn_url'] : ((request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register'));
-                $breakdownCtaText = !empty($mcSettings['breakdown_cta_text']) ? $mcSettings['breakdown_cta_text'] : 'অফার টি নিতে চাই';
+                $breakdownCtaText = !empty($mcSettings['breakdown_cta_text']) ? $mcSettings['breakdown_cta_text'] : $heroBtnText;
                 $breakdownCtaLink = !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : $heroBtnUrl;
             @endphp
+            @php
+                $securityNote = !empty($mcSettings['breakdown_security_note']) ? $mcSettings['breakdown_security_note'] : '';
+            @endphp
+            @if(!empty($breakdownCtaText))
             <div class="text-center w-100 mt-2">
                 <a href="{{ $breakdownCtaLink }}" class="template-btn get-access-btn">
                     <i class="fas fa-shopping-cart me-2"></i>
                     <span>{{ $breakdownCtaText }}</span>
                     <i class="fas fa-arrow-right ms-2"></i>
                 </a>
+                @if(!empty($securityNote))
                 <div class="mc-bd-light-security-note">
-                    <i class="fas fa-lock me-1"></i> ১০০% নিরাপদ পেমেন্ট
+                    <i class="fas fa-lock me-1"></i> {{ $securityNote }}
                 </div>
+                @endif
             </div>
-            
+            @endif
         </div>
     </div>
 </section>

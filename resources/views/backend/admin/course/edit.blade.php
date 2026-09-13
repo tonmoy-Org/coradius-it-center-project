@@ -29,8 +29,6 @@
                     foreach ($step_3_errors as $step3) {
                         if ($errors->has($step3)) {
                             $step_3_error = true;
-                            if(!$step_1_error)
-                                $request_tab = 'pricing';
                             break;
                         }
                     }
@@ -75,14 +73,6 @@
                                aria-selected="false">
                                 <span
                                     class="default-tab-count {{ $step_2_error  ? 'bg-danger text-white' : '' }}">3</span>{{ __('media_images') }}
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link tab_change {{ $request_tab == 'pricing' ? 'active ' : '' }} {{ $step_3_error ? 'text-danger' : '' }}"
-                               data-tab="pricing" id="pricing" data-bs-toggle="pill" data-bs-target="#coursePricing"
-                               role="tab" aria-controls="coursePricing" aria-selected="false">
-                                <span
-                                    class="default-tab-count {{ $step_3_error  ? 'bg-danger text-white' : '' }}">4</span>{{ __('pricing') }}
                             </a>
                         </li>
 
@@ -353,39 +343,32 @@
                                     $defOverviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : '';
                                     $defHideOverviewSection = !empty($mcSettings['hide_overview_section']);
 
-                                    $defDescRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : '';
-                                    $defDescStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : '';
-                                    $defDescStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : '';
-                                    $defDescStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : '';
-                                    $defDescStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : '';
-                                    $defDescStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : '';
-                                    $defDescStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : '';
-                                    $defDescBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '';
-                                    $defDescBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '';
-                                    $defDescBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : '';
-
-
+                                    $defDescRightTitle  = $mcSettings['desc_right_title'] ?? '';
+                                    $defDescStep1Title  = $mcSettings['desc_step_1_title'] ?? '';
+                                    $defDescStep1Sub    = $mcSettings['desc_step_1_sub'] ?? '';
+                                    $defDescStep2Title  = $mcSettings['desc_step_2_title'] ?? '';
+                                    $defDescStep2Sub    = $mcSettings['desc_step_2_sub'] ?? '';
+                                    $defDescStep3Title  = $mcSettings['desc_step_3_title'] ?? '';
+                                    $defDescStep3Sub    = $mcSettings['desc_step_3_sub'] ?? '';
+                                    $defDescBannerIcon  = $mcSettings['desc_banner_icon'] ?? '';
+                                    $defDescBannerTitle = $mcSettings['desc_banner_title'] ?? '';
+                                    $defDescBannerSub   = $mcSettings['desc_banner_sub'] ?? '';
                                 @endphp
                                 
                                 <div class="masterclass-single-page-wrapper">
-                                    <!-- Section 2: Course Description Right Feature Card -->
+                                    <!-- Course Description Right Feature Card -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
-                                        <div class="card-header bg-white py-3">
-                                            <span class="form-label m-0">Course Description Right Box Settings</span>
+                                        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                                            <label class="form-label m-0 cursor-pointer" for="show_desc_right_box">Course Description Right Box Settings</label>
+                                            <div class="setting-check m-0">
+                                                <input type="hidden" name="masterclass_settings[show_desc_right_box]" value="0">
+                                                <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
+                                                    {{ !isset($mcSettings['show_desc_right_box']) || !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
+                                                <label for="show_desc_right_box" class="m-0"></label>
+                                            </div>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
-                                                <div class="col-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
-                                                                {{ !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
-                                                            <label for="show_desc_right_box"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="show_desc_right_box">Show Course Description Right Box</label>
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Top Subtitle / Heading</label>
                                                     <input type="text" name="masterclass_settings[desc_right_title]" class="form-control rounded-2"
@@ -480,9 +463,12 @@
                                             <div class="row gx-20">
                                                 <div class="col-12 mb-4">
                                                     <div class="d-flex align-items-center gap-2">
+                                                        <input type="hidden" name="masterclass_settings[show_benefits_section]" value="0">
+                                                        <input type="hidden" name="masterclass_settings[benefits_status]" id="hidden_benefits_status" value="{{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 1 : 0 }}">
                                                         <div class="setting-check">
                                                             <input type="checkbox" name="masterclass_settings[show_benefits_section]" value="1" id="show_benefits_section"
-                                                                {{ !empty($mcSettings['show_benefits_section']) ? 'checked' : '' }}>
+                                                                {{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 'checked' : '' }}
+                                                                onchange="document.getElementById('hidden_benefits_status').value = this.checked ? 1 : 0;">
                                                             <label for="show_benefits_section"></label>
                                                         </div>
                                                         <label class="form-label mb-0 cursor-pointer" for="show_benefits_section">Show Benefits & Target Audience Section</label>
@@ -895,111 +881,14 @@
                             </div>
                             <!-- End Course Media Images -->
 
-                            <div class="tab-pane fade {{ $request_tab == 'pricing' ? 'show active' : '' }} {{ $step_3_error && !$step_2_error ? 'show active' : '' }}"
-                                 id="coursePricing" role="tabpanel" aria-labelledby="pricing" tabindex="0">
-                                <div class="row gx-20">
-                                    <div class="col-lg-6">
-                                        <div class="price-checkbox d-flex gap-12 mb-4">
-                                            <label for="is_free">{{ __('free_course') }}</label>
-                                            <div class="setting-check">
-                                                <input type="checkbox" id="is_free" name="is_free" value="1"
-                                                    {{ old('is_free', $course->is_free) == 1 ? 'checked' : '' }}>
-                                                <label for="is_free"></label>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="price-checkbox d-flex gap-12 mb-4 not_free_div {{ old('is_free', $course->is_free) == 1 ? 'd-none' : '' }}">
-                                            <label for="discountable_course">{{ __('discountable_course') }}</label>
-                                            <div class="setting-check">
-                                                <input type="checkbox" id="discountable_course" name="is_discountable"
-                                                       value="1"
-                                                    {{ old('is_discountable', $course->is_discountable) == 1 ? 'checked' : '' }}>
-                                                <label for="discountable_course"></label>
-                                            </div>
-                                        </div>
+                            <!-- Preserved course pricing fields to ensure course saving, updates and checkout function seamlessly -->
+                            <input type="hidden" name="is_free" value="{{ old('is_free', $course->is_free) }}">
+                            <input type="hidden" name="price" value="{{ old('price', $course->price) }}">
+                            <input type="hidden" name="is_discountable" value="{{ old('is_discountable', $course->is_discountable) }}">
+                            <input type="hidden" name="discount_type" value="{{ old('discount_type', $course->discount_type) }}">
+                            <input type="hidden" name="discount_amount" value="{{ old('discount_amount', $course->discount_amount) }}">
+                            <input type="hidden" name="discount_period" value="{{ old('discount_period', $course->discount_period) }}">
 
-                                    </div>
-                                    <!-- End Free Course Option -->
-
-                                    <div class="col-lg-6 not_free_div {{ old('is_free', $course->is_free) == 1 ? 'd-none' : '' }}">
-                                        <div class="mb-4">
-                                            <label for="price" class="form-label">{{ __('price') }}</label>
-                                            <input type="text" class="form-control rounded-2" id="price" name="price"
-                                                   value="{{ old('price', $course->price) }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('price') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Price -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable', $course->is_discountable) == 1 && old('is_free', $course->is_free) == 0 ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <div class="select-type-v2">
-                                                <label for="discount_type"
-                                                       class="form-label">{{ __('discount_type') }}</label>
-
-                                                <select class="form-select form-select-lg mb-3 without_search"
-                                                        id="discount_type" name="discount_type">
-                                                    <option value="">{{ __('select_discount_type') }}</option>
-                                                    <option value="flat"
-                                                        {{ old('discount_type', $course->discount_type) == 'flat' ? 'selected' : '' }}>
-                                                        {{ __('flat') }}</option>
-                                                    <option value="percentage"
-                                                        {{ old('discount_type', $course->discount_type) == 'percentage' ? 'selected' : '' }}>
-                                                        {{ __('percentage') }}</option>
-                                                </select>
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('discount_type') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Discount Type -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable', $course->is_discountable) == 1 && old('is_free', $course->is_free) == 0 ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <label for="discount_amount"
-                                                   class="form-label">{{ __('discount_amount') }}</label>
-                                            <input type="text" class="form-control rounded-2" id="discount_amount"
-                                                   name="discount_amount"
-                                                   value="{{ old('discount_amount', $course->discount_amount) }}">
-                                            <div class="nk-block-des text-danger">
-                                                <p class="error">{{ $errors->first('discount_amount') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Discount Amount -->
-
-                                    <div
-                                        class="col-lg-6 discountable_div {{ old('is_discountable', $course->is_discountable) == 1 && old('is_free', $course->is_free) == 0 ? '' : 'd-none' }}">
-                                        <div class="mb-4">
-                                            <label for="liveClassDateRangePicker"
-                                                   class="form-label">{{ __('discount_period') }}</label>
-
-                                            <div class="date-picker-div text-start">
-                                                <input type="text" class="form-control" name="discount_period"
-                                                       id="liveClassDateRangePicker"
-                                                       value="{{ old('discount_period', $course->discount_period) }}">
-                                                <div class="nk-block-des text-danger">
-                                                    <p class="error">{{ $errors->first('discount_period') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Date Range Picker -->
-                                </div>
-                                <!-- End Product images section -->
-
-                                <div class="col-lg-12">
-                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
-                                        <button type="submit" name="save_and_published" value="1" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Course Pricing -->
 
                             <!-- start Curriculum Tab -->
                             <div
@@ -1386,28 +1275,60 @@
                                                 <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
                                             </div>
 
-                                            <div class="form-group mb-0">
-                                                <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
-                                                <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
-                                                       value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
+                                                <div class="form-group mb-3">
+                                                    <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="faq_badge_title" class="form-label">{{ __('FAQ Image Floating Badge Title') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_badge_title]" id="faq_badge_title" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_badge_title'] ?? '' }}">
+                                                </div>
+
+                                                <div class="form-group mb-0">
+                                                    <label for="faq_badge_subtitle" class="form-label">{{ __('FAQ Image Floating Badge Subtitle') }}</label>
+                                                    <input type="text" name="masterclass_settings[faq_badge_subtitle]" id="faq_badge_subtitle" class="form-control rounded-2"
+                                                           value="{{ $mcSettings['faq_badge_subtitle'] ?? '' }}">
+                                                </div>
                                             </div>
                                         </div>
 
                                         <!-- FAQ Image Upload -->
-                                        <div class="mb-4 mt-2">
-                                            <span class="form-label mb-3 d-block">{{ __('FAQ Section Image') }}</span>
-                                            <p class="text-muted mb-4">{{ __('Upload an image to display on the right side of the FAQ section on the single course page.') }}</p>
-                                            @include('backend.common.media-input', [
-                                                'title' => __('FAQ Image'),
-                                                'name' => 'faq_image_media_id',
-                                                'col' => 'col-12',
-                                                'size' => '(800x600)',
-                                                'image' => old('faq_image_media_id', $course->faq_image_media_id),
-                                                'label' => __('FAQ Image'),
-                                                'edit' => $course,
-                                                'image_object' => $course->faq_image,
-                                                'media_id' => $course->faq_image_media_id,
-                                            ])
+                                        <div class="card mb-4 mt-2 border-0 shadow-sm">
+                                            <div class="card-body">
+                                                <span class="form-label mb-2 d-block">{{ __('FAQ Section Image') }}</span>
+                                                <p class="text-muted mb-3">{{ __('Upload an image to display on the right side of the FAQ section.') }}</p>
+                                                
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">{{ __('Upload Direct Image File') }}</label>
+                                                        <input type="file" name="faq_image_file" class="form-control rounded-2" accept="image/*">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">{{ __('Custom Image URL or Path') }}</label>
+                                                        <input type="text" name="masterclass_settings[faq_image_url_custom]" class="form-control rounded-2"
+                                                               value="{{ $mcSettings['faq_image_url'] ?? '' }}" placeholder="">
+                                                    </div>
+                                                </div>
+
+                                                @php
+                                                    $currentFaqImg = !empty($mcSettings['faq_image_url']) ? dynamic_asset($mcSettings['faq_image_url']) : '';
+                                                    if (!$currentFaqImg && !empty($course->faq_image)) {
+                                                        $currentFaqImg = getFileLink('original_image', $course->faq_image);
+                                                    }
+                                                    if (!$currentFaqImg || str_contains($currentFaqImg, 'default')) {
+                                                        $currentFaqImg = static_asset('images/faq/faq_classroom.jpg');
+                                                    }
+                                                @endphp
+                                                @if($currentFaqImg)
+                                                <div class="mt-3">
+                                                    <label class="form-label d-block text-muted mb-1">{{ __('Current Image Preview') }}</label>
+                                                    <img src="{{ $currentFaqImg }}" alt="FAQ Image" style="max-width: 220px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                                </div>
+                                                @endif
+                                            </div>
                                         </div>
 
                                         <div class="oftions-content-right mb-20">

@@ -32,7 +32,7 @@
                                     <div class="mb-4">
                                         <label for="about_me_tag" class="form-label">{{ __('tag_badge_text') }}</label>
                                         <input type="text" class="form-control rounded-2" id="about_me_tag"
-                                               placeholder="{{ __('e.g. ABOUT ME') }}" name="about_me_tag" value="{{ setting('about_me_tag', $lang) ?: 'ABOUT ME' }}">
+                                               placeholder="" name="about_me_tag" value="{{ setting('about_me_tag', $lang) }}">
                                     </div>
                                 </div>
 
@@ -41,7 +41,7 @@
                                     <div class="mb-4">
                                         <label for="about_me_title" class="form-label">{{ __('title') }}</label>
                                         <input type="text" class="form-control rounded-2" id="about_me_title"
-                                               placeholder="{{ __('enter_title') }}" name="about_me_title" value="{{ setting('about_me_title', $lang) ?: 'I\'m Teaching Online For About 5+ Years On Programming' }}">
+                                               placeholder="" name="about_me_title" value="{{ setting('about_me_title', $lang) }}">
                                     </div>
                                 </div>
 
@@ -50,7 +50,7 @@
                                     <div class="mb-4">
                                         <label for="about_me_description" class="form-label">{{ __('description') }}</label>
                                         <textarea class="form-control summernote" id="about_me_description" rows="5"
-                                                  name="about_me_description" placeholder="{{ __('enter_description') }}">{{ setting('about_me_description', $lang) ?: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non.' }}</textarea>
+                                                  name="about_me_description" placeholder="">{{ setting('about_me_description', $lang) }}</textarea>
                                     </div>
                                 </div>
 
@@ -59,7 +59,7 @@
                                     <div class="mb-4">
                                         <label for="about_me_btn_text" class="form-label">{{ __('button_text') }}</label>
                                         <input type="text" class="form-control rounded-2" id="about_me_btn_text"
-                                               placeholder="{{ __('e.g. LEARN MORE') }}" name="about_me_btn_text" value="{{ setting('about_me_btn_text', $lang) ?: 'LEARN MORE' }}">
+                                               placeholder="" name="about_me_btn_text" value="{{ setting('about_me_btn_text', $lang) }}">
                                     </div>
                                 </div>
 
@@ -68,21 +68,25 @@
                                     <div class="mb-4">
                                         <label for="about_me_btn_url" class="form-label">{{ __('button_url') }}</label>
                                         <input type="text" class="form-control rounded-2" id="about_me_btn_url"
-                                               placeholder="{{ __('e.g. # or /courses') }}" name="about_me_btn_url" value="{{ setting('about_me_btn_url', $lang) ?: '#' }}">
+                                               placeholder="" name="about_me_btn_url" value="{{ setting('about_me_btn_url', $lang) }}">
                                     </div>
                                 </div>
 
                                 <!-- Image Upload -->
-                                <div class="col-lg-12 mb-3">
-                                    @include('backend.common.media-input', [
-                                        'title' => __('image'),
-                                        'label' => __('image'),
-                                        'for' => 'image',
-                                        'name' => 'about_me_image',
-                                        'col' => 'col-12',
-                                        'size' => '(600x600)',
-                                        'image' => setting('about_me_image')
-                                    ])
+                                <div class="col-lg-12 input_file_div mb-3">
+                                    <div class="mb-3">
+                                        <label for="about_me_image" class="form-label mb-1">{{ __('image') }} (600x600)</label>
+                                        <label for="about_me_image" class="file-upload-text">
+                                            <p></p>
+                                            <span class="file-btn">{{ __('choose_file') }}</span>
+                                        </label>
+                                        <input class="d-none file_picker" type="file" name="about_me_image" id="about_me_image">
+                                    </div>
+                                    <div class="selected-files d-flex flex-wrap gap-20">
+                                        <div class="selected-files-item">
+                                            <img class="selected-img" src="{{ setting('about_me_image') ? getFileLink('80x80', setting('about_me_image')) : static_asset('images/about/about_me_instructor.jpg') }}" alt="about me image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Status Switch -->

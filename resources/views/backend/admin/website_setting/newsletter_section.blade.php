@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('Newsletter Section Settings'))
 @section('content')
     <section class="options">
@@ -61,13 +61,13 @@
                                         <div class="col-md-6 col-12">
                                             <label for="get_access_btn_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Get Access Button Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="get_access_btn_title" name="get_access_btn_title"
-                                                   placeholder="" value="{{ setting('get_access_btn_title', $lang) ?: setting('get_access_btn_title') }}">
+                                                   placeholder="" value="{{ setting('get_access_btn_title', $lang) }}">
                                         </div>
 
                                         <div class="col-md-6 col-12">
                                             <label for="get_access_btn_link" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Get Access Button Link') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="get_access_btn_link" name="get_access_btn_link"
-                                                   placeholder="" value="{{ setting('get_access_btn_link') ?: '' }}">
+                                                   placeholder="" value="{{ setting('get_access_btn_link', $lang) }}">
                                             <div class="nk-block-des text-muted mt-1" style="font-size: 12px;">
                                                 <p>{{ __('Leave blank to default to the Order Form / Billing Details section (#register).') }}</p>
                                             </div>

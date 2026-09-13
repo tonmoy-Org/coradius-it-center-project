@@ -1,13 +1,19 @@
-﻿@php
+@php
     $showStickyBar = setting('show_sticky_promo_bar');
-    $title = setting('sticky_promo_title');
     
     $mcSettings = [];
     if (isset($course) && $course) {
         $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+        if (!is_array($mcSettings)) $mcSettings = [];
     }
-    $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : setting('sticky_promo_btn_text');
-    $btnText = $heroBtnText;
+    
+    $title = !empty($mcSettings['sticky_promo_title']) 
+        ? $mcSettings['sticky_promo_title'] 
+        : setting('sticky_promo_title', app()->getLocale());
+    
+    $btnText = !empty($mcSettings['overview_btn_text']) 
+        ? $mcSettings['overview_btn_text'] 
+        : setting('sticky_promo_btn_text', app()->getLocale());
     $rawBtnLink = setting('sticky_promo_btn_link');
     if (empty($rawBtnLink) || $rawBtnLink === '#' || $rawBtnLink === '#register') {
         $btnLink = (request()->is('/') || request()->is('home*') || isHome()) ? '#register' : url('/#register');
@@ -282,25 +288,28 @@
         <div class="sticky-promo-anchor"></div>
         <div class="sticky-promo-wrapper sp-banner">
             <div class="sp-inner-container">
+                @if(!empty(trim($title ?? '')))
                 <div class="sp-left">
                     <h3>{{ $title }}</h3>
                 </div>
+                @endif
                 <div class="sp-middle">
                     <div class="sp-countdown js-countdown">
                         <div class="sp-cd-item">
                             <span class="num js-hours">00</span>
-                            <span class="label">HRS</span>
+                            <span class="label">{{ __('HRS') }}</span>
                         </div>
                         <div class="sp-cd-item">
                             <span class="num js-minutes">00</span>
-                            <span class="label">MIN</span>
+                            <span class="label">{{ __('MIN') }}</span>
                         </div>
                         <div class="sp-cd-item">
                             <span class="num js-seconds">00</span>
-                            <span class="label">SEC</span>
+                            <span class="label">{{ __('SEC') }}</span>
                         </div>
                     </div>
                 </div>
+                @if(!empty(trim($btnText ?? '')))
                  <div class="sp-right">
                     <a href="{{ $btnLink }}" class="template-btn btn-enroll position-relative">
                         <!-- Border Beam SVG -->
@@ -318,10 +327,11 @@
                         </svg>
                         <span class="btn-text-content" style="position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
                             <span>{{ $btnText }}</span>
-                            <i class="fas fa-arrow-right" style="margin-left: 0 !important; font-size: 14px;"></i>
+                            <i class="fas fa-arrow-right"></i>
                         </span>
                     </a>
                 </div>
+                @endif
             </div>
         </div>
     </div>

@@ -86,47 +86,57 @@
 <!--====== Start Counter Section ======-->
 @include('frontend.homePage.counter_section')
 
-@if(isset($hero_course->description) && !empty(strip_tags($hero_course->description)))
+@if((isset($hero_course->description) && !empty(strip_tags($hero_course->description))) || !empty($mcSettings['description_content']))
 @if(!isset($mcSettings['description_status']) || $mcSettings['description_status'] == 1)
 <section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
         <div class="description-card p-4 p-md-5 position-relative overflow-hidden" 
              style="background-color: var(--color-blue-tint, #EAF2FE); border: 1px solid var(--color-border-tint, #C7DCFA); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.06);">
             
+            @php
+                $descSubtitle = !empty($hero_course->description_subtitle) 
+                    ? $hero_course->description_subtitle 
+                    : (!empty($mcSettings['description_subtitle']) ? $mcSettings['description_subtitle'] : '');
+                $descContent = !empty($hero_course->description) 
+                    ? $hero_course->description 
+                    : ($mcSettings['description_content'] ?? '');
+
+                $descRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : '';
+                $descStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : '';
+                $descStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : '';
+                $descStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : '';
+                $descStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : '';
+                $descStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : '';
+                $descStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : '';
+                $descBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '';
+                $descBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '';
+                $descBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : '';
+
+                $hasTimelineSteps = !empty($descStep1Title) || !empty($descStep1Sub) || !empty($descStep2Title) || !empty($descStep2Sub) || !empty($descStep3Title) || !empty($descStep3Sub);
+                $hasBannerCard = !empty($descBannerIcon) || !empty($descBannerTitle) || !empty($descBannerSub);
+                $showDescRightBox = isset($mcSettings['show_desc_right_box']) ? !empty($mcSettings['show_desc_right_box']) : true;
+                $hasRightContent = $showDescRightBox && (!empty($descRightTitle) || $hasTimelineSteps || $hasBannerCard);
+            @endphp
+
             <div class="row g-4 g-lg-5 align-items-center">
                 <!-- Left Column -->
-                <div class="col-lg-6 col-md-12">
+                <div class="{{ $hasRightContent ? 'col-lg-6' : 'col-lg-12' }} col-md-12">
                     <div class="quote-decorator mb-2" style="color: var(--color-primary, #0056D2); font-size: 55px; line-height: 1; font-family: Georgia, serif; font-weight: bold;">
                         “
                     </div>
-                    @if($hero_course->description_subtitle)
+                    @if(!empty($descSubtitle))
                         <h2 class="mb-3 fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
-                            {!! format_title_highlight($hero_course->description_subtitle) !!}
-                        </h2>
-                    @else
-                        <h2 class="mb-3 fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
-                            আমি আপনাদের বলতে চাই
+                            {!! format_title_highlight($descSubtitle) !!}
                         </h2>
                     @endif
                     
                     <div class="course-description-content" style="color: var(--color-text-secondary, #4B5A72); font-size: 16px; line-height: 1.85; font-weight: 400;">
-                        {!! $hero_course->description !!}
+                        {!! $descContent !!}
                     </div>
                 </div>
 
+                @if($hasRightContent)
                 <!-- Right Column: Structured Feature Layout -->
-                @php
-                    $descRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : 'আমি আমার কাজের দীর্ঘ সময়ের অভিজ্ঞতা থেকে দেখিয়েছি তিন ধরনের আয় করার কার্যকরী প্রুভেন সিস্টেম।';
-                    $descStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : 'শর্ট টার্ম';
-                    $descStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : 'দ্রুত প্রথম আয়';
-                    $descStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : 'মিড টার্ম';
-                    $descStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : 'নিয়মিত মাসিক আয়';
-                    $descStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : 'লং টার্ম';
-                    $descStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : 'প্যাসিভ ও স্থায়ী আয়';
-                    $descBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '💰';
-                    $descBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '$1,000+ প্রতি মাসে আয় করুন!';
-                    $descBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : 'প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।';
-                @endphp
                 <div class="col-lg-6 col-md-12">
                     <div class="p-3 p-md-4 rounded-4" style="background: var(--color-white, #FFFFFF); border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 4px 18px rgba(0, 31, 92, 0.05);">
                         <!-- Top Subtitle -->
@@ -136,28 +146,43 @@
                             </h4>
                         @endif
 
+                        @if($hasTimelineSteps)
                         <!-- 3-Step Timeline Nodes -->
                         <div class="timeline-nodes-wrapper position-relative mb-4 py-2">
                             <div class="timeline-line" style="position: absolute; top: 18px; left: 10%; right: 10%; height: 2px; background: var(--color-border-tint, #D9E8FC); z-index: 1;"></div>
                             <div class="row text-center position-relative" style="z-index: 2;">
                                 <div class="col-4">
                                     <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
-                                    <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep1Title }}</div>
-                                    <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep1Sub }}</div>
+                                    @if(!empty($descStep1Title))
+                                        <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep1Title }}</div>
+                                    @endif
+                                    @if(!empty($descStep1Sub))
+                                        <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep1Sub }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-4">
                                     <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
-                                    <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep2Title }}</div>
-                                    <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep2Sub }}</div>
+                                    @if(!empty($descStep2Title))
+                                        <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep2Title }}</div>
+                                    @endif
+                                    @if(!empty($descStep2Sub))
+                                        <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep2Sub }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-4">
                                     <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
-                                    <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep3Title }}</div>
-                                    <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep3Sub }}</div>
+                                    @if(!empty($descStep3Title))
+                                        <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep3Title }}</div>
+                                    @endif
+                                    @if(!empty($descStep3Sub))
+                                        <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep3Sub }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
+                        @endif
 
+                        @if($hasBannerCard)
                         <!-- Inner Highlight Banner Card -->
                         <div class="highlight-banner-card p-3 p-md-4 rounded-3 text-center" 
                              style="background: var(--color-white, #ffffff); border: 2px solid var(--color-primary, #0056D2); box-shadow: 0 4px 15px rgba(0, 86, 210, 0.12);">
@@ -177,8 +202,10 @@
                                 </p>
                             @endif
                         </div>
+                        @endif
                     </div>
                 </div>
+                @endif
             </div>
 
         </div>
@@ -536,22 +563,22 @@
     }
 
     .hero-title {
-        font-size: 24px !important;
-        line-height: 1.4 !important;
+        font-size: 22px !important;
+        line-height: 1.35 !important;
         font-weight: 700 !important;
         margin-bottom: 8px !important;
     }
 
     .hero-subtitle {
-        font-size: 16px !important;
+        font-size: 17px !important;
         line-height: 1.45 !important;
         font-weight: 600 !important;
         margin-bottom: 12px !important;
     }
 
     .hero-description {
-        font-size: 14px !important;
-        line-height: 1.65 !important;
+        font-size: 13.5px !important;
+        line-height: 1.75 !important;
         font-weight: 400 !important;
         margin-bottom: 16px !important;
     }
@@ -567,8 +594,8 @@
     }
 
     .course-description-section {
-        padding-top: 25px !important;
-        padding-bottom: 20px !important;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
     }
 
     .description-card {

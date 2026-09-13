@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('Sticky Promo Bar Settings'))
 @section('content')
     <section class="options">
@@ -10,7 +10,7 @@
 
                     </div>
                     <div class="bg-white redious-border p-20 p-sm-30">
-                        <form action="{{ route('footer.update-setting') }}" id="setting-form" method="POST" class="form" enctype="multipart/form-data">@csrf
+                        <form action="{{ route('website.sticky_promo.save') }}" id="setting-form" method="POST" class="form" enctype="multipart/form-data">@csrf
                             <input type="hidden" name="site_lang" value="{{$lang}}">
 
                             <div class="card border mb-4 shadow-sm" style="border-radius: 12px; overflow: hidden;">
@@ -34,13 +34,13 @@
                                         <div class="col-md-6 col-12">
                                             <label for="sticky_promo_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Promo Title') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_title" name="sticky_promo_title"
-                                                   value="{{ setting('sticky_promo_title', $lang) ?: '' }}">
+                                                   value="{{ setting('sticky_promo_title', $lang) }}">
                                         </div>
 
                                         <div class="col-md-6 col-12">
                                             <label for="sticky_promo_btn_text" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Button Text') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_btn_text" name="sticky_promo_btn_text"
-                                                   value="{{ setting('sticky_promo_btn_text', $lang) ?: '' }}">
+                                                   value="{{ setting('sticky_promo_btn_text', $lang) }}">
                                         </div>
 
                                         <div class="col-md-6 col-12">
@@ -54,6 +54,7 @@
                             
                             <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
                                 <button type="submit" class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                @include('backend.common.loading-btn', ['class' => 'btn sg-btn-primary'])
                             </div>
                         </form>
                     </div>
