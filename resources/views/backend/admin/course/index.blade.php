@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('course_list'))
 @section('content')
     <div class="container-fluid">
@@ -33,7 +33,6 @@
                                                 <label for="select_category"
                                                        class="form-label">{{ __('select_category') }}</label>
                                                 <select id="select_category" name="category_ids[]" multiple
-                                                        placeholder="{{ __('select_category') }}"
                                                         class="form-select-lg rounded-0 mb-3"
                                                         data-route="{{ route('ajax.categories') }}"
                                                         aria-label=".form-select-lg example">

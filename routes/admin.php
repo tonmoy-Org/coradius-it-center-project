@@ -126,6 +126,8 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         //website categories of work section setting
         Route::get('categories-of-work-section', [WebsiteSettingController::class, 'categoriesOfWorkSection'])->name('website.categories_of_work_section');
+        Route::get('newsletter-section', [WebsiteSettingController::class, 'newsletterSection'])->name('website.newsletter_section');
+        Route::get('sticky-promo-section', [WebsiteSettingController::class, 'stickyPromoSection'])->name('website.sticky_promo');
         Route::match(['get', 'post'], 'save-categories-of-work-section', [WebsiteSettingController::class, 'saveCategoriesOfWorkSection'])->name('website.categories_of_work_section.save');
 
         //website why choose section setting

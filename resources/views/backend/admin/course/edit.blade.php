@@ -1,10 +1,10 @@
-@extends('backend.layouts.master')
-@section('title', __('edit_course'))
+﻿@extends('backend.layouts.master')
+@section('title', __('Home Landing Page Setup'))
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="section-title">{{ __('edit_course') }}</h3>
+                <h3 class="section-title">{{ __('Home Landing Page Setup') }}</h3>
                 @php
                     $step_1_error = false;
                     $step_2_error = false;
@@ -44,7 +44,7 @@
                     }
                 @endphp
                 <div class="default-tab-list bg-white redious-border p-20 p-sm-30">
-                    <ul class="nav justify-content-center pb-40 mb-0" id="pills-tab" role="tablist">
+                    <ul class="nav justify-content-center pb-40 mb-0 d-none" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link tab_change {{ $request_tab == 'basic' ? 'active ' : '' }}{{ $step_1_error ? 'text-danger' : '' }}"
                                data-tab="basic" id="basicInformation" data-bs-toggle="pill"
@@ -139,7 +139,7 @@
                                             <label for="courseTitle" class="form-label">{{ __('course_title') }}</label>
                                             <input type="text" value="{{ old('title', $course->title) }}"
                                                    class="form-control rounded-2 ai_content_name" id="courseTitle"
-                                                   name="title" placeholder="{{ __('enter_course_title') }}">
+                                                   name="title">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('title') }}</p>
                                             </div>
@@ -150,7 +150,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="mb-4">
                                             <label for="courseSubtitle" class="form-label">Course Subtitle</label>
-                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" placeholder="Enter Course Subtitle" value="{{ old('course_subtitle', $course->course_subtitle) }}">
+                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" value="{{ old('course_subtitle', $course->course_subtitle) }}">
                                         </div>
                                     </div>
                                     <!-- End Course Subtitle -->
@@ -162,7 +162,6 @@
                                                        class="form-label">{{ __('select_category') }}</label>
                                                 <select id="select_category" name="category_id"
                                                         data-route="{{ route('ajax.categories') }}"
-                                                        placeholder="{{ __('select_category') }}"
                                                         class="form-select-lg rounded-0 mb-3"
                                                         aria-label=".form-select-lg example">
                                                     @if ($category)
@@ -297,7 +296,7 @@
                                             <label for="courseDuration"
                                                    class="form-label">{{ __('course_duration') }}</label>
                                             <input type="text" class="form-control rounded-2" id="courseDuration"
-                                                   name="duration" placeholder="{{ __('72_hours') }}"
+                                                   name="duration"
                                                    value="{{ old('duration', $course->duration) }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('duration') }}</p>
@@ -311,7 +310,7 @@
                                             <label for="tag" class="form-label">{{ __('course_tag') }}</label>
                                             <select id="tag" multiple
                                                     class="form-select form-select-lg mb-3 with_search" name="tags[]"
-                                                    aria-label=".form-select-lg" placeholder="{{ __('select_tags') }}">
+                                                    aria-label=".form-select-lg">
                                                 @foreach ($tags as $tag)
                                                     <option value="{{ $tag->id }}"
                                                         {{ old('tags', $course->tags) && in_array($tag->id, old('tags', $course->tags)) ? 'selected' : '' }}>
@@ -335,8 +334,7 @@
                                                 ])
                                             </div>
                                             <textarea class="form-control" name="short_description"
-                                                      id="shortDescription"
-                                                      placeholder="{{ __('enter_short_description') }}">{{ old('short_description', $course->short_description) }}</textarea>
+                                                      id="shortDescription">{{ old('short_description', $course->short_description) }}</textarea>
                                         </div>
                                     </div>
                                     <!-- End Short Description -->
@@ -344,7 +342,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-4">
                                             <label for="descriptionSubtitle" class="form-label">Description Subtitle</label>
-                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" placeholder="Enter Description Subtitle" value="{{ old('description_subtitle', $course->description_subtitle) }}">
+                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" value="{{ old('description_subtitle', $course->description_subtitle) }}">
                                         </div>
                                     </div>
                                     <!-- End Description Subtitle -->
@@ -356,7 +354,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="mb-4">
                                             <label for="overview_btn_text" class="form-label">Hero Button Text</label>
-                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_text]" id="overview_btn_text" placeholder="Enroll Now" value="{{ old('masterclass_settings.overview_btn_text', $mc_settings['overview_btn_text'] ?? '') }}">
+                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_text]" id="overview_btn_text" value="{{ old('masterclass_settings.overview_btn_text', $mc_settings['overview_btn_text'] ?? '') }}">
                                         </div>
                                     </div>
                                     <!-- End Hero Button Text -->
@@ -364,7 +362,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="mb-4">
                                             <label for="overview_btn_url" class="form-label">Hero Button Link</label>
-                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_url]" id="overview_btn_url" placeholder="#register" value="{{ old('masterclass_settings.overview_btn_url', $mc_settings['overview_btn_url'] ?? '') }}">
+                                            <input type="text" class="form-control" name="masterclass_settings[overview_btn_url]" id="overview_btn_url" value="{{ old('masterclass_settings.overview_btn_url', $mc_settings['overview_btn_url'] ?? '') }}">
                                         </div>
                                     </div>
                                     <!-- End Hero Button Link -->
@@ -422,25 +420,17 @@
                                         </div>
                                     </div>
                                     <!-- End Description -->
-
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-end align-items-center mt-30">
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseMasterclass">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
                                 </div>
                             </div>
                             <!-- End Basic Course Information -->
 <!-- Start Masterclass Landing Tab -->
-                            <div class="tab-pane fade {{ $request_tab == 'masterclass' ? 'show active' : '' }}"
-                                 id="courseMasterclass" role="tabpanel" aria-labelledby="masterclass" tabindex="0">
+                            <div class="tab-pane fade {{ $request_tab == 'desc_right_box' ? 'show active' : '' }}"
+                                 id="courseDescRightBox" role="tabpanel" aria-labelledby="desc_right_box" tabindex="0">
                                 @php
                                     $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
                                     if(!is_array($mcSettings)) $mcSettings = [];
 
-                                    $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : ($category ? $category->lang_title : '');
+                                    $defEyebrow = !empty($mcSettings['eyebrow_title']) ? $mcSettings['eyebrow_title'] : '';
                                     $defPrimaryCta = !empty($mcSettings['primary_cta_text']) ? $mcSettings['primary_cta_text'] : '';
                                     $defVideoCaption = !empty($mcSettings['video_caption']) ? $mcSettings['video_caption'] : '';
                                     $defRemainingSeats = !empty($mcSettings['remaining_seats']) ? $mcSettings['remaining_seats'] : ($course->capacity > 0 ? $course->capacity : '100');
@@ -450,9 +440,9 @@
                                     $defZoomTitle = !empty($mcSettings['zoom_title']) ? $mcSettings['zoom_title'] : '';
                                     $defZoomSubtitle = !empty($mcSettings['zoom_subtitle']) ? $mcSettings['zoom_subtitle'] : '';
                                     $defScheduleLabel = !empty($mcSettings['schedule_label']) ? $mcSettings['schedule_label'] : '';
-                                    $defScheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : (!empty($course->duration) ? $course->duration : '');
+                                    $defScheduleValue = !empty($mcSettings['schedule_value']) ? $mcSettings['schedule_value'] : '';
                                     $defLevelLabel = !empty($mcSettings['level_label']) ? $mcSettings['level_label'] : '';
-                                    $defLevelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : ($level ? $level->lang_title : '');
+                                    $defLevelValue = !empty($mcSettings['level_value']) ? $mcSettings['level_value'] : '';
                                     $defGoldOfferTitle = !empty($mcSettings['gold_offer_title']) ? $mcSettings['gold_offer_title'] : '';
                                     $defOriginalPriceLabel = !empty($mcSettings['original_price_label']) ? $mcSettings['original_price_label'] : '';
                                     $defGoldCtaText = !empty($mcSettings['gold_cta_text']) ? $mcSettings['gold_cta_text'] : '';
@@ -462,30 +452,23 @@
                                             ? preg_replace('/\d+/', $availSeatsCount, $mcSettings['gold_seats_text'])
                                             : $mcSettings['gold_seats_text'];
                                     } else {
-                                        $defGoldSeatsText = 'আর মাত্র ' . $availSeatsCount . ' সিট বাকি';
+                                        $defGoldSeatsText = '';
                                     }
 
-                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : 'Who Is This {Masterclass} For?';
+                                    $defBenefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
                                     
                                     $benefitsList = [];
                                     if (!empty($mcSettings['benefits_list']) && is_array($mcSettings['benefits_list'])) {
                                         $benefitsList = array_values(array_filter(array_map('trim', $mcSettings['benefits_list'])));
                                     } elseif (!empty($mcSettings['benefits_items'])) {
-                                        $lines = array_filter(array_map('trim', explode("
-", $mcSettings['benefits_items'])));
+                                        $lines = array_filter(array_map('trim', explode("\n", $mcSettings['benefits_items'])));
                                         $benefitsList = array_values($lines);
                                     } elseif (!empty($course->what_will_learn)) {
-                                        $lines = array_filter(array_map('trim', explode("
-", strip_tags($course->what_will_learn))));
+                                        $lines = array_filter(array_map('trim', explode("\n", strip_tags($course->what_will_learn))));
                                         $benefitsList = array_values($lines);
                                     }
                                     if (empty($benefitsList)) {
-                                        $benefitsList = [
-                                            'অনলাইন বিজনেস করতে চান কিন্তু কনফিউজড',
-                                            'পুঁজি কম নিয়ে বিজনেস শুরু করতে চাচ্ছেন',
-                                            'ই-কমার্স বিজনেস শুরু করার ভয় আছে',
-                                            'লস না করে সঠিকভাবে শুরু করতে চান',
-                                        ];
+                                        $benefitsList = [];
                                     }
 
                                     $defGiftBadge = !empty($mcSettings['gift_badge']) ? $mcSettings['gift_badge'] : '';
@@ -506,9 +489,9 @@
                                     $defExplainerTitle = !empty($mcSettings['explainer_title']) ? $mcSettings['explainer_title'] : '';
                                     $defExplainerText = !empty($mcSettings['explainer_text']) ? $mcSettings['explainer_text'] : '';
 
-                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : "Today's Special Token Price: Only ৳২,৯৯০";
-                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : "Today's {Value} Breakdown";
-                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : "🎓 2-Day Live Masterclass with a Complete Step-by-Step Roadmap | ৳৪,০০০\n🎁 FREE Access to the Ecom Dropshipping Mastery Course | ৳১০,০০০\n🎓 Lifetime Access to the Masterclass Recording | ৳৩,০০০\n🎁 Ready-to-Use Templates, Checklists & Resources | ৳৩,০০০\n🎁 Private Community Support | ৳৪,০০০\n🎁 Live Q&A Session with Direct Expert Guidance | ৳৩,০০০\n🎁 Winning Product Research Strategy | ৳৩,০০০\n🎁 Facebook Ads & Scaling Blueprint | ৳৭,০০০\n🎁 Premium Bonus Resources & Materials | ৳৩,০০০\n🎁 Certificate of Participation | ৳২,০০০\n🎁 Future Updates (if applicable) | FREE\n🎁 Practical Action Plan to launch Your Store | ৳৪,০০০";
+                                    $defBreakdownSubheading = !empty($mcSettings['breakdown_subheading']) ? $mcSettings['breakdown_subheading'] : "";
+                                    $defBreakdownTodayTitle = !empty($mcSettings['breakdown_today_title']) ? $mcSettings['breakdown_today_title'] : "";
+                                    $defBreakdownItems = !empty($mcSettings['breakdown_items']) ? $mcSettings['breakdown_items'] : "";
                                     $defBreakdownCtaText = !empty($mcSettings['breakdown_cta_text']) ? $mcSettings['breakdown_cta_text'] : '';
                                     $defBreakdownCtaLink = !empty($mcSettings['breakdown_cta_link']) ? $mcSettings['breakdown_cta_link'] : '';
 
@@ -535,8 +518,7 @@
                                     if (!empty($mcSettings['faq_list']) && is_array($mcSettings['faq_list'])) {
                                         $faqList = $mcSettings['faq_list'];
                                     } elseif (!empty($mcSettings['faq_items'])) {
-                                        $lines = array_filter(array_map('trim', explode("
-", $mcSettings['faq_items'])));
+                                        $lines = array_filter(array_map('trim', explode("\n", $mcSettings['faq_items'])));
                                         foreach ($lines as $line) {
                                             $parts = explode('|', $line);
                                             if (isset($parts[0]) && isset($parts[1])) {
@@ -548,15 +530,11 @@
                                         }
                                     }
                                     if (empty($faqList)) {
-                                        $faqList = [
-                                            ['question' => 'লাইভ ক্লাসে কিভাবে যুক্ত হবো?', 'answer' => 'আপনি পেমেন্ট করার পর আপনাকে আমাদের একটা প্রাইভেট গ্রুপে জয়েন করানো হবে, এবং যেদিন লাইভ ক্লাসগুলো হবে সেদিন আপনাকে জুমের লিংক শেয়ার করা হবে'],
-                                            ['question' => 'লাইভ ক্লাসগুলো কত ঘন্টার হবে?', 'answer' => 'এইটা সঠিক ভাবে বলা যাচ্ছে না, যে টাইম দেয়া আছে ঠিক সেই সময়েই শুরু হবে কিন্তু শেষ হবে আপনাদের ইচ্ছায়। যতক্ষণ আপনাদের প্রয়োজন আমি লাইভে থাকবো ইনশাআল্লাহ্'],
-                                            ['question' => 'মাষ্টার ক্লাসটিতে ডিস্কাウント দেয়া যাবে না?', 'answer' => 'বর্তমানে বিশাল ডিস্কাউন্ট দেয়া আছে তবে প্রতিনিয়ত প্রোগ্রামটির মূল্য কিছু কিছু করে বাড়ানো হবে। তাই যত দ্রুত যুক্ত হবেন তত বেশি আপনারই লাভ।'],
-                                        ];
+                                        $faqList = [];
                                     }
 
                                     $defDualCtaLeft = !empty($mcSettings['dual_cta_left']) ? $mcSettings['dual_cta_left'] : '';
-                                    $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : '' . $defRemainingSeats . ' সিট বাকি';
+                                    $defDualCtaSeats = !empty($mcSettings['dual_cta_seats']) ? $mcSettings['dual_cta_seats'] : '';
 
                                     $defOverviewTag = !empty($mcSettings['overview_tag']) ? $mcSettings['overview_tag'] : '';
                                     $defOverviewTitle = !empty($mcSettings['overview_title']) ? $mcSettings['overview_title'] : '';
@@ -567,16 +545,16 @@
                                     $defOverviewImageUrl = !empty($mcSettings['overview_image_url']) ? $mcSettings['overview_image_url'] : '';
                                     $defHideOverviewSection = !empty($mcSettings['hide_overview_section']);
 
-                                    $defDescRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : 'আমি আমার কাজের দীর্ঘ সময়ের অভিজ্ঞতা থেকে দেখিয়েছি তিন ধরনের আয় করার কার্যকরী প্রুভেন সিস্টেম।';
-                                    $defDescStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : 'শর্ট টার্ম';
-                                    $defDescStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : 'দ্রুত প্রথম আয়';
-                                    $defDescStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : 'মিড টার্ম';
-                                    $defDescStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : 'নিয়মিত মাসিক আয়';
-                                    $defDescStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : 'লং টার্ম';
-                                    $defDescStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : 'প্যাসিভ ও স্থায়ী আয়';
-                                    $defDescBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '💰';
-                                    $defDescBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '$1,000+ প্রতি মাসে আয় করুন!';
-                                    $defDescBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : 'প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।';
+                                    $defDescRightTitle  = !empty($mcSettings['desc_right_title']) ? $mcSettings['desc_right_title'] : '';
+                                    $defDescStep1Title  = !empty($mcSettings['desc_step_1_title']) ? $mcSettings['desc_step_1_title'] : '';
+                                    $defDescStep1Sub    = !empty($mcSettings['desc_step_1_sub']) ? $mcSettings['desc_step_1_sub'] : '';
+                                    $defDescStep2Title  = !empty($mcSettings['desc_step_2_title']) ? $mcSettings['desc_step_2_title'] : '';
+                                    $defDescStep2Sub    = !empty($mcSettings['desc_step_2_sub']) ? $mcSettings['desc_step_2_sub'] : '';
+                                    $defDescStep3Title  = !empty($mcSettings['desc_step_3_title']) ? $mcSettings['desc_step_3_title'] : '';
+                                    $defDescStep3Sub    = !empty($mcSettings['desc_step_3_sub']) ? $mcSettings['desc_step_3_sub'] : '';
+                                    $defDescBannerIcon  = !empty($mcSettings['desc_banner_icon']) ? $mcSettings['desc_banner_icon'] : '';
+                                    $defDescBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '';
+                                    $defDescBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : '';
 
 
                                 @endphp
@@ -589,11 +567,22 @@
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
+                                                <div class="col-12 mb-4">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
+                                                            <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
+                                                                {{ !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
+                                                            <label for="show_desc_right_box"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_desc_right_box">Show Course Description Right Box</label>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Top Subtitle / Heading</label>
                                                     <input type="text" name="masterclass_settings[desc_right_title]" class="form-control rounded-2"
-                                                           value="{{ $defDescRightTitle }}" placeholder="আমি আমার কাজের দীর্ঘ সময়ের অভিজ্ঞতা থেকে দেখিয়েছি...">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>&lt;mark&gt;word&lt;/mark&gt;</code> or <code>{word}</code> to highlight words.</small>
+                                                           value="{{ $defDescRightTitle }}">
+
                                                 </div>
 
                                                 <!-- 3 Timeline Steps -->
@@ -605,10 +594,10 @@
                                                                 <h6 class="fw-bold mb-2 text-primary font-14">Step 1</h6>
                                                                 <label class="form-label font-12 text-muted">Title</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_1_title]" class="form-control rounded-2 bg-white mb-2"
-                                                                       value="{{ $defDescStep1Title }}" placeholder="শর্ট টার্ম">
+                                                                       value="{{ $defDescStep1Title }}">
                                                                 <label class="form-label font-12 text-muted">Subtitle</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_1_sub]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $defDescStep1Sub }}" placeholder="দ্রুত প্রথম আয়">
+                                                                       value="{{ $defDescStep1Sub }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -616,10 +605,10 @@
                                                                 <h6 class="fw-bold mb-2 text-primary font-14">Step 2</h6>
                                                                 <label class="form-label font-12 text-muted">Title</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_2_title]" class="form-control rounded-2 bg-white mb-2"
-                                                                       value="{{ $defDescStep2Title }}" placeholder="মিড টার্ম">
+                                                                       value="{{ $defDescStep2Title }}">
                                                                 <label class="form-label font-12 text-muted">Subtitle</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_2_sub]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $defDescStep2Sub }}" placeholder="নিয়মিত মাসিক আয়">
+                                                                       value="{{ $defDescStep2Sub }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -627,10 +616,10 @@
                                                                 <h6 class="fw-bold mb-2 text-primary font-14">Step 3</h6>
                                                                 <label class="form-label font-12 text-muted">Title</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_3_title]" class="form-control rounded-2 bg-white mb-2"
-                                                                       value="{{ $defDescStep3Title }}" placeholder="লং টার্ম">
+                                                                       value="{{ $defDescStep3Title }}">
                                                                 <label class="form-label font-12 text-muted">Subtitle</label>
                                                                 <input type="text" name="masterclass_settings[desc_step_3_sub]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $defDescStep3Sub }}" placeholder="প্যাসিভ ও স্থায়ী আয়">
+                                                                       value="{{ $defDescStep3Sub }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -643,17 +632,17 @@
                                                         <div class="col-md-3">
                                                             <label class="form-label font-12 text-muted">Icon / Emoji</label>
                                                             <input type="text" name="masterclass_settings[desc_banner_icon]" class="form-control rounded-2"
-                                                                   value="{{ $defDescBannerIcon }}" placeholder="💰">
+                                                                   value="{{ $defDescBannerIcon }}">
                                                         </div>
                                                         <div class="col-md-9">
                                                             <label class="form-label font-12 text-muted">Card Heading</label>
                                                             <input type="text" name="masterclass_settings[desc_banner_title]" class="form-control rounded-2"
-                                                                   value="{{ $defDescBannerTitle }}" placeholder="$1,000+ প্রতি মাসে আয় করুন!">
+                                                                   value="{{ $defDescBannerTitle }}">
                                                         </div>
                                                         <div class="col-md-12">
                                                             <label class="form-label font-12 text-muted">Card Subtitle</label>
                                                             <input type="text" name="masterclass_settings[desc_banner_sub]" class="form-control rounded-2"
-                                                                   value="{{ $defDescBannerSub }}" placeholder="প্রতি মাসে ১,০০০ ডলার প্লাস আয় করার নিশ্চয়তার জার্নি হচ্ছে এই কোর্স।">
+                                                                   value="{{ $defDescBannerSub }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -661,7 +650,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                        </div> <!-- End masterclass-single-page-wrapper -->
+                                    </div>
+                                    <div class="tab-pane fade {{ $request_tab == 'benefits' ? 'show active' : '' }}"
+                                         id="courseBenefits" role="tabpanel" aria-labelledby="benefits" tabindex="0">
+                                        <div class="masterclass-single-page-wrapper">
                                     <!-- Section 3: Benefits Section -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
@@ -672,11 +665,22 @@
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
+                                                <div class="col-12 mb-4">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="setting-check">
+                                                            <input type="checkbox" name="masterclass_settings[show_benefits_section]" value="1" id="show_benefits_section"
+                                                                {{ !empty($mcSettings['show_benefits_section']) ? 'checked' : '' }}>
+                                                            <label for="show_benefits_section"></label>
+                                                        </div>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_benefits_section">Show Benefits & Target Audience Section</label>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Benefits Heading</label>
                                                     <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                                           value="{{ $defBenefitsTitle }}" placeholder="Who Is This {Masterclass} For?">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>&lt;mark&gt;word&lt;/mark&gt;</code> or <code>{word}</code> to highlight words (e.g. <code>Who Is This {Masterclass} For?</code>).</small>
+                                                           value="{{ $defBenefitsTitle }}">
+
                                                 </div>
 
                                                 <div class="col-12 mb-2">
@@ -686,7 +690,7 @@
                                                             <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                                                                 <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">{{ $bIdx + 1 }}</span></span>
                                                                 <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white"
-                                                                       value="{{ $bItem }}" placeholder="Enter benefit point...">
+                                                                       value="{{ $bItem }}">
                                                                 <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                                                                     <i class="las la-trash-alt fs-5"></i>
                                                                 </a>
@@ -697,8 +701,11 @@
                                             </div>
                                         </div>
                                      </div>
-
-
+                                        </div> <!-- End masterclass-single-page-wrapper -->
+                                    </div>
+                                    <div class="tab-pane fade {{ $request_tab == 'gift_banner' ? 'show active' : '' }}"
+                                         id="courseGiftBanner" role="tabpanel" aria-labelledby="gift_banner" tabindex="0">
+                                        <div class="masterclass-single-page-wrapper">
                                     <!-- Section 4: Special Bonus Gift -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
@@ -720,38 +727,37 @@
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Pill / Badge Text</label>
                                                     <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
-                                                           value="{{ $defGiftBadge }}" placeholder="🎁 যারা join করবেন তাদের জন্য special gift">
+                                                           value="{{ $defGiftBadge }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Title</label>
                                                     <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                                           value="{{ $defGiftTitle }}" placeholder="৳১০,০০০ টাকার Ecom Dropshipping Mastery Course — {FREE} করার সুযোগ">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>{FREE} করার সুযোগ</code>)।</small>
+                                                           value="{{ $defGiftTitle }}">
+
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Original Gift Value</label>
                                                     <input type="text" name="masterclass_settings[gift_value]" class="form-control rounded-2"
-                                                           value="{{ $defGiftValue }}" placeholder="৳১০,০০০">
+                                                           value="{{ $defGiftValue }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Red CTA Text</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defGiftCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                           value="{{ $defGiftCtaText }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Red CTA Link</label>
                                                     <input type="text" name="masterclass_settings[gift_cta_link]" class="form-control rounded-2"
-                                                           value="{{ $defGiftCtaLink }}" placeholder="e.g. #register or https://...">
+                                                           value="{{ $defGiftCtaLink }}">
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
                                                     <label class="form-label">Gift Description</label>
-                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3"
-                                                              placeholder="এই master class-এ যারা join করবেন, তারা আমার ৳১০,০০০ টাকার Ecom Dropshipping Mastery Course টা free তে করার সুযোগ পাবেন...">{{ $defGiftDescription }}</textarea>
+                                                    <textarea name="masterclass_settings[gift_description]" class="form-control rounded-2 summernote" rows="3">{{ $defGiftDescription }}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 mb-4">
@@ -796,7 +802,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                        </div> <!-- End masterclass-single-page-wrapper -->
+                                    </div>
+                                    <div class="tab-pane fade {{ $request_tab == 'offer_breakdown' ? 'show active' : '' }}"
+                                         id="courseOfferBreakdown" role="tabpanel" aria-labelledby="offer_breakdown" tabindex="0">
+                                        <div class="masterclass-single-page-wrapper">
                                     <!-- Section 3.5: Offer Breakdown -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
@@ -819,48 +829,47 @@
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Breakdown Today Title</label>
                                                     <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownTodayTitle }}" placeholder="আজকে এই {কোর্সে} যুক্ত হলে যা যা পাচ্ছেন:">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>আজকে এই {কোর্সে} যুক্ত হলে</code>)।</small>
+                                                           value="{{ $defBreakdownTodayTitle }}">
+
                                                 </div>
 
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Bottom Subheading</label>
                                                     <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownSubheading }}" placeholder="আজকের মূল্য (token) ২৯৯০ টাকা মাত্র">
+                                                           value="{{ $defBreakdownSubheading }}">
                                                 </div>
 
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Original Price (Strikethrough)</label>
                                                     <input type="text" name="masterclass_settings[breakdown_original_price]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['breakdown_original_price'] ?? '' }}" placeholder="$1,000.00">
+                                                           value="{{ $mcSettings['breakdown_original_price'] ?? '' }}">
                                                 </div>
 
                                                 <div class="col-12 mb-4">
                                                     <label class="form-label mb-2">Breakdown Items (One per line, Format: Title | Price)</label>
-                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="6"
-                                                              placeholder="🎓 ২ দিনের live masterclass — সম্পূর্ণ roadmap সহ | ৳৩,০০০&#10;🎁 Ecom Dropshipping Mastery Course free পাওয়ার সুযোগ | ৳১০,০০০">{{ $defBreakdownItems }}</textarea>
+                                                    <textarea name="masterclass_settings[breakdown_items]" class="form-control rounded-2" rows="6">{{ $defBreakdownItems }}</textarea>
                                                     <small class="text-muted">Separate title and price with a pipe (|) character.</small>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Breakdown Red CTA Text</label>
                                                     <input type="text" name="masterclass_settings[breakdown_cta_text]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownCtaText }}" placeholder="সিট কনফার্ম করুন →">
+                                                           value="{{ $defBreakdownCtaText }}">
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Breakdown Red CTA Link</label>
                                                     <input type="text" name="masterclass_settings[breakdown_cta_link]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownCtaLink }}" placeholder="e.g. #register or https://...">
+                                                           value="{{ $defBreakdownCtaLink }}">
                                                 </div>
                                             </div>
                                         </div>
                                      </div>
-
-
-
-
-
+                                        </div> <!-- End masterclass-single-page-wrapper -->
+                                    </div>
+                                    <div class="tab-pane fade {{ $request_tab == 'ad_banners' ? 'show active' : '' }}"
+                                         id="courseAdBanners" role="tabpanel" aria-labelledby="ad_banners" tabindex="0">
+                                        <div class="masterclass-single-page-wrapper">
                                     <!-- Section 10: Masterclass Ad Banners (1 & 2) -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3">
@@ -885,7 +894,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Ad Banner Link URL 1</label>
                                                     <input type="text" name="masterclass_settings[ad_banner_1_link]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}" placeholder="https://example.com/promotion1">
+                                                           value="{{ $mcSettings['ad_banner_1_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label mb-2">Banner Image 1 (1200x300)</label>
@@ -897,7 +906,7 @@
                                                         <div class="col-lg-6 mb-2">
                                                             <label class="form-label mb-1">Or Image URL / Link</label>
                                                             <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}" placeholder="https://example.com/banner1.jpg">
+                                                                   value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
                                                         </div>
                                                     </div>
                                                     @if(!empty($mcSettings['ad_banner_1_image_url']))
@@ -925,7 +934,7 @@
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Ad Banner Link URL 2</label>
                                                     <input type="text" name="masterclass_settings[ad_banner_2_link]" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}" placeholder="https://example.com/promotion2">
+                                                           value="{{ $mcSettings['ad_banner_2_link'] ?? '' }}">
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label mb-2">Banner Image 2 (1200x300)</label>
@@ -937,7 +946,7 @@
                                                         <div class="col-lg-6 mb-2">
                                                             <label class="form-label mb-1">Or Image URL / Link</label>
                                                             <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
-                                                                   value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}" placeholder="https://example.com/banner2.jpg">
+                                                                   value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
                                                         </div>
                                                     </div>
                                                     @if(!empty($mcSettings['ad_banner_2_image_url']))
@@ -950,17 +959,16 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                        </div> <!-- End masterclass-single-page-wrapper -->
+                                    </div>
+                                    <div class="tab-pane fade {{ $request_tab == 'support' ? 'show active' : '' }}"
+                                         id="courseSupport" role="tabpanel" aria-labelledby="support" tabindex="0">
+                                        <div class="masterclass-single-page-wrapper">
                                     @include('backend.admin.course.masterclass_support')
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="d-flex justify-content-between align-items-center mt-30 pt-3 border-top">
-                                        <a href="#" type="button" class="btn sg-btn-outline-primary btn_action"
-                                            data-bs-target="#basicCourseInformation">{{ __('back') }}</a>
-
+                                    <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
                                         <button type="submit" class="btn sg-btn-primary px-4"><i class="las la-save me-1"></i> {{ __('update') }} {{ __('masterclass') }}</button>
-                                        <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                            data-bs-target="#courseMediaImages">{{ __('next') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -1025,7 +1033,7 @@
                                         <div class="mb-4">
                                             <label for="videoLink" class="form-label">{{ __('video_link') }}</label>
                                             <input type="text" class="form-control rounded-2" name="video_link"
-                                                   id="videoLink" placeholder="{{ __('enter_video_link') }}"
+                                                   id="videoLink"
                                                    value="{{ $course->video_source == 'upload' ? getFileName(getArrayValue('image', $course->video)) : $course->video }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('video') }}</p>
@@ -1053,22 +1061,11 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseMasterclass">{{ __('back') }}</a>
-
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#coursePricing">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
                                 </div>
                             </div>
                             <!-- End Course Media Images -->
 
-                            <div class="tab-pane fade {{ $step_3_error && !$step_2_error ? 'show active' : '' }}"
+                            <div class="tab-pane fade {{ $request_tab == 'pricing' ? 'show active' : '' }} {{ $step_3_error && !$step_2_error ? 'show active' : '' }}"
                                  id="coursePricing" role="tabpanel" aria-labelledby="pricing" tabindex="0">
                                 <div class="row gx-20">
                                     <div class="col-lg-6">
@@ -1098,7 +1095,6 @@
                                         <div class="mb-4">
                                             <label for="price" class="form-label">{{ __('price') }}</label>
                                             <input type="text" class="form-control rounded-2" id="price" name="price"
-                                                   placeholder="{{ __('price') }}"
                                                    value="{{ old('price', $course->price) }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('price') }}</p>
@@ -1139,8 +1135,7 @@
                                                    class="form-label">{{ __('discount_amount') }}</label>
                                             <input type="text" class="form-control rounded-2" id="discount_amount"
                                                    name="discount_amount"
-                                                   value="{{ old('discount_amount', $course->discount_amount) }}"
-                                                   placeholder="{{ __('discount_amount') }}">
+                                                   value="{{ old('discount_amount', $course->discount_amount) }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('discount_amount') }}</p>
                                             </div>
@@ -1165,19 +1160,6 @@
                                         </div>
                                     </div>
                                     <!-- End Date Range Picker -->
-
-
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseMediaImages">{{ __('back') }}</a>
-
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseCurriculum">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
-                                    <!-- End Next Page BTN -->
                                 </div>
                                 <!-- End Product images section -->
                             </div>
@@ -1202,9 +1184,8 @@
                                         <div class="form-group">
                                             <label for="curriculum_title" class="form-label">{{ __('Curriculum Section Title') }}</label>
                                             <input type="text" name="masterclass_settings[curriculum_title]" id="curriculum_title" class="form-control rounded-2"
-                                                   value="{{ $mcSettings['curriculum_title'] ?? '' }}"
-                                                   placeholder="{{ __('e.g. Course {Syllabus}') }}">
-                                            <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight 1-3 words (e.g. <code>Course {Syllabus}</code>).</small>
+                                                   value="{{ $mcSettings['curriculum_title'] ?? '' }}">
+                                            <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
                                         </div>
                                     </div>
 
@@ -1409,15 +1390,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#coursePricing">{{ __('back') }}</a>
-                                            <a href="#" type="button" id="curriculum_next_btn" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="{{ $course->course_type == 'live_class' ? '#courseLiveClass' : '#courseFAQ' }}">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <!-- End Curriculum Tab -->
@@ -1433,8 +1405,7 @@
                                                     <label for="liveClassDate" class="form-label">Live Class
                                                         Date</label>
                                                     <input id="liveClassDateRangePicker" name="dateRange" type="text"
-                                                           class="form-control rounded-2"
-                                                           placeholder="{{ __('select_date') }}">
+                                                           class="form-control rounded-2">
                                                     <div class="nk-block-des text-danger">
                                                         <p class="dateRange_error error"></p>
                                                     </div>
@@ -1515,7 +1486,6 @@
                                             <label for="meetingLink" class="form-label">Meeting Link</label>
                                             <input type="text" class="form-control rounded-2"
                                                    name="LiveClassmeetingLink" id="meetingLink"
-                                                   placeholder="https://"
                                                    value="{{ $liveClass->meeting_link ??  old('metting_link') }}">
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('LiveClassmeetingLink') }}</p>
@@ -1528,7 +1498,6 @@
                                         <label for="MeetingID" class="form-label">Meeting ID</label>
                                         <input type="number" class="form-control rounded-2" name="LiveClassMeetingID"
                                                id="MeetingID"
-                                               placeholder="756 3546 14256"
                                                value="{{ $liveClass->meeting_id ??  old('metting_id') }}">
                                         <div class="nk-block-des text-danger">
                                             <p class="error">{{ $errors->first('LiveClassMeetingID') }}</p>
@@ -1540,7 +1509,6 @@
                                         <label for="meetingPassword" class="form-label">Meeting Password</label>
                                         <input type="text" class="form-control rounded-2"
                                                name="LiveClassmeetingPassword" id="meetingPassword"
-                                               placeholder="K465G465"
                                                value="{{ $liveClass->meeting_password ??  old('metting_password')}}">
                                         <div class="nk-block-des text-danger">
                                             <p class="error">{{ $errors->first('LiveClassmeetingPassword') }}</p>
@@ -1548,15 +1516,6 @@
                                     </div>
                                     <!-- End Meeting Password -->
 
-                                    <div class="col-lg-12">
-                                        <div class="d-flex justify-content-between align-items-center mt-30">
-                                            <a href="#" type="button"
-                                               class="btn sg-btn-outline-primary btn_action"
-                                               data-bs-target="#courseCurriculum">{{ __('back') }}</a>
-                                            <a href="#" type="button" class="btn sg-btn-primary btn_action"
-                                               data-bs-target="#courseFAQ">{{ __('next') }}</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <!-- End Live Class Tab -->
@@ -1578,16 +1537,14 @@
                                                 <div class="form-group mb-3">
                                                     <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
                                                     <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_title'] ?? '' }}"
-                                                           placeholder="{{ __('e.g. Frequently Asked {Questions}') }}">
-                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight 1-3 words (e.g. <code>Frequently Asked {Questions}</code>).</small>
+                                                           value="{{ $mcSettings['faq_title'] ?? '' }}">
+                                                    <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
                                                 </div>
 
                                                 <div class="form-group mb-0">
                                                     <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
                                                     <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}"
-                                                           placeholder="{{ __('e.g. POPULAR QUESTIONS') }}">
+                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -1759,7 +1716,7 @@
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
-                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white">
                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                             <i class="las la-trash-alt fs-5"></i>
                         </a>
@@ -1800,11 +1757,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold small text-dark">Question (প্রশ্ন)</label>
-                            <input type="text" name="masterclass_settings[faq_list][${index}][question]" class="form-control rounded-2 bg-white" placeholder="প্রশ্নটি লিখুন...">
+                            <input type="text" name="masterclass_settings[faq_list][${index}][question]" class="form-control rounded-2 bg-white">
                         </div>
                         <div>
                             <label class="form-label fw-bold small text-dark">Answer (উত্তর)</label>
-                            <textarea name="masterclass_settings[faq_list][${index}][answer]" class="form-control rounded-2 bg-white" rows="2" placeholder="উত্তরটি লিখুন..."></textarea>
+                            <textarea name="masterclass_settings[faq_list][${index}][answer]" class="form-control rounded-2 bg-white" rows="2"></textarea>
                         </div>
                     </div>
                 `;
@@ -1890,7 +1847,7 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <label class="form-label small mb-1 font-13 fw-normal text-muted">Link / URL</label>
-                                <input type="text" name="masterclass_settings[support_icons_list][${index}][url]" class="form-control form-control-sm rounded-2 fw-normal" placeholder="https://facebook.com/yourpage or https://wa.me/...">
+                                <input type="text" name="masterclass_settings[support_icons_list][${index}][url]" class="form-control form-control-sm rounded-2 fw-normal">
                             </div>
                         </div>
                     </div>
@@ -2141,17 +2098,15 @@
                             <div class="col-md-3 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Icon Class</label>
                                 <input type="text" name="masterclass_settings[gold_info_points][${idx}][icon]" class="form-control rounded-2 bg-white"
-                                       value="fas fa-check-circle" placeholder="e.g. fas fa-video">
+                                       value="fas fa-check-circle">
                             </div>
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Title / Label</label>
-                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white"
-                                       placeholder="যেমন: Zoom লাইভ 104">
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][title]" class="form-control rounded-2 bg-white">
                             </div>
                             <div class="col-md-4 col-12 mb-2 mb-md-0">
                                 <label class="form-label small text-muted mb-1">Subtitle / Value</label>
-                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white"
-                                       placeholder="যেমন: অনলাইন সেশন / 4h 40min">
+                                <input type="text" name="masterclass_settings[gold_info_points][${idx}][value]" class="form-control rounded-2 bg-white">
                             </div>
                             <div class="col-md-1 col-12 text-end">
                                 <label class="form-label d-none d-md-block opacity-0 mb-1">Del</label>
@@ -2175,7 +2130,7 @@
                 let html = `
                     <div class="benefit-single-item d-flex align-items-center gap-2 mb-3">
                         <span class="badge bg-light text-dark border p-2 font-13"><span class="benefit-num">${count + 1}</span></span>
-                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white" placeholder="সুবিধা / পয়েন্টটি লিখুন...">
+                        <input type="text" name="masterclass_settings[benefits_list][]" class="form-control rounded-2 bg-white">
                         <a href="javascript:void(0)" class="btn btn-sm text-danger border-0 remove-benefit-btn ms-1">
                             <i class="las la-trash-alt fs-5"></i>
                         </a>

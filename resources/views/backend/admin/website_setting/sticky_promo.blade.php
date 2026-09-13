@@ -1,0 +1,59 @@
+@extends('backend.layouts.master')
+@section('title', __('Sticky Promo Bar Settings'))
+@section('content')
+    <section class="options">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="section-title mb-4" style="font-weight: 500;">{{ __('Sticky Promo Bar Settings') }}</h3>
+                    <div class="bg-white redious-border p-20 p-sm-30">
+                        <form action="{{ route('footer.update-setting') }}" method="POST" class="form" enctype="multipart/form-data">@csrf
+                            <input type="hidden" name="site_lang" value="{{$lang}}">
+
+                            <div class="card border mb-4 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                                <div class="card-header bg-light py-3 px-4 d-flex align-items-center justify-content-between">
+                                    <h6 class="m-0 text-dark" style="font-size: 15px; font-weight: 500;">
+                                        {{ __('Sticky Promo Bar Settings') }}
+                                    </h6>
+                                    <div class="d-flex align-items-center gap-2 m-0">
+                                        <input type="hidden" name="show_sticky_promo_bar" value="0">
+                                        <label class="form-label m-0" for="show_sticky_promo_bar" style="font-size: 13px; font-weight: 400;">{{ __('Enable Promo Bar') }}</label>
+                                        <div class="setting-check m-0">
+                                            <input type="checkbox" name="show_sticky_promo_bar" value="1" id="show_sticky_promo_bar" class="sandbox_mode" {{ setting('show_sticky_promo_bar') == 1 ? 'checked' : '' }}>
+                                            <label for="show_sticky_promo_bar"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="row gx-20 gy-3">
+                                        <div class="col-md-6 col-12">
+                                            <label for="sticky_promo_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Promo Title') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_title" name="sticky_promo_title"
+                                                   placeholder="{{ __('e.g. অফার শেষ হওয়ার আগেই কিনুন') }}" value="{{ setting('sticky_promo_title', $lang) ?: '' }}">
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <label for="sticky_promo_btn_text" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Button Text') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_btn_text" name="sticky_promo_btn_text"
+                                                   placeholder="{{ __('e.g. Enroll Now') }}" value="{{ setting('sticky_promo_btn_text', $lang) ?: '' }}">
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <label for="sticky_promo_btn_link" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Button Link') }}</label>
+                                            <input type="text" class="form-control rounded-2 py-2" id="sticky_promo_btn_link" name="sticky_promo_btn_link"
+                                                   placeholder="{{ __('Enter Button Link') }}" value="{{ setting('sticky_promo_btn_link') ?: '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                <button type="submit" class="btn sg-btn-primary px-4"><i class="las la-save me-1"></i> {{ __('update') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection

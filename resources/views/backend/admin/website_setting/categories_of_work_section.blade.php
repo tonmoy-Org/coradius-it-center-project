@@ -4,8 +4,7 @@
     <section class="oftions">
         <div class="container-fluid">
             <div class="row">
-                @include('backend.admin.website_setting.sidebar_component')
-                <div class="col-xxl-9 col-lg-8 col-md-8">
+                <div class="col-lg-12">
                     <h3 class="section-title">{{ __('Categories of Work Section') }}</h3>
                     <div class="bg-white redious-border p-20 p-sm-30">
                         <form action="{{route('website.categories_of_work_section.save')}}" method="POST" class="form" enctype="multipart/form-data">@csrf

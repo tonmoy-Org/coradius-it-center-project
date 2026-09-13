@@ -45,36 +45,9 @@ class CourseController extends Controller
     public function index(CourseDataTable $dataTable, Request $request, $org_id = null)
     {
         try {
-
-            $organization  = $this->organization->find($org_id ?? $request->organization_id);
-
-            $instructor    = $this->user->findUsers([
-                'role_id'         => 2,
-                'organization_id' => $request->organization_id,
-            ]);
-
-            $categories    = $request->category_ids ? $this->category->activeCategories([
-                'ids'  => $request->category_ids,
-                'type' => 'course',
-            ]) : [];
-
-            $data          = [
-                'organization'    => $organization,
-                'instructors'     => $instructor,
-                'categories'      => $categories,
-                'status'          => $request->status,
-                'organization_id' => $request->organization_id,
-                'instructor_ids'  => $request->instructor_ids,
-            ];
-
-            $filtered_data = [
-                'instructor_ids' => $request->instructor_ids,
-                'category_ids'   => $request->category_ids,
-                'org_id'         => $org_id ?? $request->organization_id,
-                'status'         => $request->status,
-            ];
-
-            return $dataTable->with($filtered_data)->render('backend.admin.course.index', $data);
+            $firstCourse = $this->course->first();
+            $landingId = $firstCourse ? $firstCourse->id : 1;
+            return redirect()->route('courses.edit', [$landingId, 'tab' => 'basic']);
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
 

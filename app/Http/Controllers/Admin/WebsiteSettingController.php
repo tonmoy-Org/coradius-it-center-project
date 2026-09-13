@@ -539,6 +539,38 @@ class WebsiteSettingController extends Controller
         }
     }
 
+    public function newsletterSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.newsletter_section', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
+    public function stickyPromoSection(Request $request)
+    {
+        try {
+            $data = [
+                'languages' => $this->language->all(),
+                'lang'      => $request->lang == '' ? app()->getLocale() : $request->lang,
+            ];
+
+            return view('backend.admin.website_setting.sticky_promo', $data);
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+
+            return back();
+        }
+    }
+
     public function saveCategoriesOfWorkSection(Request $request)
     {
         if ($request->isMethod('get')) {

@@ -9,7 +9,7 @@
                 <h3 class="section-title">{{ __('theme_options') }}</h3>
                 <div class="bg-white redious-border p-20 p-sm-30">
                     <form action="{{ route('theme.options') }}" method="post" class="form">@csrf
-                        <div class="row">
+                        <div class="row d-none">
                             <div class="pageTitle">
                                 <h6 class="sub-title">Website Mode</h6>
                             </div>

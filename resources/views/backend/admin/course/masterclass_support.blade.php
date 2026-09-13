@@ -1,15 +1,15 @@
-@php
+﻿@php
     $mcSettings = $mcSettings ?? (old('masterclass_settings') ?: []);
     if (!is_array($mcSettings)) {
         $mcSettings = json_decode($mcSettings ?? '[]', true) ?: [];
     }
 
     $supportStatus = !empty($mcSettings['support_status']);
-    $supportTitle = old('masterclass_settings.support_title', $mcSettings['support_title'] ?? 'লাইফটাইম সাপোর্ট');
-    $supportTitleIcon = old('masterclass_settings.support_title_icon', $mcSettings['support_title_icon'] ?? 'fas fa-headset');
-    $supportSubtitle = old('masterclass_settings.support_subtitle', $mcSettings['support_subtitle'] ?? 'কোর্স শেষ হলেও আপনার শেখার পথ শেষ হবে না।');
-    $supportDescription = old('masterclass_settings.support_description', $mcSettings['support_description'] ?? 'আমাদের এক্সপার্ট সাপোর্ট ইন্সট্রাক্টর টিম প্রতিদিন আপনাকে লাইভ জুম সেশনের মাধ্যমে প্রতিটি কোডিং সমস্যা সমাধানে সাহায্য করবে।');
-    $supportImageUrl = old('masterclass_settings.support_image_url_custom', $mcSettings['support_image_url'] ?? 'images/support/support_right_top.png');
+    $supportTitle = old('masterclass_settings.support_title', $mcSettings['support_title'] ?? '');
+    $supportTitleIcon = old('masterclass_settings.support_title_icon', $mcSettings['support_title_icon'] ?? '');
+    $supportSubtitle = old('masterclass_settings.support_subtitle', $mcSettings['support_subtitle'] ?? '');
+    $supportDescription = old('masterclass_settings.support_description', $mcSettings['support_description'] ?? '');
+    $supportImageUrl = old('masterclass_settings.support_image_url_custom', $mcSettings['support_image_url'] ?? '');
 
     // Feature Cards (Dynamic List)
     $featureCards = old('masterclass_settings.support_features_list');
@@ -17,28 +17,12 @@
         if (!empty($mcSettings['support_features_list']) && is_array($mcSettings['support_features_list'])) {
             $featureCards = array_values($mcSettings['support_features_list']);
         } else {
-            $f1Icon = $mcSettings['support_feature_1_icon'] ?? 'fas fa-comment-dots';
-            $f1Title = $mcSettings['support_feature_1_title'] ?? 'ডাইরেক্ট সাপোর্ট';
-            $f1Desc = $mcSettings['support_feature_1_desc'] ?? 'যেকোনো কোর্স-রিলেটেড সমস্যায় সরাসরি সাপোর্ট পাবেন আমাদের টিমের কাছ থেকে।';
-
-            $f2Icon = $mcSettings['support_feature_2_icon'] ?? 'fas fa-video';
-            $f2Title = $mcSettings['support_feature_2_title'] ?? '1-to-1 লাইভ হেল্প';
-            $f2Desc = $mcSettings['support_feature_2_desc'] ?? 'প্রয়োজনে জুম মিটিংয়ের মাধ্যমে লাইভে সমস্যার সমাধান নিন সহজেই।';
-
-            $f3Icon = $mcSettings['support_feature_3_icon'] ?? 'fas fa-infinity';
-            $f3Title = $mcSettings['support_feature_3_title'] ?? 'লাইফটাইম এক্সেস';
-            $f3Desc = $mcSettings['support_feature_3_desc'] ?? 'কোর্স একবার কিনলে আজীবন সাপোর্ট ও মেন্টর গাইডলাইন পেতে থাকবেন।';
-
-            $featureCards = [
-                ['title' => $f1Title, 'icon' => $f1Icon, 'desc' => $f1Desc],
-                ['title' => $f2Title, 'icon' => $f2Icon, 'desc' => $f2Desc],
-                ['title' => $f3Title, 'icon' => $f3Icon, 'desc' => $f3Desc],
-            ];
+            $featureCards = [];
         }
     }
 
     // Divider
-    $dividerText = old('masterclass_settings.support_divider_text', $mcSettings['support_divider_text'] ?? 'সাপোর্ট নিতে যোগাযোগ করুন');
+    $dividerText = old('masterclass_settings.support_divider_text', $mcSettings['support_divider_text'] ?? '');
 
     // Support Channels (Dynamic List)
     $supportChannels = old('masterclass_settings.support_channels_list');
@@ -46,45 +30,14 @@
         if (!empty($mcSettings['support_channels_list']) && is_array($mcSettings['support_channels_list'])) {
             $supportChannels = array_values($mcSettings['support_channels_list']);
         } else {
-            $supportChannels = [
-                [
-                    'title' => $mcSettings['support_channel_1_title'] ?? 'ফেসবুক সাপোর্ট',
-                    'desc' => $mcSettings['support_channel_1_desc'] ?? 'আমাদের ফেসবুক পেজে মেসেজ করুন',
-                    'icon' => $mcSettings['support_channel_1_icon'] ?? 'fab fa-facebook-f',
-                    'team_avatar' => $mcSettings['support_channel_1_team_avatar'] ?? 'images/support/support_avatars.png',
-                    'team_label' => $mcSettings['support_channel_1_team_label'] ?? 'সক্রিয় সাপোর্ট টিম',
-                    'btn_text' => $mcSettings['support_channel_1_btn_text'] ?? 'মেসেজ করুন',
-                    'url' => $mcSettings['support_channel_1_url'] ?? ($mcSettings['support_facebook_url'] ?? setting('facebook_link') ?? 'https://facebook.com/yourpage'),
-                    'is_highlighted' => 0,
-                ],
-                [
-                    'title' => $mcSettings['support_channel_2_title'] ?? 'হোয়াটসঅ্যাপ সাপোর্ট',
-                    'desc' => $mcSettings['support_channel_2_desc'] ?? 'দ্রুত উত্তর পেতে আমাদের হোয়াটসঅ্যাপে নক দিন',
-                    'icon' => $mcSettings['support_channel_2_icon'] ?? 'fab fa-whatsapp',
-                    'team_avatar' => $mcSettings['support_channel_2_team_avatar'] ?? 'images/support/support_avatars.png',
-                    'team_label' => $mcSettings['support_channel_2_team_label'] ?? 'দ্রুত রেসপন্স',
-                    'btn_text' => $mcSettings['support_channel_2_btn_text'] ?? 'হোয়াটসঅ্যাপে নক দিন',
-                    'url' => $mcSettings['support_channel_2_url'] ?? ($mcSettings['support_whatsapp_url'] ?? setting('whatsapp_link') ?? 'https://wa.me/1234567890'),
-                    'is_highlighted' => 1,
-                ],
-                [
-                    'title' => $mcSettings['support_channel_3_title'] ?? 'টেলিগ্রাম সাপোর্ট',
-                    'desc' => $mcSettings['support_channel_3_desc'] ?? 'সাপোর্ট কমিউনিটিতে যুক্ত হয়ে সবার সাথে থাকুন',
-                    'icon' => $mcSettings['support_channel_3_icon'] ?? 'fab fa-telegram-plane',
-                    'team_avatar' => $mcSettings['support_channel_3_team_avatar'] ?? 'images/support/support_avatars.png',
-                    'team_label' => $mcSettings['support_channel_3_team_label'] ?? 'অ্যাক্টিভ কমিউনিটি',
-                    'btn_text' => $mcSettings['support_channel_3_btn_text'] ?? 'টেলিগ্রামে যোগ দিন',
-                    'url' => $mcSettings['support_channel_3_url'] ?? ($mcSettings['support_telegram_url'] ?? setting('telegram_link') ?? 'https://t.me/yourusername'),
-                    'is_highlighted' => 0,
-                ],
-            ];
+            $supportChannels = [];
         }
     }
 
     // Bottom strip banner
     $stripIcon = old('masterclass_settings.support_strip_icon', $mcSettings['support_strip_icon'] ?? 'fas fa-heart');
-    $stripText1 = old('masterclass_settings.support_strip_text_1', $mcSettings['support_strip_text_1'] ?? 'আপনি একা নন, আমরা আছি আপনার সাথে সবসময়।');
-    $stripText2 = old('masterclass_settings.support_strip_text_2', $mcSettings['support_strip_text_2'] ?? 'আপনার সফলতাই আমাদের লক্ষ্য।');
+    $stripText1 = old('masterclass_settings.support_strip_text_1', $mcSettings['support_strip_text_1'] ?? '');
+    $stripText2 = old('masterclass_settings.support_strip_text_2', $mcSettings['support_strip_text_2'] ?? '');
 @endphp
 
 <style>
@@ -139,15 +92,15 @@
             <div class="col-lg-6 col-md-6 mb-4">
                 <label class="form-label">Support Title / Heading</label>
                 <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
-                       value="{{ $supportTitle }}" placeholder="লাইফটাইম সাপোর্ট">
-                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i>শব্দ হাইলাইট করতে <code>&lt;mark&gt;শব্দ&lt;/mark&gt;</code> অথবা <code>{শব্দ}</code> ব্যবহার করুন (যেমন: <code>লাইফটাইম {সাপোর্ট}</code>)।</small>
+                       value="{{ $supportTitle }}">
+                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
             </div>
 
             <!-- Title Icon -->
             <div class="col-lg-6 col-md-6 mb-4">
                 <label class="form-label">Title Icon Class / Image Link</label>
                 <input type="text" name="masterclass_settings[support_title_icon]" class="form-control rounded-2 mb-2"
-                       value="{{ $supportTitleIcon }}" placeholder="fas fa-headset or image path">
+                       value="{{ $supportTitleIcon }}">
                 <label class="form-label small text-muted mb-1">Or Upload Title Icon / Image File</label>
                 <input type="file" name="support_title_icon_file" class="form-control form-control-sm rounded-2" accept="image/*">
             </div>
@@ -156,14 +109,13 @@
             <div class="col-lg-12 mb-4">
                 <label class="form-label">Support Subtitle / Tagline</label>
                 <input type="text" name="masterclass_settings[support_subtitle]" class="form-control rounded-2"
-                       value="{{ $supportSubtitle }}" placeholder="কোর্স শেষ হলেও আপনার শেখার পথ শেষ হবে না।">
+                       value="{{ $supportSubtitle }}">
             </div>
 
             <!-- Description -->
             <div class="col-lg-12 mb-4">
                 <label class="form-label">Support Description</label>
-                <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3"
-                          placeholder="সাপোর্টের বিস্তারিত লিখুন...">{{ $supportDescription }}</textarea>
+                <textarea name="masterclass_settings[support_description]" class="form-control rounded-2 summernote" rows="3">{{ $supportDescription }}</textarea>
             </div>
 
             <!-- Support Image Upload & URL -->
@@ -174,7 +126,7 @@
             <div class="col-lg-6 mb-4">
                 <label class="form-label mb-2">Or Support Image URL / Link</label>
                 <input type="text" name="masterclass_settings[support_image_url_custom]" class="form-control rounded-2"
-                       value="{{ $mcSettings['support_image_url'] ?? 'images/support/support_right_top.png' }}" placeholder="images/support/support_right_top.png">
+                       value="{{ $mcSettings['support_image_url'] ?? 'images/support/support_right_top.png' }}">
             </div>
             @if(!empty($mcSettings['support_image_url']))
                 <div class="col-12 mb-4">
@@ -207,7 +159,7 @@
                                 <label class="form-label font-12 text-muted mb-1">Title</label>
                                 <input type="text" name="masterclass_settings[support_features_list][{{ $idx }}][title]"
                                        class="form-control rounded-2 bg-white mb-2 support-feature-title-input"
-                                       value="{{ $fCard['title'] ?? '' }}" placeholder="ফিচার শিরোনাম">
+                                       value="{{ $fCard['title'] ?? '' }}">
 
                                 <input type="hidden" name="masterclass_settings[support_features_list][{{ $idx }}][icon]"
                                        class="support-feature-icon-input"
@@ -219,8 +171,7 @@
 
                                 <label class="form-label font-12 text-muted mb-1">Description</label>
                                 <textarea name="masterclass_settings[support_features_list][{{ $idx }}][desc]"
-                                          class="form-control rounded-2 bg-white support-feature-desc-input" rows="2"
-                                          placeholder="ফিচারের সংক্ষিপ্ত বিবরণ লিখুন...">{{ $fCard['desc'] ?? '' }}</textarea>
+                                          class="form-control rounded-2 bg-white support-feature-desc-input" rows="2">{{ $fCard['desc'] ?? '' }}</textarea>
                             </div>
                         </div>
                     @empty
@@ -235,7 +186,7 @@
             <div class="col-lg-12 mb-4">
                 <label class="form-label">Section Divider Text</label>
                 <input type="text" name="masterclass_settings[support_divider_text]" class="form-control rounded-2"
-                       value="{{ $dividerText }}" placeholder="সাপোর্ট নিতে যোগাযোগ করুন">
+                       value="{{ $dividerText }}">
             </div>
 
             <!-- Support Channels Section (Dynamic Repeater) -->
@@ -273,12 +224,12 @@
                                 <label class="form-label font-12 text-muted mb-1">Title</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][title]"
                                        class="form-control rounded-2 bg-white mb-2 support-channel-title-input"
-                                       value="{{ $chCard['title'] ?? '' }}" placeholder="চ্যানেলের নাম (যেমন: ফেসবুক সাপোর্ট)">
+                                       value="{{ $chCard['title'] ?? '' }}">
 
                                 <label class="form-label font-12 text-muted mb-1">Subtitle / Description</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][desc]"
                                        class="form-control rounded-2 bg-white mb-2 support-channel-desc-input"
-                                       value="{{ $chCard['desc'] ?? '' }}" placeholder="আমাদের পেজে মেসেজ করুন">
+                                       value="{{ $chCard['desc'] ?? '' }}">
 
                                 <input type="hidden" name="masterclass_settings[support_channels_list][{{ $cIdx }}][icon]"
                                        class="support-channel-icon-input"
@@ -293,22 +244,22 @@
                                        class="form-control form-control-sm rounded-2 bg-white mb-1 support-channel-file-input" accept="image/*">
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][team_avatar]"
                                        class="form-control form-control-sm rounded-2 bg-white mb-2 support-channel-avatar-input"
-                                       value="{{ $chCard['team_avatar'] ?? 'images/support/support_avatars.png' }}" placeholder="images/support/support_avatars.png">
+                                       value="{{ $chCard['team_avatar'] ?? 'images/support/support_avatars.png' }}">
 
                                 <label class="form-label font-12 text-muted mb-1">Team Status Label</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][team_label]"
                                        class="form-control rounded-2 bg-white mb-2 support-channel-label-input"
-                                       value="{{ $chCard['team_label'] ?? '' }}" placeholder="সক্রিয় সাপোর্ট টিম">
+                                       value="{{ $chCard['team_label'] ?? '' }}">
 
                                 <label class="form-label font-12 text-muted mb-1">Button Text</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][btn_text]"
                                        class="form-control rounded-2 bg-white mb-2 support-channel-btn-text-input"
-                                       value="{{ $chCard['btn_text'] ?? '' }}" placeholder="মেসেজ করুন">
+                                       value="{{ $chCard['btn_text'] ?? '' }}">
 
                                 <label class="form-label font-12 text-muted mb-1">Button URL / Link</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][url]"
                                        class="form-control rounded-2 bg-white support-channel-url-input"
-                                       value="{{ $chCard['url'] ?? '' }}" placeholder="https://example.com">
+                                       value="{{ $chCard['url'] ?? '' }}">
                             </div>
                         </div>
                     @empty
@@ -326,17 +277,17 @@
             <div class="col-md-2 mb-4">
                 <label class="form-label font-12 text-muted">Badge Icon</label>
                 <input type="text" name="masterclass_settings[support_strip_icon]" class="form-control rounded-2"
-                       value="{{ $stripIcon }}" placeholder="fas fa-heart">
+                       value="{{ $stripIcon }}">
             </div>
             <div class="col-md-5 mb-4">
                 <label class="form-label font-12 text-muted">Left Text</label>
                 <input type="text" name="masterclass_settings[support_strip_text_1]" class="form-control rounded-2"
-                       value="{{ $stripText1 }}" placeholder="আপনি একা নন, আমরা আছি আপনার সাথে সবসময়।">
+                       value="{{ $stripText1 }}">
             </div>
             <div class="col-md-5 mb-4">
                 <label class="form-label font-12 text-muted">Right Highlight Text</label>
                 <input type="text" name="masterclass_settings[support_strip_text_2]" class="form-control rounded-2"
-                       value="{{ $stripText2 }}" placeholder="আপনার সফলতাই আমাদের লক্ষ্য।">
+                       value="{{ $stripText2 }}">
             </div>
 
         </div>
@@ -390,7 +341,7 @@
                             </div>
                             <label class="form-label font-12 text-muted mb-1">Title</label>
                             <input type="text" name="masterclass_settings[support_features_list][${nextIndex}][title]"
-                                   class="form-control rounded-2 bg-white mb-2 support-feature-title-input" placeholder="ফিচার শিরোনাম">
+                                   class="form-control rounded-2 bg-white mb-2 support-feature-title-input">
 
                             <input type="hidden" name="masterclass_settings[support_features_list][${nextIndex}][icon]"
                                    class="support-feature-icon-input" value="">
@@ -401,8 +352,7 @@
 
                             <label class="form-label font-12 text-muted mb-1">Description</label>
                             <textarea name="masterclass_settings[support_features_list][${nextIndex}][desc]"
-                                      class="form-control rounded-2 bg-white support-feature-desc-input" rows="2"
-                                      placeholder="ফিচারের সংক্ষিপ্ত বিবরণ লিখুন..."></textarea>
+                                      class="form-control rounded-2 bg-white support-feature-desc-input" rows="2"></textarea>
                         </div>
                     </div>
                 `;
@@ -482,13 +432,11 @@
 
                             <label class="form-label font-12 text-muted mb-1">Title</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][title]"
-                                   class="form-control rounded-2 bg-white mb-2 support-channel-title-input"
-                                   placeholder="চ্যানেলের নাম (যেমন: ডিসকর্ড সাপোর্ট)">
+                                   class="form-control rounded-2 bg-white mb-2 support-channel-title-input">
 
                             <label class="form-label font-12 text-muted mb-1">Subtitle / Description</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][desc]"
-                                   class="form-control rounded-2 bg-white mb-2 support-channel-desc-input"
-                                   placeholder="সংক্ষিপ্ত বিবরণ লিখুন...">
+                                   class="form-control rounded-2 bg-white mb-2 support-channel-desc-input">
 
                             <input type="hidden" name="masterclass_settings[support_channels_list][${nextIndex}][icon]"
                                    class="support-channel-icon-input" value="">
@@ -502,22 +450,21 @@
                                    class="form-control form-control-sm rounded-2 bg-white mb-1 support-channel-file-input" accept="image/*">
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][team_avatar]"
                                    class="form-control form-control-sm rounded-2 bg-white mb-2 support-channel-avatar-input"
-                                   value="images/support/support_avatars.png" placeholder="images/support/support_avatars.png">
+                                   value="images/support/support_avatars.png">
 
                             <label class="form-label font-12 text-muted mb-1">Team Status Label</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][team_label]"
                                    class="form-control rounded-2 bg-white mb-2 support-channel-label-input"
-                                   value="সক্রিয় টিম" placeholder="সক্রিয় টিম">
+                                   value="সক্রিয় টিম">
 
                             <label class="form-label font-12 text-muted mb-1">Button Text</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][btn_text]"
                                    class="form-control rounded-2 bg-white mb-2 support-channel-btn-text-input"
-                                   value="যোগ দিন" placeholder="যোগ দিন">
+                                   value="যোগ দিন">
 
                             <label class="form-label font-12 text-muted mb-1">Button URL / Link</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][url]"
-                                   class="form-control rounded-2 bg-white support-channel-url-input"
-                                   placeholder="https://...">
+                                   class="form-control rounded-2 bg-white support-channel-url-input">
                         </div>
                     </div>
                 `;
