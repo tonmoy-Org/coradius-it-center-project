@@ -49,6 +49,23 @@ class SuccessStoryRepository
         if (arrayCheck('success_media_id', $request)) {
             $request['image'] = $this->getImageWithRecommendedSize($request['success_media_id'], '473', '337', true);
         }
+
+        if (arrayCheck('video_media_id', $request) && !empty($request['video_media_id'])) {
+            $media = \App\Models\MediaLibrary::find($request['video_media_id']);
+            if ($media && !empty($media->original_file)) {
+                $request['video'] = $media->original_file;
+            }
+        } elseif (arrayCheck('video_file', $request) && $request['video_file'] instanceof \Illuminate\Http\UploadedFile) {
+            $videoFile = $request['video_file'];
+            $extension = $videoFile->getClientOriginalExtension();
+            $fileName  = 'story_video_' . date('YmdHis') . '_' . rand(100, 999) . '.' . $extension;
+            $directory = 'files/stories/';
+            \Illuminate\Support\Facades\File::ensureDirectoryExists(public_path($directory), 0777, true);
+            $videoFile->move(public_path($directory), $fileName);
+            $request['video'] = $directory . $fileName;
+        }
+
+        $request['media_type'] = $request['media_type'] ?? 'image';
         $request['slug'] = getSlug('success_stories', $request['title']);
         $success         = SuccessStory::create($request);
 
@@ -62,8 +79,37 @@ class SuccessStoryRepository
         $data    = $request;
         $success = SuccessStory::findOrfail($id);
 
+        if (arrayCheck('media_type', $request)) {
+            $request['media_type'] = $request['media_type'] ?: 'image';
+        }
+
         if (arrayCheck('success_media_id', $request)) {
             $request['image'] = $this->getImageWithRecommendedSize($request['success_media_id'], '473', '337', true);
+        }
+
+        if (!empty($request['remove_video'])) {
+            if (!empty($success->video) && file_exists(public_path($success->video)) && str_contains($success->video, 'files/stories/')) {
+                @unlink(public_path($success->video));
+            }
+            $request['video'] = null;
+            $request['video_media_id'] = null;
+        } elseif (arrayCheck('video_media_id', $request) && !empty($request['video_media_id'])) {
+            $media = \App\Models\MediaLibrary::find($request['video_media_id']);
+            if ($media && !empty($media->original_file)) {
+                $request['video'] = $media->original_file;
+            }
+        } elseif (arrayCheck('video_file', $request) && $request['video_file'] instanceof \Illuminate\Http\UploadedFile) {
+            if (!empty($success->video) && file_exists(public_path($success->video)) && str_contains($success->video, 'files/stories/')) {
+                @unlink(public_path($success->video));
+            }
+            $videoFile = $request['video_file'];
+            $extension = $videoFile->getClientOriginalExtension();
+            $fileName  = 'story_video_' . date('YmdHis') . '_' . rand(100, 999) . '.' . $extension;
+            $directory = 'files/stories/';
+            \Illuminate\Support\Facades\File::ensureDirectoryExists(public_path($directory), 0777, true);
+            $videoFile->move(public_path($directory), $fileName);
+            $request['video'] = $directory . $fileName;
+            $request['video_media_id'] = null;
         }
 
         if (arrayCheck('lang', $request) && $request['lang'] != 'en') {
@@ -92,6 +138,10 @@ class SuccessStoryRepository
 
     public function destroy($id)
     {
+        $success = SuccessStory::find($id);
+        if ($success && !empty($success->video) && file_exists(public_path($success->video))) {
+            @unlink(public_path($success->video));
+        }
         return SuccessStory::destroy($id);
     }
 

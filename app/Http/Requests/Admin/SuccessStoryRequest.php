@@ -16,6 +16,10 @@ class SuccessStoryRequest extends FormRequest
         return [
             'title'       => 'required|unique:success_stories,title,'.$this->id,
             'description' => 'required',
+            'video_file'     => 'nullable|file|mimes:mp4,mov,ogg,webm,mkv|max:102400',
+            'video_media_id' => 'nullable',
+            'video'          => 'nullable|string',
+            'media_type'     => 'nullable|string|in:image,video',
         ];
     }
 }
