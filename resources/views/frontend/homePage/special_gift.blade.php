@@ -106,6 +106,21 @@
         .mc-callout-quote .quote-price {
             align-self: flex-start !important;
         }
+
+        /* Mobile font-size lock for text editor rich content */
+        .mc-gift-pill,
+        .mc-gift-pill * {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+        .mc-gift-title,
+        .mc-gift-title * {
+            font-size: 20px !important;
+            line-height: 1.35 !important;
+            font-weight: 700 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
     }
 </style>
 <section class="special-gift-section p-t-60 p-b-60 bg-white">
@@ -120,7 +135,7 @@
                     @endif
 
                     @if($giftTitle)
-                        <h2 class="fw-bold text-center mb-3" style="color: var(--color-text-ink, #0A1E3F); font-size: 26px; line-height: 1.4;">
+                        <h2 class="mc-gift-title fw-bold text-center mb-3" style="color: var(--color-text-ink, #0A1E3F); font-size: 26px; line-height: 1.4;">
                             {!! format_title_highlight($formatCurrencyText($giftTitle)) !!}
                         </h2>
                     @endif

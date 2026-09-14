@@ -638,10 +638,13 @@
             padding-bottom: 35px;
         }
 
-        .mc-support-title {
-            font-size: var(--mobile-font-heading-main, 22px) !important;
+        .mc-support-title,
+        .mc-support-title * {
+            font-size: 22px !important;
             line-height: 1.35 !important;
             margin-bottom: 10px !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
         }
 
         .mc-support-title-icon {
@@ -653,14 +656,17 @@
             height: 24px !important;
         }
 
-        .mc-support-subtitle {
-            font-size: var(--mobile-font-heading-sub, 17px) !important;
+        .mc-support-subtitle,
+        .mc-support-subtitle * {
+            font-size: 14px !important;
             margin-bottom: 10px !important;
+            word-break: break-word !important;
         }
 
         .mc-support-description,
-        .mc-support-description p {
-            font-size: var(--mobile-font-body, 13.5px) !important;
+        .mc-support-description p,
+        .mc-support-description * {
+            font-size: 13.5px !important;
             line-height: 1.42 !important;
             margin-bottom: 6px !important;
         }
@@ -675,11 +681,11 @@
         }
 
         .mc-feature-title {
-            font-size: var(--mobile-font-heading-sub, 17px) !important;
+            font-size: 13px !important;
         }
 
         .mc-feature-desc {
-            font-size: var(--mobile-font-body, 13.5px) !important;
+            font-size: 11.5px !important;
         }
 
         .mc-support-img-wrapper {
@@ -720,11 +726,14 @@
             padding-bottom: 30px;
         }
 
-        .mc-support-title {
-            font-size: var(--mobile-font-heading-main, 22px) !important;
+        .mc-support-title,
+        .mc-support-title * {
+            font-size: 20px !important;
             line-height: 1.35 !important;
             margin-bottom: 8px !important;
             gap: 6px;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
         }
 
         .mc-support-title-icon {
@@ -736,15 +745,18 @@
             height: 22px !important;
         }
 
-        .mc-support-subtitle {
-            font-size: var(--mobile-font-heading-sub, 17px) !important;
+        .mc-support-subtitle,
+        .mc-support-subtitle * {
+            font-size: 14px !important;
             line-height: 1.5 !important;
             margin-bottom: 8px !important;
+            word-break: break-word !important;
         }
 
         .mc-support-description,
-        .mc-support-description p {
-            font-size: var(--mobile-font-body, 13.5px) !important;
+        .mc-support-description p,
+        .mc-support-description * {
+            font-size: 13.5px !important;
             line-height: 1.42 !important;
             margin-bottom: 6px !important;
         }

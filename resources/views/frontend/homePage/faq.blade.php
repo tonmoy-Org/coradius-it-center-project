@@ -148,6 +148,21 @@
             font-size: 15px;
             margin-left: 10px;
         }
+
+        /* Mobile font-size lock for text editor rich content */
+        .faq-section-subtitle,
+        .faq-section-subtitle * {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+        .faq-section-title,
+        .faq-section-title * {
+            font-size: 20px !important;
+            line-height: 1.3 !important;
+            font-weight: 700 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
     }
 </style>
 
@@ -172,12 +187,12 @@
                     @if(!empty($faqSubtitle) || !empty($faqTitle))
                     <div class="common-heading m-b-30">
                         @if(!empty($faqSubtitle))
-                            <span class="sub-title fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
+                            <span class="faq-section-subtitle sub-title fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                                 {!! format_title_highlight($faqSubtitle) !!}
                             </span>
                         @endif
                         @if(!empty($faqTitle))
-                            <h2 class="fw-bold m-b-0" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
+                            <h2 class="faq-section-title fw-bold m-b-0" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
                                 {!! format_title_highlight($faqTitle) !!}
                             </h2>
                         @endif

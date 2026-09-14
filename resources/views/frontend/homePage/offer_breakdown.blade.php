@@ -309,13 +309,17 @@
         .mc-breakdown-light-card {
             padding: 20px 12px;
         }
-        .mc-bd-light-title {
-            font-size: var(--mobile-font-heading-main, 22px) !important;
+        .mc-bd-light-title,
+        .mc-bd-light-title * {
+            font-size: 20px !important;
             font-weight: 700 !important;
             line-height: 1.35 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
         }
-        .mc-bd-light-eyebrow {
-            font-size: var(--mobile-font-badge, 13px) !important;
+        .mc-bd-light-eyebrow,
+        .mc-bd-light-eyebrow * {
+            font-size: 13px !important;
             font-weight: 600 !important;
             line-height: 1.4 !important;
         }
@@ -334,13 +338,16 @@
         .mc-bd-light-row {
             gap: 8px;
         }
-        .mc-bd-light-item-title {
-            font-size: var(--mobile-font-heading-sub, 17px) !important;
+        .mc-bd-light-item-title,
+        .mc-bd-light-item-title * {
+            font-size: 14px !important;
             font-weight: 600 !important;
-            word-break: break-word;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
         }
-        .mc-bd-light-item-sub {
-            font-size: var(--mobile-font-body, 13.5px) !important;
+        .mc-bd-light-item-sub,
+        .mc-bd-light-item-sub * {
+            font-size: 12.5px !important;
             font-weight: 400 !important;
         }
         .mc-bd-light-item-val {

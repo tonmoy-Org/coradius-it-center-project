@@ -111,13 +111,25 @@
         padding: 2px 8px;
         border-radius: 6px;
     }
+
+    /* Mobile font-size lock for text editor rich content */
+    @media (max-width: 767px) {
+        .benefits-section-title,
+        .benefits-section-title * {
+            font-size: 20px !important;
+            line-height: 1.35 !important;
+            font-weight: 700 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+    }
 </style>
 
 <section class="benefits-section p-t-60 p-b-60" style="background-color: #ffffff;">
     <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
             @if(!empty($benefitsTitle))
-            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">
+            <h2 class="benefits-section-title fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">
                 {!! format_title_highlight($benefitsTitle) !!}
             </h2>
             @endif
