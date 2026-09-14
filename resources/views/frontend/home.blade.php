@@ -165,8 +165,13 @@
         section.order-form-section .lead-title *,
         section.order-form-section .form-heading,
         section.order-form-section .form-heading *,
-        section.order-form-section h2,
         section.order-form-section h2 *,
+        section.course-description-section .description-card h2,
+        section.course-description-section .description-card h2 *,
+        section.course-description-section .desc-main-title,
+        section.course-description-section .desc-main-title *,
+        .desc-main-title,
+        .desc-main-title *,
         .home-page-sections > section h2,
         .home-page-sections > section h2 *,
         .home-page-sections > section .common-heading h2,
@@ -238,7 +243,11 @@
         .card-title,
         .card-title *,
         .sub-heading,
-        .sub-heading * {
+        .sub-heading *,
+        .desc-right-title,
+        .desc-right-title *,
+        .desc-banner-title,
+        .desc-banner-title * {
             font-size: var(--mobile-font-heading-sub, 17px) !important;
             font-weight: 600 !important;
             line-height: 1.4 !important;
@@ -357,6 +366,10 @@
         .coupon-banner-section p,
         .home-page-sections p:not(.file_name):not(.error):not(.num),
         .section-description,
+        .desc-banner-sub,
+        .desc-banner-sub *,
+        .course-description-content,
+        .course-description-content *,
         .common-heading > p {
             font-size: var(--mobile-font-body, 13.5px) !important;
             font-weight: 400 !important;

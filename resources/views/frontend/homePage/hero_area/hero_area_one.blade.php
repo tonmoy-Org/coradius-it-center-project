@@ -125,7 +125,7 @@
                         “
                     </div>
                     @if(!empty($descSubtitle))
-                        <h2 class="mb-3 fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
+                        <h2 class="mb-3 fw-bold desc-main-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
                             {!! format_title_highlight($descSubtitle) !!}
                         </h2>
                     @endif
@@ -138,10 +138,10 @@
                 @if($hasRightContent)
                 <!-- Right Column: Structured Feature Layout -->
                 <div class="col-lg-6 col-md-12">
-                    <div class="p-3 p-md-4 rounded-4" style="background: var(--color-white, #FFFFFF); border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 4px 18px rgba(0, 31, 92, 0.05);">
+                    <div class="desc-right-box p-3 p-md-4 rounded-4" style="background: var(--color-white, #FFFFFF); border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 4px 18px rgba(0, 31, 92, 0.05);">
                         <!-- Top Subtitle -->
                         @if(!empty($descRightTitle))
-                            <h4 class="fw-bold mb-4" style="color: var(--color-text-ink, #0A1E3F); font-size: 17.5px; line-height: 1.65;">
+                            <h4 class="fw-bold mb-4 desc-right-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 17.5px; line-height: 1.65;">
                                 {!! format_title_highlight($descRightTitle) !!}
                             </h4>
                         @endif
@@ -154,28 +154,28 @@
                                 <div class="col-4">
                                     <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
                                     @if(!empty($descStep1Title))
-                                        <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep1Title }}</div>
+                                        <div class="fw-bold desc-step-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep1Title }}</div>
                                     @endif
                                     @if(!empty($descStep1Sub))
-                                        <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep1Sub }}</div>
+                                        <div class="desc-step-sub" style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep1Sub }}</div>
                                     @endif
                                 </div>
                                 <div class="col-4">
                                     <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
                                     @if(!empty($descStep2Title))
-                                        <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep2Title }}</div>
+                                        <div class="fw-bold desc-step-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep2Title }}</div>
                                     @endif
                                     @if(!empty($descStep2Sub))
-                                        <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep2Sub }}</div>
+                                        <div class="desc-step-sub" style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep2Sub }}</div>
                                     @endif
                                 </div>
                                 <div class="col-4">
                                     <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
                                     @if(!empty($descStep3Title))
-                                        <div class="fw-bold" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep3Title }}</div>
+                                        <div class="fw-bold desc-step-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep3Title }}</div>
                                     @endif
                                     @if(!empty($descStep3Sub))
-                                        <div style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep3Sub }}</div>
+                                        <div class="desc-step-sub" style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep3Sub }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -188,16 +188,16 @@
                              style="background: var(--color-white, #ffffff); border: 2px solid var(--color-primary, #0056D2); box-shadow: 0 4px 15px rgba(0, 86, 210, 0.12);">
                             <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
                                 @if(!empty($descBannerIcon))
-                                    <span style="font-size: 26px;">{{ $descBannerIcon }}</span>
+                                    <span class="desc-banner-icon" style="font-size: 26px;">{{ $descBannerIcon }}</span>
                                 @endif
                                 @if(!empty($descBannerTitle))
-                                    <h3 class="m-0 fw-bold" style="color: var(--color-accent-orange, #FF7A00); font-size: 22px; letter-spacing: 0.5px;">
+                                    <h3 class="m-0 fw-bold desc-banner-title" style="color: var(--color-accent-orange, #FF7A00); font-size: 22px; letter-spacing: 0.5px;">
                                         {!! format_title_highlight($descBannerTitle) !!}
                                     </h3>
                                 @endif
                             </div>
                             @if(!empty($descBannerSub))
-                                <div class="m-0 fw-semibold" style="color: var(--color-text-secondary, #4B5A72); font-size: 14.5px;">
+                                <div class="m-0 fw-semibold desc-banner-sub" style="color: var(--color-text-secondary, #4B5A72); font-size: 14.5px;">
                                     {!! format_title_highlight($descBannerSub) !!}
                                 </div>
                             @endif
@@ -616,9 +616,15 @@
         padding: 20px 16px !important;
     }
 
-    .description-card h2 {
+    .description-card h2,
+    .desc-main-title,
+    .desc-main-title * {
         font-size: 20px !important;
+        line-height: 1.35 !important;
+        font-weight: 700 !important;
         margin-bottom: 12px !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
     }
 
     .course-description-content,
@@ -630,7 +636,9 @@
     .course-description-content h1,
     .course-description-content h2,
     .course-description-content h3,
-    .course-description-content h4 {
+    .course-description-content h4,
+    .course-description-content h5,
+    .course-description-content h6 {
         font-size: 16px !important;
         font-weight: 600 !important;
         color: #0A1E3F !important;
@@ -649,6 +657,73 @@
     .course-description-content b {
         font-weight: 600 !important;
         color: #0056D2 !important;
+    }
+
+    /* ── Course Description Right Box: Locked Mobile Typography ── */
+    .desc-right-box {
+        padding: 18px 14px !important;
+        margin-top: 10px !important;
+    }
+
+    .desc-right-title,
+    .desc-right-title * {
+        font-size: 16px !important;
+        line-height: 1.45 !important;
+        font-weight: 700 !important;
+        margin-bottom: 14px !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    .timeline-nodes-wrapper {
+        margin-bottom: 16px !important;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+    .timeline-nodes-wrapper .timeline-line {
+        top: 14px !important;
+    }
+    .timeline-nodes-wrapper .node-dot {
+        width: 12px !important;
+        height: 12px !important;
+        margin-bottom: 6px !important;
+    }
+    .desc-step-title,
+    .desc-step-title * {
+        font-size: 12px !important;
+        line-height: 1.3 !important;
+        font-weight: 700 !important;
+        word-break: break-word !important;
+    }
+    .desc-step-sub,
+    .desc-step-sub * {
+        font-size: 10.5px !important;
+        line-height: 1.25 !important;
+        word-break: break-word !important;
+    }
+
+    .highlight-banner-card {
+        padding: 16px 12px !important;
+    }
+    .desc-banner-icon {
+        font-size: 22px !important;
+        line-height: 1 !important;
+    }
+    .desc-banner-title,
+    .desc-banner-title * {
+        font-size: 18px !important;
+        line-height: 1.35 !important;
+        font-weight: 700 !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    .desc-banner-sub,
+    .desc-banner-sub * {
+        font-size: 13.5px !important;
+        line-height: 1.5 !important;
+        font-weight: 500 !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
     }
 }
 

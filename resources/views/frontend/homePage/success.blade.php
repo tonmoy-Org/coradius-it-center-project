@@ -388,26 +388,6 @@
         .story-modal-desc {
             font-size: 14.5px;
         }
-
-        /* Mobile font-size lock: override any inline styles from text editor */
-        .success-section-eyebrow,
-        .success-section-eyebrow * {
-            font-size: 13px !important;
-            line-height: 1.4 !important;
-        }
-        .success-section-title,
-        .success-section-title * {
-            font-size: 22px !important;
-            line-height: 1.3 !important;
-            font-weight: 700 !important;
-            word-break: break-word !important;
-            overflow-wrap: break-word !important;
-        }
-        .success-section-subtitle,
-        .success-section-subtitle * {
-            font-size: 14px !important;
-            line-height: 1.6 !important;
-        }
     }
 </style>
 
@@ -418,17 +398,17 @@
             <div class="col-12 col-lg-8">
                 <div class="common-heading" data-aos="fade-up" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
                     @if(!empty($successEyebrow))
-                        <span class="success-section-eyebrow sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                             {!! format_title_highlight($successEyebrow) !!}
                         </span>
                     @endif
                     @if(!empty($successTitle))
-                        <h2 class="success-section-title fw-bold m-b-12" style="color: #0A1E3F; font-size: 32px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-12" style="color: #0A1E3F; font-size: 32px; line-height: 1.25;">
                             {!! format_title_highlight($successTitle) !!}
                         </h2>
                     @endif
                     @if(!empty($successSubtitle))
-                        <div class="success-section-subtitle m-b-20" style="color: #4B5A72; font-size: 16px; line-height: 1.7; max-width: 680px;">
+                        <div class="m-b-20" style="color: #4B5A72; font-size: 16px; line-height: 1.7; max-width: 680px;">
                             {!! $successSubtitle !!}
                         </div>
                     @endif

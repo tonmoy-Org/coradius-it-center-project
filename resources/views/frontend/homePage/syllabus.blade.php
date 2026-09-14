@@ -44,25 +44,13 @@
         background: var(--color-white, #ffffff) !important;
         padding: 0;
     }
-
-    /* Mobile font-size lock for text editor rich content */
-    @media (max-width: 767px) {
-        .syllabus-section-title,
-        .syllabus-section-title * {
-            font-size: 20px !important;
-            line-height: 1.3 !important;
-            font-weight: 700 !important;
-            word-break: break-word !important;
-            overflow-wrap: break-word !important;
-        }
-    }
 </style>
 
 <section class="syllabus-section p-t-60 p-b-60 position-relative overflow-hidden bg-white" id="syllabus">
     <div class="container container-1278">
         @if(!empty($curriculumTitle))
         <div class="common-heading text-center m-b-40" data-aos="fade-up">
-            <h2 class="syllabus-section-title fw-bold m-b-0" style="color: var(--color-text-ink, #0A1E3F); font-size: 28px; line-height: 1.25;">
+            <h2 class="fw-bold m-b-0" style="color: var(--color-text-ink, #0A1E3F); font-size: 28px; line-height: 1.25;">
                 {!! format_title_highlight($curriculumTitle) !!}
             </h2>
         </div>
