@@ -33,7 +33,7 @@
                     @endif
 
                     {{-- Video or Image --}}
-                    <div class="hero-video-wrapper video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 1150px; border: 2px solid rgba(0, 86, 210, 0.4);">
+                    <div class="hero-video-wrapper video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 960px; border: 2px solid rgba(0, 86, 210, 0.4);">
                         <!-- Border Beam SVG -->
                         <svg class="border-beam-svg">
                             <defs>

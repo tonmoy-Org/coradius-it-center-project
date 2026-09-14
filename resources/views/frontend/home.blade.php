@@ -38,6 +38,20 @@
         margin-top: 0 !important;
     }
 
+    /* Narrow overall container & component widths for Home Landing Page */
+    @media (min-width: 992px) {
+        .container.container-1278,
+        .container-1278 {
+            max-width: 1080px !important;
+        }
+        .hero-video-wrapper {
+            max-width: 960px !important;
+        }
+        .lead-card {
+            max-width: 920px !important;
+        }
+    }
+
     @media (max-width: 767.98px) {
         /* Standardized Section Vertical Spacing (38px top & bottom) */
         .home-page-sections > section,
