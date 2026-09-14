@@ -28,8 +28,8 @@
                                 <div class="col-12 col-lg-12">
                                     <div class="mb-4">
                                         <label for="categories_of_work_title" class="form-label">{{ __('Section Title') }}</label>
-                                        <input type="text" class="form-control rounded-2" id="categories_of_work_title"
-                                               placeholder="" name="categories_of_work_title" value="{{ setting('categories_of_work_title') }}">
+                                        <textarea class="form-control rounded-2 summernote-title" id="categories_of_work_title"
+                                                  name="categories_of_work_title" rows="2" data-height="110">{!! setting('categories_of_work_title') !!}</textarea>
                                     </div>
                                 </div>
 
@@ -52,7 +52,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">{{ __('Title') }}</label>
-                                                            <input type="text" class="form-control" name="categories_of_work_cards[{{ $index }}][title]" value="{{ $card['title'] ?? '' }}">
+                                                            <textarea class="form-control summernote-title" name="categories_of_work_cards[{{ $index }}][title]" rows="2" data-height="90">{!! $card['title'] ?? '' !!}</textarea>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label class="form-label">{{ __('Link (Optional)') }}</label>
@@ -116,7 +116,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">{{ __('Title') }}</label>
-                            <input type="text" class="form-control" name="categories_of_work_cards[${cardIndex}][title]">
+                            <textarea class="form-control summernote-title" name="categories_of_work_cards[${cardIndex}][title]" rows="2" data-height="90"></textarea>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">{{ __('Link (Optional)') }}</label>
@@ -147,13 +147,26 @@
             
             $('#cards_container').append(template);
             
-            // Initialize summernote for newly added textarea
-            $('#cards_container .card-item').last().find('.summernote').summernote({
+            // Initialize summernote for newly added textareas
+            var $lastCard = $('#cards_container .card-item').last();
+            $lastCard.find('.summernote').summernote({
                 height: 150,
                 toolbar: [
                     ['style', ['bold', 'italic', 'underline', 'clear']],
                     ['font', ['strikethrough', 'superscript', 'subscript']],
                     ['para', ['ul', 'ol', 'paragraph']],
+                ]
+            });
+            $lastCard.find('.summernote-title').summernote({
+                height: 90,
+                fontSizes: ['10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '32', '36', '40', '48', '56', '64'],
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['paragraph']],
+                    ['view', ['codeview']]
                 ]
             });
             

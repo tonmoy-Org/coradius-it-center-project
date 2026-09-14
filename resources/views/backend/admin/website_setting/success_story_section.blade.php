@@ -31,8 +31,8 @@
                                 <div class="col-12 col-lg-12">
                                     <div class="mb-4">
                                         <label for="success_section_eyebrow" class="form-label">{{ __('tag_badge_text') }}</label>
-                                        <input type="text" class="form-control rounded-2" id="success_section_eyebrow"
-                                               placeholder="{{ __('e.g. SUCCESS STORIES') }}" name="success_section_eyebrow" value="{{ setting('success_section_eyebrow', $lang) ?: 'SUCCESS STORIES' }}">
+                                        <textarea class="form-control rounded-2 summernote-title" id="success_section_eyebrow"
+                                                  name="success_section_eyebrow" rows="2" data-height="100">{!! setting('success_section_eyebrow', $lang) ?: 'SUCCESS STORIES' !!}</textarea>
                                     </div>
                                 </div>
 
@@ -40,8 +40,8 @@
                                 <div class="col-12 col-lg-12">
                                     <div class="mb-4">
                                         <label for="success_section_title" class="form-label">{{ __('title') }}</label>
-                                        <input type="text" class="form-control rounded-2" id="success_section_title"
-                                               placeholder="{{ __('enter_title') }}" name="success_section_title" value="{{ setting('success_section_title', $lang) ?: 'What Says My Students About The Platform' }}">
+                                        <textarea class="form-control rounded-2 summernote-title" id="success_section_title"
+                                                  name="success_section_title" rows="2" data-height="110">{!! setting('success_section_title', $lang) ?: 'What Says My Students About The Platform' !!}</textarea>
                                     </div>
                                 </div>
 

@@ -115,7 +115,7 @@
                 <div class="mc-special-gift-card text-center d-flex flex-column align-items-center" data-aos="fade-up">
                     @if($giftBadge)
                         <span class="mc-gift-pill">
-                            {{ $formatCurrencyText($giftBadge) }}
+                            {!! format_title_highlight($formatCurrencyText($giftBadge)) !!}
                         </span>
                     @endif
 

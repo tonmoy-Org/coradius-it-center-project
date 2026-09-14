@@ -31,8 +31,8 @@
                                 <div class="col-12 col-lg-12">
                                     <div class="mb-4">
                                         <label for="about_me_tag" class="form-label">{{ __('tag_badge_text') }}</label>
-                                        <input type="text" class="form-control rounded-2" id="about_me_tag"
-                                               placeholder="" name="about_me_tag" value="{{ setting('about_me_tag', $lang) }}">
+                                        <textarea class="form-control rounded-2 summernote-title" id="about_me_tag"
+                                               placeholder="" name="about_me_tag" rows="2">{{ setting('about_me_tag', $lang) }}</textarea>
                                     </div>
                                 </div>
 
@@ -40,8 +40,8 @@
                                 <div class="col-12 col-lg-12">
                                     <div class="mb-4">
                                         <label for="about_me_title" class="form-label">{{ __('title') }}</label>
-                                        <input type="text" class="form-control rounded-2" id="about_me_title"
-                                               placeholder="" name="about_me_title" value="{{ setting('about_me_title', $lang) }}">
+                                        <textarea class="form-control rounded-2 summernote-title" id="about_me_title"
+                                               placeholder="" name="about_me_title" rows="2">{{ setting('about_me_title', $lang) }}</textarea>
                                     </div>
                                 </div>
 

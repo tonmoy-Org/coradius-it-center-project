@@ -639,8 +639,8 @@ class WebsiteSettingController extends Controller
         }
 
         $request->validate([
-            'success_section_eyebrow' => 'nullable|string|max:255',
-            'success_section_title' => 'nullable|string|max:255',
+            'success_section_eyebrow' => 'nullable|string',
+            'success_section_title' => 'nullable|string',
             'success_section_btn_text' => 'nullable|string|max:255',
             'success_section_btn_url' => 'nullable|string|max:255',
         ]);
@@ -671,6 +671,32 @@ class WebsiteSettingController extends Controller
                             ['value' => $val]
                         );
                     }
+                }
+            }
+
+            // Sync with any course masterclass_settings so stale course data never overrides
+            $courses = \App\Models\Course::whereNotNull('masterclass_settings')->get();
+            foreach ($courses as $c) {
+                $mc = is_array($c->masterclass_settings) ? $c->masterclass_settings : json_decode($c->masterclass_settings, true);
+                if (is_array($mc)) {
+                    if ($request->has('success_section_eyebrow')) {
+                        $mc['success_eyebrow'] = $request->input('success_section_eyebrow');
+                    }
+                    if ($request->has('success_section_title')) {
+                        $mc['success_title'] = $request->input('success_section_title');
+                    }
+                    if ($request->has('success_section_description')) {
+                        $mc['success_subtitle'] = $request->input('success_section_description');
+                        $mc['success_description'] = $request->input('success_section_description');
+                    }
+                    if ($request->has('success_section_btn_text')) {
+                        $mc['success_btn_text'] = $request->input('success_section_btn_text');
+                    }
+                    if ($request->has('success_section_btn_url')) {
+                        $mc['success_btn_url'] = $request->input('success_section_btn_url');
+                    }
+                    $c->masterclass_settings = $mc;
+                    $c->save();
                 }
             }
 

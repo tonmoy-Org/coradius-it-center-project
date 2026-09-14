@@ -161,6 +161,40 @@
 @endif
 @stack('js_asset')
 @stack('js')
+<script>
+    $(document).ready(function() {
+        function initSummernoteTitles() {
+            if (typeof $.fn.summernote !== 'undefined') {
+                $('.summernote-title').each(function() {
+                    if (!$(this).next('.note-editor').length) {
+                        var h = $(this).data('height') || 120;
+                        $(this).summernote({
+                            tabsize: 2,
+                            height: h,
+                            fontNames: ["sans-serif", "Arial", "Hind Siliguri", "Inter", "Roboto"],
+                            fontSizes: ['10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '32', '36', '40', '48', '56', '64'],
+                            disableResize: true,
+                            disableResizeEditor: true,
+                            resize: false,
+                            toolbar: [
+                                ["style", ["style"]],
+                                ["font", ["bold", "italic", "underline", "clear"]],
+                                ["fontsize", ["fontsize"]],
+                                ["color", ["color"]],
+                                ["para", ["paragraph"]],
+                                ["view", ["codeview"]]
+                            ]
+                        });
+                    }
+                });
+            }
+        }
+        initSummernoteTitles();
+        $('button[data-bs-toggle="pill"], a[data-bs-toggle="pill"], a[data-bs-toggle="tab"], .tab_change').on('shown.bs.tab', function() {
+            initSummernoteTitles();
+        });
+    });
+</script>
 @if (setting('is_pusher_notification_active') && auth()->check())
     <script src="{{ static_asset('admin/js/pusher.min.js') }}"></script>
     <script>

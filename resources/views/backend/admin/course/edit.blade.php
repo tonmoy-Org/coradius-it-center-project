@@ -137,9 +137,8 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="mb-4">
                                             <label for="courseTitle" class="form-label">{{ __('course_title') }}</label>
-                                            <input type="text" value="{{ old('title', $course->title) }}"
-                                                   class="form-control rounded-2 ai_content_name" id="courseTitle"
-                                                   name="title">
+                                            <textarea class="form-control rounded-2 ai_content_name summernote-title" id="courseTitle"
+                                                      name="title" rows="3" data-height="120">{!! old('title', $course->title) !!}</textarea>
                                             <div class="nk-block-des text-danger">
                                                 <p class="error">{{ $errors->first('title') }}</p>
                                             </div>
@@ -150,7 +149,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="mb-4">
                                             <label for="courseSubtitle" class="form-label">Course Subtitle</label>
-                                            <input type="text" class="form-control" name="course_subtitle" id="courseSubtitle" value="{{ old('course_subtitle', $course->course_subtitle) }}">
+                                            <textarea class="form-control rounded-2 summernote-title" name="course_subtitle" id="courseSubtitle" rows="3" data-height="120">{!! old('course_subtitle', $course->course_subtitle) !!}</textarea>
                                         </div>
                                     </div>
                                     <!-- End Course Subtitle -->
@@ -176,7 +175,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-4">
                                             <label for="descriptionSubtitle" class="form-label">Description Subtitle</label>
-                                            <input type="text" class="form-control" name="description_subtitle" id="descriptionSubtitle" value="{{ old('description_subtitle', $course->description_subtitle) }}">
+                                            <textarea class="form-control rounded-2 summernote-title" name="description_subtitle" id="descriptionSubtitle" rows="3" data-height="120">{!! old('description_subtitle', $course->description_subtitle) !!}</textarea>
                                         </div>
                                     </div>
                                     <!-- End Description Subtitle -->
@@ -381,8 +380,8 @@
                                             <div class="row gx-20">
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Top Subtitle / Heading</label>
-                                                    <input type="text" name="masterclass_settings[desc_right_title]" class="form-control rounded-2"
-                                                           value="{{ $defDescRightTitle }}">
+                                                    <textarea name="masterclass_settings[desc_right_title]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="110">{!! $defDescRightTitle !!}</textarea>
 
                                                 </div>
 
@@ -437,13 +436,13 @@
                                                         </div>
                                                         <div class="col-md-9">
                                                             <label class="form-label">Card Heading</label>
-                                                            <input type="text" name="masterclass_settings[desc_banner_title]" class="form-control rounded-2"
-                                                                   value="{{ $defDescBannerTitle }}">
+                                                            <textarea name="masterclass_settings[desc_banner_title]" class="form-control rounded-2 summernote-title"
+                                                                      rows="2" data-height="110">{!! $defDescBannerTitle !!}</textarea>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <label class="form-label">Card Subtitle</label>
-                                                            <input type="text" name="masterclass_settings[desc_banner_sub]" class="form-control rounded-2"
-                                                                   value="{{ $defDescBannerSub }}">
+                                                            <textarea name="masterclass_settings[desc_banner_sub]" class="form-control rounded-2 summernote-title"
+                                                                      rows="2" data-height="110">{!! $defDescBannerSub !!}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -487,8 +486,8 @@
 
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Benefits Heading</label>
-                                                    <input type="text" name="masterclass_settings[benefits_title]" class="form-control rounded-2"
-                                                           value="{{ $defBenefitsTitle }}">
+                                                    <textarea name="masterclass_settings[benefits_title]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="110">{!! $defBenefitsTitle !!}</textarea>
 
                                                 </div>
 
@@ -540,14 +539,14 @@
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Pill / Badge Text</label>
-                                                    <input type="text" name="masterclass_settings[gift_badge]" class="form-control rounded-2"
-                                                           value="{{ $defGiftBadge }}">
+                                                    <textarea name="masterclass_settings[gift_badge]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="100">{!! $defGiftBadge !!}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Title</label>
-                                                    <input type="text" name="masterclass_settings[gift_title]" class="form-control rounded-2"
-                                                           value="{{ $defGiftTitle }}">
+                                                    <textarea name="masterclass_settings[gift_title]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="110">{!! $defGiftTitle !!}</textarea>
 
                                                 </div>
 
@@ -645,15 +644,15 @@
 
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Breakdown Today Title</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownTodayTitle }}">
+                                                    <textarea name="masterclass_settings[breakdown_today_title]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="110">{!! $defBreakdownTodayTitle !!}</textarea>
 
                                                 </div>
 
-                                                <div class="col-lg-6 mb-4">
+                                                <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Bottom Subheading</label>
-                                                    <input type="text" name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2"
-                                                           value="{{ $defBreakdownSubheading }}">
+                                                    <textarea name="masterclass_settings[breakdown_subheading]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="110">{!! $defBreakdownSubheading !!}</textarea>
                                                 </div>
 
                                                 <div class="col-lg-6 mb-4">
@@ -1377,16 +1376,16 @@
                                             
                                             <div class="form-group mb-3">
                                                 <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
-                                                <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
-                                                       value="{{ $mcSettings['faq_title'] ?? '' }}">
+                                                <textarea name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2 summernote-title"
+                                                          rows="2" data-height="110">{!! $mcSettings['faq_title'] ?? '' !!}</textarea>
                                                 <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
                                             </div>
 
-                                                <div class="form-group mb-3">
-                                                    <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
-                                                    <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
-                                                </div>
+                                            <div class="form-group mb-3">
+                                                <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
+                                                <textarea name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2 summernote-title"
+                                                          rows="2" data-height="110">{!! $mcSettings['faq_subtitle'] ?? '' !!}</textarea>
+                                            </div>
 
                                                 <div class="form-group mb-3">
                                                     <label for="faq_badge_title" class="form-label">{{ __('FAQ Image Floating Badge Title') }}</label>

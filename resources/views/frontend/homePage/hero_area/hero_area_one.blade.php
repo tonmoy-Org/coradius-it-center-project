@@ -18,11 +18,11 @@
                     
 
                     {{-- Title first --}}
-                    <h1 class="hero-title mb-2" style="color: #ffffff;">{{ $hero_course->title }}</h1>
+                    <h1 class="hero-title mb-2" style="color: #ffffff;">{!! format_title_highlight($hero_course->title) !!}</h1>
 
                     {{-- Subtitle second --}}
                     @if($hero_course->course_subtitle)
-                        <h4 class="hero-subtitle mb-3" style="color: #ffffff;">{{ $hero_course->course_subtitle }}</h4>
+                        <h4 class="hero-subtitle mb-3" style="color: #ffffff;">{!! format_title_highlight($hero_course->course_subtitle) !!}</h4>
                     @endif
                     
                     {{-- Description --}}
@@ -56,7 +56,7 @@
                                 'size'   => 'original_image'
                             ])
                         @else
-                            <img src="{{ getFileLink('original_image', $hero_course->image) }}" alt="{{ $hero_course->title }}" class="img-fluid w-100" style="object-fit: cover; max-height: 550px;">
+                            <img src="{{ getFileLink('original_image', $hero_course->image) }}" alt="{{ strip_tags($hero_course->title) }}" class="img-fluid w-100" style="object-fit: cover; max-height: 550px;">
                         @endif
                     </div>
                     
@@ -197,9 +197,9 @@
                                 @endif
                             </div>
                             @if(!empty($descBannerSub))
-                                <p class="m-0 fw-semibold" style="color: var(--color-text-secondary, #4B5A72); font-size: 14.5px;">
-                                    {{ $descBannerSub }}
-                                </p>
+                                <div class="m-0 fw-semibold" style="color: var(--color-text-secondary, #4B5A72); font-size: 14.5px;">
+                                    {!! format_title_highlight($descBannerSub) !!}
+                                </div>
                             @endif
                         </div>
                         @endif
@@ -326,6 +326,14 @@
 .hero-subtitle {
     font-size: 24px;
     font-weight: 500;
+}
+
+.hero-title p,
+.hero-subtitle p {
+    display: inline !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: inherit !important;
 }
 
 .hero-description {
@@ -562,18 +570,24 @@
         font-weight: 600 !important;
     }
 
-    .hero-title {
+    .hero-title,
+    .hero-title * {
         font-size: 24px !important;
-        line-height: 1.4 !important;
+        line-height: 1.35 !important;
         font-weight: 700 !important;
         margin-bottom: 8px !important;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
-    .hero-subtitle {
+    .hero-subtitle,
+    .hero-subtitle * {
         font-size: 16px !important;
         line-height: 1.45 !important;
         font-weight: 600 !important;
         margin-bottom: 12px !important;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .hero-description {

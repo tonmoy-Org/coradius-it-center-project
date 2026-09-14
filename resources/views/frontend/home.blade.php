@@ -100,81 +100,150 @@
         /* --------------------------------------------------------------------------
            TIER 1: MAIN SECTION HEADINGS (22px, Bold 700)
            CSS Variable: --mobile-font-heading-main
+           Enforces fixed previous mobile typography on headings and all child spans/elements,
+           ensuring custom desktop font sizes from text editor do NOT break mobile layout.
            -------------------------------------------------------------------------- */
         .hero-area .hero-title,
+        .hero-area .hero-title *,
+        .hero-title,
+        .hero-title *,
         .hero-area .hero-content h1,
+        .hero-area .hero-content h1 *,
         .hero-content h1,
+        .hero-content h1 *,
+        .common-heading h1,
+        .common-heading h1 *,
         .common-heading h2,
+        .common-heading h2 *,
         .course-section-title,
+        .course-section-title *,
         .section-title,
+        .section-title *,
         .cow-title,
+        .cow-title *,
         section.about-me-section .common-heading h2,
+        section.about-me-section .common-heading h2 *,
         section.about-me-section h2,
+        section.about-me-section h2 *,
         section.categories-of-work-section .cow-title,
+        section.categories-of-work-section .cow-title *,
         section.benefits-section .course-section-title,
+        section.benefits-section .course-section-title *,
         section.benefits-section h2,
+        section.benefits-section h2 *,
         section.special-gift-section .mc-special-gift-card h2,
+        section.special-gift-section .mc-special-gift-card h2 *,
         section.special-gift-section h2,
+        section.special-gift-section h2 *,
         section.syllabus-section .common-heading h2,
+        section.syllabus-section .common-heading h2 *,
         section.syllabus-section h2,
+        section.syllabus-section h2 *,
         section.success-banner-section .common-heading h2,
+        section.success-banner-section .common-heading h2 *,
         section.success-story-section .common-heading h2,
+        section.success-story-section .common-heading h2 *,
         section.success-story-section h2,
+        section.success-story-section h2 *,
         section.offer-breakdown-section .mc-bd-light-title,
+        section.offer-breakdown-section .mc-bd-light-title *,
         section.offer-breakdown-section .common-heading h2,
+        section.offer-breakdown-section .common-heading h2 *,
         section.offer-breakdown-section h2,
+        section.offer-breakdown-section h2 *,
         section.faq-section .common-heading h2,
+        section.faq-section .common-heading h2 *,
         section.faq-section h2,
+        section.faq-section h2 *,
         section.mc-support-section-wrapper .mc-support-title,
+        section.mc-support-section-wrapper .mc-support-title *,
         section.mc-support-section-wrapper h2,
+        section.mc-support-section-wrapper h2 *,
         section.mc-support-section-wrapper .common-heading h2,
+        section.mc-support-section-wrapper .common-heading h2 *,
         section.order-form-section .lead-title,
+        section.order-form-section .lead-title *,
         section.order-form-section .form-heading,
+        section.order-form-section .form-heading *,
         section.order-form-section h2,
+        section.order-form-section h2 *,
         .home-page-sections > section h2,
-        .home-page-sections > section .common-heading h2 {
+        .home-page-sections > section h2 *,
+        .home-page-sections > section .common-heading h2,
+        .home-page-sections > section .common-heading h2 * {
             font-size: var(--mobile-font-heading-main, 22px) !important;
             font-weight: 700 !important;
             line-height: 1.35 !important;
             letter-spacing: -0.01em;
             margin-bottom: 12px;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         /* --------------------------------------------------------------------------
            TIER 2: CARD & SUB-HEADINGS (17px, Semi-Bold 600)
            CSS Variable: --mobile-font-heading-sub
+           Enforces fixed previous mobile typography on subtitles and all child spans/elements.
            -------------------------------------------------------------------------- */
         .hero-area .hero-subtitle,
+        .hero-area .hero-subtitle *,
         .hero-area .hero-content h4,
+        .hero-area .hero-content h4 *,
         .hero-subtitle,
+        .hero-subtitle *,
         .cow-card-title,
+        .cow-card-title *,
         .mc-audience-title-light,
+        .mc-audience-title-light *,
         .custom-syllabus-accordion .accordion-button,
+        .custom-syllabus-accordion .accordion-button *,
         .custom-testimonial-card .author-details h6,
+        .custom-testimonial-card .author-details h6 *,
         .mc-bd-light-item-title,
+        .mc-bd-light-item-title *,
         .mc-bd-light-today-box h3,
+        .mc-bd-light-today-box h3 *,
         .mc-bd-light-offer-heading,
+        .mc-bd-light-offer-heading *,
         .custom-faq-accordion .accordion-button,
+        .custom-faq-accordion .accordion-button *,
         .faq-badge-floating h5,
+        .faq-badge-floating h5 *,
         .mc-support-subtitle,
+        .mc-support-subtitle *,
         .mc-feature-title,
+        .mc-feature-title *,
         .mc-channel-title,
+        .mc-channel-title *,
         .mc-channel-info-title,
+        .mc-channel-info-title *,
         .mc-support-divider-text,
+        .mc-support-divider-text *,
         .counter-label,
+        .counter-label *,
         .order-form-section .modern-label,
         .order-form-section .order-summary-title,
         .order-form-section .lead-card h3,
+        .order-form-section .lead-card h3 *,
         .order-form-section .lead-card h4,
+        .order-form-section .lead-card h4 *,
         .sp-left h3,
+        .sp-left h3 *,
         .mc-special-gift-card .mc-callout-quote .quote-price,
+        .mc-special-gift-card .mc-callout-quote .quote-price *,
         .common-heading h3,
+        .common-heading h3 *,
         .common-heading h4,
+        .common-heading h4 *,
         .card-title,
-        .sub-heading {
+        .card-title *,
+        .sub-heading,
+        .sub-heading * {
             font-size: var(--mobile-font-heading-sub, 17px) !important;
             font-weight: 600 !important;
             line-height: 1.4 !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         /* --------------------------------------------------------------------------
@@ -182,24 +251,36 @@
            CSS Variable: --mobile-font-badge
            -------------------------------------------------------------------------- */
         .common-heading .sub-title,
+        .common-heading .sub-title *,
         .sub-title,
+        .sub-title *,
         .section-tag,
+        .section-tag *,
         .eyebrow,
+        .eyebrow *,
         .mc-audience-check-note-light,
+        .mc-audience-check-note-light *,
         .mc-gift-pill,
+        .mc-gift-pill *,
         .author-details span,
         .author-details .stars,
         .mc-channel-team-label,
         .mc-team-status-label,
         .mc-support-badge,
+        .mc-support-badge *,
         .lead-badge,
+        .lead-badge *,
         .secure-badge span,
         .secure-badge,
         .coupon-code-badge,
+        .coupon-code-badge *,
         .faq-badge-floating span,
         .mc-bd-light-eyebrow,
+        .mc-bd-light-eyebrow *,
         .mc-bd-light-ribbon,
+        .mc-bd-light-ribbon *,
         .mc-bd-pill-badge,
+        .mc-bd-pill-badge *,
         .mc-bd-light-saved-label,
         .mc-bd-light-saved-pct,
         .mc-bd-light-orig-label,
@@ -210,14 +291,20 @@
         .badge,
         .badge-pill,
         .tag,
-        mark.title-highlight,
-        .title-highlight,
-        h2 mark,
-        .course-section-title mark,
         .sp-cd-item span.label {
             font-size: var(--mobile-font-badge, 13px) !important;
             font-weight: 600 !important;
             line-height: 1.4 !important;
+        }
+
+        /* Ensure highlight marks smoothly inherit parent heading font size */
+        mark.title-highlight,
+        .title-highlight,
+        h1 mark, h2 mark, h3 mark, h4 mark,
+        .hero-title mark, .hero-subtitle mark,
+        .course-section-title mark, .cow-title mark, .cow-card-title mark {
+            font-size: inherit !important;
+            line-height: inherit !important;
         }
 
         /* --------------------------------------------------------------------------
@@ -226,7 +313,8 @@
            -------------------------------------------------------------------------- */
         .hero-area .hero-description,
         .hero-description,
-        .hero-content p,
+        .hero-area .hero-description p,
+        .hero-content > p,
         section.about-me-section .about-me-description-content,
         section.about-me-section .about-me-description-content p,
         section.about-me-section .about-me-description-content li,
@@ -247,12 +335,13 @@
         .custom-syllabus-accordion .accordion-body,
         .custom-syllabus-accordion li,
         .custom-syllabus-accordion p,
-        .success-banner-section .common-heading p,
-        .success-story-section .common-heading p,
+        .success-banner-section .common-heading > p,
+        .success-story-section .common-heading > p,
         .custom-testimonial-card p,
         .mc-bd-light-item-sub,
         .mc-bd-light-desc,
-        .offer-breakdown-section p,
+        .offer-breakdown-section .mc-bd-light-desc,
+        .offer-breakdown-section .mc-bd-light-security-note,
         .custom-faq-accordion .accordion-body,
         .custom-faq-accordion .accordion-body p,
         .mc-support-description,
@@ -268,7 +357,7 @@
         .coupon-banner-section p,
         .home-page-sections p:not(.file_name):not(.error):not(.num),
         .section-description,
-        .common-heading p {
+        .common-heading > p {
             font-size: var(--mobile-font-body, 13.5px) !important;
             font-weight: 400 !important;
             line-height: 1.65 !important;
@@ -357,6 +446,37 @@
             padding-left: 12px !important;
             padding-right: 12px !important;
         }
+    }
+
+    /* ==========================================================================
+       RICH TITLE & SUBTITLE INLINE HARMONIZATION (SUMMERNOTE COMPATIBILITY)
+       Ensures custom font sizes, colors, and spans render seamlessly inside headings
+       without unwanted block margins or accidental font-size downgrades.
+       ========================================================================== */
+    .hero-title p,
+    .hero-subtitle p,
+    .course-section-title p,
+    .cow-title p,
+    .cow-card-title p,
+    .mc-bd-light-title p,
+    .mc-bd-light-eyebrow p,
+    .mc-special-gift-card h2 p,
+    .mc-special-gift-card .gift-badge p,
+    .common-heading h1 p,
+    .common-heading h2 p,
+    .common-heading h3 p,
+    .common-heading h4 p,
+    .common-heading span.tag-badge p,
+    .mc-support-title p,
+    .mc-support-subtitle p,
+    .highlight-banner-card h3 p,
+    .highlight-banner-card div p,
+    .faq-content-wrap h2 p,
+    .faq-content-wrap span p {
+        display: inline !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: inherit !important;
     }
 </style>
 @endpush

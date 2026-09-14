@@ -946,9 +946,9 @@
 
                 @if(!empty($supportSubtitle))
                 <!-- Subtitle -->
-                <p class="mc-support-subtitle" data-aos="fade-up" data-aos-delay="50">
-                    {{ $supportSubtitle }}
-                </p>
+                <div class="mc-support-subtitle" data-aos="fade-up" data-aos-delay="50">
+                    {!! format_title_highlight($supportSubtitle) !!}
+                </div>
                 @endif
 
                 @if(!empty($supportDescription))
@@ -966,7 +966,7 @@
         <!-- Middle Tier: Full Width Showcase Image -->
         <div class="row justify-content-center">
             <div class="col-12 text-center mc-support-img-wrapper" data-aos="zoom-in" data-aos-delay="180">
-                <img src="{{ $supportImageUrl }}" alt="{{ $supportTitle ?: 'Support' }}" class="mc-support-img img-fluid">
+                <img src="{{ $supportImageUrl }}" alt="{{ strip_tags($supportTitle) ?: 'Support' }}" class="mc-support-img img-fluid">
             </div>
         </div>
         @endif
