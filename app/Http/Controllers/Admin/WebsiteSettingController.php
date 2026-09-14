@@ -525,6 +525,20 @@ class WebsiteSettingController extends Controller
                 }
             }
 
+            if ($request->has('about_me_media_id')) {
+                $mediaId = $request->input('about_me_media_id');
+                if (!empty($mediaId)) {
+                    $media = \App\Models\MediaLibrary::find($mediaId);
+                    if ($media && !empty($media->image_variants)) {
+                        \App\Models\Setting::updateOrCreate(['title' => 'about_me_image', 'lang' => 'en'], ['value' => serialize($media->image_variants)]);
+                        \App\Models\Setting::updateOrCreate(['title' => 'about_me_media_id', 'lang' => 'en'], ['value' => $mediaId]);
+                    }
+                } else {
+                    \App\Models\Setting::updateOrCreate(['title' => 'about_me_image', 'lang' => 'en'], ['value' => '']);
+                    \App\Models\Setting::updateOrCreate(['title' => 'about_me_media_id', 'lang' => 'en'], ['value' => '']);
+                }
+            }
+
             \Illuminate\Support\Facades\Cache::flush();
 
             Toastr::success(__('update_successful'));

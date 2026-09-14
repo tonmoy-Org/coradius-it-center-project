@@ -158,6 +158,23 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
+            if (request('faq_image_media_id')) {
+                $media = \App\Models\MediaLibrary::find(request('faq_image_media_id'));
+                if ($media && !empty($media->image_variants)) {
+                    $mc['faq_image_url'] = getFileLink('original_image', $media->image_variants);
+                    $mc['faq_image_media_id'] = request('faq_image_media_id');
+                    $request['faq_image'] = $media->image_variants;
+                }
+            } elseif (request()->hasFile('faq_image_file')) {
+                $response = $this->saveImage(request()->file('faq_image_file'), 'course');
+                if ($response && isset($response['images'])) {
+                    $mc['faq_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                    $request['faq_image'] = $response['images'];
+                }
+            } elseif (!empty($mc['faq_image_url_custom'])) {
+                $mc['faq_image_url'] = $mc['faq_image_url_custom'];
+            }
+
             if (request('support_title_icon_media_id')) {
                 $media = \App\Models\MediaLibrary::find(request('support_title_icon_media_id'));
                 if ($media && !empty($media->image_variants)) {
@@ -194,6 +211,16 @@ class CourseRepository
             }
 
             if (isset($mc['support_features_list']) && is_array($mc['support_features_list'])) {
+                foreach ($mc['support_features_list'] as $fIdx => &$fItem) {
+                    if (!empty($fItem['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($fItem['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $fItem['icon'] = getFileLink('original_image', $media->image_variants);
+                        }
+                    }
+                }
+                unset($fItem);
+
                 if (request()->hasFile('support_feature_icon_files')) {
                     foreach (request()->file('support_feature_icon_files') as $fIdx => $fFile) {
                         if ($fFile && isset($mc['support_features_list'][$fIdx])) {
@@ -206,26 +233,39 @@ class CourseRepository
                 }
 
                 $mc['support_features_list'] = array_values(array_filter($mc['support_features_list'], function ($item) {
-                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty(trim($item['icon'] ?? '')));
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty(trim($item['icon'] ?? '')) || !empty($item['media_id']));
                 }));
                 if (!empty($mc['support_features_list'][0])) {
                     $mc['support_feature_1_title'] = $mc['support_features_list'][0]['title'] ?? '';
                     $mc['support_feature_1_icon']  = $mc['support_features_list'][0]['icon'] ?? '';
                     $mc['support_feature_1_desc']  = $mc['support_features_list'][0]['desc'] ?? '';
+                    $mc['support_feature_1_media_id'] = $mc['support_features_list'][0]['media_id'] ?? '';
                 }
                 if (!empty($mc['support_features_list'][1])) {
                     $mc['support_feature_2_title'] = $mc['support_features_list'][1]['title'] ?? '';
                     $mc['support_feature_2_icon']  = $mc['support_features_list'][1]['icon'] ?? '';
                     $mc['support_feature_2_desc']  = $mc['support_features_list'][1]['desc'] ?? '';
+                    $mc['support_feature_2_media_id'] = $mc['support_features_list'][1]['media_id'] ?? '';
                 }
                 if (!empty($mc['support_features_list'][2])) {
                     $mc['support_feature_3_title'] = $mc['support_features_list'][2]['title'] ?? '';
                     $mc['support_feature_3_icon']  = $mc['support_features_list'][2]['icon'] ?? '';
                     $mc['support_feature_3_desc']  = $mc['support_features_list'][2]['desc'] ?? '';
+                    $mc['support_feature_3_media_id'] = $mc['support_features_list'][2]['media_id'] ?? '';
                 }
             }
 
             if (isset($mc['support_channels_list']) && is_array($mc['support_channels_list'])) {
+                foreach ($mc['support_channels_list'] as $cIdx => &$cItem) {
+                    if (!empty($cItem['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($cItem['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $cItem['icon'] = getFileLink('original_image', $media->image_variants);
+                        }
+                    }
+                }
+                unset($cItem);
+
                 if (request()->hasFile('support_channel_avatar_files')) {
                     foreach (request()->file('support_channel_avatar_files') as $cIdx => $cFile) {
                         if ($cFile && isset($mc['support_channels_list'][$cIdx])) {
@@ -249,7 +289,7 @@ class CourseRepository
                 }
 
                 $mc['support_channels_list'] = array_values(array_filter($mc['support_channels_list'], function ($item) {
-                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['url'] ?? '')) || !empty(trim($item['desc'] ?? '')));
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['url'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty($item['media_id']));
                 }));
 
                 for ($ch = 1; $ch <= 3; $ch++) {
@@ -258,6 +298,7 @@ class CourseRepository
                         $mc["support_channel_{$ch}_title"] = $mc['support_channels_list'][$cIdx]['title'] ?? '';
                         $mc["support_channel_{$ch}_desc"]  = $mc['support_channels_list'][$cIdx]['desc'] ?? '';
                         $mc["support_channel_{$ch}_icon"]  = $mc['support_channels_list'][$cIdx]['icon'] ?? '';
+                        $mc["support_channel_{$ch}_media_id"] = $mc['support_channels_list'][$cIdx]['media_id'] ?? '';
                         $mc["support_channel_{$ch}_team_avatar"] = $mc['support_channels_list'][$cIdx]['team_avatar'] ?? '';
                         $mc["support_channel_{$ch}_team_label"]  = $mc['support_channels_list'][$cIdx]['team_label'] ?? '';
                         $mc["support_channel_{$ch}_btn_text"]    = $mc['support_channels_list'][$cIdx]['btn_text'] ?? '';
@@ -452,7 +493,22 @@ class CourseRepository
                 $mc['support_image_url'] = $mc['support_image_url_custom'];
             }
 
-            if (request()->hasFile('faq_image_file')) {
+            if (request()->has('faq_image_media_id')) {
+                if (request('faq_image_media_id')) {
+                    $media = \App\Models\MediaLibrary::find(request('faq_image_media_id'));
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['faq_image_url'] = getFileLink('original_image', $media->image_variants);
+                        $mc['faq_image_media_id'] = request('faq_image_media_id');
+                        $course->faq_image = $media->image_variants;
+                        $request['faq_image'] = $media->image_variants;
+                    }
+                } else {
+                    $mc['faq_image_url'] = '';
+                    $mc['faq_image_media_id'] = '';
+                    $course->faq_image = [];
+                    $request['faq_image'] = [];
+                }
+            } elseif (request()->hasFile('faq_image_file')) {
                 $response = $this->saveImage(request()->file('faq_image_file'), 'course');
                 if ($response && isset($response['images'])) {
                     $mc['faq_image_url'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
@@ -507,6 +563,16 @@ class CourseRepository
             }
 
             if (isset($mc['support_features_list']) && is_array($mc['support_features_list'])) {
+                foreach ($mc['support_features_list'] as $fIdx => &$fItem) {
+                    if (!empty($fItem['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($fItem['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $fItem['icon'] = getFileLink('original_image', $media->image_variants);
+                        }
+                    }
+                }
+                unset($fItem);
+
                 if (request()->hasFile('support_feature_icon_files')) {
                     foreach (request()->file('support_feature_icon_files') as $fIdx => $fFile) {
                         if ($fFile && isset($mc['support_features_list'][$fIdx])) {
@@ -519,28 +585,41 @@ class CourseRepository
                 }
 
                 $mc['support_features_list'] = array_values(array_filter($mc['support_features_list'], function ($item) {
-                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty(trim($item['icon'] ?? '')));
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty(trim($item['icon'] ?? '')) || !empty($item['media_id']));
                 }));
                 if (!empty($mc['support_features_list'][0])) {
                     $mc['support_feature_1_title'] = $mc['support_features_list'][0]['title'] ?? '';
                     $mc['support_feature_1_icon']  = $mc['support_features_list'][0]['icon'] ?? '';
                     $mc['support_feature_1_desc']  = $mc['support_features_list'][0]['desc'] ?? '';
+                    $mc['support_feature_1_media_id'] = $mc['support_features_list'][0]['media_id'] ?? '';
                 }
                 if (!empty($mc['support_features_list'][1])) {
                     $mc['support_feature_2_title'] = $mc['support_features_list'][1]['title'] ?? '';
                     $mc['support_feature_2_icon']  = $mc['support_features_list'][1]['icon'] ?? '';
                     $mc['support_feature_2_desc']  = $mc['support_features_list'][1]['desc'] ?? '';
+                    $mc['support_feature_2_media_id'] = $mc['support_features_list'][1]['media_id'] ?? '';
                 }
                 if (!empty($mc['support_features_list'][2])) {
                     $mc['support_feature_3_title'] = $mc['support_features_list'][2]['title'] ?? '';
                     $mc['support_feature_3_icon']  = $mc['support_features_list'][2]['icon'] ?? '';
                     $mc['support_feature_3_desc']  = $mc['support_features_list'][2]['desc'] ?? '';
+                    $mc['support_feature_3_media_id'] = $mc['support_features_list'][2]['media_id'] ?? '';
                 }
             } elseif (arrayCheck('masterclass_settings', $request)) {
                 $mc['support_features_list'] = [];
             }
 
             if (isset($mc['support_channels_list']) && is_array($mc['support_channels_list'])) {
+                foreach ($mc['support_channels_list'] as $cIdx => &$cItem) {
+                    if (!empty($cItem['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($cItem['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $cItem['icon'] = getFileLink('original_image', $media->image_variants);
+                        }
+                    }
+                }
+                unset($cItem);
+
                 if (request()->hasFile('support_channel_avatar_files')) {
                     foreach (request()->file('support_channel_avatar_files') as $cIdx => $cFile) {
                         if ($cFile && isset($mc['support_channels_list'][$cIdx])) {
@@ -564,7 +643,7 @@ class CourseRepository
                 }
 
                 $mc['support_channels_list'] = array_values(array_filter($mc['support_channels_list'], function ($item) {
-                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['url'] ?? '')) || !empty(trim($item['desc'] ?? '')));
+                    return is_array($item) && (!empty(trim($item['title'] ?? '')) || !empty(trim($item['url'] ?? '')) || !empty(trim($item['desc'] ?? '')) || !empty($item['media_id']));
                 }));
 
                 for ($ch = 1; $ch <= 3; $ch++) {
@@ -573,6 +652,7 @@ class CourseRepository
                         $mc["support_channel_{$ch}_title"] = $mc['support_channels_list'][$cIdx]['title'] ?? '';
                         $mc["support_channel_{$ch}_desc"]  = $mc['support_channels_list'][$cIdx]['desc'] ?? '';
                         $mc["support_channel_{$ch}_icon"]  = $mc['support_channels_list'][$cIdx]['icon'] ?? '';
+                        $mc["support_channel_{$ch}_media_id"] = $mc['support_channels_list'][$cIdx]['media_id'] ?? '';
                         $mc["support_channel_{$ch}_team_avatar"] = $mc['support_channels_list'][$cIdx]['team_avatar'] ?? '';
                         $mc["support_channel_{$ch}_team_label"]  = $mc['support_channels_list'][$cIdx]['team_label'] ?? '';
                         $mc["support_channel_{$ch}_btn_text"]    = $mc['support_channels_list'][$cIdx]['btn_text'] ?? '';

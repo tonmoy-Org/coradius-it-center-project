@@ -26,7 +26,7 @@
         $featureCards = [];
         if (!empty($mcSettings['support_features_list']) && is_array($mcSettings['support_features_list'])) {
             $featureCards = array_values(array_filter($mcSettings['support_features_list'], function($item) {
-                return !empty($item['title']) || !empty($item['desc']);
+                return !empty($item['title']) || !empty($item['desc']) || !empty($item['icon']) || !empty($item['media_id']);
             }));
         } else {
             for ($i = 1; $i <= 3; $i++) {
@@ -34,6 +34,7 @@
                     $featureCards[] = [
                         'title' => $mcSettings["support_feature_{$i}_title"] ?? '',
                         'icon'  => $mcSettings["support_feature_{$i}_icon"] ?? 'fas fa-check-circle',
+                        'media_id' => $mcSettings["support_feature_{$i}_media_id"] ?? '',
                         'desc'  => $mcSettings["support_feature_{$i}_desc"] ?? '',
                     ];
                 }
@@ -47,7 +48,7 @@
         $channelCards = [];
         if (!empty($mcSettings['support_channels_list']) && is_array($mcSettings['support_channels_list'])) {
             $channelCards = array_values(array_filter($mcSettings['support_channels_list'], function($ch) {
-                return !empty($ch['title']) || !empty($ch['desc']) || !empty($ch['url']);
+                return !empty($ch['title']) || !empty($ch['desc']) || !empty($ch['url']) || !empty($ch['icon']) || !empty($ch['media_id']);
             }));
         } else {
             for ($i = 1; $i <= 3; $i++) {
@@ -56,6 +57,7 @@
                         'title' => $mcSettings["support_channel_{$i}_title"] ?? '',
                         'desc' => $mcSettings["support_channel_{$i}_desc"] ?? '',
                         'icon' => $mcSettings["support_channel_{$i}_icon"] ?? 'fas fa-comments',
+                        'media_id' => $mcSettings["support_channel_{$i}_media_id"] ?? '',
                         'team_avatar' => $mcSettings["support_channel_{$i}_team_avatar"] ?? '',
                         'team_label' => $mcSettings["support_channel_{$i}_team_label"] ?? '',
                         'btn_text' => $mcSettings["support_channel_{$i}_btn_text"] ?? '',
@@ -67,8 +69,22 @@
         }
 
 
-        $renderIcon = function($icon, $defaultClass = '') {
+        $renderIcon = function($icon, $defaultClass = '', $mediaId = '') {
+            if (!empty($mediaId)) {
+                $media = \App\Models\MediaLibrary::find($mediaId);
+                if ($media && !empty($media->image_variants)) {
+                    $imgUrl = getFileLink('original_image', $media->image_variants);
+                    return '<img src="' . dynamic_asset($imgUrl) . '" alt="icon" style="max-width: 100%; max-height: 100%; object-fit: contain; display: inline-block; vertical-align: middle;">';
+                }
+            }
             $icon = trim($icon ?: $defaultClass);
+            if (is_numeric($icon)) {
+                $media = \App\Models\MediaLibrary::find($icon);
+                if ($media && !empty($media->image_variants)) {
+                    $imgUrl = getFileLink('original_image', $media->image_variants);
+                    return '<img src="' . dynamic_asset($imgUrl) . '" alt="icon" style="max-width: 100%; max-height: 100%; object-fit: contain; display: inline-block; vertical-align: middle;">';
+                }
+            }
             if (preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $icon) || str_starts_with($icon, 'http') || str_starts_with($icon, '/') || str_contains($icon, 'uploads/') || str_contains($icon, 'images/')) {
                 return '<img src="' . dynamic_asset($icon) . '" alt="icon" style="max-width: 100%; max-height: 100%; object-fit: contain; display: inline-block; vertical-align: middle;">';
             }
@@ -605,7 +621,7 @@
         }
 
         .mc-support-title {
-            font-size: 25px !important;
+            font-size: var(--mobile-font-heading-main, 22px) !important;
             line-height: 1.35 !important;
             margin-bottom: 10px !important;
         }
@@ -620,13 +636,13 @@
         }
 
         .mc-support-subtitle {
-            font-size: 15px !important;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
             margin-bottom: 10px !important;
         }
 
         .mc-support-description,
         .mc-support-description p {
-            font-size: 14px !important;
+            font-size: var(--mobile-font-body, 13.5px) !important;
             line-height: 1.65 !important;
             margin-bottom: 18px !important;
         }
@@ -641,11 +657,11 @@
         }
 
         .mc-feature-title {
-            font-size: 13.5px !important;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
         }
 
         .mc-feature-desc {
-            font-size: 11px !important;
+            font-size: var(--mobile-font-body, 13.5px) !important;
         }
 
         .mc-support-img-wrapper {
@@ -687,7 +703,7 @@
         }
 
         .mc-support-title {
-            font-size: 22px !important;
+            font-size: var(--mobile-font-heading-main, 22px) !important;
             line-height: 1.35 !important;
             margin-bottom: 8px !important;
             gap: 6px;
@@ -703,14 +719,14 @@
         }
 
         .mc-support-subtitle {
-            font-size: 14px !important;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
             line-height: 1.5 !important;
             margin-bottom: 8px !important;
         }
 
         .mc-support-description,
         .mc-support-description p {
-            font-size: 13.5px !important;
+            font-size: var(--mobile-font-body, 13.5px) !important;
             line-height: 1.65 !important;
             margin-bottom: 16px !important;
         }
@@ -744,14 +760,14 @@
         }
 
         .mc-feature-title {
-            font-size: 14px !important;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
             margin-bottom: 4px !important;
             text-align: center !important;
         }
 
         .mc-feature-desc {
-            font-size: 11.5px !important;
-            line-height: 1.45 !important;
+            font-size: var(--mobile-font-body, 13.5px) !important;
+            line-height: 1.55 !important;
             text-align: center !important;
         }
 
@@ -802,13 +818,13 @@
         }
 
         .mc-channel-info-title {
-            font-size: 15px !important;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
             margin-bottom: 2px !important;
         }
 
         .mc-channel-info-desc {
-            font-size: 12px !important;
-            line-height: 1.35 !important;
+            font-size: var(--mobile-font-body, 13.5px) !important;
+            line-height: 1.45 !important;
         }
 
         .mc-channel-team-row {
@@ -933,11 +949,12 @@
                             @php
                                 $fcTitle = $fCard['title'] ?? '';
                                 $fcIcon = $fCard['icon'] ?? 'fas fa-check-circle';
+                                $fcMediaId = $fCard['media_id'] ?? '';
                                 $fcDesc = $fCard['desc'] ?? '';
                             @endphp
                             <div class="mc-support-feature-card">
                                 <div class="mc-feature-icon-circle">
-                                    {!! $renderIcon($fcIcon, 'fas fa-check-circle') !!}
+                                    {!! $renderIcon($fcIcon, 'fas fa-check-circle', $fcMediaId) !!}
                                 </div>
                                 @if(!empty($fcTitle))
                                     <h4 class="mc-feature-title">{{ $fcTitle }}</h4>
@@ -1000,7 +1017,7 @@
                         <div>
                             <div class="mc-channel-card-top">
                                 <div class="mc-channel-avatar-circle {{ $avatarClass }}">
-                                    {!! $renderIcon($cIcon, 'fas fa-comments') !!}
+                                    {!! $renderIcon($cIcon, 'fas fa-comments', $chCard['media_id'] ?? '') !!}
                                 </div>
                                 <div>
                                     @if(!empty($cTitle))

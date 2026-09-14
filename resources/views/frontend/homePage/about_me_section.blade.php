@@ -29,18 +29,25 @@
         $aboutImgUrl = getFileLink('original_image', $aboutImgSetting);
     }
     if (!$aboutImgUrl || str_contains($aboutImgUrl, 'default')) {
+        $aboutMediaId = setting('about_me_media_id');
+        if ($aboutMediaId) {
+            $media = \App\Models\MediaLibrary::find($aboutMediaId);
+            if ($media && !empty($media->image_variants)) {
+                $aboutImgUrl = getFileLink('original_image', $media->image_variants);
+            }
+        }
+    }
+    if (!$aboutImgUrl || str_contains($aboutImgUrl, 'default')) {
         $aboutImgUrl = static_asset('images/about/about_me_instructor.jpg');
     }
 @endphp
 
 <style>
     .about-me-description-content {
-        font-size: 16px !important;
         line-height: 1.85 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
     }
     .about-me-description-content p {
-        font-size: 16px !important;
         line-height: 1.85 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
         margin-bottom: 16px;
@@ -59,9 +66,24 @@
         display: list-item !important;
         margin-left: 25px !important;
         margin-bottom: 10px !important;
-        font-size: 16px !important;
         line-height: 1.7 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
+    }
+
+    @media (min-width: 768px) {
+        .about-me-description-content,
+        .about-me-description-content p,
+        .about-me-description-content li {
+            font-size: 16px !important;
+        }
+    }
+    @media (max-width: 767.98px) {
+        .about-me-description-content,
+        .about-me-description-content p,
+        .about-me-description-content li {
+            font-size: var(--mobile-font-body, 13.5px) !important;
+            line-height: 1.65 !important;
+        }
     }
 </style>
 

@@ -309,9 +309,15 @@
         .mc-breakdown-light-card {
             padding: 20px 12px;
         }
-        .mc-bd-light-eyebrow, .mc-bd-light-title {
-            font-size: 20px;
-            line-height: 1.35;
+        .mc-bd-light-title {
+            font-size: var(--mobile-font-heading-main, 22px) !important;
+            font-weight: 700 !important;
+            line-height: 1.35 !important;
+        }
+        .mc-bd-light-eyebrow {
+            font-size: var(--mobile-font-badge, 13px) !important;
+            font-weight: 600 !important;
+            line-height: 1.4 !important;
         }
         .mc-bd-light-price-huge {
             font-size: 1.75rem;
@@ -329,8 +335,13 @@
             gap: 8px;
         }
         .mc-bd-light-item-title {
-            font-size: 0.88rem;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
+            font-weight: 600 !important;
             word-break: break-word;
+        }
+        .mc-bd-light-item-sub {
+            font-size: var(--mobile-font-body, 13.5px) !important;
+            font-weight: 400 !important;
         }
         .mc-bd-light-item-val {
             font-size: 0.95rem;

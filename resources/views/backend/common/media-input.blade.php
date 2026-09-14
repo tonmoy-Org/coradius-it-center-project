@@ -49,6 +49,9 @@
         if ($imageVal && (is_numeric($imageVal) || is_string($imageVal))) {
             $media = \App\Models\MediaLibrary::find($imageVal);
         }
+        $hasImageArray = is_array($image) && arrayCheck('image_80x80', $image) && is_file_exists($image['image_80x80'], $image['storage'] ?? 'local');
+        $hasMediaImg = $media && $media->image_variants && arrayCheck('image_80x80',$media->image_variants) && is_file_exists($media->image_variants['image_80x80'], $media->image_variants['storage']);
+        $hasActive = $hasMediaImg || $hasImageArray;
     @endphp
     <div class="{{ $col }} custom-image">
         <div class="mb-4 gallery-modal" data-for="{{ $for ?? 'image' }}" data-selection="{{ $selection ?? 'single' }}">
@@ -56,7 +59,7 @@
                 {{ $size }}</label>
             <label for="apkThumb" class="file-upload-text">
                 <p><span
-                        class="file_selected">{{ $media && $media->image_variants && arrayCheck('image_80x80',$media->image_variants) && is_file_exists($media->image_variants['image_80x80'], $media->image_variants['storage']) ? 1 : '0' }} </span>{{ __('files_selected') }}
+                        class="file_selected">{{ $hasActive ? 1 : '0' }} </span>{{ __('files_selected') }}
                 </p>
                 <span class="file-btn">{{ __('choose_file') }}</span>
             </label>
@@ -80,8 +83,18 @@
                         <i class='las la-times'></i>
                     </div>
                 </div>
+            @elseif($hasImageArray)
+                <div class="selected-files-item">
+                    <img
+                        src="{{ getFileLink('80x80',$image) }}"
+                        alt="image"
+                        class="selected-img">
+                    <div class="remove-icon" data-id="">
+                        <i class='las la-times'></i>
+                    </div>
+                </div>
             @endif
-            <div class="selected-files-item {{ $media && arrayCheck('image_80x80',$media->image_variants) && is_file_exists($media->image_variants['image_80x80'], $media->image_variants['storage']) ? 'd-none' : '' }}">
+            <div class="selected-files-item {{ $hasActive ? 'd-none' : '' }}">
                 <img class="selected-img"
                      src="{{ static_asset('images/default/default-image-80x80.png') }}"
                      alt="Headphone">

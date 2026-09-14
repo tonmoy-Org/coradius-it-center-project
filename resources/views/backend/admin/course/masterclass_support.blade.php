@@ -63,6 +63,9 @@
         transform: scale(1.15);
         box-shadow: none !important;
     }
+    .gallery-modal {
+        cursor: pointer;
+    }
     .support-card-delete-btn:active {
         transform: scale(0.95);
     }
@@ -141,6 +144,19 @@
                 </div>
                 <div class="row g-3" id="support_features_container">
                     @forelse($featureCards as $idx => $fCard)
+                        @php
+                            $cardMediaId = $fCard['media_id'] ?? '';
+                            $cardMedia = null;
+                            if (!empty($cardMediaId)) {
+                                $cardMedia = \App\Models\MediaLibrary::find($cardMediaId);
+                            } elseif (!empty($fCard['icon']) && is_numeric($fCard['icon'])) {
+                                $cardMedia = \App\Models\MediaLibrary::find($fCard['icon']);
+                                $cardMediaId = $fCard['icon'];
+                            }
+                            $hasMedia = $cardMedia && $cardMedia->image_variants && arrayCheck('image_80x80', $cardMedia->image_variants) && is_file_exists($cardMedia->image_variants['image_80x80'], $cardMedia->image_variants['storage']);
+                            $customIconUrl = (!$hasMedia && !empty($fCard['icon']) && (preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $fCard['icon']) || str_starts_with($fCard['icon'], 'http') || str_contains($fCard['icon'], 'uploads/') || str_contains($fCard['icon'], 'images/'))) ? $fCard['icon'] : '';
+                            $isSelected = $hasMedia || !empty($customIconUrl);
+                        @endphp
                         <div class="col-md-4 support-feature-card-item" data-index="{{ $idx }}">
                             <div class="p-3 bg-light rounded-3 border h-100 position-relative">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -158,9 +174,43 @@
                                        class="support-feature-icon-input"
                                        value="{{ $fCard['icon'] ?? '' }}">
 
-                                <label class="form-label">Upload Icon</label>
-                                <input type="file" name="support_feature_icon_files[{{ $idx }}]"
-                                       class="form-control font-12 bg-white mb-2 support-feature-file-input" accept="image/*">
+                                <div class="custom-image mb-2">
+                                    <div class="gallery-modal" data-for="image" data-selection="single">
+                                        <label class="form-label mb-1">Upload Icon</label>
+                                        <div class="file-upload-text">
+                                            <p><span class="file_selected">{{ $isSelected ? '1' : '0' }} </span>{{ __('files_selected') }}</p>
+                                            <span class="file-btn">{{ __('choose_file') }}</span>
+                                        </div>
+                                        <input class="d-none support-feature-media-id-input" type="hidden" name="masterclass_settings[support_features_list][{{ $idx }}][media_id]"
+                                               value="{{ $cardMediaId }}">
+                                    </div>
+                                    <div class="selected-files d-flex flex-wrap gap-20">
+                                        @if($hasMedia)
+                                            <div class="selected-files-item">
+                                                <img src="{{ getFileLink('80x80', $cardMedia->image_variants) }}"
+                                                     alt="{{ $cardMedia->name }}"
+                                                     class="selected-img">
+                                                <div class="remove-icon" data-id="{{ $cardMedia->id }}">
+                                                    <i class="las la-times"></i>
+                                                </div>
+                                            </div>
+                                        @elseif($customIconUrl)
+                                            <div class="selected-files-item">
+                                                <img src="{{ dynamic_asset($customIconUrl) }}"
+                                                     alt="icon"
+                                                     class="selected-img">
+                                                <div class="remove-icon" data-id="">
+                                                    <i class="las la-times"></i>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="selected-files-item {{ $isSelected ? 'd-none' : '' }}">
+                                            <img class="selected-img"
+                                                 src="{{ static_asset('images/default/default-image-80x80.png') }}"
+                                                 alt="default">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <label class="form-label">Description</label>
                                 <textarea name="masterclass_settings[support_features_list][{{ $idx }}][desc]"
@@ -197,6 +247,19 @@
             <div class="col-12 mb-4">
                 <div class="row g-3" id="support_channels_container">
                     @forelse($supportChannels as $cIdx => $chCard)
+                        @php
+                            $chMediaId = $chCard['media_id'] ?? '';
+                            $chMedia = null;
+                            if (!empty($chMediaId)) {
+                                $chMedia = \App\Models\MediaLibrary::find($chMediaId);
+                            } elseif (!empty($chCard['icon']) && is_numeric($chCard['icon'])) {
+                                $chMedia = \App\Models\MediaLibrary::find($chCard['icon']);
+                                $chMediaId = $chCard['icon'];
+                            }
+                            $hasChMedia = $chMedia && $chMedia->image_variants && arrayCheck('image_80x80', $chMedia->image_variants) && is_file_exists($chMedia->image_variants['image_80x80'], $chMedia->image_variants['storage']);
+                            $customChIconUrl = (!$hasChMedia && !empty($chCard['icon']) && (preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $chCard['icon']) || str_starts_with($chCard['icon'], 'http') || str_contains($chCard['icon'], 'uploads/') || str_contains($chCard['icon'], 'images/'))) ? $chCard['icon'] : '';
+                            $isChSelected = $hasChMedia || !empty($customChIconUrl);
+                        @endphp
                         <div class="col-md-4 support-channel-card-item" data-index="{{ $cIdx }}">
                             <div class="p-3 bg-light rounded-3 border h-100 position-relative">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -228,11 +291,43 @@
                                        class="support-channel-icon-input"
                                        value="{{ $chCard['icon'] ?? '' }}">
 
-                                <label class="form-label">Upload Icon</label>
-                                <input type="file" name="support_channel_icon_files[{{ $cIdx }}]"
-                                       class="form-control font-12 bg-white mb-2 support-channel-icon-file-input" accept="image/*">
-
-
+                                <div class="custom-image mb-2">
+                                    <div class="gallery-modal" data-for="image" data-selection="single">
+                                        <label class="form-label mb-1">Upload Icon</label>
+                                        <div class="file-upload-text">
+                                            <p><span class="file_selected">{{ $isChSelected ? '1' : '0' }} </span>{{ __('files_selected') }}</p>
+                                            <span class="file-btn">{{ __('choose_file') }}</span>
+                                        </div>
+                                        <input class="d-none support-channel-media-id-input" type="hidden" name="masterclass_settings[support_channels_list][{{ $cIdx }}][media_id]"
+                                               value="{{ $chMediaId }}">
+                                    </div>
+                                    <div class="selected-files d-flex flex-wrap gap-20">
+                                        @if($hasChMedia)
+                                            <div class="selected-files-item">
+                                                <img src="{{ getFileLink('80x80', $chMedia->image_variants) }}"
+                                                     alt="{{ $chMedia->name }}"
+                                                     class="selected-img">
+                                                <div class="remove-icon" data-id="{{ $chMedia->id }}">
+                                                    <i class="las la-times"></i>
+                                                </div>
+                                            </div>
+                                        @elseif($customChIconUrl)
+                                            <div class="selected-files-item">
+                                                <img src="{{ dynamic_asset($customChIconUrl) }}"
+                                                     alt="icon"
+                                                     class="selected-img">
+                                                <div class="remove-icon" data-id="">
+                                                    <i class="las la-times"></i>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="selected-files-item {{ $isChSelected ? 'd-none' : '' }}">
+                                            <img class="selected-img"
+                                                 src="{{ static_asset('images/default/default-image-80x80.png') }}"
+                                                 alt="default">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <label class="form-label">Team Status Label</label>
                                 <input type="text" name="masterclass_settings[support_channels_list][{{ $cIdx }}][team_label]"
@@ -287,7 +382,7 @@
                     $(this).find('.card-num-label').text('Card ' + (index + 1));
                     $(this).find('.support-feature-title-input').attr('name', 'masterclass_settings[support_features_list][' + index + '][title]');
                     $(this).find('.support-feature-icon-input').attr('name', 'masterclass_settings[support_features_list][' + index + '][icon]');
-                    $(this).find('.support-feature-file-input').attr('name', 'support_feature_icon_files[' + index + ']');
+                    $(this).find('.support-feature-media-id-input').attr('name', 'masterclass_settings[support_features_list][' + index + '][media_id]');
                     $(this).find('.support-feature-desc-input').attr('name', 'masterclass_settings[support_features_list][' + index + '][desc]');
                 });
             }
@@ -315,9 +410,21 @@
                             <input type="hidden" name="masterclass_settings[support_features_list][${nextIndex}][icon]"
                                    class="support-feature-icon-input" value="">
 
-                            <label class="form-label">Upload Icon</label>
-                            <input type="file" name="support_feature_icon_files[${nextIndex}]"
-                                   class="form-control font-12 bg-white mb-2 support-feature-file-input" accept="image/*">
+                            <div class="custom-image mb-2">
+                                <div class="gallery-modal" data-for="image" data-selection="single">
+                                    <label class="form-label mb-1">Upload Icon</label>
+                                    <div class="file-upload-text">
+                                        <p><span class="file_selected">0 </span>{{ __('files_selected') }}</p>
+                                        <span class="file-btn">{{ __('choose_file') }}</span>
+                                    </div>
+                                    <input class="d-none support-feature-media-id-input" type="hidden" name="masterclass_settings[support_features_list][${nextIndex}][media_id]" value="">
+                                </div>
+                                <div class="selected-files d-flex flex-wrap gap-20">
+                                    <div class="selected-files-item">
+                                        <img class="selected-img" src="{{ static_asset('images/default/default-image-80x80.png') }}" alt="default">
+                                    </div>
+                                </div>
+                            </div>
 
                             <label class="form-label">Description</label>
                             <textarea name="masterclass_settings[support_features_list][${nextIndex}][desc]"
@@ -334,6 +441,11 @@
                 e.preventDefault();
                 $(this).closest('.support-feature-card-item').remove();
                 renumberSupportCards();
+            });
+
+            $(document).on('click', '.support-feature-card-item .remove-icon', function() {
+                $(this).closest('.support-feature-card-item').find('.support-feature-icon-input').val('');
+                $(this).closest('.support-feature-card-item').find('.support-feature-media-id-input').val('');
             });
 
             // --- Support Channels Repeater ---
@@ -360,7 +472,7 @@
                     $(this).find('.support-channel-title-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][title]');
                     $(this).find('.support-channel-desc-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][desc]');
                     $(this).find('.support-channel-icon-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][icon]');
-                    $(this).find('.support-channel-icon-file-input').attr('name', 'support_channel_icon_files[' + index + ']');
+                    $(this).find('.support-channel-media-id-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][media_id]');
                     $(this).find('.support-channel-label-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][team_label]');
                     $(this).find('.support-channel-btn-text-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][btn_text]');
                     $(this).find('.support-channel-url-input').attr('name', 'masterclass_settings[support_channels_list][' + index + '][url]');
@@ -408,9 +520,21 @@
                             <input type="hidden" name="masterclass_settings[support_channels_list][${nextIndex}][icon]"
                                    class="support-channel-icon-input" value="">
 
-                            <label class="form-label">Upload Icon</label>
-                            <input type="file" name="support_channel_icon_files[${nextIndex}]"
-                                   class="form-control font-12 bg-white mb-2 support-channel-icon-file-input" accept="image/*">
+                            <div class="custom-image mb-2">
+                                <div class="gallery-modal" data-for="image" data-selection="single">
+                                    <label class="form-label mb-1">Upload Icon</label>
+                                    <div class="file-upload-text">
+                                        <p><span class="file_selected">0 </span>{{ __('files_selected') }}</p>
+                                        <span class="file-btn">{{ __('choose_file') }}</span>
+                                    </div>
+                                    <input class="d-none support-channel-media-id-input" type="hidden" name="masterclass_settings[support_channels_list][${nextIndex}][media_id]" value="">
+                                </div>
+                                <div class="selected-files d-flex flex-wrap gap-20">
+                                    <div class="selected-files-item">
+                                        <img class="selected-img" src="{{ static_asset('images/default/default-image-80x80.png') }}" alt="default">
+                                    </div>
+                                </div>
+                            </div>
 
                             <label class="form-label">Team Status Label</label>
                             <input type="text" name="masterclass_settings[support_channels_list][${nextIndex}][team_label]"
@@ -437,6 +561,11 @@
                 e.preventDefault();
                 $(this).closest('.support-channel-card-item').remove();
                 renumberSupportChannels();
+            });
+
+            $(document).on('click', '.support-channel-card-item .remove-icon', function() {
+                $(this).closest('.support-channel-card-item').find('.support-channel-icon-input').val('');
+                $(this).closest('.support-channel-card-item').find('.support-channel-media-id-input').val('');
             });
 
         });

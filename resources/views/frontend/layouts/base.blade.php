@@ -120,6 +120,12 @@
             --color-text-secondary: #4B5A72;
             --color-text-muted: #8A96A8;
             --color-white: #FFFFFF;
+
+            /* Mobile Typography System (Harmonized Scale) */
+            --mobile-font-heading-main: 22px;
+            --mobile-font-heading-sub: 17px;
+            --mobile-font-badge: 13px;
+            --mobile-font-body: 13.5px;
         }
 
         .form-control:focus, .nice-select:focus, input:focus, textarea:focus, select:focus {

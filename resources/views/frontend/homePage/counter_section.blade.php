@@ -110,7 +110,8 @@
             border-radius: 12px;
         }
         .counter-label {
-            font-size: 16px !important;
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
+            font-weight: 600 !important;
             margin-bottom: 2px;
         }
         .counter-number {

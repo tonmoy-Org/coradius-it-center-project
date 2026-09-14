@@ -8,6 +8,13 @@
        Standardizes vertical cadence, container gutters, and heading spacing
        across all landing page sections on mobile and tablet devices.
        ========================================================================== */
+    :root {
+        --mobile-font-heading-main: 22px;
+        --mobile-font-heading-sub: 17px;
+        --mobile-font-badge: 13px;
+        --mobile-font-body: 13.5px;
+    }
+
     /* Completely eliminate top white gap & reset body/header spacing */
     html, body {
         margin: 0 !important;
@@ -84,9 +91,187 @@
         .course-section-title {
             margin-bottom: 22px !important;
         }
-        .cow-title {
-            margin-bottom: 22px !important;
-            font-size: 22px !important;
+
+        /* ==========================================================================
+           PROFESSIONAL MOBILE TYPOGRAPHY SYSTEM (4 TIERS)
+           Harmonizes text hierarchy across the entire landing page on mobile.
+           ========================================================================== */
+
+        /* --------------------------------------------------------------------------
+           TIER 1: MAIN SECTION HEADINGS (22px, Bold 700)
+           CSS Variable: --mobile-font-heading-main
+           -------------------------------------------------------------------------- */
+        .hero-area .hero-title,
+        .hero-area .hero-content h1,
+        .hero-content h1,
+        .common-heading h2,
+        .course-section-title,
+        .section-title,
+        .cow-title,
+        section.about-me-section .common-heading h2,
+        section.about-me-section h2,
+        section.categories-of-work-section .cow-title,
+        section.benefits-section .course-section-title,
+        section.benefits-section h2,
+        section.special-gift-section .mc-special-gift-card h2,
+        section.special-gift-section h2,
+        section.syllabus-section .common-heading h2,
+        section.syllabus-section h2,
+        section.success-banner-section .common-heading h2,
+        section.success-story-section .common-heading h2,
+        section.success-story-section h2,
+        section.offer-breakdown-section .mc-bd-light-title,
+        section.offer-breakdown-section .common-heading h2,
+        section.offer-breakdown-section h2,
+        section.faq-section .common-heading h2,
+        section.faq-section h2,
+        section.mc-support-section-wrapper .mc-support-title,
+        section.mc-support-section-wrapper h2,
+        section.mc-support-section-wrapper .common-heading h2,
+        section.order-form-section .lead-title,
+        section.order-form-section .form-heading,
+        section.order-form-section h2,
+        .home-page-sections > section h2,
+        .home-page-sections > section .common-heading h2 {
+            font-size: var(--mobile-font-heading-main, 22px) !important;
+            font-weight: 700 !important;
+            line-height: 1.35 !important;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+        }
+
+        /* --------------------------------------------------------------------------
+           TIER 2: CARD & SUB-HEADINGS (17px, Semi-Bold 600)
+           CSS Variable: --mobile-font-heading-sub
+           -------------------------------------------------------------------------- */
+        .hero-area .hero-subtitle,
+        .hero-area .hero-content h4,
+        .hero-subtitle,
+        .cow-card-title,
+        .mc-audience-title-light,
+        .custom-syllabus-accordion .accordion-button,
+        .custom-testimonial-card .author-details h6,
+        .mc-bd-light-item-title,
+        .mc-bd-light-today-box h3,
+        .mc-bd-light-offer-heading,
+        .custom-faq-accordion .accordion-button,
+        .faq-badge-floating h5,
+        .mc-support-subtitle,
+        .mc-feature-title,
+        .mc-channel-title,
+        .mc-channel-info-title,
+        .mc-support-divider-text,
+        .counter-label,
+        .order-form-section .modern-label,
+        .order-form-section .order-summary-title,
+        .order-form-section .lead-card h3,
+        .order-form-section .lead-card h4,
+        .sp-left h3,
+        .mc-special-gift-card .mc-callout-quote .quote-price,
+        .common-heading h3,
+        .common-heading h4,
+        .card-title,
+        .sub-heading {
+            font-size: var(--mobile-font-heading-sub, 17px) !important;
+            font-weight: 600 !important;
+            line-height: 1.4 !important;
+        }
+
+        /* --------------------------------------------------------------------------
+           TIER 3: BADGES, TAGS & EYEBROWS (13px, Medium / Semi-Bold 500/600)
+           CSS Variable: --mobile-font-badge
+           -------------------------------------------------------------------------- */
+        .common-heading .sub-title,
+        .sub-title,
+        .section-tag,
+        .eyebrow,
+        .mc-audience-check-note-light,
+        .mc-gift-pill,
+        .author-details span,
+        .author-details .stars,
+        .mc-channel-team-label,
+        .mc-team-status-label,
+        .mc-support-badge,
+        .lead-badge,
+        .secure-badge span,
+        .secure-badge,
+        .coupon-code-badge,
+        .faq-badge-floating span,
+        .mc-bd-light-eyebrow,
+        .mc-bd-light-ribbon,
+        .mc-bd-pill-badge,
+        .mc-bd-light-saved-label,
+        .mc-bd-light-saved-pct,
+        .mc-bd-light-orig-label,
+        .mc-bd-light-security-note,
+        .custom-syllabus-accordion .badge,
+        .custom-syllabus-accordion .lesson-duration,
+        .custom-syllabus-accordion span.duration,
+        .badge,
+        .badge-pill,
+        .tag,
+        mark.title-highlight,
+        .title-highlight,
+        h2 mark,
+        .course-section-title mark,
+        .sp-cd-item span.label {
+            font-size: var(--mobile-font-badge, 13px) !important;
+            font-weight: 600 !important;
+            line-height: 1.4 !important;
+        }
+
+        /* --------------------------------------------------------------------------
+           TIER 4: BODY TEXT & PARAGRAPHS (13.5px, Regular 400)
+           CSS Variable: --mobile-font-body
+           -------------------------------------------------------------------------- */
+        .hero-area .hero-description,
+        .hero-description,
+        .hero-content p,
+        section.about-me-section .about-me-description-content,
+        section.about-me-section .about-me-description-content p,
+        section.about-me-section .about-me-description-content li,
+        section.about-me-section .about-me-text-block p,
+        .about-me-description-content,
+        .about-me-description-content p,
+        .about-me-description-content li,
+        .about-me-text-block p,
+        .cow-card-content,
+        .cow-card-content p,
+        .cow-card-content li,
+        .mc-audience-desc-light,
+        .mc-special-gift-card .text-secondary,
+        .mc-special-gift-card .quote-text,
+        .mc-special-gift-card .quote-text p,
+        .mc-callout-quote .quote-text,
+        .custom-syllabus-accordion .course-item-title,
+        .custom-syllabus-accordion .accordion-body,
+        .custom-syllabus-accordion li,
+        .custom-syllabus-accordion p,
+        .success-banner-section .common-heading p,
+        .success-story-section .common-heading p,
+        .custom-testimonial-card p,
+        .mc-bd-light-item-sub,
+        .mc-bd-light-desc,
+        .offer-breakdown-section p,
+        .custom-faq-accordion .accordion-body,
+        .custom-faq-accordion .accordion-body p,
+        .mc-support-description,
+        .mc-support-description p,
+        .mc-feature-desc,
+        .mc-channel-desc,
+        .mc-channel-info-desc,
+        .order-form-section .lead-desc,
+        .order-form-section .form-subheading,
+        .order-form-section .feature-list li,
+        .order-form-section p,
+        .order-form-section .text-muted,
+        .coupon-banner-section p,
+        .home-page-sections p:not(.file_name):not(.error):not(.num),
+        .section-description,
+        .common-heading p {
+            font-size: var(--mobile-font-body, 13.5px) !important;
+            font-weight: 400 !important;
+            line-height: 1.65 !important;
         }
 
         /* Internal Card Padding & Responsive Alignment */
@@ -121,11 +306,14 @@
             max-height: 320px !important;
             object-fit: cover !important;
         }
-        /* Mobile Input & Button Usability (Prevents Safari Auto-Zoom & Overflow) */
+
+        /* Mobile Input & Button Usability (Prevents Safari Auto-Zoom & Viewport Shift) */
         .order-form-section input[type="text"],
         .order-form-section input[type="email"],
         .order-form-section input[type="tel"],
-        .order-form-section input[type="password"] {
+        .order-form-section input[type="password"],
+        .order-form-section select,
+        .order-form-section textarea {
             font-size: 16px !important;
         }
     }
@@ -168,13 +356,6 @@
         .container.container-1278 {
             padding-left: 12px !important;
             padding-right: 12px !important;
-        }
-
-        .common-heading h2,
-        .course-section-title,
-        .cow-title {
-            font-size: 22px !important;
-            line-height: 1.35 !important;
         }
     }
 </style>
