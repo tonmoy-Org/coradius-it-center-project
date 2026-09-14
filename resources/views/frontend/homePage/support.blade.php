@@ -956,30 +956,7 @@
                 </div>
                 @endif
 
-                @if(!empty($featureCards) && count($featureCards) > 0)
-                    <!-- Dynamic Feature Cards -->
-                    <div class="mc-support-feature-cards" data-aos="fade-up" data-aos-delay="150">
-                        @foreach($featureCards as $fCard)
-                            @php
-                                $fcTitle = $fCard['title'] ?? '';
-                                $fcIcon = $fCard['icon'] ?? 'fas fa-check-circle';
-                                $fcMediaId = $fCard['media_id'] ?? '';
-                                $fcDesc = $fCard['desc'] ?? '';
-                            @endphp
-                            <div class="mc-support-feature-card">
-                                <div class="mc-feature-icon-circle">
-                                    {!! $renderIcon($fcIcon, 'fas fa-check-circle', $fcMediaId) !!}
-                                </div>
-                                @if(!empty($fcTitle))
-                                    <h4 class="mc-feature-title">{{ $fcTitle }}</h4>
-                                @endif
-                                @if(!empty($fcDesc))
-                                    <p class="mc-feature-desc">{{ $fcDesc }}</p>
-                                @endif
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
+
             </div>
         </div>
 
