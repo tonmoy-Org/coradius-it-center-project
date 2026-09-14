@@ -42,7 +42,7 @@
         }
 
         // Divider
-        $supportDividerText = !empty($mcSettings['support_divider_text']) ? $mcSettings['support_divider_text'] : '';
+        $supportDividerText = !empty($mcSettings['support_divider_text']) ? $mcSettings['support_divider_text'] : __('সাপোর্ট নিতে যোগাযোগ করুন');
 
         // Channels List (Dynamic)
         $channelCards = [];
@@ -120,6 +120,8 @@
         margin-bottom: 12px !important;
         display: flex;
         align-items: center;
+        justify-content: center;
+        text-align: center;
         flex-wrap: wrap;
         gap: 8px;
     }
@@ -153,8 +155,9 @@
         font-size: 17px !important;
         font-weight: 700 !important;
         color: var(--color-primary, #0056D2) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.5 !important;
+        margin-bottom: 8px !important;
+        line-height: 1.35 !important;
+        text-align: center;
     }
 
     /* Description */
@@ -162,17 +165,28 @@
     .mc-support-description p {
         font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif) !important;
         font-size: 15.5px !important;
-        line-height: 1.8 !important;
+        line-height: 1.45 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
+        margin-bottom: 6px !important;
+        text-align: center;
+    }
+
+    .mc-support-description {
+        max-width: 1080px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 22px !important;
     }
 
     /* Dynamic Feature Cards */
     .mc-support-feature-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 14px;
-        margin-top: 10px;
+        margin: 10px auto 25px auto;
+        max-width: 820px;
+        width: 100%;
     }
 
     .mc-support-feature-card {
@@ -230,20 +244,24 @@
         margin: 0 !important;
     }
 
-    /* Right Top Image - Restored to exact previous dimension standards */
+    /* Showcase Full Width Image */
     .mc-support-img-wrapper {
-        height: 100%;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 15px 0 25px 0;
+        text-align: center;
     }
 
     .mc-support-img {
-        max-height: 520px;
+        max-height: 480px;
+        max-width: 100%;
         width: auto;
-        display: block;
+        display: inline-block;
         object-fit: contain;
-        margin-bottom: 0;
+        margin: 0 auto;
+        transition: transform 0.3s ease;
     }
 
     /* Section Divider */
@@ -461,8 +479,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: 14.5px !important;
-            line-height: 1.7 !important;
-            margin-bottom: 18px !important;
+            line-height: 1.45 !important;
+            margin-bottom: 6px !important;
         }
 
         .mc-support-feature-cards {
@@ -559,8 +577,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: 15px !important;
-            line-height: 1.7 !important;
-            margin-bottom: 20px !important;
+            line-height: 1.45 !important;
+            margin-bottom: 6px !important;
         }
 
         .mc-support-feature-cards {
@@ -643,8 +661,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: var(--mobile-font-body, 13.5px) !important;
-            line-height: 1.65 !important;
-            margin-bottom: 18px !important;
+            line-height: 1.42 !important;
+            margin-bottom: 6px !important;
         }
 
         .mc-support-feature-cards {
@@ -727,8 +745,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: var(--mobile-font-body, 13.5px) !important;
-            line-height: 1.65 !important;
-            margin-bottom: 16px !important;
+            line-height: 1.42 !important;
+            margin-bottom: 6px !important;
         }
 
         /* Feature Cards on Mobile: Compact vertical centered look, stacked one by one */
@@ -915,11 +933,9 @@
 
 <section class="mc-support-section-wrapper">
     <div class="container container-1278">
-        <!-- Top Half: Content + Right Top Image -->
-        <div class="row align-items-center g-4">
-            <!-- Left Side: Content -->
-            <!-- Left Side: Content -->
-            <div class="col-lg-6 col-md-12 text-start">
+        <!-- Top Tier: Centered Header, Subtitle, Description & Feature Cards -->
+        <div class="row justify-content-center text-center">
+            <div class="col-12 col-xl-11">
                 @if(!empty($supportTitle))
                 <!-- Main Title with Headset Icon -->
                 <h2 class="mc-support-title" data-aos="fade-up">
@@ -942,39 +958,18 @@
                 </div>
                 @endif
 
-                @if(!empty($featureCards) && count($featureCards) > 0)
-                    <!-- Dynamic Feature Cards -->
-                    <div class="mc-support-feature-cards" data-aos="fade-up" data-aos-delay="150">
-                        @foreach($featureCards as $fCard)
-                            @php
-                                $fcTitle = $fCard['title'] ?? '';
-                                $fcIcon = $fCard['icon'] ?? 'fas fa-check-circle';
-                                $fcMediaId = $fCard['media_id'] ?? '';
-                                $fcDesc = $fCard['desc'] ?? '';
-                            @endphp
-                            <div class="mc-support-feature-card">
-                                <div class="mc-feature-icon-circle">
-                                    {!! $renderIcon($fcIcon, 'fas fa-check-circle', $fcMediaId) !!}
-                                </div>
-                                @if(!empty($fcTitle))
-                                    <h4 class="mc-feature-title">{{ $fcTitle }}</h4>
-                                @endif
-                                @if(!empty($fcDesc))
-                                    <p class="mc-feature-desc">{{ $fcDesc }}</p>
-                                @endif
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
 
-            @if(!empty($supportImageUrl))
-            <!-- Right Top Side: Restored to exact previous image size (max-height: 520px / 400px) -->
-            <div class="col-lg-6 col-md-12 text-center text-lg-end mc-support-img-wrapper justify-content-center justify-content-lg-end" data-aos="fade-left" data-aos-delay="150">
+            </div>
+        </div>
+
+        @if(!empty($supportImageUrl))
+        <!-- Middle Tier: Full Width Showcase Image -->
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mc-support-img-wrapper" data-aos="zoom-in" data-aos-delay="180">
                 <img src="{{ $supportImageUrl }}" alt="{{ $supportTitle ?: 'Support' }}" class="mc-support-img img-fluid">
             </div>
-            @endif
         </div>
+        @endif
 
         @if(!empty($supportDividerText))
         <!-- Middle Section: Divider with Title -->

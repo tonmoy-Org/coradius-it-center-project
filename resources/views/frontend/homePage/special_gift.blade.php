@@ -63,6 +63,20 @@
         margin-bottom: 16px;
     }
 
+    .mc-gift-free-badge {
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        padding: 4px 16px !important;
+        line-height: 1.2 !important;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.25);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+    }
+
     .mc-callout-quote {
         background: var(--color-white, #ffffff);
         border-left: 4px solid var(--color-primary, #0056D2);
@@ -78,6 +92,10 @@
     @media (max-width: 767px) {
         .mc-special-gift-card {
             padding: 22px 14px;
+        }
+        .mc-gift-free-badge {
+            font-size: 1.05rem !important;
+            padding: 4px 14px !important;
         }
         .mc-callout-quote {
             flex-direction: column !important;
@@ -114,7 +132,7 @@
                                 <span style="position: absolute; width: 120%; height: 2px; background: red; top: 50%; left: -10%; transform: rotate(20deg);"></span>
                                 {{ $formatCurrencyText($giftValue) }}
                             </span>
-                            <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">{{ __('FREE') }}</span>
+                            <span class="badge bg-danger mc-gift-free-badge rounded-pill">{{ __('FREE') }}</span>
                         </div>
                     @endif
 

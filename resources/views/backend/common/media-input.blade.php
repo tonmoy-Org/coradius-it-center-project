@@ -1,20 +1,21 @@
 @isset($edit)
     @php
         $image = $image_object;
+        $inputId = !empty($name) ? 'media_input_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $name) : 'apkThumb';
     @endphp
     <div class="{{ $col }} custom-image">
         <div class="mb-4 gallery-modal" data-for="{{ $for ?? 'image' }}" data-selection="{{ $selection ?? 'single' }}">
-            <label for="apkThumb"
+            <label for="{{ $inputId }}"
                    class="form-label mb-1">{{ $label }}
                 {{ $size }}</label>
-            <label for="apkThumb" class="file-upload-text">
+            <label for="{{ $inputId }}" class="file-upload-text">
                 <p>
                     <span class="file_selected"></span>
                     {{ __('files_selected') }}
                 </p>
                 <span class="file-btn">{{ __('choose_file') }}</span>
             </label>
-            <input class="d-none" type="hidden" name="{{ $name }}" data-type="{{ $type ?? '' }}" id="apkThumb"
+            <input class="d-none" type="hidden" name="{{ $name }}" data-type="{{ $type ?? '' }}" id="{{ $inputId }}"
                    value="{{ old('image') ? old('image') : ($media_id ? : '') }}">
         </div>
         <div class="selected-files d-flex flex-wrap gap-20">
@@ -50,20 +51,24 @@
             $media = \App\Models\MediaLibrary::find($imageVal);
         }
         $hasImageArray = is_array($image) && arrayCheck('image_80x80', $image) && is_file_exists($image['image_80x80'], $image['storage'] ?? 'local');
-        $hasMediaImg = $media && $media->image_variants && arrayCheck('image_80x80',$media->image_variants) && is_file_exists($media->image_variants['image_80x80'], $media->image_variants['storage']);
+        $hasMediaImg = $media && (
+            ($media->image_variants && arrayCheck('image_80x80',$media->image_variants) && is_file_exists($media->image_variants['image_80x80'], $media->image_variants['storage']))
+            || ($media->type != 'image' && !empty($media->original_file))
+        );
         $hasActive = $hasMediaImg || $hasImageArray;
+        $inputId = !empty($name) ? 'media_input_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $name) : 'apkThumb';
     @endphp
     <div class="{{ $col }} custom-image">
         <div class="mb-4 gallery-modal" data-for="{{ $for ?? 'image' }}" data-selection="{{ $selection ?? 'single' }}">
-            <label for="apkThumb" class="form-label mb-1">{{ $label }}
+            <label for="{{ $inputId }}" class="form-label mb-1">{{ $label }}
                 {{ $size }}</label>
-            <label for="apkThumb" class="file-upload-text">
+            <label for="{{ $inputId }}" class="file-upload-text">
                 <p><span
                         class="file_selected">{{ $hasActive ? 1 : '0' }} </span>{{ __('files_selected') }}
                 </p>
                 <span class="file-btn">{{ __('choose_file') }}</span>
             </label>
-            <input class="d-none" type="hidden" name="{{ $name }}" data-type="{{ $type ?? '' }}" id="apkThumb"
+            <input class="d-none" type="hidden" name="{{ $name }}" data-type="{{ $type ?? '' }}" id="{{ $inputId }}"
                    value="{{ is_array($image) ? ($image['id'] ?? '') : $image }}">
         </div>
         <div class="selected-files d-flex flex-wrap gap-20">
@@ -75,9 +80,9 @@
                             alt="{{ $media->name }}"
                             class="selected-img">
                     @else
-                        <img src="{{ static_asset('images/default/default-image-80x80.png') }}"
+                        <img src="{{ $media->type != 'image' && file_exists(public_path('images/default/default-'.$media->type.'-190x230.png')) ? static_asset('images/default/default-'.$media->type.'-190x230.png') : static_asset('images/default/default-image-80x80.png') }}"
                              data-default="{{ static_asset('images/default/default-image-80x80.png') }}"
-                             alt="category-banner" class="selected-img">
+                             alt="{{ $media->name }}" class="selected-img">
                     @endif
                     <div class="remove-icon" data-id="{{ $media->id }}">
                         <i class='las la-times'></i>
