@@ -155,8 +155,8 @@
         font-size: 17px !important;
         font-weight: 700 !important;
         color: var(--color-primary, #0056D2) !important;
-        margin-bottom: 12px !important;
-        line-height: 1.5 !important;
+        margin-bottom: 8px !important;
+        line-height: 1.35 !important;
         text-align: center;
     }
 
@@ -165,16 +165,18 @@
     .mc-support-description p {
         font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif) !important;
         font-size: 15.5px !important;
-        line-height: 1.8 !important;
+        line-height: 1.45 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
-        margin-bottom: 22px !important;
+        margin-bottom: 6px !important;
         text-align: center;
     }
 
     .mc-support-description {
-        max-width: 820px;
+        max-width: 1080px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 22px !important;
     }
 
     /* Dynamic Feature Cards */
@@ -477,8 +479,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: 14.5px !important;
-            line-height: 1.7 !important;
-            margin-bottom: 18px !important;
+            line-height: 1.45 !important;
+            margin-bottom: 6px !important;
         }
 
         .mc-support-feature-cards {
@@ -575,8 +577,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: 15px !important;
-            line-height: 1.7 !important;
-            margin-bottom: 20px !important;
+            line-height: 1.45 !important;
+            margin-bottom: 6px !important;
         }
 
         .mc-support-feature-cards {
@@ -659,8 +661,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: var(--mobile-font-body, 13.5px) !important;
-            line-height: 1.65 !important;
-            margin-bottom: 18px !important;
+            line-height: 1.42 !important;
+            margin-bottom: 6px !important;
         }
 
         .mc-support-feature-cards {
@@ -743,8 +745,8 @@
         .mc-support-description,
         .mc-support-description p {
             font-size: var(--mobile-font-body, 13.5px) !important;
-            line-height: 1.65 !important;
-            margin-bottom: 16px !important;
+            line-height: 1.42 !important;
+            margin-bottom: 6px !important;
         }
 
         /* Feature Cards on Mobile: Compact vertical centered look, stacked one by one */
@@ -933,7 +935,7 @@
     <div class="container container-1278">
         <!-- Top Tier: Centered Header, Subtitle, Description & Feature Cards -->
         <div class="row justify-content-center text-center">
-            <div class="col-lg-10 col-xl-9">
+            <div class="col-12 col-xl-11">
                 @if(!empty($supportTitle))
                 <!-- Main Title with Headset Icon -->
                 <h2 class="mc-support-title" data-aos="fade-up">
