@@ -42,7 +42,7 @@
         }
 
         // Divider
-        $supportDividerText = !empty($mcSettings['support_divider_text']) ? $mcSettings['support_divider_text'] : '';
+        $supportDividerText = !empty($mcSettings['support_divider_text']) ? $mcSettings['support_divider_text'] : __('সাপোর্ট নিতে যোগাযোগ করুন');
 
         // Channels List (Dynamic)
         $channelCards = [];
@@ -120,6 +120,8 @@
         margin-bottom: 12px !important;
         display: flex;
         align-items: center;
+        justify-content: center;
+        text-align: center;
         flex-wrap: wrap;
         gap: 8px;
     }
@@ -155,6 +157,7 @@
         color: var(--color-primary, #0056D2) !important;
         margin-bottom: 12px !important;
         line-height: 1.5 !important;
+        text-align: center;
     }
 
     /* Description */
@@ -165,14 +168,23 @@
         line-height: 1.8 !important;
         color: var(--color-text-secondary, #4B5A72) !important;
         margin-bottom: 22px !important;
+        text-align: center;
+    }
+
+    .mc-support-description {
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     /* Dynamic Feature Cards */
     .mc-support-feature-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 14px;
-        margin-top: 10px;
+        margin: 10px auto 25px auto;
+        max-width: 820px;
+        width: 100%;
     }
 
     .mc-support-feature-card {
@@ -230,20 +242,24 @@
         margin: 0 !important;
     }
 
-    /* Right Top Image - Restored to exact previous dimension standards */
+    /* Showcase Full Width Image */
     .mc-support-img-wrapper {
-        height: 100%;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 15px 0 25px 0;
+        text-align: center;
     }
 
     .mc-support-img {
-        max-height: 520px;
+        max-height: 480px;
+        max-width: 100%;
         width: auto;
-        display: block;
+        display: inline-block;
         object-fit: contain;
-        margin-bottom: 0;
+        margin: 0 auto;
+        transition: transform 0.3s ease;
     }
 
     /* Section Divider */
@@ -915,11 +931,9 @@
 
 <section class="mc-support-section-wrapper">
     <div class="container container-1278">
-        <!-- Top Half: Content + Right Top Image -->
-        <div class="row align-items-center g-4">
-            <!-- Left Side: Content -->
-            <!-- Left Side: Content -->
-            <div class="col-lg-6 col-md-12 text-start">
+        <!-- Top Tier: Centered Header, Subtitle, Description & Feature Cards -->
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10 col-xl-9">
                 @if(!empty($supportTitle))
                 <!-- Main Title with Headset Icon -->
                 <h2 class="mc-support-title" data-aos="fade-up">
@@ -967,14 +981,16 @@
                     </div>
                 @endif
             </div>
+        </div>
 
-            @if(!empty($supportImageUrl))
-            <!-- Right Top Side: Restored to exact previous image size (max-height: 520px / 400px) -->
-            <div class="col-lg-6 col-md-12 text-center text-lg-end mc-support-img-wrapper justify-content-center justify-content-lg-end" data-aos="fade-left" data-aos-delay="150">
+        @if(!empty($supportImageUrl))
+        <!-- Middle Tier: Full Width Showcase Image -->
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mc-support-img-wrapper" data-aos="zoom-in" data-aos-delay="180">
                 <img src="{{ $supportImageUrl }}" alt="{{ $supportTitle ?: 'Support' }}" class="mc-support-img img-fluid">
             </div>
-            @endif
         </div>
+        @endif
 
         @if(!empty($supportDividerText))
         <!-- Middle Section: Divider with Title -->
