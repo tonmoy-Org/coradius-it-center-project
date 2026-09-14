@@ -1,5 +1,5 @@
 <!--====== Start FAQ Section ======-->
-@if(isset($course) && count($course->faqs) > 0)
+@if(isset($course) && count($course->faqs) > 0 && (!isset($mcSettings['faq_status']) || !empty($mcSettings['faq_status'])))
 <style>
     .custom-faq-accordion .accordion-item {
         border: 1px solid var(--color-border-tint, #D9E8FC);

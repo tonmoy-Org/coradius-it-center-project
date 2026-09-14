@@ -80,13 +80,13 @@
         <div class="row gx-20">
             <!-- Show Support Section Checkbox (Left side, consistent with upper sections) -->
             <div class="col-12 mb-3">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="setting-check">
-                        <input type="checkbox" name="masterclass_settings[support_status]" value="1" id="support_status"
+                <div class="d-flex align-items-center justify-content-between">
+                    <label class="form-label mb-0 fw-semibold cursor-pointer" for="support_status">Show Support Section</label>
+                    <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                        <input type="checkbox" name="masterclass_settings[support_status]" value="1" id="support_status" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
                             {{ $supportStatus ? 'checked' : '' }}>
-                        <label for="support_status"></label>
+                        <label class="m-0" style="cursor: pointer;"></label>
                     </div>
-                    <label class="form-label mb-0 cursor-pointer" for="support_status">Show Support Section</label>
                 </div>
             </div>
 

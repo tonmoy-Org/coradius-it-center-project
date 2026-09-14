@@ -129,6 +129,10 @@
                                     {{ __('Sticky Promo') }}
                                 </a>
                             </li>
+                            <li>
+                                <a class="{{ request()->routeIs('courses.edit') && $currTab == 'lead_form' ? 'active' : '' }}"
+                                   href="{{ route('courses.edit', [$landingId, 'tab' => 'lead_form']) }}">{{ __('Lead Form') }}</a>
+                            </li>
                         </ul>
                     </li>
                 @endif

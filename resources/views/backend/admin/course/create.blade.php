@@ -264,12 +264,7 @@
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
                                                 <div class="col-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[show_special_gift]" value="1" id="create_show_gift"
-                                                                {{ old('masterclass_settings.show_special_gift', '1') == '1' ? 'checked' : '' }}>
-                                                            <label for="create_show_gift"></label>
-                                                        </div>
+                                                    <div class="d-flex align-items-center justify-content-between">
                                                         <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_show_gift">Show Special Gift Banner Card</label>
                                                     </div>
                                                 </div>
@@ -345,7 +340,7 @@
                                                                 {{ !empty($mcSettings['ad_banner_1_status']) ? 'checked' : '' }}>
                                                             <label for="create_ad_banner_1_status"></label>
                                                         </div>
-                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_ad_banner_1_status">Enable Ad Banner 1</label>
+                                                        <label class="form-label mb-0 fw-semibold cursor-pointer" for="create_ad_banner_1_status">Enable</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-4">
@@ -363,11 +358,6 @@
                                                         'size' => '(1200x300)',
                                                         'image' => $mcSettings['ad_banner_1_media_id'] ?? ''
                                                     ])
-                                                    <div class="mt-2">
-                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
-                                                        <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
-                                                               value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
-                                                    </div>
                                                 </div>
 
                                                 <!-- Banner 2 -->
@@ -399,11 +389,6 @@
                                                         'size' => '(1200x300)',
                                                         'image' => $mcSettings['ad_banner_2_media_id'] ?? ''
                                                     ])
-                                                    <div class="mt-2">
-                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
-                                                        <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
-                                                               value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

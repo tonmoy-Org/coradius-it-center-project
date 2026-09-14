@@ -98,6 +98,7 @@ class CourseRepository
             $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
             $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
+            $mc['faq_status'] = isset($mc['faq_status']) ? (!empty($mc['faq_status']) ? 1 : 0) : 1;
 
             if (request()->hasFile('overview_image_file')) {
                 $response = $this->saveImage(request()->file('overview_image_file'), 'course');
@@ -173,6 +174,20 @@ class CourseRepository
                 }
             } elseif (!empty($mc['faq_image_url_custom'])) {
                 $mc['faq_image_url'] = $mc['faq_image_url_custom'];
+            }
+
+            if (request()->has('order_form_image_media_id') || isset($mc['order_form_image_media_id'])) {
+                $orderFormMediaId = request('order_form_image_media_id', $mc['order_form_image_media_id'] ?? null);
+                if ($orderFormMediaId) {
+                    $media = \App\Models\MediaLibrary::find($orderFormMediaId);
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['order_form_image_url'] = getFileLink('original_image', $media->image_variants);
+                        $mc['order_form_image_media_id'] = $orderFormMediaId;
+                    }
+                } else {
+                    $mc['order_form_image_url'] = '';
+                    $mc['order_form_image_media_id'] = '';
+                }
             }
 
             if (request('support_title_icon_media_id')) {
@@ -421,6 +436,7 @@ class CourseRepository
             $mc['ad_banner_2_status'] = isset($mc['ad_banner_2_status']) ? 1 : 0;
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
             $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
+            $mc['faq_status'] = isset($mc['faq_status']) ? (!empty($mc['faq_status']) ? 1 : 0) : 1;
             if (isset($mc['show_benefits_section'])) {
                 $mc['show_benefits_section'] = !empty($mc['show_benefits_section']) ? 1 : 0;
                 $mc['benefits_status'] = $mc['show_benefits_section'];
@@ -517,6 +533,20 @@ class CourseRepository
                 }
             } elseif (!empty($mc['faq_image_url_custom'])) {
                 $mc['faq_image_url'] = $mc['faq_image_url_custom'];
+            }
+
+            if (request()->has('order_form_image_media_id') || isset($mc['order_form_image_media_id'])) {
+                $orderFormMediaId = request('order_form_image_media_id', $mc['order_form_image_media_id'] ?? null);
+                if ($orderFormMediaId) {
+                    $media = \App\Models\MediaLibrary::find($orderFormMediaId);
+                    if ($media && !empty($media->image_variants)) {
+                        $mc['order_form_image_url'] = getFileLink('original_image', $media->image_variants);
+                        $mc['order_form_image_media_id'] = $orderFormMediaId;
+                    }
+                } else {
+                    $mc['order_form_image_url'] = '';
+                    $mc['order_form_image_media_id'] = '';
+                }
             }
 
             if (isset($mc['support_title_icon'])) {

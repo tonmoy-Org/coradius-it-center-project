@@ -369,13 +369,13 @@
                                     <!-- Course Description Right Feature Card -->
                                     <div class="card border mb-4 rounded-3 shadow-sm">
                                         <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
-                                            <label class="form-label m-0 cursor-pointer" for="show_desc_right_box">Course Description Right Box Settings</label>
-                                            <div class="setting-check m-0">
-                                                <input type="hidden" name="masterclass_settings[show_desc_right_box]" value="0">
-                                                <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box"
-                                                    {{ !isset($mcSettings['show_desc_right_box']) || !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
-                                                <label for="show_desc_right_box" class="m-0"></label>
-                                            </div>
+                                             <label class="form-label m-0 cursor-pointer" for="show_desc_right_box">Course Description Right Box Settings</label>
+                                             <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                 <input type="hidden" name="masterclass_settings[show_desc_right_box]" value="0">
+                                                 <input type="checkbox" name="masterclass_settings[show_desc_right_box]" value="1" id="show_desc_right_box" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
+                                                     {{ !isset($mcSettings['show_desc_right_box']) || !empty($mcSettings['show_desc_right_box']) ? 'checked' : '' }}>
+                                                 <label for="show_desc_right_box" class="m-0" style="cursor: pointer;"></label>
+                                             </div>
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
@@ -471,19 +471,19 @@
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
-                                                <div class="col-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <input type="hidden" name="masterclass_settings[show_benefits_section]" value="0">
-                                                        <input type="hidden" name="masterclass_settings[benefits_status]" id="hidden_benefits_status" value="{{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 1 : 0 }}">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[show_benefits_section]" value="1" id="show_benefits_section"
-                                                                {{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 'checked' : '' }}
-                                                                onchange="document.getElementById('hidden_benefits_status').value = this.checked ? 1 : 0;">
-                                                            <label for="show_benefits_section"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="show_benefits_section">Show Benefits & Target Audience Section</label>
-                                                    </div>
-                                                </div>
+                                                 <div class="col-12 mb-4">
+                                                     <div class="d-flex align-items-center justify-content-between">
+                                                         <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_benefits_section">{{ __('Show Benefits & Target Audience Section') }}</label>
+                                                         <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                             <input type="hidden" name="masterclass_settings[show_benefits_section]" value="0">
+                                                             <input type="hidden" name="masterclass_settings[benefits_status]" id="hidden_benefits_status" value="{{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 1 : 0 }}">
+                                                             <input type="checkbox" name="masterclass_settings[show_benefits_section]" value="1" id="show_benefits_section" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
+                                                                 {{ (isset($mcSettings['show_benefits_section']) ? !empty($mcSettings['show_benefits_section']) : (!isset($mcSettings['benefits_status']) || !empty($mcSettings['benefits_status']))) ? 'checked' : '' }}
+                                                                 onchange="document.getElementById('hidden_benefits_status').value = this.checked ? 1 : 0;">
+                                                             <label class="m-0" style="cursor: pointer;"></label>
+                                                         </div>
+                                                     </div>
+                                                 </div>
 
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Benefits Heading</label>
@@ -527,16 +527,16 @@
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
-                                                <div class="col-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[show_special_gift]" value="1" id="show_gift"
-                                                                {{ isset($mcSettings['show_special_gift']) ? ($mcSettings['show_special_gift'] ? 'checked' : '') : (empty($mcSettings['hide_special_gift']) ? 'checked' : '') }}>
-                                                            <label for="show_gift"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="show_gift">Show Special Gift Banner Card</label>
-                                                    </div>
-                                                </div>
+                                                 <div class="col-12 mb-4">
+                                                     <div class="d-flex align-items-center justify-content-between">
+                                                         <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_gift">Show Special Gift Banner Card</label>
+                                                         <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                             <input type="checkbox" name="masterclass_settings[show_special_gift]" value="1" id="show_gift" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
+                                                                 {{ isset($mcSettings['show_special_gift']) ? ($mcSettings['show_special_gift'] ? 'checked' : '') : (empty($mcSettings['hide_special_gift']) ? 'checked' : '') }}>
+                                                             <label for="show_gift" class="m-0" style="cursor: pointer;"></label>
+                                                         </div>
+                                                     </div>
+                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 mb-4">
                                                     <label class="form-label">Gift Pill / Badge Text</label>
@@ -633,15 +633,15 @@
                                         </div>
                                         <div class="card-body p-4">
                                             <div class="row gx-20">
-                                                <div class="col-12 mb-3">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[breakdown_status]" value="1" id="breakdown_status" {{ !empty($mcSettings['breakdown_status']) ? 'checked' : '' }}>
-                                                            <label for="breakdown_status"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="breakdown_status">Show Offer Breakdown Section</label>
-                                                    </div>
-                                                </div>
+                                                 <div class="col-12 mb-3">
+                                                     <div class="d-flex align-items-center justify-content-between">
+                                                         <label class="form-label mb-0 fw-semibold cursor-pointer" for="breakdown_status">{{ __('Show Offer Breakdown Section') }}</label>
+                                                         <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                             <input type="checkbox" name="masterclass_settings[breakdown_status]" value="1" id="breakdown_status" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;" {{ !empty($mcSettings['breakdown_status']) ? 'checked' : '' }}>
+                                                             <label class="m-0" style="cursor: pointer;"></label>
+                                                         </div>
+                                                     </div>
+                                                 </div>
 
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label">Breakdown Today Title</label>
@@ -703,16 +703,16 @@
                                                 <div class="col-12">
                                                     <label class="form-label mb-3 border-bottom pb-2 w-100">Ad Banner 1</label>
                                                 </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[ad_banner_1_status]" value="1" id="ad_banner_1_status"
-                                                                {{ !empty($mcSettings['ad_banner_1_status']) ? 'checked' : '' }}>
-                                                            <label for="ad_banner_1_status"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="ad_banner_1_status">Enable Ad Banner 1</label>
-                                                    </div>
-                                                </div>
+                                                 <div class="col-lg-12 mb-4">
+                                                     <div class="d-flex align-items-center justify-content-between">
+                                                         <label class="form-label mb-0 fw-semibold cursor-pointer" for="ad_banner_1_status">{{ __('Enable Ad Banner 1') }}</label>
+                                                         <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                             <input type="checkbox" name="masterclass_settings[ad_banner_1_status]" value="1" id="ad_banner_1_status" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
+                                                                 {{ !empty($mcSettings['ad_banner_1_status']) ? 'checked' : '' }}>
+                                                             <label class="m-0" style="cursor: pointer;"></label>
+                                                         </div>
+                                                     </div>
+                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Ad Banner Link URL 1</label>
                                                     <input type="text" name="masterclass_settings[ad_banner_1_link]" class="form-control rounded-2"
@@ -728,27 +728,22 @@
                                                         'size' => '(1200x300)',
                                                         'image' => $mcSettings['ad_banner_1_media_id'] ?? ''
                                                     ])
-                                                    <div class="mt-2">
-                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
-                                                        <input type="text" name="masterclass_settings[ad_banner_1_image_url_custom]" class="form-control rounded-2"
-                                                               value="{{ $mcSettings['ad_banner_1_image_url'] ?? '' }}">
-                                                    </div>
                                                 </div>
 
                                                 <!-- Banner 2 -->
                                                 <div class="col-12 mt-3">
                                                     <label class="form-label mb-3 border-bottom pb-2 w-100">Ad Banner 2</label>
                                                 </div>
-                                                <div class="col-lg-12 mb-4">
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <div class="setting-check">
-                                                            <input type="checkbox" name="masterclass_settings[ad_banner_2_status]" value="1" id="ad_banner_2_status"
-                                                                {{ !empty($mcSettings['ad_banner_2_status']) ? 'checked' : '' }}>
-                                                            <label for="ad_banner_2_status"></label>
-                                                        </div>
-                                                        <label class="form-label mb-0 cursor-pointer" for="ad_banner_2_status">Enable Ad Banner 2</label>
-                                                    </div>
-                                                </div>
+                                                 <div class="col-lg-12 mb-4">
+                                                     <div class="d-flex align-items-center justify-content-between">
+                                                         <label class="form-label mb-0 fw-semibold cursor-pointer" for="ad_banner_2_status">{{ __('Enable Ad Banner 2') }}</label>
+                                                         <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                             <input type="checkbox" name="masterclass_settings[ad_banner_2_status]" value="1" id="ad_banner_2_status" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
+                                                                 {{ !empty($mcSettings['ad_banner_2_status']) ? 'checked' : '' }}>
+                                                             <label class="m-0" style="cursor: pointer;"></label>
+                                                         </div>
+                                                     </div>
+                                                 </div>
                                                 <div class="col-lg-6 mb-4">
                                                     <label class="form-label">Ad Banner Link URL 2</label>
                                                     <input type="text" name="masterclass_settings[ad_banner_2_link]" class="form-control rounded-2"
@@ -764,11 +759,6 @@
                                                         'size' => '(1200x300)',
                                                         'image' => $mcSettings['ad_banner_2_media_id'] ?? ''
                                                     ])
-                                                    <div class="mt-2">
-                                                        <label class="form-label small text-muted mb-1">Or Custom Image URL</label>
-                                                        <input type="text" name="masterclass_settings[ad_banner_2_image_url_custom]" class="form-control rounded-2"
-                                                               value="{{ $mcSettings['ad_banner_2_image_url'] ?? '' }}">
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1004,14 +994,14 @@
                                 <div class="row">
 
                                     <div class="col-lg-12 mb-4">
-                                        <div class="d-flex align-items-center gap-2 mb-3">
-                                            <div class="setting-check">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <label class="form-label mb-0 fw-semibold cursor-pointer" for="show_curriculum_section">{{ __('Show Curriculum Section on Landing Page') }}</label>
+                                            <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
                                                 <input type="hidden" name="masterclass_settings[show_curriculum_section]" value="0">
-                                                <input type="checkbox" name="masterclass_settings[show_curriculum_section]" value="1" id="show_curriculum_section"
+                                                <input type="checkbox" name="masterclass_settings[show_curriculum_section]" value="1" id="show_curriculum_section" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
                                                     {{ !isset($mcSettings['show_curriculum_section']) || !empty($mcSettings['show_curriculum_section']) ? 'checked' : '' }}>
-                                                <label for="show_curriculum_section"></label>
+                                                <label class="m-0" style="cursor: pointer;"></label>
                                             </div>
-                                            <label class="form-label mb-0 cursor-pointer" for="show_curriculum_section">{{ __('Show Curriculum Section on Landing Page') }}</label>
                                         </div>
                                         <div class="form-group">
                                             <label for="curriculum_title" class="form-label">{{ __('Curriculum Section Title') }}</label>
@@ -1371,58 +1361,51 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         
-                                        <!-- FAQ Section Title & Settings -->
-                                        <div class="mb-4 mt-2">
-                                            <span class="form-label mb-3 d-block">{{ __('FAQ Section Title & Tag') }}</span>
-                                            
-                                            <div class="form-group mb-3">
-                                                <label for="faq_title" class="form-label">{{ __('FAQ Section Title') }}</label>
-                                                <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
-                                                       value="{{ $mcSettings['faq_title'] ?? '' }}">
-                                                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
-                                            </div>
+                                        <!-- FAQ Section Header & Toggle Switch -->
+                                         <div class="card mb-4 border-0 shadow-sm">
+                                             <div class="card-body p-3">
+                                                  <div class="d-flex align-items-center justify-content-between">
+                                                      <label class="form-label mb-0 fw-semibold cursor-pointer" for="faq_status">{{ __('Enable FAQ Section') }}</label>
+                                                      <div class="setting-check m-0" style="cursor: pointer;" onclick="var cb = this.querySelector('input[type=checkbox]'); if (event.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); }">
+                                                          <input type="hidden" name="masterclass_settings[faq_status]" id="hidden_faq_status" value="{{ (!isset($mcSettings['faq_status']) || !empty($mcSettings['faq_status'])) ? 1 : 0 }}">
+                                                          <input type="checkbox" name="masterclass_settings[faq_status]" value="1" id="faq_status" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;"
+                                                              {{ (!isset($mcSettings['faq_status']) || !empty($mcSettings['faq_status'])) ? 'checked' : '' }}
+                                                              onchange="document.getElementById('hidden_faq_status').value = this.checked ? 1 : 0;">
+                                                          <label class="m-0" style="cursor: pointer;"></label>
+                                                      </div>
+                                                  </div>
+                                             </div>
+                                         </div>
 
-                                                <div class="form-group mb-3">
-                                                    <label for="faq_subtitle" class="form-label">{{ __('FAQ Section Tag / Subtitle') }}</label>
-                                                    <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_subtitle'] ?? '' }}">
-                                                </div>
+                                         <!-- FAQ Section Title & Settings -->
+                                         <div class="card mb-4 border-0 shadow-sm">
+                                             <div class="card-body p-4">
+                                                 <div class="form-group mb-3">
+                                                     <label for="faq_title" class="form-label fw-semibold">{{ __('FAQ Section Title') }}</label>
+                                                     <input type="text" name="masterclass_settings[faq_title]" id="faq_title" class="form-control rounded-2"
+                                                            value="{{ $mcSettings['faq_title'] ?? '' }}" placeholder="e.g., সচরাচর জিজ্ঞাসিত প্রশ্ন">
+                                                     <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
+                                                 </div>
 
-                                                <div class="form-group mb-3">
-                                                    <label for="faq_badge_title" class="form-label">{{ __('FAQ Image Floating Badge Title') }}</label>
-                                                    <input type="text" name="masterclass_settings[faq_badge_title]" id="faq_badge_title" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_badge_title'] ?? '' }}">
-                                                </div>
-
-                                                <div class="form-group mb-0">
-                                                    <label for="faq_badge_subtitle" class="form-label">{{ __('FAQ Image Floating Badge Subtitle') }}</label>
-                                                    <input type="text" name="masterclass_settings[faq_badge_subtitle]" id="faq_badge_subtitle" class="form-control rounded-2"
-                                                           value="{{ $mcSettings['faq_badge_subtitle'] ?? '' }}">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                         <!-- FAQ Image Upload -->
-                                         <div class="card mb-4 mt-2 border-0 shadow-sm">
-                                             <div class="card-body">
-                                                 <span class="form-label mb-2 d-block">{{ __('FAQ Section Image') }}</span>
-                                                 <p class="text-muted mb-3">{{ __('Upload an image to display on the right side of the FAQ section.') }}</p>
-                                                 
-                                                 @include('backend.common.media-input', [
-                                                     'title' => __('FAQ Section Image'),
-                                                     'label' => __('FAQ Section Image'),
-                                                     'for' => 'image',
-                                                     'name' => 'faq_image_media_id',
-                                                     'col' => 'col-12 mb-3',
-                                                     'size' => '',
-                                                     'image' => $mcSettings['faq_image_media_id'] ?? ($course->faq_image ?? '')
-                                                 ])
-                                                 <div class="mt-2">
-                                                     <label class="form-label small text-muted mb-1">{{ __('Or Custom Image URL / Path') }}</label>
-                                                     <input type="text" name="masterclass_settings[faq_image_url_custom]" class="form-control rounded-2"
-                                                            value="{{ $mcSettings['faq_image_url'] ?? '' }}" placeholder="e.g. images/faq/faq_classroom.jpg">
+                                                 <div class="form-group mb-0">
+                                                     <label for="faq_subtitle" class="form-label fw-semibold">{{ __('FAQ Subtitle / Tag') }}</label>
+                                                     <input type="text" name="masterclass_settings[faq_subtitle]" id="faq_subtitle" class="form-control rounded-2"
+                                                            value="{{ $mcSettings['faq_subtitle'] ?? '' }}" placeholder="e.g., আপনার সাধারণ প্রশ্নগুলোর উত্তর">
                                                  </div>
                                              </div>
+                                         </div>
+
+                                         <!-- FAQ Image Upload -->
+                                         <div class="mb-4">
+                                             @include('backend.common.media-input', [
+                                                 'title' => __('FAQ Section Image'),
+                                                 'label' => __('FAQ Section Image'),
+                                                 'for' => 'image',
+                                                 'name' => 'faq_image_media_id',
+                                                 'col' => 'col-12 mb-0',
+                                                 'size' => '',
+                                                 'image' => $mcSettings['faq_image_media_id'] ?? ($course->faq_image ?? '')
+                                             ])
                                          </div>
 
                                         <div class="oftions-content-right mb-20">
@@ -1500,7 +1483,28 @@
                             </div>
                             <!-- End FAQ Tab -->
 
-                            
+                            <!-- Lead Form Tab -->
+                            <div class="tab-pane fade {{ $request_tab == 'lead_form' ? 'show active' : '' }}"
+                                 id="courseLeadForm" role="tabpanel" tabindex="0">
+                                <div class="row gx-20">
+                                    @include('backend.common.media-input', [
+                                        'title' => 'Lead Form Left Image',
+                                        'name' => 'order_form_image_media_id',
+                                        'col' => 'col-12',
+                                        'size' => '(Recommended: 500x700)',
+                                        'image' => $mcSettings['order_form_image_media_id'] ?? '',
+                                        'label' => __('Upload / Select Image from Media (Blue Section Banner)'),
+                                        'media_id' => $mcSettings['order_form_image_media_id'] ?? ''
+                                    ])
+                                </div>
+
+                                <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">
+                                    <button type="submit" name="save_and_published" value="1"
+                                            class="btn sg-btn-primary px-4">{{ __('save_&_publish') }}</button>
+                                </div>
+                            </div>
+                            <!-- End Lead Form Tab -->
+
                         </div>
                     </form>
                 </div>

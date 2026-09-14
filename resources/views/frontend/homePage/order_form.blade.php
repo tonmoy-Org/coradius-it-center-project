@@ -14,6 +14,20 @@
             $query->where('user_id', auth()->id());
         })->exists();
     }
+
+    $blueSectionImage = '';
+    if (!empty($mcSettings['order_form_image_media_id'])) {
+        $media = \App\Models\MediaLibrary::find($mcSettings['order_form_image_media_id']);
+        if ($media && !empty($media->image_variants)) {
+            $blueSectionImage = getFileLink('original_image', $media->image_variants);
+        }
+    }
+    if (!$blueSectionImage && !empty($mcSettings['order_form_image_url'])) {
+        $blueSectionImage = dynamic_asset($mcSettings['order_form_image_url']);
+    }
+    if (!$blueSectionImage && !empty($course->image)) {
+        $blueSectionImage = getFileLink('original_image', $course->image);
+    }
 @endphp
 
 @if(isset($course))
@@ -37,68 +51,25 @@
     .lead-info-side {
         background: linear-gradient(145deg, #0056D2 0%, #003b93 100%);
         color: white;
-        padding: 50px 40px;
+        padding: 0;
         flex: 1 1 400px;
         position: relative;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 450px;
     }
-    .lead-info-side::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-        opacity: 0.5;
-        pointer-events: none;
-    }
-    .lead-info-content {
-        position: relative;
-        z-index: 2;
+    .lead-info-full-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
     .lead-form-side {
         padding: 50px 40px;
         flex: 1 1 500px;
         background: #ffffff;
-    }
-    .lead-badge {
-        background: rgba(255,255,255,0.2);
-        padding: 6px 14px;
-        border-radius: 50px;
-        font-size: 14px;
-        font-weight: 600;
-        display: inline-block;
-        margin-bottom: 20px;
-        backdrop-filter: blur(5px);
-    }
-    .lead-title {
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 1.3;
-        margin-bottom: 20px;
-        color: #ffffff !important;
-    }
-    .lead-desc {
-        font-size: 16px;
-        opacity: 0.9;
-        line-height: 1.6;
-        margin-bottom: 30px;
-    }
-    .feature-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .feature-list li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-        font-size: 15px;
-    }
-    .feature-list li svg {
-        margin-right: 12px;
-        color: #4ade80;
     }
     .form-heading {
         color: #0A1E3F;
@@ -111,38 +82,43 @@
         font-size: 15px;
         margin-bottom: 30px;
     }
-    .modern-input {
-        height: 56px;
-        border-radius: 12px;
-        border: 2px solid #e2e8f0;
-        padding: 10px 20px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        background-color: #f8fafc;
-        width: 100%;
-        color: #1e293b;
-    }
-    .modern-input:focus {
-        border-color: #0056D2;
-        box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.1);
-        background-color: #ffffff;
-        outline: none;
-    }
-    .modern-label {
-        font-weight: 600;
+    .lead-form-side .form-label {
+        font-weight: 500;
         color: #334155;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         display: block;
         font-size: 14px;
     }
-    .secure-badge {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        color: #64748b;
-        font-size: 13px;
-        margin-top: 20px;
+    .lead-form-side .form-control {
+        height: 48px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        padding: 10px 16px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        background-color: #ffffff;
+        width: 100%;
+        color: #1e293b;
+    }
+    .lead-form-side .form-control:focus {
+        border-color: #0056D2;
+        box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.15);
+        outline: none;
+    }
+    .lead-form-side .btn-submit-profile {
+        background-color: #0056D2;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 16px;
+        border-radius: 6px;
+        padding: 12px 24px;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .lead-form-side .btn-submit-profile:hover {
+        background-color: #0044ab;
     }
     
     @media (max-width: 768px) {
@@ -150,13 +126,11 @@
             flex-direction: column;
         }
         .lead-info-side {
-            padding: 40px 30px;
+            padding: 0;
+            min-height: 250px;
         }
         .lead-form-side {
             padding: 40px 30px;
-        }
-        .lead-title {
-            font-size: 26px;
         }
     }
 </style>
@@ -168,34 +142,9 @@
         <div class="lead-card" data-aos="fade-up">
             <!-- Left Info Side -->
             <div class="lead-info-side">
-                <div class="lead-info-content">
-                    <div class="lead-badge">১০০% ফ্রি এক্সেস</div>
-                    <h2 class="lead-title">{{ $course->title }}</h2>
-                    <p class="lead-desc">আজই আমাদের সাথে যুক্ত হোন এবং ডিজিটাল স্কিল শেখা শুরু করুন। এক্সক্লুসিভ ট্রেনিং ম্যাটেরিয়ালস পেতে নিচের ফর্মটি পূরণ করুন।</p>
-                    
-                    <ul class="feature-list">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            ইন্সট্যান্ট আজীবন এক্সেস
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            ফ্রি রিসোর্স ও গাইডলাইন
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            মোবাইল এবং ডেস্কটপ ফ্রেন্ডলি
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            এক্সপার্ট গাইডলাইন
-                        </li>
-                    </ul>
-                    
-                    <div style="margin-top: 40px; text-align: center;">
-                        <img src="{{ getFileLink('295x248', $course->image) }}" alt="{{ $course->title }}" class="rounded shadow" style="width: 100%; max-width: 280px; border: 4px solid rgba(255,255,255,0.2);">
-                    </div>
-                </div>
+                @if(!empty($blueSectionImage))
+                    <img src="{{ $blueSectionImage }}" alt="Lead Form Banner" class="lead-info-full-img">
+                @endif
             </div>
             
             <!-- Right Form Side -->
@@ -210,46 +159,32 @@
                     <input type="hidden" name="quantity" value="1">
                     
                     <div class="mb-4">
-                        <label class="modern-label">আপনার নাম <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="modern-input @error('name') is-invalid @enderror" value="{{ old('name', auth()->check() ? auth()->user()->first_name : '') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
+                        <label class="form-label">আপনার নাম <span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control rounded-2 @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
                         @error('name')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label class="modern-label">ইমেইল <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="modern-input @error('email') is-invalid @enderror" value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
+                        <label class="form-label">ইমেইল <span class="text-danger">*</span></label>
+                        <input type="email" name="email" class="form-control rounded-2 @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
                         @error('email')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label class="modern-label">মোবাইল নাম্বার <span class="text-danger">*</span></label>
-                        <input type="tel" name="phone" class="modern-input @error('phone') is-invalid @enderror" value="{{ old('phone', auth()->check() ? auth()->user()->phone : '') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
+                        <label class="form-label">মোবাইল নাম্বার <span class="text-danger">*</span></label>
+                        <input type="tel" name="phone" class="form-control rounded-2 @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
                         @error('phone')
                             <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
 
-                    <div class="mb-4" style="margin-top: 10px;">
-                        <div class="d-flex align-items-start gap-2">
-                            <input type="checkbox" name="agree" id="agree_terms" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
-                            <label for="agree_terms" class="text-muted small" style="cursor: pointer; line-height: 1.5; font-size: 13px;">
-                                আমি মার্কেটিং সংক্রান্ত যোগাযোগ গ্রহণে সম্মত এবং মেনে নিচ্ছি <a href="{{ route('terms.conditions') }}" target="_blank" class="text-primary text-decoration-none fw-semibold">শর্তাবলী</a> ও <a href="{{ route('refund.policy') }}" target="_blank" class="text-primary text-decoration-none fw-semibold">গোপনীয়তা নীতি</a>।
-                            </label>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="template-btn w-100 text-center border-0" style="border-radius: 4px; padding: 15px 0; font-size: 18px;">
+                    <button type="submit" class="btn btn-submit-profile w-100 text-center">
                         {{ $payNowBtnText }}
                     </button>
-                    
-                    <div class="secure-badge">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                        আপনার তথ্য ১০০% নিরাপদ এবং কারও সাথে শেয়ার করা হবে না।
-                    </div>
                 </form>
             </div>
         </div>
