@@ -220,20 +220,19 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: transparent !important;
-        background: transparent !important;
+        background-color: var(--color-blue-tint, #EAF2FE);
         color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
+        font-size: 16px;
         margin-bottom: 10px;
-        padding: 0;
+        padding: 6px;
     }
 
     .mc-feature-icon-circle img {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         object-fit: contain;
     }
 
@@ -390,18 +389,36 @@
     }
 
     .mc-avatar-fb {
-        background-color: #ffffff;
-        color: #1877F2;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        background-color: #1877F2 !important;
+        color: #ffffff !important;
+        border: none !important;
+    }
+
+    .mc-avatar-fb i {
+        color: #ffffff !important;
+        font-size: 22px;
     }
 
     .mc-avatar-wa {
-        background-color: #25D366;
+        background-color: #25D366 !important;
+        color: #ffffff !important;
+        border: none !important;
+    }
+
+    .mc-avatar-wa i {
+        color: #ffffff !important;
+        font-size: 22px;
     }
 
     .mc-avatar-tg {
-        background-color: #0088cc;
+        background-color: #0088cc !important;
+        color: #ffffff !important;
+        border: none !important;
+    }
+
+    .mc-avatar-tg i {
+        color: #ffffff !important;
+        font-size: 22px;
     }
 
     .mc-channel-info-title {
@@ -1083,12 +1100,21 @@
 
                         $lower = strtolower($cTitle . ' ' . $cIcon . ' ' . $cUrl);
                         $avatarClass = 'mc-avatar-default';
-                        if (str_contains($lower, 'face') || str_contains($lower, 'fb')) {
-                            $avatarClass = 'mc-avatar-fb';
-                        } elseif (str_contains($lower, 'whats') || str_contains($lower, 'wa.me')) {
+                        $channelDefaultIcon = 'fas fa-comments';
+
+                        if (str_contains($lower, 'whats') || str_contains($lower, 'wa.me') || str_contains(strtolower($cTitle), 'হোয়াটসঅ্যাপ') || str_contains(strtolower($cTitle), 'whatsapp')) {
                             $avatarClass = 'mc-avatar-wa';
-                        } elseif (str_contains($lower, 'tele') || str_contains($lower, 't.me')) {
+                            $channelDefaultIcon = 'fab fa-whatsapp';
+                        } elseif (str_contains($lower, 'tele') || str_contains($lower, 't.me') || str_contains(strtolower($cTitle), 'টেলিগ্রাম') || str_contains(strtolower($cTitle), 'telegram')) {
                             $avatarClass = 'mc-avatar-tg';
+                            $channelDefaultIcon = 'fab fa-telegram-plane';
+                        } elseif (str_contains($lower, 'face') || str_contains($lower, 'fb') || str_contains(strtolower($cTitle), 'ফেসবুক') || str_contains(strtolower($cTitle), 'facebook')) {
+                            $avatarClass = 'mc-avatar-fb';
+                            $channelDefaultIcon = 'fab fa-facebook-f';
+                        }
+
+                        if (empty($cIcon) || $cIcon === 'fas fa-comments' || ($avatarClass === 'mc-avatar-wa' && str_contains(strtolower($cIcon), 'facebook')) || ($avatarClass === 'mc-avatar-tg' && str_contains(strtolower($cIcon), 'facebook'))) {
+                            $cIcon = $channelDefaultIcon;
                         }
                     @endphp
                     <div class="mc-channel-card {{ $isHigh ? 'highlighted-channel' : '' }}">
