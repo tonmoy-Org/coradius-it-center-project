@@ -93,8 +93,8 @@
             <!-- Support Title -->
             <div class="col-lg-6 col-md-6 mb-4">
                 <label class="form-label">Support Title</label>
-                <input type="text" name="masterclass_settings[support_title]" class="form-control rounded-2"
-                       value="{{ $supportTitle }}">
+                <textarea name="masterclass_settings[support_title]" class="form-control rounded-2 summernote-title"
+                          rows="2" data-height="110">{!! $supportTitle !!}</textarea>
                 <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
             </div>
 
@@ -108,8 +108,8 @@
             <!-- Subtitle -->
             <div class="col-lg-12 mb-4">
                 <label class="form-label">Support Subtitle</label>
-                <input type="text" name="masterclass_settings[support_subtitle]" class="form-control rounded-2"
-                       value="{{ $supportSubtitle }}">
+                <textarea name="masterclass_settings[support_subtitle]" class="form-control rounded-2 summernote-title"
+                          rows="2" data-height="110">{!! $supportSubtitle !!}</textarea>
             </div>
 
             <!-- Description -->

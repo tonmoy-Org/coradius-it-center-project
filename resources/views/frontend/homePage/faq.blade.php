@@ -172,8 +172,8 @@
                     @if(!empty($faqSubtitle) || !empty($faqTitle))
                     <div class="common-heading m-b-30">
                         @if(!empty($faqSubtitle))
-                            <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
-                                {{ $faqSubtitle }}
+                            <span class="sub-title fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
+                                {!! format_title_highlight($faqSubtitle) !!}
                             </span>
                         @endif
                         @if(!empty($faqTitle))
@@ -234,7 +234,7 @@
                 @endphp
 
                 <div class="faq-image-card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
-                    <img src="{{ $faqImgUrl }}" alt="{{ $faqTitle ?: 'FAQ' }}" style="border-radius: 12px; min-height: 500px; width: 100%; object-fit: cover;">
+                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" style="border-radius: 12px; min-height: 500px; width: 100%; object-fit: cover;">
                     
                     @if(!empty($faqBadgeTitle) || !empty($faqBadgeSubtitle))
                     <div class="faq-badge-floating d-flex">
@@ -244,10 +244,10 @@
                         </div>
                         <div>
                             @if(!empty($faqBadgeTitle))
-                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">{{ $faqBadgeTitle }}</h5>
+                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">{!! format_title_highlight($faqBadgeTitle) !!}</h5>
                             @endif
                             @if(!empty($faqBadgeSubtitle))
-                            <span style="color: #4B5A72; font-size: 0.85rem;">{{ $faqBadgeSubtitle }}</span>
+                            <span style="color: #4B5A72; font-size: 0.85rem;">{!! format_title_highlight($faqBadgeSubtitle) !!}</span>
                             @endif
                         </div>
                     </div>

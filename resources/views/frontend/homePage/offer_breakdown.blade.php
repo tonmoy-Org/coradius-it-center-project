@@ -354,9 +354,14 @@
         <div class="mc-breakdown-light-card text-center" data-aos="fade-up">
             
             @php
-                $titleLines = array_values(array_filter(preg_split('/\r\n|\r|\n|<br\s*\/?>/i', $todayTitle)));
-                $eyebrowText = count($titleLines) > 1 ? trim($titleLines[0]) : '';
-                $mainTitleText = count($titleLines) > 1 ? trim($titleLines[1]) : (count($titleLines) == 1 ? trim($titleLines[0] ?? '') : $todayTitle);
+                if (strip_tags($todayTitle) !== $todayTitle) {
+                    $eyebrowText = '';
+                    $mainTitleText = $todayTitle;
+                } else {
+                    $titleLines = array_values(array_filter(preg_split('/\r\n|\r|\n|<br\s*\/?>/i', $todayTitle)));
+                    $eyebrowText = count($titleLines) > 1 ? trim($titleLines[0]) : '';
+                    $mainTitleText = count($titleLines) > 1 ? trim($titleLines[1]) : (count($titleLines) == 1 ? trim($titleLines[0] ?? '') : $todayTitle);
+                }
                 
                 $eyebrowText = $stripEmojis($eyebrowText);
                 $mainTitleText = $stripEmojis($mainTitleText);
@@ -427,7 +432,7 @@
                     @if(!empty($subheading))
                     <div class="col-md-{{ !empty($originalPrice) ? '6' : '12' }} text-center text-md-start {{ !empty($originalPrice) ? 'mc-bd-light-divider pe-md-4' : '' }}">
                         <div class="mc-bd-light-offer-heading">এখনই কোর্সটি কিনুন মাত্র</div>
-                        <div class="mc-bd-light-price-huge">{{ $formatCurrencyText($subheading) }}</div>
+                        <div class="mc-bd-light-price-huge">{!! format_title_highlight($formatCurrencyText($subheading)) !!}</div>
                         <div class="mc-bd-light-timer-text">
                             <i class="far fa-clock text-success"></i>
                             <span>সীমিত সময়ের অফার – এখনই সুযোগ নিন!</span>

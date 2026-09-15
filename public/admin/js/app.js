@@ -919,6 +919,26 @@ function defaultEditor() {
             ["view", ["fullscreen", "help"]],
         ],
     });
+    $(".summernote-title").each(function () {
+        var h = $(this).data("height") || 120;
+        $(this).summernote({
+            tabsize: 2,
+            height: h,
+            fontNames: ["sans-serif", "Arial", "Hind Siliguri", "Inter", "Roboto"],
+            fontSizes: ['10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '32', '36', '40', '48', '56', '64'],
+            disableResize: true,
+            disableResizeEditor: true,
+            resize: false,
+            toolbar: [
+                ["style", ["style"]],
+                ["font", ["bold", "italic", "underline", "clear"]],
+                ["fontsize", ["fontsize"]],
+                ["color", ["color"]],
+                ["para", ["paragraph"]],
+                ["view", ["codeview"]]
+            ]
+        });
+    });
     $(".summernote").summernote({
         tabsize: 2,
         height: 350,

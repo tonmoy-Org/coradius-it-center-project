@@ -1,4 +1,4 @@
-﻿@if(setting('categories_of_work_status') !== '0')
+@if(setting('categories_of_work_status') !== '0')
 @php
     $cards = setting('categories_of_work_cards');
     $cards = is_array($cards) ? $cards : [];
@@ -98,10 +98,34 @@
         max-width: 100%;
         border-radius: 8px;
     }
+    .cow-title p,
+    .cow-card-title p {
+        display: inline !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: inherit !important;
+    }
     @media (max-width: 768px) {
         .cow-wrapper {
             padding: 40px 20px;
             border-radius: 0;
+        }
+        .cow-title,
+        .cow-title * {
+            font-size: 22px !important;
+            line-height: 1.35 !important;
+            margin-bottom: 25px !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        .cow-card-title,
+        .cow-card-title * {
+            font-size: 17px !important;
+            line-height: 1.4 !important;
+            margin-bottom: 16px !important;
+            padding: 12px 18px !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         .cow-card-content {
             padding-right: 0;
@@ -122,7 +146,7 @@
     <div class="container container-1278">
         <div class="cow-wrapper">
             @if($title)
-                <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight(__($title)) !!}</h3>
+                <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight($title) !!}</h3>
             @endif
 
             <div class="row g-4 justify-content-center">
@@ -157,7 +181,7 @@
                             <div class="cow-card">
                                 @if($hasTitle)
                                     <div class="cow-card-title">
-                                        {{ $card['title'] }}
+                                        {!! format_title_highlight($card['title']) !!}
                                     </div>
                                 @endif
 

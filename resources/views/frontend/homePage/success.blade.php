@@ -14,12 +14,12 @@
             : json_decode($hero_course->masterclass_settings, true);
     }
 
-    $successEyebrow  = !empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : (setting('success_section_eyebrow') ?: '');
-    $successTitle    = !empty($mcSettings['success_title']) ? $mcSettings['success_title'] : (isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : (setting('success_section_title') ?: ''));
+    $successEyebrow  = setting('success_section_eyebrow') ?: (!empty($mcSettings['success_eyebrow']) ? $mcSettings['success_eyebrow'] : '');
+    $successTitle    = setting('success_section_title') ?: (!empty($mcSettings['success_title']) ? $mcSettings['success_title'] : (isset($section->contents['title']) && !empty($section->contents['title']) ? $section->contents['title'] : ''));
     $heroBtnText     = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : null;
-    $successBtnText  = !empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : ($heroBtnText ?: setting('success_section_btn_text'));
-    $successBtnUrl   = !empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : (setting('success_section_btn_url') ?: '#register');
-    $successSubtitle = !empty($mcSettings['success_description']) ? $mcSettings['success_description'] : setting('success_section_description');
+    $successBtnText  = setting('success_section_btn_text') ?: (!empty($mcSettings['success_btn_text']) ? $mcSettings['success_btn_text'] : ($heroBtnText ?: ''));
+    $successBtnUrl   = setting('success_section_btn_url') ?: (!empty($mcSettings['success_btn_url']) ? $mcSettings['success_btn_url'] : '#register');
+    $successSubtitle = setting('success_section_description') ?: (!empty($mcSettings['success_description']) ? $mcSettings['success_description'] : (!empty($mcSettings['success_subtitle']) ? $mcSettings['success_subtitle'] : ''));
 
     $getVideoInfo = function($video) {
         if (empty($video)) return null;
