@@ -219,20 +219,22 @@
     .mc-feature-icon-circle {
         width: 40px;
         height: 40px;
-        border-radius: 50%;
-        background-color: var(--color-blue-tint, #EAF2FE);
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
         color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
+        font-size: 24px;
         margin-bottom: 10px;
-        padding: 6px;
+        padding: 0;
     }
 
     .mc-feature-icon-circle img {
-        width: 24px;
-        height: 24px;
+        width: 36px;
+        height: 36px;
         object-fit: contain;
     }
 
@@ -312,8 +314,14 @@
     }
 
     .mc-avatar-default {
-        background: var(--color-blue-tint, #EAF2FE);
+        background: transparent !important;
+        background-color: transparent !important;
         color: var(--color-primary, #0056D2);
+    }
+
+    .mc-avatar-default i {
+        color: var(--color-primary, #0056D2);
+        font-size: 32px;
     }
 
     .mc-channel-card {
@@ -373,52 +381,64 @@
     .mc-channel-avatar-circle {
         width: 44px;
         height: 44px;
-        border-radius: 50%;
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
-        color: #ffffff;
+        font-size: 32px;
         flex-shrink: 0;
     }
 
     .mc-channel-avatar-circle img {
-        width: 26px;
-        height: 26px;
+        width: 40px;
+        height: 40px;
+        max-width: 44px;
+        max-height: 44px;
         object-fit: contain;
+        display: block;
     }
 
     .mc-avatar-fb {
-        background-color: #1877F2 !important;
-        color: #ffffff !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #1877F2 !important;
         border: none !important;
+        box-shadow: none !important;
     }
 
     .mc-avatar-fb i {
-        color: #ffffff !important;
-        font-size: 22px;
+        color: #1877F2 !important;
+        font-size: 32px;
     }
 
     .mc-avatar-wa {
-        background-color: #25D366 !important;
-        color: #ffffff !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #25D366 !important;
         border: none !important;
+        box-shadow: none !important;
     }
 
     .mc-avatar-wa i {
-        color: #ffffff !important;
-        font-size: 22px;
+        color: #25D366 !important;
+        font-size: 32px;
     }
 
     .mc-avatar-tg {
-        background-color: #0088cc !important;
-        color: #ffffff !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #0088cc !important;
         border: none !important;
+        box-shadow: none !important;
     }
 
     .mc-avatar-tg i {
-        color: #ffffff !important;
-        font-size: 22px;
+        color: #0088cc !important;
+        font-size: 32px;
     }
 
     .mc-channel-info-title {
@@ -933,12 +953,14 @@
         .mc-channel-avatar-circle {
             width: 40px;
             height: 40px;
-            font-size: 18px;
+            font-size: 28px;
+            background: transparent !important;
+            background-color: transparent !important;
         }
 
         .mc-channel-avatar-circle img {
-            width: 24px;
-            height: 24px;
+            width: 36px;
+            height: 36px;
         }
 
         .mc-channel-info-title {
