@@ -97,11 +97,12 @@
 <style>
     /* Support Section Styles - Standard typography & previous image size */
     .mc-support-section-wrapper {
-        background-color: transparent !important;
-        background-image: none !important;
-        border-top: none;
+        background-color: var(--color-blue-tint, #EAF2FE);
+        background-image: linear-gradient(rgba(0, 86, 210, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 86, 210, 0.04) 1px, transparent 1px);
+        background-size: 20px 20px;
+        border-top: 1px solid var(--color-border-tint, #C7DCFA);
         border-bottom: none;
-        padding-top: 60px;
+        padding-top: 120px;
         padding-bottom: 20px;
         margin-top: 0 !important;
         width: 100%;
@@ -197,12 +198,12 @@
     }
 
     .mc-support-feature-card {
-        background: transparent !important;
+        background: var(--color-white, #ffffff);
         border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 8px;
         padding: 60px 12px 16px 12px;
         text-align: center;
-        box-shadow: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         flex-direction: column;
@@ -211,7 +212,7 @@
 
     .mc-support-feature-card:hover {
         transform: translateY(-3px);
-        box-shadow: none !important;
+        box-shadow: 0 10px 22px rgba(0, 86, 210, 0.08);
         border-color: var(--color-border-hover, #C7DCFA);
     }
 
@@ -220,19 +221,19 @@
         height: 40px;
         border-radius: 50%;
         background-color: transparent !important;
-        border: 1px solid var(--color-border-tint, #D9E8FC);
+        background: transparent !important;
         color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
+        font-size: 24px;
         margin-bottom: 10px;
-        padding: 6px;
+        padding: 0;
     }
 
     .mc-feature-icon-circle img {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
         object-fit: contain;
     }
 
@@ -312,18 +313,17 @@
     }
 
     .mc-avatar-default {
-        background: transparent !important;
-        border: 1px solid #D9E8FC;
+        background: var(--color-blue-tint, #EAF2FE);
         color: var(--color-primary, #0056D2);
     }
 
     .mc-channel-card {
-        background: transparent !important;
+        background: #ffffff;
         border: 1px solid #D9E8FC;
         border-radius: 8px;
         padding: 24px 20px 22px 20px;
         min-height: 205px;
-        box-shadow: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -333,7 +333,12 @@
     }
 
     .mc-channel-beam-svg {
-        display: none !important;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
     }
 
     .mc-channel-beam-rect {
@@ -350,13 +355,13 @@
 
     .mc-channel-card:hover {
         transform: translateY(-3px);
-        box-shadow: none !important;
+        box-shadow: 0 8px 22px rgba(0, 86, 210, 0.08);
         border-color: #C7DCFA;
     }
 
     .mc-channel-card.highlighted-channel {
-        border-color: #C7DCFA;
-        box-shadow: none !important;
+        border-color: #3B8AF2;
+        box-shadow: 0 4px 18px rgba(0, 86, 210, 0.08);
     }
 
     .mc-channel-card-top {
