@@ -197,12 +197,12 @@
     }
 
     .mc-support-feature-card {
-        background: var(--color-white, #ffffff);
+        background: transparent !important;
         border: 1px solid var(--color-border-tint, #D9E8FC);
         border-radius: 8px;
         padding: 60px 12px 16px 12px;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        box-shadow: none !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         flex-direction: column;
@@ -211,7 +211,7 @@
 
     .mc-support-feature-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 22px rgba(0, 86, 210, 0.08);
+        box-shadow: none !important;
         border-color: var(--color-border-hover, #C7DCFA);
     }
 
@@ -219,7 +219,8 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: var(--color-blue-tint, #EAF2FE);
+        background-color: transparent !important;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
         color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
@@ -311,17 +312,18 @@
     }
 
     .mc-avatar-default {
-        background: var(--color-blue-tint, #EAF2FE);
+        background: transparent !important;
+        border: 1px solid #D9E8FC;
         color: var(--color-primary, #0056D2);
     }
 
     .mc-channel-card {
-        background: #ffffff;
+        background: transparent !important;
         border: 1px solid #D9E8FC;
         border-radius: 8px;
         padding: 24px 20px 22px 20px;
         min-height: 205px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        box-shadow: none !important;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -331,12 +333,7 @@
     }
 
     .mc-channel-beam-svg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 10;
+        display: none !important;
     }
 
     .mc-channel-beam-rect {
@@ -353,13 +350,13 @@
 
     .mc-channel-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 22px rgba(0, 86, 210, 0.08);
+        box-shadow: none !important;
         border-color: #C7DCFA;
     }
 
     .mc-channel-card.highlighted-channel {
-        border-color: #3B8AF2;
-        box-shadow: 0 4px 18px rgba(0, 86, 210, 0.08);
+        border-color: #C7DCFA;
+        box-shadow: none !important;
     }
 
     .mc-channel-card-top {

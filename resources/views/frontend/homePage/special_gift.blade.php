@@ -58,7 +58,7 @@
 
     .mc-gift-pill {
         display: inline-block;
-        background-color: var(--color-white, #ffffff);
+        background-color: transparent !important;
         border: 1px solid var(--color-border-tint, #D9E8FC);
         color: var(--color-primary, #0056D2);
         font-size: 0.88rem;
@@ -74,7 +74,7 @@
         padding: 4px 16px !important;
         line-height: 1.2 !important;
         letter-spacing: 0.5px;
-        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.25);
+        box-shadow: none !important;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -83,15 +83,16 @@
     }
 
     .mc-callout-quote {
-        background: var(--color-white, #ffffff);
-        border-left: 4px solid var(--color-primary, #0056D2);
+        background: transparent !important;
+        border: 1px solid var(--color-border-tint, #D9E8FC);
+        border-left: 4px solid var(--color-primary, #0056D2) !important;
         border-radius: 8px;
         padding: 16px 20px;
         font-style: italic;
         color: var(--color-text-secondary, #4B5A72);
         margin-top: 18px;
         margin-bottom: 18px;
-        box-shadow: 0 4px 12px rgba(0, 31, 92, 0.04);
+        box-shadow: none !important;
     }
     
     @media (max-width: 767px) {
@@ -157,7 +158,7 @@
                                 <div class="mc-callout-quote d-flex justify-content-between align-items-center w-100 text-start mt-2 mb-2">
                                     <div class="quote-text me-3">{!! $quote['text'] ?? '' !!}</div>
                                     @if(!empty($quote['price']))
-                                        <div class="quote-price fw-bolder px-3 py-1 rounded" style="color: var(--color-primary, #0056D2); background-color: var(--color-blue-tint, #EAF2FE); font-style: normal; white-space: nowrap; font-size: 1.15rem; border: 1px solid var(--color-border-tint, #D9E8FC);">
+                                        <div class="quote-price fw-bolder px-3 py-1 rounded" style="color: var(--color-primary, #0056D2); background-color: transparent; font-style: normal; white-space: nowrap; font-size: 1.15rem; border: 1px solid var(--color-border-tint, #D9E8FC);">
                                             {{ $formatCurrencyText($quote['price']) }}
                                         </div>
                                     @endif
