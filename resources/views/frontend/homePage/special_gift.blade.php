@@ -26,7 +26,7 @@
         if ($isBdt) {
             return str_replace(['$', 'USD', 'TK', 'Tk', 'টাকা'], $sym, $text);
         } else {
-            return str_replace(['৳', 'TK', 'Tk', 'টাকা'], $sym, $text);
+            return str_replace(['৳', 'TK', 'Tk', 'টাকা', '$'], $sym, $text);
         }
     };
 

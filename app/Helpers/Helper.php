@@ -193,7 +193,7 @@ if (! function_exists('get_symbol')) {
             $curr = userCurrency();
         }
 
-        $symbol     = '$';
+        $symbol     = '৳';
 
         $currency   = $currencies->where('code', $curr)->first() ?: $currencies->where('id', $curr)->first();
         if ($currency) {
@@ -923,7 +923,7 @@ if (! function_exists('userCurrency')) {
             }
         }
 
-        return $default ?: 'USD';
+        return $default ?: 'BDT';
     }
 }
 if (! function_exists('userLanguage')) {
