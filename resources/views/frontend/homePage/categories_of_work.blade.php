@@ -8,54 +8,75 @@
 @if(count($cards) > 0 || $title)
 <style>
     .cow-wrapper {
-        background-color: var(--color-blue-tint, #EAF2FE);
-        border: 1px solid var(--color-border-tint, #C7DCFA);
-        border-radius: 20px;
-        padding: 60px 40px;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 20px 0;
         margin-bottom: 0px;
     }
     .cow-title { 
         color: var(--color-text-ink, #0A1E3F);
-        font-size: 28px;
-        font-weight: 800;
+        font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif) !important;
+        font-size: 32px;
+        font-weight: 700;
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 40px;
     }
     .cow-card {
         background-color: var(--color-white, #ffffff);
         border-radius: 8px;
         border: 1px solid var(--color-border-tint, #D9E8FC);
-        box-shadow: 0 4px 20px rgba(0, 31, 92, 0.04);
-        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        padding: 20px;
         height: 100%;
         display: flex;
         flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+    .cow-card:not(.cow-card-only-image)::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23F0F6FF' fill-opacity='1' d='M0,256L60,245.3C120,235,240,213,360,208C480,203,600,213,720,218.7C840,224,960,224,1080,218.7C1200,213,1320,203,1380,197.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        z-index: 0;
+        pointer-events: none;
     }
     .cow-card-title {
+        position: relative;
+        z-index: 1;
         background-color: var(--color-blue-tint, #EAF2FE);
         color: var(--color-primary, #0056D2);
         border: 1px solid var(--color-border-tint, #D9E8FC);
-        padding: 16px 24px;
+        padding: 12px 16px;
         border-radius: 8px;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 700;
-        margin-bottom: 25px;
+        margin-bottom: 16px;
+        text-align: center;
     }
     .cow-card-body-wrapper {
         position: relative;
+        z-index: 1;
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        padding-top: 10px;
+        padding-top: 5px;
     }
     .cow-card-content {
         color: var(--color-text-secondary, #4B5A72);
-        font-size: 15px;
-        line-height: 2.2;
-        padding-left: 24px; /* Align with title text */
-        padding-right: 24px; 
-        min-height: 100px;
+        font-size: 14px;
+        line-height: 1.8;
+        padding-left: 10px;
+        padding-right: 10px; 
+        min-height: 80px;
     }
     .cow-card-content.has-image {
         padding-right: 140px; /* leaves room for absolute image */
@@ -107,7 +128,7 @@
     }
     @media (max-width: 768px) {
         .cow-wrapper {
-            padding: 40px 20px;
+            padding: 20px 0;
             border-radius: 0;
         }
         .cow-title,
@@ -144,10 +165,10 @@
 
 <section class="categories-of-work-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
+        @if($title)
+            <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight($title) !!}</h3>
+        @endif
         <div class="cow-wrapper">
-            @if($title)
-                <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight($title) !!}</h3>
-            @endif
 
             <div class="row g-4 justify-content-center">
                 @foreach($cards as $card)

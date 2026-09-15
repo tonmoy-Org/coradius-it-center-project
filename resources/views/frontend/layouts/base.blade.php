@@ -135,7 +135,7 @@
         
         .template-btn, .template-btn.bordered-btn, .template-btn.bordered-btn-secondary,
         .btn {
-            border-radius: 6px !important;
+            border-radius: 8px !important;
         }
 
         .card, .course-item, .blog-post-item, .category-item, .testimonial-item,
@@ -220,33 +220,37 @@
             transform: rotate(0.4deg);
         }
 
-        /* Universal Compact & Elegant Button Design across ALL sections */
+        /* Universal Support-Style Elegant Global Button Design across ALL sections */
         .template-btn, 
         a.template-btn, 
         button.template-btn,
         .get-access-btn,
         .footer-btn-cta,
         .about-me-btn,
+        .hero-btn,
+        .hero-btns .template-btn,
         .sp-right .btn-enroll {
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            padding: 10px 24px !important;
-            border-radius: 6px !important;
-            background: var(--color-primary) !important;
-            background-color: var(--color-primary) !important;
+            font-family: var(--body-font, "Hind Siliguri", "Inter", sans-serif) !important;
+            font-size: 15px !important;
+            font-weight: 700 !important;
+            padding: 12px 24px !important;
+            border-radius: 8px !important;
+            background: #0056D2 !important;
+            background-color: #0056D2 !important;
             color: #ffffff !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            box-shadow: 0 4px 14px rgba(0, 86, 210, 0.22) !important;
+            box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
             border: none !important;
+            outline: none !important;
             text-decoration: none !important;
-            line-height: 1.35 !important;
-            min-height: 42px !important;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            line-height: 1.4 !important;
+            position: relative !important;
+            overflow: hidden !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            cursor: pointer !important;
         }
 
         .template-btn:hover,
@@ -255,11 +259,13 @@
         .get-access-btn:hover,
         .footer-btn-cta:hover,
         .about-me-btn:hover,
+        .hero-btn:hover,
+        .hero-btns .template-btn:hover,
         .sp-right .btn-enroll:hover {
             transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.35) !important;
-            background: var(--color-primary-hover) !important;
-            background-color: var(--color-primary-hover) !important;
+            box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
+            background: #FF7A00 !important;
+            background-color: #FF7A00 !important;
             color: #ffffff !important;
         }
 
@@ -268,52 +274,86 @@
         .template-btn.bordered-btn-secondary,
         .btn-outline-primary {
             background: transparent !important;
-            border: 2px solid var(--color-primary) !important;
-            color: var(--color-primary) !important;
+            border: 2px solid #0056D2 !important;
+            color: #0056D2 !important;
             box-shadow: none !important;
+            border-radius: 8px !important;
         }
         .template-btn.bordered-btn:hover,
         .template-btn.bordered-btn-secondary:hover,
         .btn-outline-primary:hover {
-            background: var(--color-primary-hover) !important;
-            border-color: var(--color-primary-hover) !important;
+            background: #FF7A00 !important;
+            border-color: #FF7A00 !important;
             color: #ffffff !important;
-            box-shadow: 0 6px 18px rgba(255, 122, 0, 0.35) !important;
+            box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
         }
 
         .back-to-top {
-            background-color: var(--color-primary) !important;
+            background-color: #0056D2 !important;
             color: #ffffff !important;
             border-radius: 50% !important;
             box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
             transition: all 0.3s ease !important;
         }
         .back-to-top:hover {
-            background-color: var(--color-primary-hover) !important;
-            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4) !important;
+            background-color: #FF7A00 !important;
+            box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
             color: #ffffff !important;
             transform: translateY(-3px) !important;
         }
 
         .template-btn::before,
+        a.template-btn::before,
+        button.template-btn::before,
         .get-access-btn::before,
         .footer-btn-cta::before,
-        .about-me-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: all 0.6s ease;
+        .about-me-btn::before,
+        .hero-btn::before,
+        .hero-btns .template-btn::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent) !important;
+            transition: all 0.6s ease !important;
+            pointer-events: none !important;
         }
 
         .template-btn:hover::before,
+        a.template-btn:hover::before,
+        button.template-btn:hover::before,
         .get-access-btn:hover::before,
         .footer-btn-cta:hover::before,
-        .about-me-btn:hover::before {
-            left: 100%;
+        .about-me-btn:hover::before,
+        .hero-btn:hover::before,
+        .hero-btns .template-btn:hover::before {
+            left: 100% !important;
+        }
+
+        .template-btn i,
+        a.template-btn i,
+        button.template-btn i,
+        .get-access-btn i,
+        .footer-btn-cta i,
+        .about-me-btn i,
+        .hero-btn i,
+        .hero-btns .template-btn i {
+            font-size: 14px !important;
+            margin-left: 6px !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .template-btn:hover i,
+        a.template-btn:hover i,
+        button.template-btn:hover i,
+        .get-access-btn:hover i,
+        .footer-btn-cta:hover i,
+        .about-me-btn:hover i,
+        .hero-btn:hover i,
+        .hero-btns .template-btn:hover i {
+            transform: translateX(4px) !important;
         }
 
         .ad-banner-section-1 img, 
@@ -335,7 +375,7 @@
                 font-size: 13.5px !important;
                 font-weight: 600 !important;
                 min-height: 38px !important;
-                border-radius: 6px !important;
+                border-radius: 8px !important;
             }
         }
 
@@ -351,7 +391,7 @@
                 font-size: 13px !important;
                 font-weight: 600 !important;
                 min-height: 36px !important;
-                border-radius: 6px !important;
+                border-radius: 8px !important;
             }
         }
 

@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+﻿@extends('backend.layouts.master')
 @section('title', __('Home Landing Page Setup'))
 @section('content')
     <div class="container-fluid">
@@ -425,16 +425,12 @@
                                                     </div>
                                                 </div>
 
+
                                                 <!-- Highlight Banner Card -->
                                                 <div class="col-12">
                                                     <label class="form-label">Highlight Banner Card</label>
                                                     <div class="row g-3">
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">Icon / Emoji</label>
-                                                            <input type="text" name="masterclass_settings[desc_banner_icon]" class="form-control rounded-2"
-                                                                   value="{{ $defDescBannerIcon }}">
-                                                        </div>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-12">
                                                             <label class="form-label">Card Heading</label>
                                                             <textarea name="masterclass_settings[desc_banner_title]" class="form-control rounded-2 summernote-title"
                                                                       rows="2" data-height="110">{!! $defDescBannerTitle !!}</textarea>
@@ -1485,16 +1481,48 @@
                             <!-- Lead Form Tab -->
                             <div class="tab-pane fade {{ $request_tab == 'lead_form' ? 'show active' : '' }}"
                                  id="courseLeadForm" role="tabpanel" tabindex="0">
-                                <div class="row gx-20">
-                                    @include('backend.common.media-input', [
-                                        'title' => 'Lead Form Left Image',
-                                        'name' => 'order_form_image_media_id',
-                                        'col' => 'col-12',
-                                        'size' => '(Recommended: 500x700)',
-                                        'image' => $mcSettings['order_form_image_media_id'] ?? '',
-                                        'label' => __('Upload / Select Image from Media (Blue Section Banner)'),
-                                        'media_id' => $mcSettings['order_form_image_media_id'] ?? ''
-                                    ])
+                                <div class="card border mb-4 rounded-3 shadow-sm">
+                                    <div class="card-header bg-white py-3">
+                                        <span class="form-label m-0">{{ __('Lead Form Settings') }}</span>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <div class="row gx-20">
+                                            <!-- Lead Form Title / Heading -->
+                                            <div class="col-12 mb-4">
+                                                <label for="order_form_title" class="form-label">{{ __('Lead Form Title / Heading') }}</label>
+                                                <textarea name="masterclass_settings[order_form_title]" id="order_form_title" class="form-control rounded-2 summernote-title"
+                                                          rows="2" data-height="110">{!! $mcSettings['order_form_title'] ?? 'আপনার ফ্রি স্পটটি নিশ্চিত করুন' !!}</textarea>
+                                                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
+                                            </div>
+
+                                            <!-- Lead Form Subtitle -->
+                                            <div class="col-12 mb-4">
+                                                <label for="order_form_subtitle" class="form-label">{{ __('Lead Form Subtitle / Description') }}</label>
+                                                <textarea name="masterclass_settings[order_form_subtitle]" id="order_form_subtitle" class="form-control rounded-2 summernote-title"
+                                                          rows="2" data-height="110">{!! $mcSettings['order_form_subtitle'] ?? 'অ্যাক্সেস ডিটেইলস পাঠাতে আপনার সঠিক তথ্য দিন।' !!}</textarea>
+                                                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
+                                            </div>
+
+                                            <!-- Submit Button Text -->
+                                            <div class="col-lg-6 col-md-6 mb-4">
+                                                <label for="order_form_button_text" class="form-label">{{ __('Submit Button Text') }}</label>
+                                                <input type="text" name="masterclass_settings[order_form_button_text]" id="order_form_button_text" class="form-control rounded-2"
+                                                       value="{{ $mcSettings['order_form_button_text'] ?? ($mcSettings['pay_now_btn_text'] ?? ($mcSettings['order_btn_text'] ?? '')) }}"
+                                                       placeholder="e.g. ফ্রি এক্সেস নিন">
+                                            </div>
+
+                                            <!-- Banner Image Upload (Optional) -->
+                                            @include('backend.common.media-input', [
+                                                'title' => __('Lead Form Banner Image'),
+                                                'name' => 'order_form_image_media_id',
+                                                'col' => 'col-12 mb-0',
+                                                'size' => '(Recommended: 500x700 - Leave empty to hide left banner image)',
+                                                'image' => $mcSettings['order_form_image_media_id'] ?? '',
+                                                'label' => __('Upload / Select Banner Image from Media (Left Blue Banner)'),
+                                                'media_id' => $mcSettings['order_form_image_media_id'] ?? ''
+                                            ])
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="d-flex justify-content-end align-items-center mt-30 pt-3 border-top">

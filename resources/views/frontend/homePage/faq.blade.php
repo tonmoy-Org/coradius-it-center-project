@@ -9,13 +9,33 @@
         overflow: hidden;
         transition: all 0.3s ease;
         background: var(--color-white, #ffffff);
+        position: relative;
+    }
+    .custom-faq-accordion .accordion-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23F0F6FF' fill-opacity='1' d='M0,256L60,245.3C120,235,240,213,360,208C480,203,600,213,720,218.7C840,224,960,224,1080,218.7C1200,213,1320,203,1380,197.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .custom-faq-accordion .accordion-header,
+    .custom-faq-accordion .accordion-collapse {
+        position: relative;
+        z-index: 1;
     }
     .custom-faq-accordion .accordion-item:hover {
         border-color: var(--color-primary, #0056D2);
         box-shadow: 0 8px 20px rgba(0, 86, 210, 0.08);
     }
     .custom-faq-accordion .accordion-button {
-        background-color: var(--color-white, #ffffff);
+        background-color: transparent;
         color: var(--color-text-ink, #0A1E3F);
         font-weight: 700;
         font-size: 17px;
@@ -28,7 +48,7 @@
     }
     .custom-faq-accordion .accordion-button:not(.collapsed) {
         color: var(--color-primary, #0056D2);
-        background-color: var(--color-white, #ffffff);
+        background-color: transparent;
     }
     .custom-faq-accordion .accordion-button::after {
         display: none;
@@ -54,7 +74,7 @@
         transform: rotate(45deg);
     }
     .custom-faq-accordion .accordion-body {
-        background-color: var(--color-white, #ffffff);
+        background-color: transparent;
         color: var(--color-text-secondary, #4B5A72);
         font-size: 15px;
         line-height: 1.75;

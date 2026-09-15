@@ -21,6 +21,12 @@
             </a>
         </li>
     @endif
+    <li class="nav-item" role="presentation">
+        <a href="{{ route('footer.resource-links') }}"
+           class="nav-link ps-0 {{ request()->routeIs('footer.resource-links') ? 'active' : '' }}">
+            <span>{{ __('resource_links') }}</span>
+        </a>
+    </li>
 
     @if(hasPermission('footer.copyright'))
         <li class="nav-item" role="presentation">

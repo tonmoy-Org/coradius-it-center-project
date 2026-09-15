@@ -132,7 +132,7 @@
                                 <span style="position: absolute; width: 120%; height: 2px; background: red; top: 50%; left: -10%; transform: rotate(20deg);"></span>
                                 {{ $formatCurrencyText($giftValue) }}
                             </span>
-                            <span class="badge bg-danger mc-gift-free-badge rounded-pill">{{ __('FREE') }}</span>
+                            <span class="badge mc-gift-free-badge rounded-pill" style="background-color: #FF7A00; color: #ffffff;">ফ্রি</span>
                         </div>
                     @endif
 

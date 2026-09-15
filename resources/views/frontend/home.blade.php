@@ -54,17 +54,20 @@
 
     @media (max-width: 767.98px) {
         /* Standardized Section Vertical Spacing (38px top & bottom) */
-        .home-page-sections > section,
         section.what-you-learn-section,
         section.syllabus-section,
         section.success-banner-section,
         section.success-story-section,
         section.offer-breakdown-section,
         section.faq-section,
-        section.mc-support-section-wrapper,
         section.order-form-section {
             padding-top: 38px !important;
             padding-bottom: 38px !important;
+        }
+
+        section.mc-support-section-wrapper {
+            padding-top: 38px !important;
+            padding-bottom: 0px !important;
         }
 
         section.about-me-section,
@@ -504,6 +507,93 @@
         margin: 0 !important;
         padding: 0 !important;
         line-height: inherit !important;
+    }
+
+    /* ==========================================================================
+       GLOBAL LANDING PAGE PROFESSIONAL TOUCHUP SYSTEM
+       Enhances cards, hover micro-interactions, buttons, badges & shadows
+       ========================================================================== */
+    .cow-card,
+    .cow-wrapper,
+    .about-me-card,
+    .mc-special-gift-card,
+    .mc-target-audience-card-light,
+    .custom-testimonial-card,
+    .mc-support-feature-card,
+    .mc-support-channel-card,
+    .lead-card,
+    .hero-video-wrapper,
+    .description-card,
+    .desc-right-box,
+    .highlight-banner-card,
+    .custom-faq-accordion .accordion-item,
+    .custom-syllabus-accordion .accordion-item,
+    .what-you-learn-section .card,
+    .instructor-card {
+        border-radius: 8px !important;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    /* Interactive Hover Lift for Section Cards */
+    .cow-card:hover,
+    .mc-target-audience-card-light:hover,
+    .custom-testimonial-card:hover,
+    .mc-support-feature-card:hover,
+    .mc-support-channel-card:hover,
+    .custom-faq-accordion .accordion-item:hover,
+    .custom-syllabus-accordion .accordion-item:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 14px 32px -6px rgba(0, 56, 148, 0.1), 0 4px 14px rgba(0, 0, 0, 0.03) !important;
+    }
+
+    /* Section Subtitle / Eyebrow Badges */
+    .common-heading .sub-title,
+    .sub-title.text-uppercase,
+    .section-tag,
+    .eyebrow {
+        letter-spacing: 1.2px !important;
+        text-transform: uppercase !important;
+        font-weight: 700 !important;
+        font-size: 13px !important;
+    }
+
+    /* Rich Text Mark & Highlight Polish */
+    mark.title-highlight,
+    .title-highlight,
+    h1 mark, h2 mark, h3 mark, h4 mark {
+        background: linear-gradient(120deg, rgba(255, 184, 0, 0.22) 0%, rgba(255, 122, 0, 0.18) 100%) !important;
+        color: inherit !important;
+        padding: 0.08em 0.3em !important;
+        border-radius: 4px !important;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+
+    /* Professional Button Hover Transitions */
+    .template-btn,
+    .btn-submit-profile,
+    .mc-bd-light-btn,
+    .hero-btn {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    background-color 0.3s ease !important;
+    }
+
+    .template-btn:hover,
+    .btn-submit-profile:hover,
+    .mc-bd-light-btn:hover {
+        transform: translateY(-2px) !important;
+        background: #FF7A00 !important;
+        background-color: #FF7A00 !important;
+        box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
+    }
+
+    .template-btn:active,
+    .btn-submit-profile:active,
+    .mc-bd-light-btn:active {
+        transform: translateY(0) !important;
     }
 </style>
 @endpush

@@ -101,13 +101,21 @@
         background-image: linear-gradient(rgba(0, 86, 210, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 86, 210, 0.04) 1px, transparent 1px);
         background-size: 20px 20px;
         border-top: 1px solid var(--color-border-tint, #C7DCFA);
-        border-bottom: 1px solid var(--color-border-tint, #C7DCFA);
-        padding-top: 50px;
-        padding-bottom: 50px;
+        border-bottom: none;
+        padding-top: 120px;
+        padding-bottom: 20px;
         margin-top: 0 !important;
         width: 100%;
         position: relative;
         font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif);
+    }
+    
+    .mc-support-section-bottom {
+        background: transparent;
+        padding-top: 50px;
+        padding-bottom: 20px;
+        width: 100%;
+        position: relative;
     }
 
     /* Heading - Balanced primary font size matching other sections */
@@ -192,8 +200,8 @@
     .mc-support-feature-card {
         background: var(--color-white, #ffffff);
         border: 1px solid var(--color-border-tint, #D9E8FC);
-        border-radius: 14px;
-        padding: 18px 12px 16px 12px;
+        border-radius: 8px;
+        padding: 60px 12px 16px 12px;
         text-align: center;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -311,7 +319,7 @@
     .mc-channel-card {
         background: #ffffff;
         border: 1px solid #D9E8FC;
-        border-radius: 14px;
+        border-radius: 8px;
         padding: 24px 20px 22px 20px;
         min-height: 205px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
@@ -319,6 +327,29 @@
         flex-direction: column;
         justify-content: space-between;
         transition: all 0.25s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mc-channel-beam-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .mc-channel-beam-rect {
+        stroke-linecap: round;
+        animation: mc-beam-travel 6s linear infinite;
+        will-change: stroke-dashoffset;
+        filter: drop-shadow(0 0 5px rgba(0, 86, 210, 0.7));
+    }
+
+    @keyframes mc-beam-travel {
+        0%   { stroke-dashoffset: var(--mc-perimeter, 2000); }
+        100% { stroke-dashoffset: 0; }
     }
 
     .mc-channel-card:hover {
@@ -404,12 +435,69 @@
         object-fit: contain;
     }
 
-    .mc-team-status-label {
-        font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif) !important;
-        font-size: 12px;
-        color: #475569;
-        font-weight: 500;
+    /* Channel Card Action Button (Global Primary Design) */
+    .mc-channel-card .template-btn,
+    .mc-channel-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        padding: 12px 24px !important;
+        font-family: var(--body-font, "Hind Siliguri", "Inter", sans-serif) !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        line-height: 1.4 !important;
+        color: #ffffff !important;
+        background: #0056D2 !important;
+        background-color: #0056D2 !important;
+        border: none !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
+        text-decoration: none !important;
+        position: relative !important;
+        overflow: hidden !important;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        cursor: pointer !important;
     }
+
+    .mc-channel-card .template-btn:hover,
+    .mc-channel-btn:hover {
+        background: #FF7A00 !important;
+        background-color: #FF7A00 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
+    }
+
+    .mc-channel-card .template-btn::before,
+    .mc-channel-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+        transition: all 0.6s ease;
+    }
+
+    .mc-channel-card .template-btn:hover::before,
+    .mc-channel-btn:hover::before {
+        left: 100%;
+    }
+
+    .mc-channel-card .template-btn i,
+    .mc-channel-btn i {
+        font-size: 14px !important;
+        margin-left: 8px !important;
+        transition: transform 0.3s ease !important;
+    }
+
+    .mc-channel-card .template-btn:hover i,
+    .mc-channel-btn:hover i {
+        transform: translateX(4px) !important;
+    }
+
 
 
 
@@ -429,7 +517,7 @@
     @media (min-width: 1400px) {
         .mc-support-section-wrapper {
             padding-top: 60px;
-            padding-bottom: 60px;
+            padding-bottom: 20px;
         }
 
         .mc-support-title {
@@ -455,7 +543,7 @@
     @media (min-width: 992px) and (max-width: 1199px) {
         .mc-support-section-wrapper {
             padding-top: 45px;
-            padding-bottom: 45px;
+            padding-bottom: 20px;
         }
 
         .mc-support-title {
@@ -562,7 +650,7 @@
     @media (min-width: 768px) and (max-width: 991px) {
         .mc-support-section-wrapper {
             padding-top: 40px;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
         }
 
         .mc-support-title {
@@ -635,7 +723,7 @@
     @media (min-width: 576px) and (max-width: 767px) {
         .mc-support-section-wrapper {
             padding-top: 35px;
-            padding-bottom: 35px;
+            padding-bottom: 15px;
         }
 
         .mc-support-title {
@@ -666,7 +754,7 @@
         }
 
         .mc-support-feature-cards {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
             gap: 10px;
         }
 
@@ -717,7 +805,7 @@
     @media (max-width: 575px) {
         .mc-support-section-wrapper {
             padding-top: 30px;
-            padding-bottom: 30px;
+            padding-bottom: 15px;
         }
 
         .mc-support-title {
@@ -761,7 +849,7 @@
             text-align: center;
             align-items: center;
             padding: 14px 14px 12px 14px;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         .mc-feature-icon-circle {
@@ -816,7 +904,7 @@
         .mc-channel-card {
             padding: 18px 16px 16px 16px;
             min-height: auto;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         .mc-channel-card-top {
@@ -887,7 +975,7 @@
 
         .mc-support-feature-card {
             padding: 12px 10px 10px 10px;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         .mc-feature-icon-circle {
@@ -940,7 +1028,6 @@
                 <!-- Main Title with Headset Icon -->
                 <h2 class="mc-support-title" data-aos="fade-up">
                     <span>{!! format_title_highlight($supportTitle) !!}</span>
-                    <span class="mc-support-title-icon"><i class="{{ (!empty($supportTitleIcon) && !str_starts_with($supportTitleIcon, 'http') && !preg_match('/\.(png|jpg|jpeg|svg|webp)$/i', $supportTitleIcon)) ? $supportTitleIcon : 'fas fa-headset' }}"></i></span>
                 </h2>
                 @endif
 
@@ -971,18 +1058,13 @@
         </div>
         @endif
 
-        @if(!empty($supportDividerText))
-        <!-- Middle Section: Divider with Title -->
-        <div class="mc-support-divider-section" data-aos="fade-up">
-            <span class="mc-support-divider-line"></span>
-            <div class="mc-support-divider-text">
-                <span class="mc-divider-bullet">•</span>
-                <span>{{ $supportDividerText }}</span>
-                <span class="mc-divider-bullet">•</span>
-            </div>
-            <span class="mc-support-divider-line"></span>
-        </div>
-        @endif
+    </div>
+</section>
+
+<section class="mc-support-section-bottom">
+    <div class="container container-1278">
+
+
 
         @if(!empty($channelCards) && count($channelCards) > 0)
             <!-- Bottom Row: Dynamic Support Channel Cards -->
@@ -1009,6 +1091,20 @@
                         }
                     @endphp
                     <div class="mc-channel-card {{ $isHigh ? 'highlighted-channel' : '' }}">
+                        <!-- Border Beam SVG -->
+                        <svg class="mc-channel-beam-svg" data-beam="true">
+                            <defs>
+                                <linearGradient id="mc-beam-grad-{{ $loop->index }}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%"   stop-color="#0056D2" stop-opacity="0" />
+                                    <stop offset="30%"  stop-color="#3B8AF2" stop-opacity="0.9" />
+                                    <stop offset="50%"  stop-color="#60AEFF" stop-opacity="1" />
+                                    <stop offset="70%"  stop-color="#3B8AF2" stop-opacity="0.9" />
+                                    <stop offset="100%" stop-color="#0056D2" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <rect class="mc-channel-beam-rect" fill="none"
+                                  stroke="url(#mc-beam-grad-{{ $loop->index }})" stroke-width="2" rx="8" ry="8" />
+                        </svg>
                         <div>
                             <div class="mc-channel-card-top">
                                 <div class="mc-channel-avatar-circle {{ $avatarClass }}">
@@ -1035,7 +1131,7 @@
                             @endif
                         </div>
                         @if(!empty($cBtnText))
-                        <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="template-btn w-100">
+                        <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="template-btn get-access-btn mc-channel-btn w-100">
                             <span>{{ $cBtnText }}</span>
                             <i class="fas fa-arrow-right ms-2"></i>
                         </a>
@@ -1047,4 +1143,47 @@
 
     </div>
 </section>
+
+<script>
+(function() {
+    function initSupportBeams() {
+        const cards = document.querySelectorAll('.mc-channel-card');
+        cards.forEach(function(card) {
+            const svg  = card.querySelector('.mc-channel-beam-svg');
+            const rect = card.querySelector('.mc-channel-beam-rect');
+            if (!svg || !rect) return;
+
+            function update() {
+                const w = card.clientWidth;
+                const h = card.clientHeight;
+                svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+                const sw   = 2;
+                const inset = sw / 2;
+                const rw   = w - sw;
+                const rh   = h - sw;
+                rect.setAttribute('x', inset);
+                rect.setAttribute('y', inset);
+                rect.setAttribute('width', rw);
+                rect.setAttribute('height', rh);
+                const perimeter = 2 * (rw + rh);
+                rect.style.setProperty('--mc-perimeter', perimeter);
+                const beamLen = perimeter * 0.28;
+                rect.style.strokeDasharray = beamLen + ' ' + (perimeter - beamLen);
+            }
+
+            update();
+            window.addEventListener('resize', update);
+            if (window.ResizeObserver) {
+                new ResizeObserver(update).observe(card);
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSupportBeams);
+    } else {
+        initSupportBeams();
+    }
+})();
+</script>
 @endif

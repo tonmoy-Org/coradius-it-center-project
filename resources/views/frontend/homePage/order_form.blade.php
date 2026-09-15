@@ -25,34 +25,38 @@
     if (!$blueSectionImage && !empty($mcSettings['order_form_image_url'])) {
         $blueSectionImage = dynamic_asset($mcSettings['order_form_image_url']);
     }
-    if (!$blueSectionImage && !empty($course->image)) {
-        $blueSectionImage = getFileLink('original_image', $course->image);
-    }
+
+    $orderFormTitle = !empty($mcSettings['order_form_title']) ? $mcSettings['order_form_title'] : 'আপনার ফ্রি স্পটটি নিশ্চিত করুন';
+    $orderFormSubtitle = !empty($mcSettings['order_form_subtitle']) ? $mcSettings['order_form_subtitle'] : 'অ্যাক্সেস ডিটেইলস পাঠাতে আপনার সঠিক তথ্য দিন।';
+    $orderFormBtnText = !empty($mcSettings['order_form_button_text']) ? $mcSettings['order_form_button_text'] : (!empty($mcSettings['pay_now_btn_text']) ? $mcSettings['pay_now_btn_text'] : (!empty($mcSettings['order_btn_text']) ? $mcSettings['order_btn_text'] : $heroBtnText));
 @endphp
 
 @if(isset($course))
 <style>
     .lead-capture-wrapper {
         background: transparent;
-        padding: 60px 0;
-        font-family: 'Inter', sans-serif;
+        padding: 60px 0 100px 0;
+        font-family: var(--body-font, "Inter", "Hind Siliguri", sans-serif);
     }
     .lead-card {
         background: #ffffff;
         border-radius: 8px;
-        box-shadow: 0 20px 40px rgba(0, 86, 210, 0.08);
+        box-shadow: 0 16px 40px rgba(0, 56, 148, 0.08);
         overflow: hidden;
-        border: 1px solid rgba(0, 86, 210, 0.1);
+        border: 1px solid rgba(0, 86, 210, 0.15);
         display: flex;
         flex-wrap: wrap;
-        max-width: 1000px;
+        width: 100% !important;
+        max-width: 100% !important;
         margin: 0 auto;
     }
     .lead-info-side {
         background: linear-gradient(145deg, #0056D2 0%, #003b93 100%);
         color: white;
         padding: 0;
-        flex: 1 1 400px;
+        flex: 0 0 50%;
+        max-width: 50%;
+        width: 50%;
         position: relative;
         overflow: hidden;
         display: flex;
@@ -67,90 +71,144 @@
         display: block;
     }
     .lead-form-side {
-        padding: 50px 40px;
-        flex: 1 1 500px;
+        padding: 45px 38px;
+        flex: 0 0 50%;
+        max-width: 50%;
+        width: 50%;
         background: #ffffff;
     }
     .form-heading {
         color: #0A1E3F;
-        font-size: 26px;
+        font-size: 25px;
         font-weight: 700;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        line-height: 1.3;
     }
     .form-subheading {
-        color: #64748b;
-        font-size: 15px;
-        margin-bottom: 30px;
+        color: #4B5A72;
+        font-size: 14.5px;
+        margin-bottom: 26px;
+        line-height: 1.45;
     }
     .lead-form-side .form-label {
-        font-weight: 500;
-        color: #334155;
+        font-weight: 600;
+        color: #1E293B;
         margin-bottom: 6px;
         display: block;
         font-size: 14px;
     }
     .lead-form-side .form-control {
         height: 48px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        border: 1px solid #CBD5E1;
         padding: 10px 16px;
         font-size: 14px;
         transition: all 0.2s ease;
-        background-color: #ffffff;
+        background-color: #F8FAFC;
         width: 100%;
-        color: #1e293b;
+        color: #1E293B;
     }
     .lead-form-side .form-control:focus {
+        background-color: #ffffff;
         border-color: #0056D2;
-        box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.15);
+        box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.12);
         outline: none;
     }
     .lead-form-side .btn-submit-profile {
-        background-color: #0056D2;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 16px;
-        border-radius: 6px;
-        padding: 12px 24px;
-        width: 100%;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
+        font-family: var(--body-font, "Hind Siliguri", "Inter", sans-serif) !important;
+        background-color: #0056D2 !important;
+        background: #0056D2 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 16px !important;
+        border-radius: 8px !important;
+        padding: 12px 24px !important;
+        width: 100% !important;
+        border: none !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
+        position: relative !important;
+        overflow: hidden !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .lead-form-side .btn-submit-profile::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent) !important;
+        transition: all 0.6s ease !important;
+        pointer-events: none !important;
     }
     .lead-form-side .btn-submit-profile:hover {
-        background-color: #0044ab;
+        background-color: #FF7A00 !important;
+        background: #FF7A00 !important;
+        box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
+        transform: translateY(-2px) !important;
+        color: #ffffff !important;
+    }
+    .lead-form-side .btn-submit-profile:hover::before {
+        left: 100% !important;
+    }
+    .lead-form-side .btn-submit-profile i {
+        font-size: 14px !important;
+        margin-left: 6px !important;
+        transition: transform 0.3s ease !important;
+    }
+    .lead-form-side .btn-submit-profile:hover i {
+        transform: translateX(4px) !important;
     }
     
     @media (max-width: 768px) {
+        .lead-capture-wrapper {
+            padding: 15px 0 40px 0;
+        }
         .lead-card {
             flex-direction: column;
+            border-radius: 8px;
         }
         .lead-info-side {
             padding: 0;
             min-height: 250px;
+            flex: 0 0 100%;
+            max-width: 100%;
+            width: 100%;
         }
         .lead-form-side {
-            padding: 40px 30px;
+            padding: 30px 20px;
+            flex: 0 0 100%;
+            max-width: 100%;
+            width: 100%;
         }
     }
 </style>
 
 <section class="lead-capture-wrapper" id="register">
     @include('frontend.homePage.sticky_promo_bar')
-    <div class="container container-1278">
+    <div class="container container-1278 px-lg-0 px-3">
         
         <div class="lead-card" data-aos="fade-up">
-            <!-- Left Info Side -->
-            <div class="lead-info-side">
-                @if(!empty($blueSectionImage))
+            <!-- Left Info Side (Only shown if image is uploaded) -->
+            @if(!empty($blueSectionImage))
+                <div class="lead-info-side">
                     <img src="{{ $blueSectionImage }}" alt="Lead Form Banner" class="lead-info-full-img">
-                @endif
-            </div>
+                </div>
+            @endif
             
             <!-- Right Form Side -->
-            <div class="lead-form-side">
-                <h3 class="form-heading">আপনার ফ্রি স্পটটি নিশ্চিত করুন</h3>
-                <p class="form-subheading">অ্যাক্সেস ডিটেইলস পাঠাতে আপনার সঠিক তথ্য দিন।</p>
+            <div class="lead-form-side {{ empty($blueSectionImage) ? 'w-100' : '' }}" style="{{ empty($blueSectionImage) ? 'flex: 0 0 100% !important; max-width: 100% !important; width: 100% !important;' : '' }}">
+                @if(!empty($orderFormTitle))
+                    <h3 class="form-heading">{!! $orderFormTitle !!}</h3>
+                @endif
+                @if(!empty($orderFormSubtitle))
+                    <div class="form-subheading">{!! $orderFormSubtitle !!}</div>
+                @endif
                 
                 <form action="{{ route('masterclass.checkout') }}" method="post" class="form">
                     @csrf
@@ -183,7 +241,8 @@
                     </div>
 
                     <button type="submit" class="btn btn-submit-profile w-100 text-center">
-                        {{ $payNowBtnText }}
+                        <span>{{ $orderFormBtnText }}</span>
+                        <i class="fas fa-arrow-right ms-2"></i>
                     </button>
                 </form>
             </div>

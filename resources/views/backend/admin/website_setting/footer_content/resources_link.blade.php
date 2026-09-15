@@ -41,7 +41,7 @@
                                     <div class="cf sortable-menu-section ">
                                         <div class="dd" id="menuSortable">
                                             <ol class="dd-list" id="dd-list">
-                                            @if($menu_language && is_array(setting('footer_resource_link_menu')) ? count(setting('footer_resource_link_menu')) : 0 != 0 && setting('footer_resource_link_menu') != [])
+                                             @if($menu_language && is_array($menu_language) && count($menu_language) > 0)
                                                 @foreach($menu_language as $key => $value)
                                                     <li class="dd-item dd3-item" data-id="0">
                                                         <input type="hidden" name="menu_lenght[]" id="menu_lenght" value="1">

@@ -99,7 +99,7 @@
                                                         <span class="fw-medium text-dark fs-6">{{ $lesson->title }}</span>
                                                         
                                                         @if($lesson->is_free == 1)
-                                                            <span class="badge ms-2" style="background-color: #0056D2; color: #ffffff;">{{ __('free') }}</span>
+                                                            <span class="badge ms-2" style="background-color: #FF7A00; color: #ffffff;">ফ্রি</span>
                                                         @endif
                                                     </div>
                                                     <span class="small text-muted fw-semibold">{{ $lesson->duration }}</span>

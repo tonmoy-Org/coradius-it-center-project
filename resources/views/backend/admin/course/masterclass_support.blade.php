@@ -98,12 +98,7 @@
                 <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Use <code>{word}</code> or <code>&lt;mark&gt;word&lt;/mark&gt;</code> to highlight text.</small>
             </div>
 
-            <!-- Title Icon -->
-            <div class="col-lg-6 col-md-6 mb-4">
-                <label class="form-label">Title Icon</label>
-                <input type="text" name="masterclass_settings[support_title_icon]" class="form-control rounded-2"
-                       value="{{ $supportTitleIcon }}" placeholder="fas fa-headset">
-            </div>
+
 
             <!-- Subtitle -->
             <div class="col-lg-12 mb-4">
@@ -159,8 +154,7 @@
                         @endphp
                         <div class="col-md-4 support-feature-card-item" data-index="{{ $idx }}">
                             <div class="p-3 bg-light rounded-3 border h-100 position-relative">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="form-label mb-0 card-num-label">Card {{ $idx + 1 }}</h6>
+                                <div class="d-flex align-items-center justify-content-end mb-2">
                                     <button type="button" class="support-card-delete-btn remove-support-card-btn" title="Delete Card">
                                         <i class="las la-trash-alt"></i>
                                     </button>

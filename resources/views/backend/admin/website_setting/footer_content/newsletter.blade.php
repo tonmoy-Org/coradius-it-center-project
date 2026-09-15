@@ -27,17 +27,7 @@
                                             <textarea class="form-control rounded-2 py-2" id="footer_logo_description" name="footer_logo_description" rows="2">{{ setting('footer_logo_description',$lang) ?: '' }}</textarea>
                                         </div>
 
-                                        <div class="col-md-6 col-12">
-                                            <label for="footer_get_in_touch_title" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Footer Get In Touch Title') }}</label>
-                                            <input type="text" class="form-control rounded-2 py-2" id="footer_get_in_touch_title" name="footer_get_in_touch_title"
-                                                   value="{{ setting('footer_get_in_touch_title', $lang) }}">
-                                        </div>
 
-                                        <div class="col-md-6 col-12">
-                                            <label for="footer_get_in_touch_desc" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Footer Get In Touch Description') }}</label>
-                                            <input type="text" class="form-control rounded-2 py-2" id="footer_get_in_touch_desc" name="footer_get_in_touch_desc"
-                                                   value="{{ setting('footer_get_in_touch_desc',$lang) ?: '' }}">
-                                        </div>
 
                                         <!-- Contact Address -->
                                         <div class="col-md-6 col-12">
@@ -53,15 +43,8 @@
                                                    value="{{ setting('contact_phone') ?: '' }}">
                                         </div>
 
-                                        <!-- Phone Schedule / Hours -->
-                                        <div class="col-md-4 col-12">
-                                            <label for="contact_phone_schedule" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Phone Schedule / Hours') }}</label>
-                                            <input type="text" class="form-control rounded-2 py-2" id="contact_phone_schedule" name="contact_phone_schedule"
-                                                   value="{{ setting('contact_phone_schedule', $lang) }}">
-                                        </div>
-
                                         <!-- Contact Email Address -->
-                                        <div class="col-md-4 col-12">
+                                        <div class="col-md-6 col-12">
                                             <label for="contact_email" class="form-label" style="font-size: 13.5px; color: #334155; font-weight: 400;">{{ __('Contact Email Address') }}</label>
                                             <input type="text" class="form-control rounded-2 py-2" id="contact_email" name="contact_email"
                                                    value="{{ setting('contact_email') ?: '' }}">

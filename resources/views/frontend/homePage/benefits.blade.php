@@ -57,11 +57,28 @@
     .mc-target-audience-card-light {
         background: var(--color-white, #ffffff);
         border: 1px solid var(--color-border-tint, #D9E8FC);
-        border-radius: 16px;
-        padding: 24px 22px;
+        border-radius: 8px;
+        padding: 24px 22px 28px 22px;
         height: 100%;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mc-target-audience-card-light::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23F0F6FF' fill-opacity='1' d='M0,256L60,245.3C120,235,240,213,360,208C480,203,600,213,720,218.7C840,224,960,224,1080,218.7C1200,213,1320,203,1380,197.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        z-index: 0;
+        pointer-events: none;
     }
 
     .mc-target-audience-card-light:hover {
@@ -99,7 +116,7 @@
     .mc-audience-check-note-light {
         font-size: 13px;
         font-weight: 600;
-        color: var(--color-primary, #0056D2);
+        color: #FF7A00;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -186,7 +203,7 @@
 
                     <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
                         <div class="mc-target-audience-card-light">
-                            <div class="d-flex align-items-start gap-3">
+                            <div class="d-flex align-items-start gap-3" style="position: relative; z-index: 1;">
                                 <div class="mc-audience-icon-box-light" style="background: {{ $iconBg }}; border: 1px solid {{ $iconBorder }}; color: {{ $iconColor }};">
                                     <i class="{{ $iconClass }}"></i>
                                 </div>

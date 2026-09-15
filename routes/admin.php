@@ -103,6 +103,8 @@ Route::group(['prefix' => localeRoutePrefix()], function () {
 
         Route::get('useful-link-setting', [FooterSettingController::class, 'usefulLinkSetting'])->name('footer.useful-links');
 
+        Route::get('resource-link-setting', [FooterSettingController::class, 'resourceLinkSetting'])->name('footer.resource-links');
+
 
         Route::get('quick-link-setting', [FooterSettingController::class, 'quickLinkSetting'])->name('footer.quick-links');
 

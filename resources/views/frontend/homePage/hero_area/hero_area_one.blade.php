@@ -33,7 +33,7 @@
                     @endif
 
                     {{-- Video or Image --}}
-                    <div class="hero-video-wrapper video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 12px; overflow: hidden; background: #000; max-width: 960px; border: 2px solid rgba(0, 86, 210, 0.4);">
+                    <div class="hero-video-wrapper has-border-beam video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 8px; overflow: hidden; background: #000; max-width: 960px; border: 2px solid rgba(0, 86, 210, 0.4);">
                         <!-- Border Beam SVG -->
                         <svg class="border-beam-svg">
                             <defs>
@@ -45,7 +45,7 @@
                                     <stop offset="100%" stop-color="#0056D2" stop-opacity="0" />
                                 </linearGradient>
                             </defs>
-                            <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient)" stroke-width="2.5" rx="12" ry="12" />
+                            <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient)" stroke-width="2.5" rx="8" ry="8" />
                         </svg>
                         @if($hero_course->video_source && $hero_course->video)
                             @include('frontend.components.video', [
@@ -91,7 +91,7 @@
 <section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
         <div class="description-card p-4 p-md-5 position-relative overflow-hidden" 
-             style="background-color: var(--color-blue-tint, #EAF2FE); border: 1px solid var(--color-border-tint, #C7DCFA); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.06);">
+             style="background: linear-gradient(135deg, #F0F6FE 0%, #E8F1FC 100%); border: 1px solid rgba(0, 86, 210, 0.12); border-radius: 12px; box-shadow: 0 10px 30px -5px rgba(0, 56, 148, 0.05);">
             
             @php
                 $descSubtitle = !empty($hero_course->description_subtitle) 
@@ -121,16 +121,18 @@
             <div class="row g-4 g-lg-5 align-items-center">
                 <!-- Left Column -->
                 <div class="{{ $hasRightContent ? 'col-lg-6' : 'col-lg-12' }} col-md-12">
-                    <div class="quote-decorator mb-2" style="color: var(--color-primary, #0056D2); font-size: 55px; line-height: 1; font-family: Georgia, serif; font-weight: bold;">
-                        “
+                    <div class="quote-decorator mb-2">
+                        <svg width="38" height="30" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 18.2857C0 8.19048 6.09524 1.52381 16 0V6.47619C10.6667 7.61905 8.19048 10.8571 8.19048 15.0476H16V32H0V18.2857ZM24 18.2857C24 8.19048 30.0952 1.52381 40 0V6.47619C34.6667 7.61905 32.1905 10.8571 32.1905 15.0476H40V32H24V18.2857Z" fill="#0056D2"/>
+                        </svg>
                     </div>
                     @if(!empty($descSubtitle))
-                        <h2 class="mb-3 fw-bold desc-main-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 30px; line-height: 1.3;">
+                        <h2 class="mb-3 fw-bold desc-main-title" style="color: #0A1E3F; font-size: 28px; line-height: 1.35; letter-spacing: -0.02em;">
                             {!! format_title_highlight($descSubtitle) !!}
                         </h2>
                     @endif
                     
-                    <div class="course-description-content" style="color: var(--color-text-secondary, #4B5A72); font-size: 16px; line-height: 1.85; font-weight: 400;">
+                    <div class="course-description-content" style="color: #475569; font-size: 15.5px; line-height: 1.85; font-weight: 400;">
                         {!! $descContent !!}
                     </div>
                 </div>
@@ -138,44 +140,44 @@
                 @if($hasRightContent)
                 <!-- Right Column: Structured Feature Layout -->
                 <div class="col-lg-6 col-md-12">
-                    <div class="desc-right-box p-3 p-md-4 rounded-4" style="background: var(--color-white, #FFFFFF); border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 4px 18px rgba(0, 31, 92, 0.05);">
+                    <div class="desc-right-box p-4" style="background: linear-gradient(160deg,#f0f6ff 0%,#ffffff 60%,#f4f0ff 100%); border: none; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,86,210,0.06), 0 20px 60px rgba(0,86,210,0.13), 0 1px 0 rgba(255,255,255,0.9) inset; position: relative; padding: 2px;">
+                    <div style="position:absolute;inset:0;border-radius:16px;padding:2px;background:linear-gradient(135deg,rgba(0,86,210,0.45) 0%,rgba(130,80,255,0.25) 50%,rgba(0,200,255,0.3) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none;"></div>
+                    <div style="background:linear-gradient(160deg,#f0f6ff 0%,#ffffff 60%,#f4f0ff 100%);border-radius:14px;padding:24px;position:relative;overflow:hidden;">
+                    <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,86,210,0.07) 0%,transparent 70%);pointer-events:none;"></div>
+
                         <!-- Top Subtitle -->
                         @if(!empty($descRightTitle))
-                            <h4 class="fw-bold mb-4 desc-right-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 17.5px; line-height: 1.65;">
+                            <h4 class="fw-bold mb-4 desc-right-title" style="color: #0A1E3F; font-size: 17.5px; line-height: 1.6; letter-spacing:-0.01em;">
                                 {!! format_title_highlight($descRightTitle) !!}
                             </h4>
                         @endif
 
                         @if($hasTimelineSteps)
                         <!-- 3-Step Timeline Nodes -->
-                        <div class="timeline-nodes-wrapper position-relative mb-4 py-2">
-                            <div class="timeline-line" style="position: absolute; top: 18px; left: 10%; right: 10%; height: 2px; background: var(--color-border-tint, #D9E8FC); z-index: 1;"></div>
-                            <div class="row text-center position-relative" style="z-index: 2;">
-                                <div class="col-4">
-                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
+                        <div class="timeline-nodes-wrapper mb-4">
+                            <div class="d-flex flex-column flex-md-row align-items-stretch gap-3">
+                                <div class="flex-fill text-center" style="background: #ffffff; border-radius: 12px; border: 1.5px solid rgba(0,86,210,0.10); box-shadow: 0 4px 20px rgba(0,86,210,0.08), 0 1px 0 rgba(255,255,255,0.9) inset; padding: 16px 10px;">
                                     @if(!empty($descStep1Title))
-                                        <div class="fw-bold desc-step-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep1Title }}</div>
+                                        <div class="fw-bold" style="color: #0A1E3F; font-size: 13px; margin-top: 8px; letter-spacing:-0.01em;">{{ $descStep1Title }}</div>
                                     @endif
                                     @if(!empty($descStep1Sub))
-                                        <div class="desc-step-sub" style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep1Sub }}</div>
+                                        <div style="color: #64748B; font-size: 11px; margin-top: 4px; line-height:1.5;">{{ $descStep1Sub }}</div>
                                     @endif
                                 </div>
-                                <div class="col-4">
-                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
+                                <div class="flex-fill text-center" style="background: #ffffff; border-radius: 12px; border: 1.5px solid rgba(0,86,210,0.10); box-shadow: 0 4px 20px rgba(0,86,210,0.08), 0 1px 0 rgba(255,255,255,0.9) inset; padding: 16px 10px;">
                                     @if(!empty($descStep2Title))
-                                        <div class="fw-bold desc-step-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep2Title }}</div>
+                                        <div class="fw-bold" style="color: #0A1E3F; font-size: 13px; margin-top: 8px; letter-spacing:-0.01em;">{{ $descStep2Title }}</div>
                                     @endif
                                     @if(!empty($descStep2Sub))
-                                        <div class="desc-step-sub" style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep2Sub }}</div>
+                                        <div style="color: #64748B; font-size: 11px; margin-top: 4px; line-height:1.5;">{{ $descStep2Sub }}</div>
                                     @endif
                                 </div>
-                                <div class="col-4">
-                                    <div class="node-dot mx-auto mb-2 rounded-circle" style="width: 14px; height: 14px; background: var(--color-primary, #0056D2); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--color-primary, #0056D2);"></div>
+                                <div class="flex-fill text-center" style="background: #ffffff; border-radius: 12px; border: 1.5px solid rgba(0,86,210,0.10); box-shadow: 0 4px 20px rgba(0,86,210,0.08), 0 1px 0 rgba(255,255,255,0.9) inset; padding: 16px 10px;">
                                     @if(!empty($descStep3Title))
-                                        <div class="fw-bold desc-step-title" style="color: var(--color-text-ink, #0A1E3F); font-size: 14px;">{{ $descStep3Title }}</div>
+                                        <div class="fw-bold" style="color: #0A1E3F; font-size: 13px; margin-top: 8px; letter-spacing:-0.01em;">{{ $descStep3Title }}</div>
                                     @endif
                                     @if(!empty($descStep3Sub))
-                                        <div class="desc-step-sub" style="color: var(--color-text-muted, #8A96A8); font-size: 11.5px;">{{ $descStep3Sub }}</div>
+                                        <div style="color: #64748B; font-size: 11px; margin-top: 4px; line-height:1.5;">{{ $descStep3Sub }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -184,26 +186,40 @@
 
                         @if($hasBannerCard)
                         <!-- Inner Highlight Banner Card -->
-                        <div class="highlight-banner-card p-3 p-md-4 rounded-3 text-center" 
-                             style="background: var(--color-white, #ffffff); border: 2px solid var(--color-primary, #0056D2); box-shadow: 0 4px 15px rgba(0, 86, 210, 0.12);">
+                        <div class="highlight-banner-card has-border-beam text-center" 
+                             style="background: linear-gradient(135deg, #003fa3 0%, #0056D2 40%, #1a78ff 80%, #4facfe 100%); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,86,210,0.40), 0 2px 8px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.15) inset; position: relative; overflow: hidden; padding: 22px 20px;">
+                            <!-- Border Beam SVG -->
+                            <svg class="border-beam-svg">
+                                <defs>
+                                    <linearGradient id="beam-gradient-card" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#FF7A00" stop-opacity="0" />
+                                        <stop offset="25%" stop-color="#FF7A00" stop-opacity="0.9" />
+                                        <stop offset="50%" stop-color="#FFB800" stop-opacity="1" />
+                                        <stop offset="75%" stop-color="#3B8AF2" stop-opacity="0.9" />
+                                        <stop offset="100%" stop-color="#0056D2" stop-opacity="0" />
+                                    </linearGradient>
+                                </defs>
+                                <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient-card)" stroke-width="2.5" rx="14" ry="14" />
+                            </svg>
+                            <div style="position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,0.14) 0%,transparent 65%);pointer-events:none;"></div>
+                            <div style="position:absolute;bottom:-40px;left:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+                            <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);pointer-events:none;"></div>
                             <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                                @if(!empty($descBannerIcon))
-                                    <span class="desc-banner-icon" style="font-size: 26px;">{{ $descBannerIcon }}</span>
-                                @endif
+
                                 @if(!empty($descBannerTitle))
-                                    <h3 class="m-0 fw-bold desc-banner-title" style="color: var(--color-accent-orange, #FF7A00); font-size: 22px; letter-spacing: 0.5px;">
+                                    <h3 class="m-0 fw-bold desc-banner-title" style="color: #ffffff; font-size: 22px; font-weight: 900; letter-spacing: -0.01em; text-shadow: 0 2px 12px rgba(0,0,0,0.25);">
                                         {!! format_title_highlight($descBannerTitle) !!}
                                     </h3>
                                 @endif
                             </div>
                             @if(!empty($descBannerSub))
-                                <div class="m-0 fw-semibold desc-banner-sub" style="color: var(--color-text-secondary, #4B5A72); font-size: 14.5px;">
+                                <div class="m-0 desc-banner-sub" style="color: rgba(255,255,255,0.90); font-size: 14.5px; font-weight: 500; line-height: 1.6;">
                                     {!! format_title_highlight($descBannerSub) !!}
                                 </div>
                             @endif
                         </div>
                         @endif
-                    </div>
+                    </div></div></div>
                 </div>
                 @endif
             </div>
@@ -260,18 +276,18 @@
         }
 
         // Border Beam animation dimensions tracker
-        const videoWrapper = document.querySelector('.hero-video-wrapper');
-        if (videoWrapper) {
-            const beamSvg = videoWrapper.querySelector('.border-beam-svg');
-            const beamRect = videoWrapper.querySelector('.border-beam-rect');
+        const beamContainers = document.querySelectorAll('.has-border-beam');
+        beamContainers.forEach(container => {
+            const beamSvg = container.querySelector('.border-beam-svg');
+            const beamRect = container.querySelector('.border-beam-rect');
             
              if (beamSvg && beamRect) {
                 let rAfFrame;
                 function updateBeam() {
                     if (rAfFrame) cancelAnimationFrame(rAfFrame);
                     rAfFrame = requestAnimationFrame(() => {
-                        const w = videoWrapper.clientWidth;
-                        const h = videoWrapper.clientHeight;
+                        const w = container.clientWidth;
+                        const h = container.clientHeight;
                         
                         beamSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
                         
@@ -285,8 +301,14 @@
                         beamRect.setAttribute('width', rectW.toString());
                         beamRect.setAttribute('height', rectH.toString());
                         
-                        // Perimeter calculation
-                        const perimeter = 2 * (rectW + rectH);
+                        const computedStyle = window.getComputedStyle(container);
+                        const borderRadius = parseFloat(computedStyle.borderRadius) || 0;
+                        const rx = Math.max(0, borderRadius - inset);
+                        beamRect.setAttribute('rx', rx.toString());
+                        beamRect.setAttribute('ry', rx.toString());
+                        
+                        // Perimeter calculation (accounting for rounded corners)
+                        const perimeter = 2 * (rectW + rectH) - rx * (8 - 2 * Math.PI);
                         beamRect.style.setProperty('--perimeter', perimeter);
                         
                         // Set beam length to 25% of the container perimeter
@@ -300,10 +322,10 @@
                 
                 if (window.ResizeObserver) {
                     const ro = new ResizeObserver(updateBeam);
-                    ro.observe(videoWrapper);
+                    ro.observe(container);
                 }
             }
-        }
+        });
     });
 </script>
 @endpush
@@ -479,19 +501,16 @@
 
 /* Video Wrapper styling */
 .hero-video-wrapper {
-    border-radius: 12px !important;
-    border-color: rgba(0, 86, 210, 0.45) !important;
+    border-radius: 8px !important;
+    border: 2px solid rgba(0, 86, 210, 0.4) !important;
     box-shadow: 0 30px 60px -15px rgba(0, 86, 210, 0.3), 
                 0 0 50px 10px rgba(59, 138, 242, 0.12) !important;
-    transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    will-change: box-shadow, border-color;
+    transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .hero-video-wrapper:hover {
-    border-color: rgba(255, 122, 0, 0.65) !important;
-    box-shadow: 0 30px 70px -10px rgba(0, 86, 210, 0.4), 
-                0 0 60px 15px rgba(255, 122, 0, 0.15) !important;
+    border-color: rgba(0, 86, 210, 0.4) !important;
+    box-shadow: 0 30px 70px -10px rgba(0, 86, 210, 0.4) !important;
 }
 
 /* Border Beam SVG and rect styles */
@@ -540,8 +559,10 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hero-btns .template-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 122, 0, 0.35);
+    transform: translateY(-2px);
+    background: #FF7A00 !important;
+    background-color: #FF7A00 !important;
+    box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45);
 }
 .hero-btns .template-btn::before {
     content: '';
@@ -550,7 +571,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
     transition: all 0.6s ease;
 }
 .hero-btns .template-btn:hover::before {
@@ -659,107 +680,132 @@
         color: #0056D2 !important;
     }
 
-    /* ── Course Description Right Box: Locked Mobile Typography ── */
+    /* ── Course Description Right Box & Title Highlight Styles ── */
+    .desc-right-title mark.title-highlight,
+    .desc-right-title mark,
+    .title-highlight {
+        background: #DCEBFE !important;
+        color: #0056D2 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+        font-weight: 700 !important;
+        display: inline-block !important;
+        line-height: 1.4 !important;
+    }
+
     .desc-right-box {
-        padding: 18px 14px !important;
-        margin-top: 10px !important;
+        padding: 28px !important;
+        margin-top: 0 !important;
     }
 
-    .desc-right-title,
-    .desc-right-title * {
-        font-size: 16px !important;
-        line-height: 1.45 !important;
-        font-weight: 700 !important;
-        margin-bottom: 14px !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
+    @media (max-width: 767.98px) {
+        .desc-right-box {
+            padding: 18px 14px !important;
+            margin-top: 10px !important;
+        }
+
+        .desc-right-title,
+        .desc-right-title * {
+            font-size: 16px !important;
+            line-height: 1.45 !important;
+            font-weight: 700 !important;
+            margin-bottom: 14px !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+
+        .timeline-nodes-wrapper {
+            margin-bottom: 16px !important;
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
+        }
+        .timeline-nodes-wrapper .timeline-line {
+            top: 11px !important;
+            left: 16.66% !important;
+            right: 16.66% !important;
+        }
+        .timeline-nodes-wrapper .node-dot {
+            width: 15px !important;
+            height: 15px !important;
+            border-width: 2px !important;
+            margin-bottom: 6px !important;
+        }
+        .timeline-nodes-wrapper .node-dot span {
+            width: 5px !important;
+            height: 5px !important;
+        }
+        .desc-step-title,
+        .desc-step-title * {
+            font-size: 12px !important;
+            line-height: 1.3 !important;
+            font-weight: 700 !important;
+            word-break: break-word !important;
+        }
+        .desc-step-sub,
+        .desc-step-sub * {
+            font-size: 10.5px !important;
+            line-height: 1.25 !important;
+            word-break: break-word !important;
+        }
+
+        .highlight-banner-card {
+            padding: 16px 12px !important;
+        }
+        .desc-banner-icon {
+            font-size: 22px !important;
+            line-height: 1 !important;
+        }
+        .desc-banner-title,
+        .desc-banner-title * {
+            font-size: 18px !important;
+            line-height: 1.35 !important;
+            font-weight: 700 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+        .desc-banner-sub,
+        .desc-banner-sub * {
+            font-size: 13.5px !important;
+            line-height: 1.5 !important;
+            font-weight: 500 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
     }
 
-    .timeline-nodes-wrapper {
-        margin-bottom: 16px !important;
-        padding-top: 4px !important;
-        padding-bottom: 4px !important;
+    /* Brand overrides for course description rich text content */
+    .course-description-content strong,
+    .course-description-content b {
+        color: #0056D2 !important;
     }
-    .timeline-nodes-wrapper .timeline-line {
-        top: 14px !important;
+    .course-description-content mark {
+        background-color: #FFB800 !important;
+        color: #0A1E3F !important;
+        padding: 2px 6px;
+        border-radius: 4px;
     }
-    .timeline-nodes-wrapper .node-dot {
-        width: 12px !important;
-        height: 12px !important;
-        margin-bottom: 6px !important;
+    .course-description-content [style*="rgb(18, 62, 43)"],
+    .course-description-content [style*="#123e2b"],
+    .course-description-content [style*="#0d4630"],
+    .course-description-content [style*="#047857"] {
+        background-color: #001F5C !important;
+        color: #FFFFFF !important;
+        border-radius: 6px !important;
+        padding: 4px 12px !important;
+        display: inline-block !important;
     }
-    .desc-step-title,
-    .desc-step-title * {
-        font-size: 12px !important;
-        line-height: 1.3 !important;
-        font-weight: 700 !important;
-        word-break: break-word !important;
+    .course-description-content [style*="rgb(79, 183, 145)"],
+    .course-description-content [style*="#10b981"],
+    .course-description-content [style*="#25ab7c"],
+    .course-description-content [style*="#2db37c"] {
+        color: #0056D2 !important;
     }
-    .desc-step-sub,
-    .desc-step-sub * {
-        font-size: 10.5px !important;
-        line-height: 1.25 !important;
-        word-break: break-word !important;
+    .course-description-content [style*="rgb(255, 255, 0)"] {
+        background-color: #FFB800 !important;
+        color: #0A1E3F !important;
+        border-radius: 4px !important;
+        padding: 2px 8px !important;
     }
-
-    .highlight-banner-card {
-        padding: 16px 12px !important;
-    }
-    .desc-banner-icon {
-        font-size: 22px !important;
-        line-height: 1 !important;
-    }
-    .desc-banner-title,
-    .desc-banner-title * {
-        font-size: 18px !important;
-        line-height: 1.35 !important;
-        font-weight: 700 !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-    }
-    .desc-banner-sub,
-    .desc-banner-sub * {
-        font-size: 13.5px !important;
-        line-height: 1.5 !important;
-        font-weight: 500 !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-    }
-}
-
-/* Brand overrides for course description rich text content */
-.course-description-content strong,
-.course-description-content b {
-    color: #0056D2 !important;
-}
-.course-description-content mark {
-    background-color: #FFB800 !important;
-    color: #0A1E3F !important;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-.course-description-content [style*="rgb(18, 62, 43)"],
-.course-description-content [style*="#123e2b"],
-.course-description-content [style*="#0d4630"],
-.course-description-content [style*="#047857"] {
-    background-color: #001F5C !important;
-    color: #FFFFFF !important;
-    border-radius: 6px !important;
-    padding: 4px 12px !important;
-    display: inline-block !important;
-}
-.course-description-content [style*="rgb(79, 183, 145)"],
-.course-description-content [style*="#10b981"],
-.course-description-content [style*="#25ab7c"],
-.course-description-content [style*="#2db37c"] {
-    color: #0056D2 !important;
-}
-.course-description-content [style*="rgb(255, 255, 0)"] {
-    background-color: #FFB800 !important;
-    color: #0A1E3F !important;
-    border-radius: 4px !important;
-    padding: 2px 8px !important;
-}
 </style>
 @endpush
 @else

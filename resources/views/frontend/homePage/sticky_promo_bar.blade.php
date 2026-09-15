@@ -26,16 +26,16 @@
 <style>
     .sticky-promo-container {
         width: 100%;
-        margin: 0 auto 40px auto;
+        margin: 0 auto 80px auto;
         position: relative;
     }
     
     .sticky-promo-wrapper {
         width: 100%;
-        background: var(--color-blue-tint, #EAF2FE);
-        border: 1.5px solid var(--color-border-tint, #C7DCFA);
-        border-radius: 12px;
-        box-shadow: 0 6px 24px rgba(0, 86, 210, 0.12);
+        background: #ffffff;
+        border: 1.5px solid rgba(0, 86, 210, 0.16);
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 56, 148, 0.08);
         transition: all 0.3s ease;
         z-index: 1040;
     }
@@ -61,16 +61,29 @@
         border-left: none;
         border-right: none;
         border-bottom: none;
-        border-top: 1.5px solid var(--color-border-tint, #C7DCFA);
-        background: var(--color-blue-tint, #EAF2FE);
-        box-shadow: 0 -4px 25px rgba(0, 31, 92, 0.12);
-        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, var(--color-hero-bg-start, #001F5C) 0%, var(--color-hero-bg-end, #0B1226) 100%);
+        box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(12px);
+    }
+    
+    .sticky-promo-wrapper.is-sticky .sp-left h3 {
+        color: #ffffff !important;
+    }
+    
+    .sticky-promo-wrapper.is-sticky .sp-cd-item {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    .sticky-promo-wrapper.is-sticky .sp-cd-item span.label {
+        color: #cbd5e1 !important;
     }
 
     .sp-left {
         flex: 1;
         min-width: 300px;
-        padding: 12px 24px;
+        padding: 14px 24px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -79,7 +92,7 @@
     .sp-left h3 {
         color: var(--color-text-ink, #0A1E3F);
         margin: 0;
-        font-size: 19px;
+        font-size: 18.5px;
         font-weight: 700;
         letter-spacing: -0.2px;
     }
@@ -98,15 +111,15 @@
     }
 
     .sp-cd-item {
-        background: #FFFFFF;
+        background: #F0F6FF;
         color: var(--color-text-ink, #0A1E3F);
         border-radius: 8px;
         padding: 6px 14px;
         min-width: 52px;
         text-align: center;
         font-weight: bold;
-        border: 1px solid var(--color-border-tint, #D9E8FC);
-        box-shadow: 0 2px 6px rgba(0, 31, 92, 0.05);
+        border: 1px solid rgba(0, 86, 210, 0.15);
+        box-shadow: 0 2px 8px rgba(0, 56, 148, 0.04);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -138,46 +151,64 @@
     }
 
     .sp-right .btn-enroll {
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px 28px !important;
+        font-family: var(--body-font, "Hind Siliguri", "Inter", sans-serif) !important;
         font-size: 15px !important;
         font-weight: 700 !important;
-        line-height: 1.2 !important;
+        padding: 10px 22px !important;
         border-radius: 8px !important;
-        background-color: var(--color-primary, #0056D2) !important;
+        background-color: #0056D2 !important;
+        background: #0056D2 !important;
         border: none !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(0, 86, 210, 0.35);
+        box-shadow: 0 4px 14px rgba(0, 86, 210, 0.25) !important;
         overflow: hidden !important;
-        position: relative;
-        transition: all 0.3s ease;
+        position: relative !important;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         user-select: none;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        text-decoration: none !important;
     }
 
-    .sp-right .btn-enroll::before,
-    .sp-right .btn-enroll::after {
-        content: none !important;
-        display: none !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
+    .sp-right .btn-enroll::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent) !important;
+        transition: all 0.6s ease !important;
+        pointer-events: none !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     .sp-right .btn-enroll:hover {
-        background-color: var(--color-primary-hover, #FF7A00) !important;
-        border-color: var(--color-primary-hover, #FF7A00) !important;
+        background-color: #FF7A00 !important;
+        background: #FF7A00 !important;
+        border-color: #FF7A00 !important;
         color: #ffffff !important;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(255, 122, 0, 0.45);
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45) !important;
+    }
+
+    .sp-right .btn-enroll:hover::before {
+        left: 100% !important;
     }
 
     .sp-right .btn-enroll i {
-        font-size: 14px;
-        margin-left: 0 !important;
+        font-size: 14px !important;
+        margin-left: 6px !important;
         line-height: 1;
+        transition: transform 0.3s ease !important;
+    }
+
+    .sp-right .btn-enroll:hover i {
+        transform: translateX(4px) !important;
     }
 
     /* Button Border Beam Animation styles */
@@ -215,6 +246,9 @@
     }
 
     @media (max-width: 768px) {
+        .sticky-promo-container {
+            margin: 0 auto 30px auto;
+        }
         .sp-inner-container {
             flex-direction: row;
             flex-wrap: wrap;
@@ -277,8 +311,8 @@
             max-width: 100%;
             border-left: none;
             border-right: none;
-            border-top: 1.5px solid var(--color-border-tint, #C7DCFA);
-            background: var(--color-blue-tint, #EAF2FE);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, var(--color-hero-bg-start, #001F5C) 0%, var(--color-hero-bg-end, #0B1226) 100%);
         }
     }
 </style>

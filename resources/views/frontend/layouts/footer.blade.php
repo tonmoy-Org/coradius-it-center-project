@@ -172,7 +172,6 @@
                 </div>
 
                 <!-- Column 2: Useful Links (Matching Header Navigation) -->
-                @if(setting('show_useful_link', 1) != 0)
                 @php
                     $useful_menu = headerFooterMenu('footer_useful_link_menu', app()->getLocale()) ?: (headerFooterMenu('footer_useful_link_menu') ?: setting('footer_useful_link_menu'));
                     $usefulLinkTitle = setting('useful_link_title', app()->getLocale());
@@ -180,7 +179,8 @@
                         $usefulLinkTitle = setting('useful_link_title');
                     }
                 @endphp
-                <div class="col-lg-2 col-md-3 col-6">
+                @if(setting('show_useful_link', 1) == 1 && is_array($useful_menu) && count($useful_menu) > 0)
+                <div class="col-lg-3 col-md-4 col-6">
                     <div class="footer-widget-item">
                         @if(!empty(trim($usefulLinkTitle ?? '')))
                         <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
@@ -188,25 +188,20 @@
                         </h5>
                         @endif
                         <ul class="list-unstyled mb-0" style="font-size: 14.5px;">
-                            @if (is_array($useful_menu) && count($useful_menu) > 0)
-                                @foreach ($useful_menu as $usefulLink)
-                                    <li class="mb-2">
-                                        <a href="{{ url($usefulLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
-                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
-                                            {{ $usefulLink['label'] ?? '' }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @else
-                                <li class="mb-2"><a href="{{ url('/') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'"><i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>{{ __('Home') }}</a></li>
-                            @endif
+                            @foreach ($useful_menu as $usefulLink)
+                                <li class="mb-2">
+                                    <a href="{{ url($usefulLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
+                                        <span>{{ $usefulLink['label'] ?? '' }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 @endif
 
                 <!-- Column 3: Resource Links (Support Pages) -->
-                @if(setting('show_resource_link', 1) != 0)
                 @php
                     $resource_menu = headerFooterMenu('footer_resource_link_menu', app()->getLocale()) ?: (headerFooterMenu('footer_resource_link_menu') ?: setting('footer_resource_link_menu'));
                     $resourceLinkTitle = setting('resource_link_title', app()->getLocale());
@@ -214,7 +209,8 @@
                         $resourceLinkTitle = setting('resource_link_title');
                     }
                 @endphp
-                <div class="col-lg-2 col-md-3 col-6">
+                @if(setting('show_resource_link', 1) == 1 && is_array($resource_menu) && count($resource_menu) > 0)
+                <div class="col-lg-3 col-md-4 col-6">
                     <div class="footer-widget-item">
                         @if(!empty(trim($resourceLinkTitle ?? '')))
                         <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
@@ -222,35 +218,14 @@
                         </h5>
                         @endif
                         <ul class="list-unstyled mb-0" style="font-size: 14.5px;">
-                            @if (is_array($resource_menu) && count($resource_menu) > 0)
-                                @foreach ($resource_menu as $resourceLink)
-                                    <li class="mb-2">
-                                        <a href="{{ url($resourceLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
-                                            <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
-                                            {{ $resourceLink['label'] ?? '' }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @else
+                            @foreach ($resource_menu as $resourceLink)
                                 <li class="mb-2">
-                                    <a href="{{ route('privacy.policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
+                                    <a href="{{ url($resourceLink['url'] ?? '#') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
                                         <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
-                                        {{ __('Privacy Policy') }}
+                                        <span>{{ $resourceLink['label'] ?? '' }}</span>
                                     </a>
                                 </li>
-                                <li class="mb-2">
-                                    <a href="{{ route('terms.conditions') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
-                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
-                                        {{ __('Terms & Condition') }}
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a href="{{ route('refund.policy') }}" style="color: #e2e8f0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#FF7A00'" onmouseout="this.style.color='#e2e8f0'">
-                                        <i class="fas fa-circle me-2" style="font-size: 7px; color: #FF7A00; vertical-align: middle;"></i>
-                                        {{ __('Refund Policy') }}
-                                    </a>
-                                </li>
-                            @endif
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -260,16 +235,11 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-widget-item ps-lg-3">
                         @php
-                            $getInTouchTitle = setting('footer_get_in_touch_title', app()->getLocale());
-                            if ($getInTouchTitle === null || $getInTouchTitle === '') {
-                                $getInTouchTitle = setting('footer_get_in_touch_title');
-                            }
+                            $getInTouchTitle = setting('footer_get_in_touch_title') ?: __('Get In Touch');
                         @endphp
-                        @if(!empty(trim($getInTouchTitle ?? '')))
                         <h5 class="widget-title fw-bold mb-4" style="color: #ffffff; font-size: 20px;">
                             {{ $getInTouchTitle }}
                         </h5>
-                        @endif
                         
                         @if(setting('footer_get_in_touch_desc', app()->getLocale()) && setting('footer_get_in_touch_desc', app()->getLocale()) != 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.')
                         <p style="color: #94a3b8; font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">
