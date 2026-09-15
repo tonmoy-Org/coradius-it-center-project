@@ -14,6 +14,7 @@ DB_USER="anik"
 DB_PASS="123456789"
 PROJECT_DIR="/var/www/coradiusitcenter"
 REPO_URL="https://github.com/tonmoy-Org/coradius-it-center-project.git"
+BRANCH="${1:-frontend-ui-adjustments}"
 
 echo "[1/10] Updating system packages..."
 apt-get update
@@ -37,17 +38,17 @@ echo "[4/10] Setting up MySQL Database..."
 mysql -uanik -p123456789 -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 echo "Database credentials created: DB=${DB_NAME} User=${DB_USER} Password=${DB_PASS}"
 
-echo "[5/10] Cloning repository to ${PROJECT_DIR} (Branch: Full-changes-Update)..."
+echo "[5/10] Cloning repository to ${PROJECT_DIR} (Branch: ${BRANCH})..."
 if [ -d "$PROJECT_DIR/.git" ]; then
-    echo "Directory ${PROJECT_DIR} already exists. Fetching and checking out Full-changes-Update..."
+    echo "Directory ${PROJECT_DIR} already exists. Fetching and checking out ${BRANCH}..."
     cd $PROJECT_DIR
-    git fetch origin Full-changes-Update
-    git checkout Full-changes-Update
-    git pull origin Full-changes-Update
+    git fetch origin ${BRANCH}
+    git checkout ${BRANCH}
+    git pull origin ${BRANCH}
 else
-    git clone -b Full-changes-Update $REPO_URL $PROJECT_DIR
+    git clone -b ${BRANCH} $REPO_URL $PROJECT_DIR
     cd $PROJECT_DIR
-    git checkout Full-changes-Update
+    git checkout ${BRANCH}
 fi
 
 echo "[6/10] Setting up .env file..."
