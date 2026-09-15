@@ -1,3 +1,17 @@
+@php
+    if (!isset($meta) || !is_array($meta)) {
+        $meta = [
+            'meta_title'          => setting('meta_title'),
+            'meta_description'    => setting('meta_description'),
+            'meta_keywords'       => setting('meta_keywords'),
+            'meta_published_time' => now(),
+            'meta_url'            => url()->current(),
+            'meta_section'        => 'Home',
+            'image_size'          => '1200',
+            'meta_image'          => getFileLink('1200x630', setting('og_image')),
+        ];
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="{{ systemLanguage() ? systemLanguage()->locale : 'en' }}"
       dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
