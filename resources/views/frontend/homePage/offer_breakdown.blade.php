@@ -8,8 +8,12 @@
         if (empty($text)) return $text;
         $sym = get_symbol();
         $code = userCurrency();
-        if ($code === 'BDT') {
-            return str_replace(['$', 'USD', 'TK', 'Tk'], $sym, $text);
+        $currencies = \app('currencies');
+        $currObj = $currencies ? ($currencies->where('code', $code)->first() ?: $currencies->where('id', $code)->first()) : null;
+        $isBdt = ($code === 'BDT' || $code === '2' || ($currObj && $currObj->code === 'BDT') || $sym === '৳');
+
+        if ($isBdt) {
+            return str_replace(['$', 'USD', 'TK', 'Tk', 'টাকা'], $sym, $text);
         } else {
             return str_replace(['৳', 'TK', 'Tk', 'টাকা'], $sym, $text);
         }

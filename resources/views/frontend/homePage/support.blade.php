@@ -97,12 +97,11 @@
 <style>
     /* Support Section Styles - Standard typography & previous image size */
     .mc-support-section-wrapper {
-        background-color: var(--color-blue-tint, #EAF2FE);
-        background-image: linear-gradient(rgba(0, 86, 210, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 86, 210, 0.04) 1px, transparent 1px);
-        background-size: 20px 20px;
-        border-top: 1px solid var(--color-border-tint, #C7DCFA);
+        background-color: transparent !important;
+        background-image: none !important;
+        border-top: none;
         border-bottom: none;
-        padding-top: 120px;
+        padding-top: 60px;
         padding-bottom: 20px;
         margin-top: 0 !important;
         width: 100%;

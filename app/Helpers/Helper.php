@@ -908,7 +908,22 @@ if (! function_exists('userCurrency')) {
             return session()->get('currency_code');
         }
 
-        return setting('default_currency') ?: 'USD';
+        $default = setting('default_currency');
+        if ($default) {
+            try {
+                $currencies = \app('currencies');
+                if ($currencies && count($currencies) > 0) {
+                    $curr = $currencies->where('code', $default)->first() ?: $currencies->where('id', $default)->first();
+                    if ($curr && !empty($curr->code)) {
+                        return $curr->code;
+                    }
+                }
+            } catch (\Throwable $e) {
+                // fallback
+            }
+        }
+
+        return $default ?: 'USD';
     }
 }
 if (! function_exists('userLanguage')) {

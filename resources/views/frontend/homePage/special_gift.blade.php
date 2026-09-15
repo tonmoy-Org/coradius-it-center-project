@@ -19,10 +19,14 @@
         if (empty($text)) return $text;
         $sym  = get_symbol();
         $code = userCurrency();
-        if ($code === 'BDT') {
-            return str_replace(['$', 'USD', 'TK', 'Tk'], $sym, $text);
+        $currencies = \app('currencies');
+        $currObj = $currencies ? ($currencies->where('code', $code)->first() ?: $currencies->where('id', $code)->first()) : null;
+        $isBdt = ($code === 'BDT' || $code === '2' || ($currObj && $currObj->code === 'BDT') || $sym === '৳');
+
+        if ($isBdt) {
+            return str_replace(['$', 'USD', 'TK', 'Tk', 'টাকা'], $sym, $text);
         } else {
-            return str_replace(['৳', 'TK', 'Tk'], $sym, $text);
+            return str_replace(['৳', 'TK', 'Tk', 'টাকা'], $sym, $text);
         }
     };
 
@@ -44,7 +48,8 @@
 @if($showSpecialGift && (!empty($giftTitle) || !empty($giftBadge) || !empty($giftDescription)))
 <style>
     .mc-special-gift-card {
-        background-color: var(--color-blue-tint, #EAF2FE);
+        background-color: transparent !important;
+        background-image: none !important;
         border: 1px solid var(--color-border-tint, #C7DCFA);
         border-radius: 12px;
         padding: 42px 28px;
