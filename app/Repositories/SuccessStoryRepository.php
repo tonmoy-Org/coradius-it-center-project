@@ -176,6 +176,10 @@ class SuccessStoryRepository
         $key              = SuccessStory::findOrfail($data['id']);
         $key->is_featured = $data['status'];
 
+        if ($data['status'] == 1) {
+            SuccessStory::where('id', '!=', $key->id)->update(['is_featured' => 0]);
+        }
+
         return $key->save();
     }
 }

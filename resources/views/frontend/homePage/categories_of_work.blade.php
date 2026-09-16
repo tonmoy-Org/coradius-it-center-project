@@ -3,6 +3,7 @@
     $cards = setting('categories_of_work_cards');
     $cards = is_array($cards) ? $cards : [];
     $title = setting('categories_of_work_title');
+    $subtitle = setting('categories_of_work_subtitle');
 @endphp
 
 @if(count($cards) > 0 || $title)
@@ -20,7 +21,19 @@
         font-size: 32px;
         font-weight: 700;
         text-align: center;
+        margin-bottom: 10px;
+    }
+    .cow-subtitle {
+        color: var(--color-text-secondary, #4B5A72);
+        font-size: 16px;
+        text-align: center;
         margin-bottom: 40px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cow-subtitle p {
+        margin-bottom: 0;
     }
     .cow-card {
         background-color: var(--color-white, #ffffff);
@@ -98,14 +111,18 @@
     }
     .cow-card-img-floating-wrapper {
         position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        bottom: -5px;
+        right: -10px;
+        width: 140px;
+        height: auto;
+        z-index: 10;
+        border-radius: 8px;
+        overflow: hidden;
     }
     .cow-card-img-floating {
-        max-width: 130px;
-        max-height: 90px;
-        object-fit: contain;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
     }
     .cow-card-only-image {
         display: flex;
@@ -135,9 +152,14 @@
         .cow-title * {
             font-size: 22px !important;
             line-height: 1.35 !important;
-            margin-bottom: 25px !important;
+            margin-bottom: 15px !important;
             word-break: break-word;
             overflow-wrap: break-word;
+        }
+        .cow-subtitle,
+        .cow-subtitle * {
+            font-size: 15px !important;
+            margin-bottom: 30px !important;
         }
         .cow-card-title,
         .cow-card-title * {
@@ -167,6 +189,11 @@
     <div class="container container-1278">
         @if($title)
             <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight($title) !!}</h3>
+        @endif
+        @if($subtitle)
+            <div class="cow-subtitle" data-aos="fade-up" data-aos-delay="100">
+                {!! $subtitle !!}
+            </div>
         @endif
         <div class="cow-wrapper">
 
@@ -230,6 +257,18 @@
                     </div>
                 @endforeach
             </div>
+
+            @if(setting('categories_of_work_button_text'))
+                <div class="row mt-5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-12 text-center">
+                        <a href="{{ setting('categories_of_work_button_link') ?? route('register') }}" class="template-btn">
+                            <span>{{ setting('categories_of_work_button_text') }}</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
 </section>

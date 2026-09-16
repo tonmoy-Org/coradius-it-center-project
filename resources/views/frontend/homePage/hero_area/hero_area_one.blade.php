@@ -244,35 +244,156 @@
             });
         }
 
-        // Parallax and cursor glow animation
+        // Modern Tech Cursor Follower & Stardust Particle Animation
         const heroSection = document.querySelector('.hero-area');
-        if (heroSection) {
+        const isFinePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        if (heroSection && isFinePointer) {
             const shapes = heroSection.querySelectorAll('.hero-shape');
-            const glow = document.createElement('div');
-            glow.className = 'hero-mouse-glow';
-            heroSection.appendChild(glow);
+            
+            // Canvas for micro-stardust particles
+            const canvas = document.createElement('canvas');
+            canvas.className = 'hero-cursor-canvas';
+            heroSection.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
 
-            heroSection.addEventListener('mousemove', function(e) {
-                const rect = heroSection.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+            // Outer follower ring
+            const ring = document.createElement('div');
+            ring.className = 'hero-cursor-follower';
+            heroSection.appendChild(ring);
 
-                glow.style.left = x + 'px';
-                glow.style.top = y + 'px';
+            // Center glow dot
+            const dot = document.createElement('div');
+            dot.className = 'hero-cursor-dot';
+            heroSection.appendChild(dot);
 
-                shapes.forEach(shape => {
-                    const speed = parseFloat(shape.getAttribute('data-speed')) || 1;
-                    const moveX = (x - rect.width / 2) * (speed / 100);
-                    const moveY = (y - rect.height / 2) * (speed / 100);
-                    shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
-                });
+            let width = 0, height = 0;
+            function resizeCanvas() {
+                width = heroSection.clientWidth;
+                height = heroSection.clientHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            let mouseX = -100, mouseY = -100;
+            let ringX = -100, ringY = -100;
+            let isInside = false;
+            let isHoveringInteractive = false;
+            let lastSpawnX = 0, lastSpawnY = 0;
+            const particles = [];
+            const palette = [
+                'rgba(56, 189, 248, ',  // Electric cyan
+                'rgba(96, 165, 250, ',  // Light blue
+                'rgba(251, 191, 36, ',  // Golden amber
+                'rgba(255, 255, 255, '   // Pure white sparkle
+            ];
+
+            heroSection.addEventListener('mouseenter', function() {
+                isInside = true;
+                ring.style.opacity = '1';
+                dot.style.opacity = '1';
             });
 
             heroSection.addEventListener('mouseleave', function() {
+                isInside = false;
+                ring.style.opacity = '0';
+                dot.style.opacity = '0';
                 shapes.forEach(shape => {
                     shape.style.transform = 'translate(0px, 0px)';
                 });
             });
+
+            heroSection.addEventListener('mousemove', function(e) {
+                const rect = heroSection.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+
+                // Direct position for instant-response center dot
+                dot.style.left = mouseX + 'px';
+                dot.style.top = mouseY + 'px';
+
+                // Check interactive hover target
+                const target = e.target;
+                const interactive = target && target.closest('a, button, .template-btn, .hero-video-wrapper, .plyr, input, select');
+                if (interactive && !isHoveringInteractive) {
+                    isHoveringInteractive = true;
+                    ring.classList.add('is-hovered');
+                    dot.classList.add('is-hovered');
+                } else if (!interactive && isHoveringInteractive) {
+                    isHoveringInteractive = false;
+                    ring.classList.remove('is-hovered');
+                    dot.classList.remove('is-hovered');
+                }
+
+                // Spawn stardust particle on movement
+                const dist = Math.hypot(mouseX - lastSpawnX, mouseY - lastSpawnY);
+                if (dist > 12 && particles.length < 35) {
+                    lastSpawnX = mouseX;
+                    lastSpawnY = mouseY;
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 0.8 + 0.3;
+                    particles.push({
+                        x: mouseX + (Math.random() - 0.5) * 8,
+                        y: mouseY + (Math.random() - 0.5) * 8,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - 0.2,
+                        size: Math.random() * 2.5 + 1.2,
+                        color: palette[Math.floor(Math.random() * palette.length)],
+                        alpha: 1,
+                        decay: Math.random() * 0.025 + 0.02
+                    });
+                }
+            });
+
+            function render() {
+                if (isInside || particles.length > 0) {
+                    // Smooth lerp for ring follower
+                    ringX += (mouseX - ringX) * 0.2;
+                    ringY += (mouseY - ringY) * 0.2;
+                    ring.style.left = ringX + 'px';
+                    ring.style.top = ringY + 'px';
+
+                    // Parallax shapes
+                    if (isInside) {
+                        shapes.forEach(shape => {
+                            const speed = parseFloat(shape.getAttribute('data-speed')) || 1;
+                            const moveX = (mouseX - width / 2) * (speed / 100);
+                            const moveY = (mouseY - height / 2) * (speed / 100);
+                            shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                        });
+                    }
+
+                    // Render particles
+                    ctx.clearRect(0, 0, width, height);
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                        const p = particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.alpha -= p.decay;
+                        p.size *= 0.97;
+
+                        if (p.alpha <= 0.05 || p.size <= 0.3) {
+                            particles.splice(i, 1);
+                            continue;
+                        }
+
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color + p.alpha + ')';
+                        ctx.shadowColor = '#38bdf8';
+                        ctx.shadowBlur = 6;
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                } else if (particles.length === 0 && !isInside) {
+                    ctx.clearRect(0, 0, width, height);
+                }
+                requestAnimationFrame(render);
+            }
+            render();
         }
 
         // Border Beam animation dimensions tracker
@@ -479,24 +600,71 @@
     }
 }
 
-/* Mouse cursor glow tracker */
-.hero-mouse-glow {
+/* Modern Tech Cursor Follower & Stardust Trail */
+.hero-cursor-canvas {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(59, 138, 242, 0.22) 0%, rgba(0, 86, 210, 0.08) 45%, rgba(0, 86, 210, 0) 70%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+    z-index: 2;
+}
+
+.hero-cursor-follower {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+    margin-left: -18px;
     border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+    border: 1.5px solid rgba(56, 189, 248, 0.65);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0.02) 70%, transparent 100%);
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.35), inset 0 0 8px rgba(56, 189, 248, 0.15);
+    pointer-events: none !important;
+    z-index: 3;
     opacity: 0;
-    transition: opacity 0.5s ease;
-    mix-blend-mode: screen;
+    transform: scale(0.85);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+    will-change: left, top, opacity, transform;
+}
+
+.hero-cursor-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    margin-top: -3px;
+    margin-left: -3px;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 10px #38bdf8, 0 0 16px rgba(56, 189, 248, 0.85);
+    pointer-events: none !important;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     will-change: left, top, opacity;
 }
 
-.hero-area:hover .hero-mouse-glow {
-    opacity: 1;
+/* Hover state when hovering clickable elements in hero */
+.hero-cursor-follower.is-hovered {
+    transform: scale(1.65);
+    border-color: rgba(251, 191, 36, 0.85);
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.18) 0%, rgba(56, 189, 248, 0.05) 70%, transparent 100%);
+    box-shadow: 0 0 22px rgba(251, 191, 36, 0.45), inset 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+.hero-cursor-dot.is-hovered {
+    transform: scale(1.3);
+    background: #fbbf24;
+    box-shadow: 0 0 12px #fbbf24, 0 0 20px rgba(251, 191, 36, 0.85);
 }
 
 /* Video Wrapper styling */

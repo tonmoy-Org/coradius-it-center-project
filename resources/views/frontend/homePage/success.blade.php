@@ -1,10 +1,11 @@
 <!--====== Start Success Story Section ======-->
 @php
+    if(!isset($featured_story)) {
+        $featured_story = \App\Models\SuccessStory::active()->featured()->latest()->first();
+    }
+
     if(!isset($success_stories) || count($success_stories) == 0) {
-        $success_stories = \App\Models\SuccessStory::active()->featured()->latest()->get();
-        if(count($success_stories) == 0) {
-            $success_stories = \App\Models\SuccessStory::active()->latest()->get();
-        }
+        $success_stories = \App\Models\SuccessStory::active()->latest()->get();
     }
 
     $mcSettings = [];
@@ -73,7 +74,7 @@
     .custom-testimonial-card .card-top-media {
         position: relative;
         width: 100%;
-        height: 220px;
+        height: 240px;
         overflow: hidden;
         cursor: pointer;
         background-color: #0A1E3F;
@@ -104,26 +105,28 @@
         background: rgba(10, 30, 63, 0.42);
     }
     .story-play-btn {
-        width: 56px;
-        height: 56px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         background: #ffffff;
         color: var(--color-primary, #0056D2);
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 20px rgba(0, 86, 210, 0.35);
+        box-shadow: 0 4px 16px rgba(0, 86, 210, 0.3);
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .story-play-btn svg {
         margin-left: 3px;
+        width: 18px;
+        height: 18px;
         fill: var(--color-primary, #0056D2);
         transition: fill 0.3s ease;
     }
     .custom-testimonial-card:hover .story-play-btn {
         transform: scale(1.15);
         background: #FF7A00;
-        box-shadow: 0 6px 24px rgba(255, 122, 0, 0.5);
+        box-shadow: 0 6px 20px rgba(255, 122, 0, 0.45);
     }
     .custom-testimonial-card:hover .story-play-btn svg {
         fill: #ffffff;
@@ -132,13 +135,13 @@
     /* Video Tag Badge */
     .story-badge-video {
         position: absolute;
-        top: 12px;
-        left: 12px;
+        top: 10px;
+        left: 10px;
         background: rgba(0, 86, 210, 0.9);
         color: #ffffff;
-        font-size: 11px;
+        font-size: 10.5px;
         font-weight: 700;
-        padding: 4px 10px;
+        padding: 3px 9px;
         border-radius: 20px;
         backdrop-filter: blur(4px);
         display: inline-flex;
@@ -147,23 +150,23 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-
     .custom-testimonial-card .card-body {
-        padding: 26px;
+        padding: 18px 20px 20px;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
     }
     .custom-testimonial-card p {
         color: var(--color-text-secondary, #4B5A72);
-        font-size: 15.5px;
-        line-height: 1.75;
-        margin-bottom: 22px;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
         display: -webkit-box;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+        min-height: 4.8em;
     }
     .custom-testimonial-author {
         display: flex;
@@ -171,33 +174,82 @@
         margin-top: auto;
     }
     .custom-testimonial-author > img {
-        width: 50px;
-        height: 50px;
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
-        margin-right: 14px;
+        margin-right: 12px;
         object-fit: cover;
         border: 2px solid var(--color-primary, #0056D2);
-        padding: 2px;
+        padding: 1px;
     }
     .author-details {
         display: flex;
         flex-direction: column;
+        min-width: 0;
     }
     .author-details h6 {
         margin: 0 0 2px 0;
-        font-size: 16px;
+        font-size: 14px !important;
         font-weight: 700;
+        line-height: 1.3;
         color: var(--color-text-ink, #0A1E3F); 
     }
     .author-details span {
-        font-size: 13px;
+        font-size: 11.5px !important;
         color: var(--color-text-muted, #8A96A8);
-        margin-bottom: 4px;
+        margin-bottom: 3px;
         font-weight: 500;
+        line-height: 1.35;
+        white-space: normal;
     }
     .author-details .stars {
         color: var(--color-accent-gold, #FFB800);
-        font-size: 13px;
+        font-size: 11px;
+        display: flex;
+        gap: 2px;
+    }
+
+    /* Featured Story Card (Full-Width Showcase) */
+    .featured-story-wrapper {
+        margin-bottom: 48px;
+    }
+    .featured-testimonial-card {
+        border-radius: 12px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+        border: 1.5px solid var(--color-border-tint, #D9E8FC);
+    }
+    .featured-testimonial-card:hover {
+        border-color: var(--color-primary, #0056D2);
+        box-shadow: 0 20px 45px rgba(0, 86, 210, 0.16);
+        transform: translateY(-4px);
+    }
+    .featured-testimonial-card .card-top-media {
+        height: 420px;
+    }
+    .featured-testimonial-card .card-top-image {
+        object-position: center;
+    }
+    .featured-badge-pill {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: #FF7A00;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 14px rgba(255, 122, 0, 0.4);
+        z-index: 5;
+        letter-spacing: 0.5px;
+    }
+    [dir="rtl"] .featured-badge-pill {
+        right: auto;
+        left: 16px;
     }
 
     /* Slick Equal Height Slides Fix */
@@ -211,38 +263,184 @@
         height: 100%;
     }
 
-    /* Custom Navigation Dots */
+    /* Hide Slick Dots */
     .success-slider .slick-dots {
+        display: none !important;
+    }
+
+    /* Slider Container & Custom Left/Right Navigation Arrows */
+    .success-slider-container {
         position: relative;
-        bottom: 0;
-        margin-top: 30px;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        list-style: none;
         padding: 0;
     }
-    .success-slider .slick-dots li {
-        margin: 0;
-        width: auto;
-        height: auto;
+    .success-slider {
+        position: relative;
     }
-    .success-slider .slick-dots li button {
-        width: 8px;
-        height: 8px;
-        padding: 0;
+    .success-slider .slick-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 15;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
-        background: #cbd5e1;
-        border: none;
-        outline: none;
-        font-size: 0;
-        transition: all 0.3s ease;
+        background: #0056d2;
+        border: 1.5px solid #0056d2;
+        color: #ffffff;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(10, 30, 63, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+        transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        padding: 0;
     }
-    .success-slider .slick-dots li.slick-active button {
-        background: var(--color-primary, #0056D2);
-        width: 24px;
-        border-radius: 6px;
+    .success-slider .slick-arrow:before {
+        display: none !important;
+        content: none !important;
+    }
+    .success-slider .slick-prev {
+        left: -22px;
+    }
+    .success-slider .slick-next {
+        right: -22px;
+    }
+    .success-slider .slick-arrow svg {
+        stroke: #ffffff;
+        transition: stroke 0.25s ease, transform 0.25s ease;
+    }
+    .success-slider .slick-arrow:hover {
+        background: #004bb8;
+        border-color: #004bb8;
+        color: #ffffff;
+        box-shadow: 0 8px 24px rgba(0, 86, 210, 0.32);
+        transform: translateY(-50%) scale(1.08);
+    }
+    .success-slider .slick-arrow:hover svg {
+        stroke: #ffffff;
+    }
+    .success-slider .slick-arrow:focus:not(:hover) {
+        background: #0056d2;
+        border-color: #0056d2;
+        color: #ffffff;
+        box-shadow: 0 4px 16px rgba(10, 30, 63, 0.08);
+        transform: translateY(-50%);
+    }
+    .success-slider .slick-arrow:focus:not(:hover) svg {
+        stroke: #ffffff;
+    }
+    .success-slider .slick-prev:hover svg {
+        transform: translateX(-2px);
+    }
+    .success-slider .slick-next:hover svg {
+        transform: translateX(2px);
+    }
+
+    [dir="rtl"] .success-slider .slick-prev {
+        right: -22px;
+        left: auto;
+    }
+    [dir="rtl"] .success-slider .slick-next {
+        left: -22px;
+        right: auto;
+    }
+
+    @media (max-width: 991px) and (min-width: 768px) {
+        .featured-testimonial-card .card-top-media {
+            height: 300px;
+        }
+        .success-slider-container {
+            padding: 0;
+        }
+        .success-slider .slick-arrow {
+            width: 40px;
+            height: 40px;
+        }
+        .success-slider .slick-prev {
+            left: -20px;
+        }
+        .success-slider .slick-next {
+            right: -20px;
+        }
+        [dir="rtl"] .success-slider .slick-prev {
+            right: -20px;
+            left: auto;
+        }
+        [dir="rtl"] .success-slider .slick-next {
+            left: -20px;
+            right: auto;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .featured-story-wrapper {
+            margin-bottom: 28px;
+        }
+        .featured-testimonial-card {
+            width: 92%;
+            margin: 0 auto;
+        }
+        .featured-testimonial-card .card-top-media {
+            height: 200px !important;
+        }
+        .custom-testimonial-card .card-top-media {
+            height: 180px;
+        }
+        .success-slider-container {
+            padding: 0 22px;
+        }
+        .success-slider .slick-arrow {
+            width: 34px;
+            height: 34px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+        .success-slider .slick-arrow svg {
+            width: 15px;
+            height: 15px;
+        }
+        .success-slider .slick-prev {
+            left: -17px;
+        }
+        .success-slider .slick-next {
+            right: -17px;
+        }
+        [dir="rtl"] .success-slider .slick-prev {
+            right: -17px;
+            left: auto;
+        }
+        [dir="rtl"] .success-slider .slick-next {
+            left: -17px;
+            right: auto;
+        }
+    }
+
+    /* Section Subtitle & Center Alignment Enforcement */
+    .success-story-section .common-heading {
+        text-align: center;
+    }
+    .success-story-section .success-section-subtitle,
+    .success-story-section .success-section-subtitle * {
+        text-align: center !important;
+    }
+
+    /* Bottom Button Styling */
+    .success-story-section .success-bottom-btn-wrapper {
+        margin-top: 36px;
+    }
+    .success-story-section .success-bottom-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        padding: 13px 34px;
+        font-size: 15px;
+        font-weight: 600;
+        box-shadow: 0 8px 22px rgba(0, 86, 210, 0.22);
+        transition: all 0.25s ease;
+    }
+    .success-story-section .success-bottom-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 86, 210, 0.32);
     }
 
     /* Story Media Popup Modal - Pretty Large White Theme */
@@ -393,35 +591,70 @@
 
 <section class="success-story-section p-t-60 p-b-60 position-relative" id="success" style="background-color: #ffffff;">
     <div class="container container-1278">
-        <!-- Section Header (Left aligned with Eyebrow, Title, Subtitle & Button) -->
-        <div class="row mb-4 mb-md-5">
-            <div class="col-12 col-lg-8">
-                <div class="common-heading" data-aos="fade-up" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
+        <!-- Section Header (Centered Eyebrow, Title & Subtitle) -->
+        <div class="row mb-4 mb-md-5 justify-content-center">
+            <div class="col-12 col-lg-9 col-xl-8">
+                <div class="common-heading text-center" data-aos="fade-up" dir="{{ systemLanguage() ? systemLanguage()->text_direction : 'ltr' }}">
                     @if(!empty($successEyebrow))
-                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
+                        <span class="sub-title text-uppercase fw-bold m-b-12 d-inline-block text-center" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
                             {!! format_title_highlight($successEyebrow) !!}
                         </span>
                     @endif
                     @if(!empty($successTitle))
-                        <h2 class="fw-bold m-b-12" style="color: #0A1E3F; font-size: 32px; line-height: 1.25;">
+                        <h2 class="fw-bold m-b-12 text-center" style="color: #0A1E3F; font-size: 32px; line-height: 1.25;">
                             {!! format_title_highlight($successTitle) !!}
                         </h2>
                     @endif
                     @if(!empty($successSubtitle))
-                        <div class="m-b-20" style="color: #4B5A72; font-size: 16px; line-height: 1.7; max-width: 680px;">
+                        <div class="m-b-20 success-section-subtitle text-center" style="color: #4B5A72; font-size: 16px; line-height: 1.7; max-width: 680px; margin-left: auto; margin-right: auto;">
                             {!! $successSubtitle !!}
-                        </div>
-                    @endif
-                    @if(!empty($successBtnText))
-                        <div class="m-t-20">
-                            <a href="{{ $successBtnUrl }}" class="template-btn" style="border-radius: 8px;">
-                                {{ $successBtnText }}
-                            </a>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
+
+        <!-- Featured Success Story (Full-Width Single Showcase) -->
+        @if($featured_story)
+            @php
+                $fMediaType = $featured_story->media_type ?? (!empty($featured_story->video) ? 'video' : 'image');
+                $fHasVideo  = ($fMediaType === 'video' && !empty($featured_story->video));
+                $fVideoInfo = $fHasVideo ? $getVideoInfo($featured_story->video) : null;
+                $fFullImage = getFileLink('original_image', $featured_story->image);
+                $fCardImage = getFileLink('original_image', $featured_story->image) ?: getFileLink('473x337', $featured_story->image);
+            @endphp
+            <div class="row justify-content-center featured-story-wrapper" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="custom-testimonial-card featured-testimonial-card">
+                        <div class="card-top-media js-open-story-modal"
+                             role="button"
+                             tabindex="0"
+                             title="{{ __('Click to preview') }}"
+                             data-title="{{ $featured_story->title }}"
+                             data-position="{{ $featured_story->position ?? __('Student') }}"
+                             data-desc="{{ $featured_story->description }}"
+                             data-image="{{ $fFullImage }}"
+                             data-has-video="{{ $fVideoInfo ? '1' : '0' }}"
+                             data-video-type="{{ $fVideoInfo['type'] ?? '' }}"
+                             data-video-url="{{ $fVideoInfo['url'] ?? '' }}">
+                            
+                            <img class="card-top-image" src="{{ $fCardImage }}" alt="{{ $featured_story->title }} Preview">
+                            
+                            @if($fVideoInfo)
+                                <div class="story-media-overlay">
+                                    <span class="story-badge-video"><i class="fas fa-play" style="font-size: 9px;"></i> {{ __('Watch Story') }}</span>
+                                    <div class="story-play-btn">
+                                        <svg width="22" height="22" viewBox="0 0 24 24">
+                                            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                                        </svg>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <!-- Bottom Tier: Full-Width Showcase Grid / Slider -->
         <div class="row">
@@ -561,6 +794,17 @@
                 @endif
             </div>
         </div>
+
+        <!-- Bottom Action Button: View All Success Stories -->
+        @if(!empty($successBtnText))
+            <div class="row success-bottom-btn-wrapper">
+                <div class="col-12 text-center" data-aos="fade-up">
+                    <a href="{{ $successBtnUrl }}" class="template-btn success-bottom-btn">
+                        {{ $successBtnText }}
+                    </a>
+                </div>
+            </div>
+        @endif
     </div>
 
     <!-- Story Media Popup Modal -->
@@ -596,8 +840,10 @@
             const isRtl = $('.success-slider').data('direction') === 'rtl';
             $('.success-slider').slick({
                 rtl: isRtl,
-                dots: true,
-                arrows: false,
+                dots: false,
+                arrows: true,
+                prevArrow: '<button type="button" class="slick-prev slick-arrow success-slider-arrow success-slider-arrow-prev" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>',
+                nextArrow: '<button type="button" class="slick-next slick-arrow success-slider-arrow success-slider-arrow-next" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>',
                 infinite: true,
                 speed: 500,
                 slidesToShow: 3,

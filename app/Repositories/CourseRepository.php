@@ -322,6 +322,41 @@ class CourseRepository
                 }
             }
 
+            if (isset($mc['gift_quotes_list']) && is_array($mc['gift_quotes_list'])) {
+                foreach ($mc['gift_quotes_list'] as $gIdx => &$gItem) {
+                    if (!empty($gItem['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($gItem['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $gItem['image'] = getFileLink('original_image', $media->image_variants);
+                        }
+                    } elseif (isset($gItem['media_id']) && $gItem['media_id'] === '' && empty($gItem['image'])) {
+                        $gItem['image'] = '';
+                    }
+                }
+                unset($gItem);
+            }
+
+            if (request()->hasFile('gift_quote_image_files') && isset($mc['gift_quotes_list'])) {
+                foreach (request()->file('gift_quote_image_files') as $gIdx => $gFile) {
+                    if ($gFile && isset($mc['gift_quotes_list'][$gIdx])) {
+                        $response = $this->saveImage($gFile, 'course');
+                        if ($response && isset($response['images'])) {
+                            $mc['gift_quotes_list'][$gIdx]['image'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                        }
+                    }
+                }
+            }
+
+            if (isset($mc['gift_quotes_list']) && is_array($mc['gift_quotes_list'])) {
+                $mc['gift_quotes_list'] = array_values(array_filter($mc['gift_quotes_list'], function ($item) {
+                    $hasText = !empty(trim(strip_tags($item['text'] ?? '')));
+                    $hasImage = !empty(trim($item['image'] ?? '')) || !empty($item['media_id']);
+                    $hasPrice = !empty(trim($item['price'] ?? ''));
+                    $hasLink = !empty(trim($item['link'] ?? ''));
+                    return $hasText || $hasImage || $hasPrice || $hasLink;
+                }));
+            }
+
             $request['masterclass_settings'] = $mc;
         }
 
@@ -581,6 +616,41 @@ class CourseRepository
                 }
             }
 
+            if (isset($mc['gift_quotes_list']) && is_array($mc['gift_quotes_list'])) {
+                foreach ($mc['gift_quotes_list'] as $gIdx => &$gItem) {
+                    if (!empty($gItem['media_id'])) {
+                        $media = \App\Models\MediaLibrary::find($gItem['media_id']);
+                        if ($media && !empty($media->image_variants)) {
+                            $gItem['image'] = getFileLink('original_image', $media->image_variants);
+                        }
+                    } elseif (isset($gItem['media_id']) && $gItem['media_id'] === '' && empty($gItem['image'])) {
+                        $gItem['image'] = '';
+                    }
+                }
+                unset($gItem);
+            }
+
+            if (request()->hasFile('gift_quote_image_files') && isset($mc['gift_quotes_list'])) {
+                foreach (request()->file('gift_quote_image_files') as $gIdx => $gFile) {
+                    if ($gFile && isset($mc['gift_quotes_list'][$gIdx])) {
+                        $response = $this->saveImage($gFile, 'course');
+                        if ($response && isset($response['images'])) {
+                            $mc['gift_quotes_list'][$gIdx]['image'] = get_media(getArrayValue('original_image', $response['images']), getArrayValue('storage', $response['images']) ?: 'local');
+                        }
+                    }
+                }
+            }
+
+            if (isset($mc['gift_quotes_list']) && is_array($mc['gift_quotes_list'])) {
+                $mc['gift_quotes_list'] = array_values(array_filter($mc['gift_quotes_list'], function ($item) {
+                    $hasText = !empty(trim(strip_tags($item['text'] ?? '')));
+                    $hasImage = !empty(trim($item['image'] ?? '')) || !empty($item['media_id']);
+                    $hasPrice = !empty(trim($item['price'] ?? ''));
+                    $hasLink = !empty(trim($item['link'] ?? ''));
+                    return $hasText || $hasImage || $hasPrice || $hasLink;
+                }));
+            }
+
             for ($ch = 1; $ch <= 3; $ch++) {
                 if (request()->hasFile("support_channel_{$ch}_team_avatar_file")) {
                     $response = $this->saveImage(request()->file("support_channel_{$ch}_team_avatar_file"), 'course');
@@ -699,6 +769,9 @@ class CourseRepository
             }
             $existing['support_features_list'] = $mc['support_features_list'] ?? [];
             $existing['support_channels_list'] = $mc['support_channels_list'] ?? [];
+            if (array_key_exists('gift_quotes_list', $mc)) {
+                $existing['gift_quotes_list'] = $mc['gift_quotes_list'];
+            }
 
             $request['masterclass_settings'] = $existing;
             $course->masterclass_settings = $existing;

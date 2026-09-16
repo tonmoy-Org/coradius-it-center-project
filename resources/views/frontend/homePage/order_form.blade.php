@@ -187,6 +187,33 @@
             width: 100%;
         }
     }
+    
+    .order-form-bottom-text {
+        background-color: #eaf2fe;
+        color: #0056D2;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-weight: 500;
+        line-height: 1.5;
+        border: 1px dashed rgba(0, 86, 210, 0.3);
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-align: left;
+    }
+    .order-form-bottom-text i {
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+    .order-form-bottom-text div > p {
+        margin-bottom: 0;
+    }
+    .order-form-bottom-text div > p:last-child {
+        margin-bottom: 0;
+    }
 </style>
 
 <section class="lead-capture-wrapper" id="register">
@@ -244,6 +271,13 @@
                         <span>{{ $orderFormBtnText }}</span>
                         <i class="fas fa-arrow-right ms-2"></i>
                     </button>
+
+                    @if(!empty($mcSettings['order_form_bottom_text']))
+                        <div class="order-form-bottom-text">
+                            <i class="fas fa-info-circle"></i>
+                            <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>
