@@ -240,6 +240,14 @@
                         @enderror
                     </div>
 
+                    <div class="mb-4">
+                        <label class="form-label">হোয়াটসঅ্যাপ নাম্বার <span class="text-danger">*</span></label>
+                        <input type="tel" name="whatsapp_number" class="form-control rounded-2 @error('whatsapp_number') is-invalid @enderror" value="{{ old('whatsapp_number') }}" placeholder="আপনার হোয়াটসঅ্যাপ নাম্বার লিখুন" required>
+                        @error('whatsapp_number')
+                            <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+
                     <button type="submit" class="btn btn-submit-profile w-100 text-center">
                         <span>{{ $orderFormBtnText }}</span>
                         <i class="fas fa-arrow-right ms-2"></i>

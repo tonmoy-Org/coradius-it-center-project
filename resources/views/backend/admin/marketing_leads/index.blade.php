@@ -7,8 +7,24 @@
                 <div class="col-lg-12">
                     <div class="header-top d-flex justify-content-between align-items-center">
                         <h3 class="section-title">Marketing Leads</h3>
-                        <div class="oftions-content-right mb-12">
-                            <a href="{{ route('marketing-leads.export') }}" class="d-flex align-items-center btn sg-btn-primary gap-2">
+                        <div class="oftions-content-right mb-12 d-flex gap-2">
+                            <form action="{{ route('marketing-leads.index') }}" method="GET" class="d-flex gap-2 align-items-center" id="filterForm">
+                                <select name="date_filter" class="form-control" id="date_filter" onchange="toggleCustomDate()">
+                                    <option value="">All Time</option>
+                                    <option value="today" {{ request('date_filter') == 'today' ? 'selected' : '' }}>Today</option>
+                                    <option value="weekly" {{ request('date_filter') == 'weekly' ? 'selected' : '' }}>This Week</option>
+                                    <option value="monthly" {{ request('date_filter') == 'monthly' ? 'selected' : '' }}>This Month</option>
+                                    <option value="yearly" {{ request('date_filter') == 'yearly' ? 'selected' : '' }}>This Year</option>
+                                    <option value="custom" {{ request('date_filter') == 'custom' ? 'selected' : '' }}>Custom Date</option>
+                                </select>
+                                
+                                <div id="custom-date-container" class="d-flex gap-2 {{ request('date_filter') == 'custom' ? '' : 'd-none' }}">
+                                    <input type="datetime-local" name="start_date" class="form-control" value="{{ request('start_date') }}" placeholder="Start Date & Time">
+                                    <input type="datetime-local" name="end_date" class="form-control" value="{{ request('end_date') }}" placeholder="End Date & Time">
+                                    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                                </div>
+                            </form>
+                            <a href="{{ route('marketing-leads.export', ['date_filter' => request('date_filter'), 'start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="d-flex align-items-center btn sg-btn-primary gap-2">
                                 <i class="las la-file-export"></i>
                                 <span>Export to CSV</span>
                             </a>
@@ -45,6 +61,7 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
+                                                <th>WhatsApp</th>
                                                 <th>Course / Source</th>
                                                 <th>Synced to Webhook?</th>
                                                 <th>Submitted At</th>
@@ -58,6 +75,7 @@
                                                     <td>{{ $lead->name }}</td>
                                                     <td>{{ $lead->email }}</td>
                                                     <td>{{ $lead->phone }}</td>
+                                                    <td>{{ $lead->whatsapp_number ?? '-' }}</td>
                                                     <td>
                                                         @if($lead->course_id)
                                                             @php $course = \App\Models\Course::find($lead->course_id); @endphp
@@ -106,4 +124,17 @@
         </div>
     </section>
     @include('backend.common.delete-script')
+    
+    <script>
+    function toggleCustomDate() {
+        const filter = document.getElementById('date_filter').value;
+        const container = document.getElementById('custom-date-container');
+        if (filter === 'custom') {
+            container.classList.remove('d-none');
+        } else {
+            container.classList.add('d-none');
+            document.getElementById('filterForm').submit();
+        }
+    }
+    </script>
 @endsection

@@ -13,6 +13,7 @@ class MarketingLead extends Model
         'name',
         'email',
         'phone',
+        'whatsapp_number',
         'course_id',
         'is_synced'
     ];

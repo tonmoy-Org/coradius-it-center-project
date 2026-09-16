@@ -400,6 +400,7 @@ class CartController extends Controller
             'name'  => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:marketing_leads,email',
             'phone' => 'required|string|max:30|unique:marketing_leads,phone',
+            'whatsapp_number' => 'nullable|string|max:30',
             'id'    => 'required',
         ], [
             'email.unique' => 'Already submitted, try a new email',
@@ -412,6 +413,7 @@ class CartController extends Controller
                 'name'      => $request->name,
                 'email'     => $request->email,
                 'phone'     => $request->phone,
+                'whatsapp_number' => $request->whatsapp_number,
                 'course_id' => $request->id,
             ]);
 
@@ -423,6 +425,7 @@ class CartController extends Controller
                         'name'      => $request->name,
                         'email'     => $request->email,
                         'phone'     => $request->phone,
+                        'whatsapp_number' => $request->whatsapp_number,
                         'course_id' => $request->id,
                     ]);
                     $marketingLead->update(['is_synced' => 1]);

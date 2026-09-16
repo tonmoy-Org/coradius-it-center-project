@@ -129,11 +129,26 @@
                                     {{ __('Sticky Promo') }}
                                 </a>
                             </li>
+                            @if(hasPermission('coupons.index') && setting('coupon_system'))
+                            <li>
+                                <a class="{{ menuActivation(['admin/coupons', 'admin/coupons/*'], 'active') }}"
+                                   href="{{ route('coupons.index') }}">{{ __('all_coupons') }}</a>
+                            </li>
+                            @endif
                             <li>
                                 <a class="{{ request()->routeIs('courses.edit') && $currTab == 'lead_form' ? 'active' : '' }}"
                                    href="{{ route('courses.edit', [$landingId, 'tab' => 'lead_form']) }}">{{ __('Lead Form') }}</a>
                             </li>
                         </ul>
+                    </li>
+                @endif
+
+                @if(hasPermission('coupons.index') && setting('coupon_system'))
+                    <li class="{{ menuActivation(['admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}">
+                        <a href="{{ route('marketing-leads.index') }}">
+                            <i class="las la-bullhorn"></i>
+                            <span>Marketing Leads</span>
+                        </a>
                     </li>
                 @endif
                 @if(hasPermission('media-library.index'))
@@ -144,27 +159,7 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('coupons.index') && setting('coupon_system'))
-                    <li class="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}">
-                        <a href="#coupon" class="dropdown-icon" data-bs-toggle="collapse" role="button"
-                           aria-expanded="{{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'true', 'false') }}"
-                           aria-controls="coupon">
-                            <i class="las la-th"></i>
-                            <span>{{ __('marketing') }}</span>
-                        </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/coupons', 'admin/coupons/*', 'admin/coupons/create', 'admin/marketing-leads', 'admin/marketing-leads/*'], 'show') }}"
-                            id="coupon">
-                            <li>
-                                <a class="{{ menuActivation(['admin/coupons', 'admin/coupons/*'], 'active') }}"
-                                   href="{{ route('coupons.index') }}">{{ __('all_coupons') }}</a>
-                            </li>
-                            <li>
-                                <a class="{{ menuActivation(['admin/marketing-leads', 'admin/marketing-leads/*'], 'active') }}"
-                                   href="{{ route('marketing-leads.index') }}">Marketing Leads</a>
-                            </li>
-                        </ul>
-                    </li>
-                @endif
+
                 @if (addon_is_activated('accounts_system') && (hasPermission('accounts.index') || hasPermission('bank-accounts.index') || hasPermission('incomes.index') || hasPermission('expenses.index') || hasPermission('transfers.index')))
                     <li
                         class="{{ menuActivation(

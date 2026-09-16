@@ -9,9 +9,41 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class MarketingLeadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $leads = MarketingLead::latest()->paginate(20);
+        $query = MarketingLead::query();
+        
+        if ($request->filled('date_filter')) {
+            switch ($request->date_filter) {
+                case 'today':
+                    $query->whereDate('created_at', \Carbon\Carbon::today());
+                    break;
+                case 'weekly':
+                    $query->whereBetween('created_at', [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()]);
+                    break;
+                case 'monthly':
+                    $query->whereMonth('created_at', \Carbon\Carbon::now()->month)
+                          ->whereYear('created_at', \Carbon\Carbon::now()->year);
+                    break;
+                case 'yearly':
+                    $query->whereYear('created_at', \Carbon\Carbon::now()->year);
+                    break;
+                case 'custom':
+                    if ($request->filled('start_date') && $request->filled('end_date')) {
+                        $query->whereBetween('created_at', [
+                            \Carbon\Carbon::parse($request->start_date),
+                            \Carbon\Carbon::parse($request->end_date)
+                        ]);
+                    } elseif ($request->filled('start_date')) {
+                        $query->where('created_at', '>=', \Carbon\Carbon::parse($request->start_date));
+                    } elseif ($request->filled('end_date')) {
+                        $query->where('created_at', '<=', \Carbon\Carbon::parse($request->end_date));
+                    }
+                    break;
+            }
+        }
+        
+        $leads = $query->latest()->paginate(20)->appends($request->all());
         return view('backend.admin.marketing_leads.index', compact('leads'));
     }
 
@@ -30,9 +62,41 @@ class MarketingLeadController extends Controller
         return back();
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        $leads = MarketingLead::all();
+        $query = MarketingLead::query();
+        
+        if ($request->filled('date_filter')) {
+            switch ($request->date_filter) {
+                case 'today':
+                    $query->whereDate('created_at', \Carbon\Carbon::today());
+                    break;
+                case 'weekly':
+                    $query->whereBetween('created_at', [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()]);
+                    break;
+                case 'monthly':
+                    $query->whereMonth('created_at', \Carbon\Carbon::now()->month)
+                          ->whereYear('created_at', \Carbon\Carbon::now()->year);
+                    break;
+                case 'yearly':
+                    $query->whereYear('created_at', \Carbon\Carbon::now()->year);
+                    break;
+                case 'custom':
+                    if ($request->filled('start_date') && $request->filled('end_date')) {
+                        $query->whereBetween('created_at', [
+                            \Carbon\Carbon::parse($request->start_date),
+                            \Carbon\Carbon::parse($request->end_date)
+                        ]);
+                    } elseif ($request->filled('start_date')) {
+                        $query->where('created_at', '>=', \Carbon\Carbon::parse($request->start_date));
+                    } elseif ($request->filled('end_date')) {
+                        $query->where('created_at', '<=', \Carbon\Carbon::parse($request->end_date));
+                    }
+                    break;
+            }
+        }
+        
+        $leads = $query->latest()->get();
         
         $filename = "marketing_leads_" . date('Y-m-d') . ".csv";
         $handle = fopen('php://output', 'w');
@@ -41,7 +105,7 @@ class MarketingLeadController extends Controller
         header('Content-Disposition: attachment; filename="' . $filename . '"');
 
         // Add CSV headers
-        fputcsv($handle, ['ID', 'Name', 'Email', 'Phone', 'Course ID', 'Is Synced', 'Submitted At']);
+        fputcsv($handle, ['ID', 'Name', 'Email', 'Phone', 'WhatsApp Number', 'Course ID', 'Is Synced', 'Submitted At']);
 
         foreach ($leads as $lead) {
             fputcsv($handle, [
@@ -49,6 +113,7 @@ class MarketingLeadController extends Controller
                 $lead->name,
                 $lead->email,
                 $lead->phone,
+                $lead->whatsapp_number,
                 $lead->course_id,
                 $lead->is_synced ? 'Yes' : 'No',
                 $lead->created_at->format('Y-m-d H:i:s')
