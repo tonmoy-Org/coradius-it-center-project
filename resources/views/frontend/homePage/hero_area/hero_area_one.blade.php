@@ -91,8 +91,40 @@
 <section class="course-description-section p-t-60 p-b-60 bg-white">
     <div class="container container-1278">
         <div class="description-card p-4 p-md-5 position-relative overflow-hidden" 
-             style="background: linear-gradient(135deg, #F0F6FE 0%, #E8F1FC 100%); border: 1px solid rgba(0, 86, 210, 0.12); border-radius: 12px; box-shadow: 0 10px 30px -5px rgba(0, 56, 148, 0.05);">
+             style="background: #ffffff; border: 1px solid rgba(0, 86, 210, 0.08); border-radius: 12px; box-shadow: 0 10px 30px -5px rgba(0, 56, 148, 0.05);">
             
+            <!-- Background Wave Shape -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: auto; z-index: 0; opacity: 0.04; pointer-events: none;">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="width: 100%; height: 180px;">
+                    <path fill="#0056D2" fill-opacity="1" d="M0,128L48,138.7C96,149,192,171,288,181.3C384,192,480,192,576,170.7C672,149,768,107,864,101.3C960,96,1056,128,1152,133.3C1248,139,1344,117,1392,106.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                </svg>
+            </div>
+
+            <!-- Background Network Node Design -->
+            <div style="position: absolute; top: 15%; right: -5%; width: 500px; height: 500px; z-index: 0; opacity: 0.05; pointer-events: none;">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="15" fill="#0056D2" />
+                    <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                    <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                    <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                </svg>
+            </div>
+            
+            <div class="position-relative" style="z-index: 1;">
             @php
                 $descSubtitle = !empty($hero_course->description_subtitle) 
                     ? $hero_course->description_subtitle 
@@ -112,15 +144,14 @@
                 $descBannerTitle = !empty($mcSettings['desc_banner_title']) ? $mcSettings['desc_banner_title'] : '';
                 $descBannerSub   = !empty($mcSettings['desc_banner_sub']) ? $mcSettings['desc_banner_sub'] : '';
 
-                $hasTimelineSteps = !empty($descStep1Title) || !empty($descStep1Sub) || !empty($descStep2Title) || !empty($descStep2Sub) || !empty($descStep3Title) || !empty($descStep3Sub);
                 $hasBannerCard = !empty($descBannerIcon) || !empty($descBannerTitle) || !empty($descBannerSub);
                 $showDescRightBox = isset($mcSettings['show_desc_right_box']) ? !empty($mcSettings['show_desc_right_box']) : true;
-                $hasRightContent = $showDescRightBox && (!empty($descRightTitle) || $hasTimelineSteps || $hasBannerCard);
+                $hasRightContent = $showDescRightBox && !empty($descRightTitle);
             @endphp
 
-            <div class="row g-4 g-lg-5 align-items-center">
+            <div class="row g-4 g-lg-5 align-items-start justify-content-center">
                 <!-- Left Column -->
-                <div class="{{ $hasRightContent ? 'col-lg-6' : 'col-lg-12' }} col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="quote-decorator mb-2">
                         <svg width="38" height="30" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 18.2857C0 8.19048 6.09524 1.52381 16 0V6.47619C10.6667 7.61905 8.19048 10.8571 8.19048 15.0476H16V32H0V18.2857ZM24 18.2857C24 8.19048 30.0952 1.52381 40 0V6.47619C34.6667 7.61905 32.1905 10.8571 32.1905 15.0476H40V32H24V18.2857Z" fill="#0056D2"/>
@@ -138,92 +169,61 @@
                 </div>
 
                 @if($hasRightContent)
-                <!-- Right Column: Structured Feature Layout -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="desc-right-box p-4" style="background: linear-gradient(160deg,#f0f6ff 0%,#ffffff 60%,#f4f0ff 100%); border: none; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,86,210,0.06), 0 20px 60px rgba(0,86,210,0.13), 0 1px 0 rgba(255,255,255,0.9) inset; position: relative; padding: 2px;">
-                    <div style="position:absolute;inset:0;border-radius:16px;padding:2px;background:linear-gradient(135deg,rgba(0,86,210,0.45) 0%,rgba(130,80,255,0.25) 50%,rgba(0,200,255,0.3) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none;"></div>
-                    <div style="background:linear-gradient(160deg,#f0f6ff 0%,#ffffff 60%,#f4f0ff 100%);border-radius:14px;padding:24px;position:relative;overflow:hidden;">
-                    <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,86,210,0.07) 0%,transparent 70%);pointer-events:none;"></div>
-
-                        <!-- Top Subtitle -->
-                        @if(!empty($descRightTitle))
-                            <h4 class="fw-bold mb-4 desc-right-title" style="color: #0A1E3F; font-size: 17.5px; line-height: 1.6; letter-spacing:-0.01em;">
+                <!-- Right Column: Statement Layout (Not a box) -->
+                <div class="col-lg-12 col-md-12 mt-2">
+                    @if(!empty($descRightTitle))
+                        <div class="d-flex align-items-center px-2 py-3" style="border-left: 4px solid #0056D2; padding-left: 20px !important;">
+                            <div class="icon-box me-4 flex-shrink-0" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0,86,210,0.1); display: flex; align-items: center; justify-content: center; color: #0056D2;">
+                                <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5l-6.5-3.25L12 3l6.5 3.25L12 9.5zM2 12l10 5 10-5v5l-10 5-10-5v-5z"/></svg>
+                            </div>
+                            <h4 class="fw-bold m-0 desc-right-title" style="color: #0A1E3F; font-size: 22px; line-height: 1.6; letter-spacing:-0.01em;">
                                 {!! format_title_highlight($descRightTitle) !!}
                             </h4>
-                        @endif
-
-                        @if($hasTimelineSteps)
-                        <!-- 3-Step Timeline Nodes -->
-                        <div class="timeline-nodes-wrapper mb-4">
-                            <div class="d-flex flex-column flex-md-row align-items-stretch gap-3">
-                                <div class="flex-fill text-center" style="background: #ffffff; border-radius: 12px; border: 1.5px solid rgba(0,86,210,0.10); box-shadow: 0 4px 20px rgba(0,86,210,0.08), 0 1px 0 rgba(255,255,255,0.9) inset; padding: 16px 10px;">
-                                    @if(!empty($descStep1Title))
-                                        <div class="fw-bold" style="color: #0A1E3F; font-size: 13px; margin-top: 8px; letter-spacing:-0.01em;">{{ $descStep1Title }}</div>
-                                    @endif
-                                    @if(!empty($descStep1Sub))
-                                        <div style="color: #64748B; font-size: 11px; margin-top: 4px; line-height:1.5;">{{ $descStep1Sub }}</div>
-                                    @endif
-                                </div>
-                                <div class="flex-fill text-center" style="background: #ffffff; border-radius: 12px; border: 1.5px solid rgba(0,86,210,0.10); box-shadow: 0 4px 20px rgba(0,86,210,0.08), 0 1px 0 rgba(255,255,255,0.9) inset; padding: 16px 10px;">
-                                    @if(!empty($descStep2Title))
-                                        <div class="fw-bold" style="color: #0A1E3F; font-size: 13px; margin-top: 8px; letter-spacing:-0.01em;">{{ $descStep2Title }}</div>
-                                    @endif
-                                    @if(!empty($descStep2Sub))
-                                        <div style="color: #64748B; font-size: 11px; margin-top: 4px; line-height:1.5;">{{ $descStep2Sub }}</div>
-                                    @endif
-                                </div>
-                                <div class="flex-fill text-center" style="background: #ffffff; border-radius: 12px; border: 1.5px solid rgba(0,86,210,0.10); box-shadow: 0 4px 20px rgba(0,86,210,0.08), 0 1px 0 rgba(255,255,255,0.9) inset; padding: 16px 10px;">
-                                    @if(!empty($descStep3Title))
-                                        <div class="fw-bold" style="color: #0A1E3F; font-size: 13px; margin-top: 8px; letter-spacing:-0.01em;">{{ $descStep3Title }}</div>
-                                    @endif
-                                    @if(!empty($descStep3Sub))
-                                        <div style="color: #64748B; font-size: 11px; margin-top: 4px; line-height:1.5;">{{ $descStep3Sub }}</div>
-                                    @endif
-                                </div>
-                            </div>
                         </div>
-                        @endif
-
-                        @if($hasBannerCard)
-                        <!-- Inner Highlight Banner Card -->
-                        <div class="highlight-banner-card has-border-beam text-center" 
-                             style="background: linear-gradient(135deg, #003fa3 0%, #0056D2 40%, #1a78ff 80%, #4facfe 100%); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,86,210,0.40), 0 2px 8px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.15) inset; position: relative; overflow: hidden; padding: 22px 20px;">
-                            <!-- Border Beam SVG -->
-                            <svg class="border-beam-svg">
-                                <defs>
-                                    <linearGradient id="beam-gradient-card" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#FF7A00" stop-opacity="0" />
-                                        <stop offset="25%" stop-color="#FF7A00" stop-opacity="0.9" />
-                                        <stop offset="50%" stop-color="#FFB800" stop-opacity="1" />
-                                        <stop offset="75%" stop-color="#3B8AF2" stop-opacity="0.9" />
-                                        <stop offset="100%" stop-color="#0056D2" stop-opacity="0" />
-                                    </linearGradient>
-                                </defs>
-                                <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient-card)" stroke-width="2.5" rx="14" ry="14" />
-                            </svg>
-                            <div style="position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,0.14) 0%,transparent 65%);pointer-events:none;"></div>
-                            <div style="position:absolute;bottom:-40px;left:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%);pointer-events:none;"></div>
-                            <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);pointer-events:none;"></div>
-                            <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-
-                                @if(!empty($descBannerTitle))
-                                    <h3 class="m-0 fw-bold desc-banner-title" style="color: #ffffff; font-size: 22px; font-weight: 900; letter-spacing: -0.01em; text-shadow: 0 2px 12px rgba(0,0,0,0.25);">
-                                        {!! format_title_highlight($descBannerTitle) !!}
-                                    </h3>
-                                @endif
-                            </div>
-                            @if(!empty($descBannerSub))
-                                <div class="m-0 desc-banner-sub" style="color: rgba(255,255,255,0.90); font-size: 14.5px; font-weight: 500; line-height: 1.6;">
-                                    {!! format_title_highlight($descBannerSub) !!}
-                                </div>
-                            @endif
-                        </div>
-                        @endif
-                    </div></div></div>
+                    @endif
                 </div>
                 @endif
             </div>
 
+            @if($hasBannerCard)
+            <!-- Full Width Highlight Banner Card Below Text -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="highlight-banner-card has-border-beam text-center" 
+                         style="background: linear-gradient(135deg, #0045B8 0%, #0056D2 40%, #1a78ff 80%, #4facfe 100%); border-radius: 16px; box-shadow: 0 15px 35px rgba(0,86,210,0.25); position: relative; overflow: hidden; padding: 40px 25px;">
+                        <!-- Border Beam SVG -->
+                        <svg class="border-beam-svg">
+                            <defs>
+                                <linearGradient id="beam-gradient-card" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#FF7A00" stop-opacity="0" />
+                                    <stop offset="25%" stop-color="#FF7A00" stop-opacity="0.9" />
+                                    <stop offset="50%" stop-color="#FFB800" stop-opacity="1" />
+                                    <stop offset="75%" stop-color="#3B8AF2" stop-opacity="0.9" />
+                                    <stop offset="100%" stop-color="#0056D2" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <rect class="border-beam-rect" fill="none" stroke="url(#beam-gradient-card)" stroke-width="2.5" rx="16" ry="16" />
+                        </svg>
+                        <div style="position:absolute;top:-50px;right:-50px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 65%);pointer-events:none;"></div>
+                        
+                        <div class="d-flex flex-column align-items-center justify-content-center gap-2 position-relative" style="z-index: 1;">
+                            @if(!empty($descBannerTitle))
+                                <h3 class="m-0 fw-bold desc-banner-title" style="color: #ffffff; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                                    {!! format_title_highlight($descBannerTitle) !!}
+                                </h3>
+                            @endif
+                            @if(!empty($descBannerSub))
+                                <div class="mt-2 desc-banner-sub" style="color: rgba(255,255,255,0.9); font-size: 16px; font-weight: 500; line-height: 1.6;">
+                                    {!! format_title_highlight($descBannerSub) !!}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            </div>
         </div>
     </div>
 </section>
