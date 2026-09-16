@@ -201,20 +201,20 @@
                         }
                     @endphp
 
-                    <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
-                        <div class="mc-target-audience-card-light">
-                            <div class="d-flex align-items-start gap-3" style="position: relative; z-index: 1;">
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
+                        <div class="mc-target-audience-card-light" style="padding: 18px 24px;">
+                            <div class="d-flex align-items-center gap-3" style="position: relative; z-index: 1;">
                                 <div class="mc-audience-icon-box-light" style="background: {{ $iconBg }}; border: 1px solid {{ $iconBorder }}; color: {{ $iconColor }};">
                                     <i class="{{ $iconClass }}"></i>
                                 </div>
                                 <div style="flex-grow: 1;">
                                     <h4 class="mc-audience-title-light">{{ $bTitle }}</h4>
                                     @if(!empty($bDesc))
-                                        <p class="mc-audience-desc-light">{{ $bDesc }}</p>
+                                        <p class="mc-audience-desc-light mb-1">{{ $bDesc }}</p>
                                     @endif
                                     @if(!empty($bNote))
-                                        <div class="mc-audience-check-note-light">
-                                            <i class="far fa-check-circle"></i>
+                                        <div class="mc-audience-check-note-light mt-1">
+                                            <i class="fas fa-arrow-circle-right"></i>
                                             <span>{{ $bNote }}</span>
                                         </div>
                                     @endif

@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('Home Landing Page Setup'))
 @section('content')
     <div class="container-fluid">
@@ -592,14 +592,79 @@
                                                                         <i class="las la-trash-alt fs-5"></i>
                                                                     </button>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-8">
-                                                                        <label class="form-label">Text/Quote</label>
-                                                                        <textarea name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][text]" class="form-control rounded-2 bg-white summernote" rows="2">{{ $gqItem['text'] ?? '' }}</textarea>
+                                                                <div class="row g-3">
+                                                                    <div class="col-md-7">
+                                                                        <label class="form-label mb-1">Text / Quote <span class="text-muted fw-normal">(Optional)</span></label>
+                                                                        <textarea name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][text]" class="form-control rounded-2 bg-white summernote gift-quote-text" rows="2">{{ $gqItem['text'] ?? '' }}</textarea>
                                                                     </div>
-                                                                    <div class="col-md-4">
-                                                                        <label class="form-label">Price</label>
-                                                                        <input type="text" name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][price]" class="form-control rounded-2 bg-white" value="{{ $gqItem['price'] ?? '' }}">
+                                                                    <div class="col-md-5">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label mb-1">Price <span class="text-muted fw-normal">(Optional)</span></label>
+                                                                            <input type="text" name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][price]" class="form-control rounded-2 bg-white gift-quote-price" placeholder="e.g. 3000" value="{{ $gqItem['price'] ?? '' }}">
+                                                                        </div>
+                                                                        @php
+                                                                            $cardMediaId = $gqItem['media_id'] ?? '';
+                                                                            $cardMedia = null;
+                                                                            if (!empty($cardMediaId)) {
+                                                                                $cardMedia = \App\Models\MediaLibrary::find($cardMediaId);
+                                                                            } elseif (!empty($gqItem['image'])) {
+                                                                                if (is_numeric($gqItem['image'])) {
+                                                                                    $cardMedia = \App\Models\MediaLibrary::find($gqItem['image']);
+                                                                                    if ($cardMedia) {
+                                                                                        $cardMediaId = $cardMedia->id;
+                                                                                    }
+                                                                                } else {
+                                                                                    $imgBasename = basename($gqItem['image']);
+                                                                                    $cardMedia = \App\Models\MediaLibrary::where('image_variants', 'like', "%{$imgBasename}%")->first();
+                                                                                    if ($cardMedia) {
+                                                                                        $cardMediaId = $cardMedia->id;
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            $hasMedia = $cardMedia && $cardMedia->image_variants && arrayCheck('image_80x80', $cardMedia->image_variants) && is_file_exists($cardMedia->image_variants['image_80x80'], $cardMedia->image_variants['storage']);
+                                                                            $customImageUrl = (!$hasMedia && !empty($gqItem['image'])) ? $gqItem['image'] : '';
+                                                                            $isSelected = $hasMedia || !empty($customImageUrl);
+                                                                        @endphp
+                                                                        <div class="gift-quote-img-field">
+                                                                            <input type="hidden" name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][image]" class="gift-quote-image-val" value="{{ $gqItem['image'] ?? '' }}">
+                                                                            
+                                                                            <div class="custom-image mb-2">
+                                                                                <div class="gallery-modal" data-for="image" data-selection="single">
+                                                                                    <label class="form-label mb-1">Item Image <span class="text-muted fw-normal">(Optional)</span></label>
+                                                                                    <div class="file-upload-text">
+                                                                                        <p><span class="file_selected">{{ $isSelected ? '1' : '0' }} </span>{{ __('files_selected') }}</p>
+                                                                                        <span class="file-btn">{{ __('choose_file') }}</span>
+                                                                                    </div>
+                                                                                    <input class="d-none gift-quote-media-id-input" type="hidden" name="masterclass_settings[gift_quotes_list][{{ $gqIdx }}][media_id]" value="{{ $cardMediaId }}">
+                                                                                </div>
+                                                                                <div class="selected-files d-flex flex-wrap gap-20">
+                                                                                    @if($hasMedia)
+                                                                                        <div class="selected-files-item">
+                                                                                            <img src="{{ getFileLink('80x80', $cardMedia->image_variants) }}"
+                                                                                                 alt="{{ $cardMedia->name }}"
+                                                                                                 class="selected-img">
+                                                                                            <div class="remove-icon" data-id="{{ $cardMedia->id }}">
+                                                                                                <i class="las la-times"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @elseif($customImageUrl)
+                                                                                        <div class="selected-files-item">
+                                                                                            <img src="{{ dynamic_asset($customImageUrl) }}"
+                                                                                                 alt="image"
+                                                                                                 class="selected-img">
+                                                                                            <div class="remove-icon" data-id="">
+                                                                                                <i class="las la-times"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="selected-files-item {{ $isSelected ? 'd-none' : '' }}">
+                                                                                        <img class="selected-img"
+                                                                                             src="{{ static_asset('images/default/default-image-80x80.png') }}"
+                                                                                             alt="default">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1511,6 +1576,13 @@
                                                        placeholder="e.g. ফ্রি এক্সেস নিন">
                                             </div>
 
+                                            <!-- Bottom Text Editor -->
+                                            <div class="col-lg-12 mb-4">
+                                                <label for="order_form_bottom_text" class="form-label">{{ __('Bottom Text (Below Button)') }}</label>
+                                                <textarea name="masterclass_settings[order_form_bottom_text]" id="order_form_bottom_text" class="form-control rounded-2 summernote"
+                                                          rows="3">{!! $mcSettings['order_form_bottom_text'] ?? '' !!}</textarea>
+                                            </div>
+
                                             <!-- Banner Image Upload (Optional) -->
                                             @include('backend.common.media-input', [
                                                 'title' => __('Lead Form Banner Image'),
@@ -1665,14 +1737,34 @@
                                 <i class="las la-trash-alt fs-5"></i>
                             </button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label class="form-label">Text/Quote</label>
-                                <textarea name="masterclass_settings[gift_quotes_list][${index}][text]" class="form-control rounded-2 bg-white summernote" rows="2"></textarea>
+                        <div class="row g-3">
+                            <div class="col-md-7">
+                                <label class="form-label mb-1">Text / Quote <span class="text-muted fw-normal">(Optional)</span></label>
+                                <textarea name="masterclass_settings[gift_quotes_list][${index}][text]" class="form-control rounded-2 bg-white summernote gift-quote-text" rows="2"></textarea>
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Price</label>
-                                <input type="text" name="masterclass_settings[gift_quotes_list][${index}][price]" class="form-control rounded-2 bg-white">
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label mb-1">Price <span class="text-muted fw-normal">(Optional)</span></label>
+                                    <input type="text" name="masterclass_settings[gift_quotes_list][${index}][price]" class="form-control rounded-2 bg-white gift-quote-price" placeholder="e.g. 3000">
+                                </div>
+                                <div class="gift-quote-img-field">
+                                    <input type="hidden" name="masterclass_settings[gift_quotes_list][${index}][image]" class="gift-quote-image-val" value="">
+                                    <div class="custom-image mb-2">
+                                        <div class="gallery-modal" data-for="image" data-selection="single">
+                                            <label class="form-label mb-1">Item Image <span class="text-muted fw-normal">(Optional)</span></label>
+                                            <div class="file-upload-text">
+                                                <p><span class="file_selected">0 </span>{{ __('files_selected') }}</p>
+                                                <span class="file-btn">{{ __('choose_file') }}</span>
+                                            </div>
+                                            <input class="d-none gift-quote-media-id-input" type="hidden" name="masterclass_settings[gift_quotes_list][${index}][media_id]" value="">
+                                        </div>
+                                        <div class="selected-files d-flex flex-wrap gap-20">
+                                            <div class="selected-files-item">
+                                                <img class="selected-img" src="{{ static_asset('images/default/default-image-80x80.png') }}" alt="default">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1702,11 +1794,24 @@
                 }
             });
 
-            $(document).on('click', '.remove-gift-quote-btn', function () {
-                $(this).closest('.gift-quote-single-item').remove();
+            function reindexGiftQuotes() {
                 $('#gift_quotes_container .gift-quote-single-item').each(function (i) {
                     $(this).find('.gift-quote-num').text(i + 1);
+                    $(this).find('.gift-quote-text').attr('name', `masterclass_settings[gift_quotes_list][${i}][text]`);
+                    $(this).find('.gift-quote-price').attr('name', `masterclass_settings[gift_quotes_list][${i}][price]`);
+                    $(this).find('.gift-quote-image-val').attr('name', `masterclass_settings[gift_quotes_list][${i}][image]`);
+                    $(this).find('.gift-quote-media-id-input').attr('name', `masterclass_settings[gift_quotes_list][${i}][media_id]`);
                 });
+            }
+
+            $(document).on('click', '.remove-gift-quote-btn', function () {
+                $(this).closest('.gift-quote-single-item').remove();
+                reindexGiftQuotes();
+            });
+
+            $(document).on('click', '.gift-quote-single-item .remove-icon', function () {
+                $(this).closest('.gift-quote-single-item').find('.gift-quote-image-val').val('');
+                $(this).closest('.gift-quote-single-item').find('.gift-quote-media-id-input').val('');
             });
 
             // Add Support Icon & Link Item

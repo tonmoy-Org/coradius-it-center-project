@@ -309,7 +309,7 @@
     /* Dynamic Channel Support Cards Grid */
     .mc-channel-cards-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
         gap: 18px;
     }
 
@@ -441,6 +441,19 @@
         font-size: 32px;
     }
 
+    .mc-avatar-ig {
+        background: transparent !important;
+        background-color: transparent !important;
+        color: #E1306C !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .mc-avatar-ig i {
+        color: #E1306C !important;
+        font-size: 32px;
+    }
+
     .mc-channel-info-title {
         font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif) !important;
         font-size: 16px !important;
@@ -480,9 +493,10 @@
         align-items: center !important;
         justify-content: center !important;
         width: 100% !important;
-        padding: 12px 24px !important;
+        padding: 9px 12px !important;
         font-family: var(--body-font, "Hind Siliguri", "Inter", sans-serif) !important;
-        font-size: 15px !important;
+        font-size: 13.5px !important;
+        white-space: nowrap !important;
         font-weight: 700 !important;
         line-height: 1.4 !important;
         color: #ffffff !important;
@@ -645,7 +659,7 @@
         }
 
         .mc-channel-cards-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
         }
 
@@ -731,7 +745,7 @@
         }
 
         .mc-channel-cards-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 14px;
         }
 
@@ -823,7 +837,7 @@
         }
 
         .mc-channel-cards-grid {
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
@@ -940,42 +954,42 @@
         }
 
         .mc-channel-card {
-            padding: 18px 16px 16px 16px;
+            padding: 14px 14px 14px 14px;
             min-height: auto;
             border-radius: 8px;
         }
 
         .mc-channel-card-top {
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .mc-channel-avatar-circle {
-            width: 40px;
-            height: 40px;
-            font-size: 28px;
+            width: 36px;
+            height: 36px;
+            font-size: 24px;
             background: transparent !important;
             background-color: transparent !important;
         }
 
         .mc-channel-avatar-circle img {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
         }
 
         .mc-channel-info-title {
-            font-size: var(--mobile-font-heading-sub, 17px) !important;
+            font-size: 15.5px !important;
             margin-bottom: 2px !important;
         }
 
         .mc-channel-info-desc {
-            font-size: var(--mobile-font-body, 13.5px) !important;
-            line-height: 1.45 !important;
+            font-size: 12.5px !important;
+            line-height: 1.4 !important;
         }
 
         .mc-channel-team-row {
-            padding-left: 50px;
-            margin-bottom: 16px;
+            padding-left: 44px;
+            margin-bottom: 12px;
             gap: 6px;
         }
 
@@ -985,6 +999,12 @@
 
         .mc-team-status-label {
             font-size: 11.5px;
+        }
+
+        .mc-channel-card .template-btn,
+        .mc-channel-btn {
+            padding: 8px 10px !important;
+            font-size: 12.5px !important;
         }
 
     }
@@ -1045,7 +1065,7 @@
         }
 
         .mc-channel-card {
-            padding: 16px 12px 14px 12px;
+            padding: 12px 10px 12px 10px;
         }
 
         .mc-channel-team-row {
@@ -1133,9 +1153,12 @@
                         } elseif (str_contains($lower, 'face') || str_contains($lower, 'fb') || str_contains(strtolower($cTitle), 'ফেসবুক') || str_contains(strtolower($cTitle), 'facebook')) {
                             $avatarClass = 'mc-avatar-fb';
                             $channelDefaultIcon = 'fab fa-facebook-f';
+                        } elseif (str_contains($lower, 'insta') || str_contains($lower, 'ig') || str_contains(strtolower($cTitle), 'ইন্সটাগ্রাম') || str_contains(strtolower($cTitle), 'instagram')) {
+                            $avatarClass = 'mc-avatar-ig';
+                            $channelDefaultIcon = 'fab fa-instagram';
                         }
 
-                        if (empty($cIcon) || $cIcon === 'fas fa-comments' || ($avatarClass === 'mc-avatar-wa' && str_contains(strtolower($cIcon), 'facebook')) || ($avatarClass === 'mc-avatar-tg' && str_contains(strtolower($cIcon), 'facebook'))) {
+                        if (empty($cIcon) || $cIcon === 'fas fa-comments' || ($avatarClass === 'mc-avatar-wa' && str_contains(strtolower($cIcon), 'facebook')) || ($avatarClass === 'mc-avatar-tg' && str_contains(strtolower($cIcon), 'facebook')) || ($avatarClass === 'mc-avatar-ig' && str_contains(strtolower($cIcon), 'facebook'))) {
                             $cIcon = $channelDefaultIcon;
                         }
                     @endphp

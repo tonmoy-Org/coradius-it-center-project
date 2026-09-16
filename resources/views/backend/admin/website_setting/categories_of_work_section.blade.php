@@ -32,6 +32,24 @@
                                                   name="categories_of_work_title" rows="2" data-height="110">{!! setting('categories_of_work_title') !!}</textarea>
                                     </div>
                                 </div>
+                                <div class="col-12 col-lg-12">
+                                    <div class="mb-4">
+                                        <label for="categories_of_work_subtitle" class="form-label">{{ __('Section Subtitle') }}</label>
+                                        <textarea class="form-control rounded-2 summernote" id="categories_of_work_subtitle"
+                                                  name="categories_of_work_subtitle" rows="3">{!! setting('categories_of_work_subtitle') !!}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label for="categories_of_work_button_text" class="form-label">{{ __('Button Text') }}</label>
+                                    <input type="text" class="form-control" id="categories_of_work_button_text" 
+                                           name="categories_of_work_button_text" value="{{ setting('categories_of_work_button_text') }}" placeholder="{{ __('E.g. Visit Registration Form') }}">
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="categories_of_work_button_link" class="form-label">{{ __('Button Link') }}</label>
+                                    <input type="text" class="form-control" id="categories_of_work_button_link" 
+                                           name="categories_of_work_button_link" value="{{ setting('categories_of_work_button_link') ?? route('register') }}" placeholder="{{ __('E.g. https://domain.com/register') }}">
+                                </div>
 
                                 <div class="col-12 col-lg-12">
                                     <h5 class="mb-3">{{ __('Cards') }}</h5>

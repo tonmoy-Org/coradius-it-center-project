@@ -89,9 +89,8 @@
     }
     .faq-image-card img {
         width: 100%;
-        height: 100%;
-        min-height: 480px;
-        max-height: 540px;
+        height: auto;
+        max-height: 500px;
         object-fit: cover;
         display: block;
         border-radius: 8px;
@@ -173,37 +172,83 @@
 
 <section class="faq-section p-t-60 p-b-60 position-relative" id="faq" style="background-color: #ffffff;">
     <div class="container container-1278">
-        <div class="row align-items-center g-5">
+        <div class="row">
             
-            <!-- Left Column: FAQ Accordion -->
-            <div class="col-lg-6 col-md-12">
-                <div class="faq-content-wrap">
-                    @php
-                        $mcSettings = [];
-                        if(isset($course) && $course) {
-                            $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
-                            if(!is_array($mcSettings)) $mcSettings = [];
+            <!-- Full Width Title/Subtitle -->
+            <div class="col-12">
+                @php
+                    $mcSettings = [];
+                    if(isset($course) && $course) {
+                        $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
+                        if(!is_array($mcSettings)) $mcSettings = [];
+                    }
+                    $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : '';
+                    $faqSubtitle = !empty($mcSettings['faq_subtitle']) ? $mcSettings['faq_subtitle'] : '';
+                    $faqBadgeTitle = !empty($mcSettings['faq_badge_title']) ? $mcSettings['faq_badge_title'] : '';
+                    $faqBadgeSubtitle = !empty($mcSettings['faq_badge_subtitle']) ? $mcSettings['faq_badge_subtitle'] : '';
+                @endphp
+                @if(!empty($faqSubtitle) || !empty($faqTitle))
+                <div class="common-heading m-b-30 text-center">
+                    @if(!empty($faqSubtitle))
+                        <span class="sub-title fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
+                            {!! format_title_highlight($faqSubtitle) !!}
+                        </span>
+                    @endif
+                    @if(!empty($faqTitle))
+                        <h2 class="fw-bold m-b-0" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
+                            {!! format_title_highlight($faqTitle) !!}
+                        </h2>
+                    @endif
+                </div>
+                @endif
+            </div>
+
+            <!-- Full Width Image -->
+            <div class="col-12 mb-5" data-aos="fade-up">
+                @php
+                    $faqImgUrl = '';
+                    if (!empty($mcSettings['faq_image_media_id'])) {
+                        $faqMedia = \App\Models\MediaLibrary::find($mcSettings['faq_image_media_id']);
+                        if ($faqMedia && !empty($faqMedia->image_variants)) {
+                            $faqImgUrl = getFileLink('original_image', $faqMedia->image_variants);
                         }
-                        $faqTitle = !empty($mcSettings['faq_title']) ? $mcSettings['faq_title'] : '';
-                        $faqSubtitle = !empty($mcSettings['faq_subtitle']) ? $mcSettings['faq_subtitle'] : '';
-                        $faqBadgeTitle = !empty($mcSettings['faq_badge_title']) ? $mcSettings['faq_badge_title'] : '';
-                        $faqBadgeSubtitle = !empty($mcSettings['faq_badge_subtitle']) ? $mcSettings['faq_badge_subtitle'] : '';
-                    @endphp
-                    @if(!empty($faqSubtitle) || !empty($faqTitle))
-                    <div class="common-heading m-b-30">
-                        @if(!empty($faqSubtitle))
-                            <span class="sub-title fw-bold m-b-12 d-inline-block" style="color: #0056D2; letter-spacing: 1.5px; font-size: 14px;">
-                                {!! format_title_highlight($faqSubtitle) !!}
-                            </span>
-                        @endif
-                        @if(!empty($faqTitle))
-                            <h2 class="fw-bold m-b-0" style="color: #0A1E3F; font-size: 28px; line-height: 1.25;">
-                                {!! format_title_highlight($faqTitle) !!}
-                            </h2>
-                        @endif
+                    }
+                    if (!$faqImgUrl && !empty($mcSettings['faq_image_url'])) {
+                        $faqImgUrl = dynamic_asset($mcSettings['faq_image_url']);
+                    }
+                    if (!$faqImgUrl && !empty($course->faq_image)) {
+                        $faqImgUrl = getFileLink('original_image', $course->faq_image);
+                    }
+                    if (!$faqImgUrl || str_contains($faqImgUrl, 'default')) {
+                        $faqImgUrl = static_asset('images/faq/faq_classroom.jpg');
+                    }
+                @endphp
+
+                <div class="faq-image-card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
+                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" style="border-radius: 12px; height: auto; max-height: 500px; width: 100%; object-fit: cover;">
+                    
+                    @if(!empty($faqBadgeTitle) || !empty($faqBadgeSubtitle))
+                    <div class="faq-badge-floating d-flex">
+                        <div class="faq-badge-icon d-flex align-items-center justify-content-center" 
+                             style="width: 46px; height: 46px; border-radius: 8px; background: var(--color-blue-tint, #EAF2FE); color: var(--color-primary, #0056D2); font-size: 1.3rem;">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div>
+                            @if(!empty($faqBadgeTitle))
+                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">{!! format_title_highlight($faqBadgeTitle) !!}</h5>
+                            @endif
+                            @if(!empty($faqBadgeSubtitle))
+                            <span style="color: #4B5A72; font-size: 0.85rem;">{!! format_title_highlight($faqBadgeSubtitle) !!}</span>
+                            @endif
+                        </div>
                     </div>
                     @endif
-                    
+                </div>
+            </div>
+
+            <!-- Full Width FAQ Accordion -->
+            <div class="col-12">
+                <div class="faq-content-wrap">
                     <div class="accordion custom-faq-accordion" id="courseFaqAccordion">
                         @foreach($course->faqs as $key => $faq)
                         <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
@@ -229,49 +274,6 @@
                         </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
-
-            <!-- Right Column: Image Card -->
-            <div class="col-lg-6 col-md-12 ps-lg-5" data-aos="fade-left" data-aos-delay="200">
-                @php
-                    $faqImgUrl = '';
-                    if (!empty($mcSettings['faq_image_media_id'])) {
-                        $faqMedia = \App\Models\MediaLibrary::find($mcSettings['faq_image_media_id']);
-                        if ($faqMedia && !empty($faqMedia->image_variants)) {
-                            $faqImgUrl = getFileLink('original_image', $faqMedia->image_variants);
-                        }
-                    }
-                    if (!$faqImgUrl && !empty($mcSettings['faq_image_url'])) {
-                        $faqImgUrl = dynamic_asset($mcSettings['faq_image_url']);
-                    }
-                    if (!$faqImgUrl && !empty($course->faq_image)) {
-                        $faqImgUrl = getFileLink('original_image', $course->faq_image);
-                    }
-                    if (!$faqImgUrl || str_contains($faqImgUrl, 'default')) {
-                        $faqImgUrl = static_asset('images/faq/faq_classroom.jpg');
-                    }
-                @endphp
-
-                <div class="faq-image-card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
-                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" style="border-radius: 12px; min-height: 500px; width: 100%; object-fit: cover;">
-                    
-                    @if(!empty($faqBadgeTitle) || !empty($faqBadgeSubtitle))
-                    <div class="faq-badge-floating d-flex">
-                        <div class="faq-badge-icon d-flex align-items-center justify-content-center" 
-                             style="width: 46px; height: 46px; border-radius: 8px; background: var(--color-blue-tint, #EAF2FE); color: var(--color-primary, #0056D2); font-size: 1.3rem;">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
-                        <div>
-                            @if(!empty($faqBadgeTitle))
-                            <h5 class="fw-bold mb-0" style="color: #0A1E3F; font-size: 1rem;">{!! format_title_highlight($faqBadgeTitle) !!}</h5>
-                            @endif
-                            @if(!empty($faqBadgeSubtitle))
-                            <span style="color: #4B5A72; font-size: 0.85rem;">{!! format_title_highlight($faqBadgeSubtitle) !!}</span>
-                            @endif
-                        </div>
-                    </div>
-                    @endif
                 </div>
             </div>
 

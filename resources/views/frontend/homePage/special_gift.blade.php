@@ -17,17 +17,38 @@
     
     $formatCurrencyText = function($text) {
         if (empty($text)) return $text;
-        $sym  = get_symbol();
-        $code = userCurrency();
-        $currencies = \app('currencies');
-        $currObj = $currencies ? ($currencies->where('code', $code)->first() ?: $currencies->where('id', $code)->first()) : null;
-        $isBdt = ($code === 'BDT' || $code === '2' || ($currObj && $currObj->code === 'BDT') || $sym === '৳');
+        $sym  = '৳';
+        $text = preg_replace('/(?:\$|৳)\s*র\b/u', 'টাকার', $text);
+        return str_replace(['$', 'USD', 'TK', 'Tk', 'টাকা'], $sym, $text);
+    };
 
-        if ($isBdt) {
-            return str_replace(['$', 'USD', 'TK', 'Tk', 'টাকা'], $sym, $text);
-        } else {
-            return str_replace(['৳', 'TK', 'Tk', 'টাকা', '$'], $sym, $text);
+    $toNum = function($str) {
+        $numStr = preg_replace('/[^\d]/', '', (string)$str);
+        $bengaliDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        $englishDigits = ['0','1','2','3','4','5','6','7','8','9'];
+        $numStr = str_replace($bengaliDigits, $englishDigits, $numStr);
+        return is_numeric($numStr) ? (float)$numStr : 0;
+    };
+
+    $toBengaliNum = function($num) {
+        $englishDigits = ['0','1','2','3','4','5','6','7','8','9'];
+        $bengaliDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        $formatted = is_numeric($num) ? number_format((float)$num) : (string)$num;
+        return str_replace($englishDigits, $bengaliDigits, $formatted);
+    };
+
+    $formatPriceDisplay = function($rawPrice) use ($formatCurrencyText, $toNum, $toBengaliNum) {
+        if (empty($rawPrice)) return '';
+        $sym = '৳';
+        $numericVal = $toNum($rawPrice);
+        if ($numericVal > 0) {
+            return $sym . $toBengaliNum($numericVal);
         }
+        return str_replace(['$', 'USD'], $sym, (string)$rawPrice);
+    };
+
+    $freePriceText = function() {
+        return '৳০';
     };
 
     $stripEmojis = function($text) {
@@ -53,6 +74,49 @@
         border-radius: 12px;
         padding: 42px 28px;
         margin-bottom: 0;
+        position: relative;
+    }
+
+    .mc-gift-price-corner {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 5;
+    }
+
+    .mc-gift-crossed-price {
+        font-size: 1.95rem;
+        font-weight: 800;
+        color: var(--color-text-ink, #0A1E3F);
+        position: relative;
+        display: inline-block;
+        white-space: nowrap;
+        line-height: 1;
+    }
+
+    .mc-gift-crossed-price .mc-cross-line-1 {
+        position: absolute;
+        width: 120%;
+        height: 3px;
+        background: red;
+        top: 50%;
+        left: -10%;
+        transform: rotate(-20deg);
+        pointer-events: none;
+    }
+
+    .mc-gift-crossed-price .mc-cross-line-2 {
+        position: absolute;
+        width: 120%;
+        height: 3px;
+        background: red;
+        top: 50%;
+        left: -10%;
+        transform: rotate(20deg);
+        pointer-events: none;
     }
 
     .mc-gift-pill {
@@ -68,17 +132,29 @@
     }
 
     .mc-gift-free-badge {
-        font-size: 1.2rem !important;
+        font-size: 1.55rem !important;
         font-weight: 700 !important;
-        padding: 4px 16px !important;
+        padding: 6px 24px !important;
         line-height: 1.2 !important;
         letter-spacing: 0.5px;
-        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.25);
+        box-shadow: 0 2px 8px rgba(255, 122, 0, 0.25);
         display: inline-flex;
         align-items: center;
         justify-content: center;
         text-transform: uppercase;
         vertical-align: middle;
+        background-color: #FF7A00 !important;
+        color: #ffffff !important;
+        border-radius: 50px !important;
+    }
+
+    .mc-special-gift-title {
+        color: var(--color-text-ink, #0A1E3F);
+        font-size: 26px;
+        line-height: 1.4;
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .mc-callout-quote {
@@ -86,26 +162,280 @@
         border-left: 4px solid var(--color-primary, #0056D2);
         border-radius: 8px;
         padding: 16px 20px;
-        font-style: italic;
         color: var(--color-text-secondary, #4B5A72);
-        margin-top: 18px;
-        margin-bottom: 18px;
+        margin-top: 0;
+        margin-bottom: 0;
         box-shadow: 0 4px 12px rgba(0, 31, 92, 0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mc-callout-quote:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 31, 92, 0.08);
+    }
+
+    .mc-callout-quote .quote-text {
+        font-style: italic;
+    }
+
+    .mc-callout-quote .gift-item-img {
+        transition: transform 0.2s ease;
+    }
+
+    .mc-callout-quote:hover .gift-item-img {
+        transform: scale(1.02);
+    }
+
+    .mc-gift-only-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .mc-gift-only-image img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .mc-gift-only-image a:hover img {
+        transform: scale(1.01);
+    }
+    
+    /* Border Wrapper (Static) */
+    .mc-gift-animated-border-wrapper {
+        position: relative;
+        padding: 2px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #eaf2fe;
+        border: 1px solid #c7dcfa;
+    }
+
+    .mc-gift-animated-border-inner {
+        position: relative;
+        z-index: 2;
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 16px;
+        height: 100%;
+        width: 100%;
+    }
+
+    /* Pro Gift Cards & Zigzag Grid */
+    .mc-gift-card-image {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid var(--color-border-tint, #C7DCFA);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 31, 92, 0.06);
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    .mc-gift-card-image:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0, 86, 210, 0.14);
+        border-color: var(--color-primary, #0056D2);
+    }
+
+    .mc-gift-card-image img {
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+        max-height: 360px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mc-gift-card-image:hover img {
+        transform: scale(1.03);
+    }
+
+
+    /* Content Card (Brand Relatable - Premium Light Ice Glow) */
+    .mc-gift-card-content {
+        position: relative;
+        background: linear-gradient(150deg, #FFFFFF 0%, #F4F8FE 50%, #E6F0FC 100%);
+        border: 2px solid #BFDBFE;
+        border-radius: 16px;
+        padding: 36px 30px;
+        box-shadow: 0 10px 28px rgba(0, 86, 210, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 26px;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        overflow: hidden;
+    }
+
+    .mc-gift-card-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--color-primary, #0056D2) 0%, #38BDF8 100%);
+        border-radius: 16px 0 0 16px;
+    }
+
+    .mc-gift-card-content:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(0, 86, 210, 0.16);
+        border-color: var(--color-primary, #0056D2);
+    }
+
+    /* Course Name / Title (Highlighted Hero) */
+    .mc-gift-course-title-wrapper {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 8px 0;
+    }
+
+    .mc-gift-course-title {
+        color: var(--color-text-ink, #0A1E3F);
+        font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif);
+        font-size: 1.65rem;
+        font-weight: 800;
+        line-height: 1.45;
+        letter-spacing: -0.3px;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .mc-gift-course-title p {
+        margin: 0 !important;
+        color: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        text-align: center !important;
+    }
+
+    .mc-gift-course-title span {
+        color: inherit !important;
+    }
+
+    .mc-gift-separator {
+        width: 80px;
+        height: 2px;
+        background-color: #BFDBFE;
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+
+    /* Price Display (Clean Highlighted Text - No Button) */
+    .mc-gift-price-box {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+    }
+
+    .mc-gift-price-box:hover {
+        transform: scale(1.04);
+        box-shadow: none !important;
+    }
+
+    .mc-gift-price-value {
+        font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif);
+        font-size: 2.25rem;
+        font-weight: 900;
+        color: #ff7a00 !important;
+        line-height: 1.1;
+        letter-spacing: -0.3px;
     }
     
     @media (max-width: 767px) {
         .mc-special-gift-card {
             padding: 22px 14px;
         }
+        .mc-gift-card-content {
+            padding: 24px 16px;
+            gap: 18px;
+        }
+        .mc-gift-course-title-wrapper {
+            padding: 8px 0 !important;
+            min-height: auto !important;
+        }
+        .mc-gift-course-title {
+            font-size: 1.3rem !important;
+        }
+        .mc-gift-price-box {
+            padding: 0 !important;
+        }
+        .mc-gift-price-value {
+            font-size: 1.75rem !important;
+        }
+        .mc-gift-card-image img {
+            min-height: 180px;
+            max-height: 240px;
+        }
+        .mc-gift-price-corner {
+            top: 14px;
+            right: 14px;
+            gap: 8px;
+        }
+        .mc-gift-crossed-price {
+            font-size: 1.15rem;
+        }
         .mc-gift-free-badge {
-            font-size: 1.05rem !important;
-            padding: 4px 14px !important;
+            font-size: 0.9rem !important;
+            padding: 3px 12px !important;
+        }
+        .mc-special-gift-title {
+            font-size: var(--mobile-font-heading-main, 20px) !important;
+            line-height: 1.35 !important;
+        }
+        .mc-gift-pill {
+            margin-top: 36px;
+        }
+        .mc-special-gift-title.mc-title-no-badge {
+            margin-top: 32px;
         }
         .mc-callout-quote {
             flex-direction: column !important;
             align-items: flex-start !important;
-            gap: 10px !important;
+            gap: 12px !important;
             padding: 14px 14px !important;
+        }
+        .mc-callout-quote .quote-main-content {
+            width: 100% !important;
+            margin-right: 0 !important;
         }
         .mc-callout-quote .quote-price {
             align-self: flex-start !important;
@@ -117,6 +447,17 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="mc-special-gift-card text-center d-flex flex-column align-items-center" data-aos="fade-up">
+                    @if($giftValue)
+                        <div class="mc-gift-price-corner">
+                            <span class="mc-gift-crossed-price">
+                                <span class="mc-cross-line-1"></span>
+                                <span class="mc-cross-line-2"></span>
+                                {{ $formatCurrencyText($giftValue) }}
+                            </span>
+                            <span class="badge mc-gift-free-badge rounded-pill">ফ্রি</span>
+                        </div>
+                    @endif
+
                     @if($giftBadge)
                         <span class="mc-gift-pill">
                             {!! format_title_highlight($formatCurrencyText($giftBadge)) !!}
@@ -124,20 +465,9 @@
                     @endif
 
                     @if($giftTitle)
-                        <h2 class="fw-bold text-center mb-3" style="color: var(--color-text-ink, #0A1E3F); font-size: 26px; line-height: 1.4;">
+                        <h2 class="fw-bold text-center mb-3 mc-special-gift-title {{ !$giftBadge ? 'mc-title-no-badge' : '' }}">
                             {!! format_title_highlight($formatCurrencyText($giftTitle)) !!}
                         </h2>
-                    @endif
-
-                    @if($giftValue)
-                        <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
-                            <span class="fw-bold position-relative d-inline-block text-dark" style="font-size: 1.75rem; white-space: nowrap;">
-                                <span style="position: absolute; width: 120%; height: 2px; background: red; top: 50%; left: -10%; transform: rotate(-20deg);"></span>
-                                <span style="position: absolute; width: 120%; height: 2px; background: red; top: 50%; left: -10%; transform: rotate(20deg);"></span>
-                                {{ $formatCurrencyText($giftValue) }}
-                            </span>
-                            <span class="badge mc-gift-free-badge rounded-pill" style="background-color: #FF7A00; color: #ffffff;">ফ্রি</span>
-                        </div>
                     @endif
 
                     @if($giftDescription)
@@ -149,23 +479,167 @@
                     @php
                         $giftQuotesList = !empty($mcSettings['gift_quotes_list']) ? $mcSettings['gift_quotes_list'] : [];
                         if (!is_array($giftQuotesList)) $giftQuotesList = [];
+
+                        $pairedRows = [];
+                        $standaloneImages = [];
+                        $standaloneTextPrices = [];
+
+                        foreach ($giftQuotesList as $quote) {
+                            $t = trim($quote['text'] ?? '');
+                            $img = trim($quote['image'] ?? '');
+                            $p = trim($quote['price'] ?? '');
+                            $l = trim($quote['link'] ?? '');
+                            $hasT = !empty(strip_tags($t)) || (!empty($t) && str_contains($t, '<img'));
+                            $hasI = !empty($img);
+                            $hasP = !empty($p);
+
+                            if ($hasI && ($hasT || $hasP)) {
+                                $pairedRows[] = [
+                                    'image' => $img,
+                                    'price' => $p,
+                                    'text'  => $t,
+                                    'link'  => $l,
+                                ];
+                            } elseif ($hasI && !$hasT && !$hasP) {
+                                $standaloneImages[] = [
+                                    'image' => $img,
+                                    'price' => '',
+                                    'text'  => '',
+                                    'link'  => $l,
+                                ];
+                            } elseif (!$hasI && ($hasT || $hasP)) {
+                                $standaloneTextPrices[] = [
+                                    'image' => '',
+                                    'price' => $p,
+                                    'text'  => $t,
+                                    'link'  => $l,
+                                ];
+                            }
+                        }
+
+                        // Pair remaining standalone images with standalone text/prices
+                        while (!empty($standaloneImages) && !empty($standaloneTextPrices)) {
+                            $imgItem = array_shift($standaloneImages);
+                            $textItem = array_shift($standaloneTextPrices);
+                            $pairedRows[] = [
+                                'image' => $imgItem['image'],
+                                'price' => $textItem['price'],
+                                'text'  => $textItem['text'],
+                                'link'  => $textItem['link'] ?: $imgItem['link'],
+                            ];
+                        }
                     @endphp
-                    @if(count($giftQuotesList) > 0)
+
+                    @if(count($pairedRows) > 0 || count($standaloneImages) > 0 || count($standaloneTextPrices) > 0)
                         <div class="w-100 mt-4 mb-4">
-                            @foreach($giftQuotesList as $quote)
-                                <div class="mc-callout-quote d-flex justify-content-between align-items-center w-100 text-start mt-2 mb-2">
-                                    <div class="quote-text me-3">{!! $quote['text'] ?? '' !!}</div>
-                                    @if(!empty($quote['price']))
-                                        <div class="quote-price fw-bolder px-3 py-1 rounded" style="color: var(--color-primary, #0056D2); background-color: var(--color-blue-tint, #EAF2FE); font-style: normal; white-space: nowrap; font-size: 1.15rem; border: 1px solid var(--color-border-tint, #D9E8FC);">
-                                            {{ $formatCurrencyText($quote['price']) }}
+                            @foreach($pairedRows as $rIdx => $row)
+                                @php
+                                    $isEven = ($rIdx % 2 === 0);
+                                    $bonusIndexStr = str_pad($rIdx + 1, 2, '0', STR_PAD_LEFT);
+                                    $bonusIndexDisplay = $toBengaliNum($bonusIndexStr);
+                                @endphp
+                                <div class="mc-gift-animated-border-wrapper w-100 mb-4 mx-0">
+                                    <div class="mc-gift-animated-border-inner">
+                                        <div class="row g-4 w-100 align-items-stretch justify-content-center mx-0">
+                                    <!-- Image Card -->
+                                    <div class="col-md-6 col-12 d-flex {{ $isEven ? 'order-1 order-md-1' : 'order-1 order-md-2' }}">
+                                        <div class="mc-gift-card-image w-100 h-100">
+                                            @if(!empty($row['link']))
+                                                <a href="{{ $row['link'] }}" class="d-block w-100 h-100 overflow-hidden text-decoration-none">
+                                            @endif
+                                            <img src="{{ dynamic_asset($row['image']) }}" 
+                                                 alt="Bonus Gift Image" 
+                                                 class="img-fluid w-100 h-100">
+                                            @if(!empty($row['link']))
+                                                </a>
+                                            @endif
                                         </div>
-                                    @endif
+                                    </div>
+
+                                    <!-- Price & Text Card -->
+                                    <div class="col-md-6 col-12 d-flex {{ $isEven ? 'order-2 order-md-2' : 'order-2 order-md-1' }}">
+                                        <div class="mc-gift-card-content w-100 h-100">
+                                            <!-- Course Name / Title (Highlighted Hero) -->
+                                            <div class="mc-gift-course-title-wrapper">
+                                                <div class="mc-gift-course-title">
+                                                    @if(!empty($row['text']))
+                                                        {!! $row['text'] !!}
+                                                    @else
+                                                        এক্সক্লুসিভ স্পেশাল বোনাস কোর্স
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            @if(!empty($row['price']))
+                                                <div class="mc-gift-separator"></div>
+                                                <!-- Price Box (Pure Highlighted) -->
+                                                <div class="mc-gift-price-box">
+                                                    <span class="mc-gift-price-value">{{ $formatPriceDisplay($row['price']) }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
+
+                            {{-- Render any leftover standalone images --}}
+                            @if(count($standaloneImages) > 0)
+                                <div class="mc-gift-animated-border-wrapper w-100 mb-3 mx-0">
+                                    <div class="mc-gift-animated-border-inner">
+                                        <div class="row g-4 w-100 justify-content-center mx-0">
+                                    @foreach($standaloneImages as $imgItem)
+                                        <div class="col-md-6 col-12 d-flex">
+                                            <div class="mc-gift-card-image w-100 h-100">
+                                                @if(!empty($imgItem['link']))
+                                                    <a href="{{ $imgItem['link'] }}" class="d-block w-100 h-100 overflow-hidden text-decoration-none">
+                                                @endif
+                                                <img src="{{ dynamic_asset($imgItem['image']) }}" 
+                                                     alt="Bonus Gift Image" 
+                                                     class="img-fluid w-100 h-100">
+                                                @if(!empty($imgItem['link']))
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            {{-- Render any leftover standalone text/prices --}}
+                            @if(count($standaloneTextPrices) > 0)
+                                <div class="mc-gift-animated-border-wrapper w-100 mb-3 mx-0">
+                                    <div class="mc-gift-animated-border-inner">
+                                        <div class="row g-4 w-100 justify-content-center mx-0">
+                                    @foreach($standaloneTextPrices as $sIdx => $textItem)
+                                        <div class="col-md-6 col-12 d-flex">
+                                            <div class="mc-gift-card-content w-100 h-100">
+                                                <!-- Course Name / Title (Highlighted Hero) -->
+                                                <div class="mc-gift-course-title-wrapper">
+                                                    <div class="mc-gift-course-title">
+                                                        {!! $textItem['text'] !!}
+                                                    </div>
+                                                </div>
+                                                @if(!empty($textItem['price']))
+                                                    <div class="mc-gift-separator"></div>
+                                                    <div class="mc-gift-price-box">
+                                                        <span class="mc-gift-price-value">{{ $formatPriceDisplay($textItem['price']) }}</span>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     @elseif(!empty($giftQuote))
                         <div class="mc-callout-quote w-100 text-start">
-                            {!! $formatCurrencyText($giftQuote) !!}
+                            <div class="quote-text">{!! $formatCurrencyText($giftQuote) !!}</div>
                         </div>
                     @endif
 

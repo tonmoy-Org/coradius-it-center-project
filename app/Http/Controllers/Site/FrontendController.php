@@ -50,7 +50,8 @@ class FrontendController extends Controller
             }
             $data['hero_course'] = \App\Models\Course::where('status', 'approved')->latest()->first();
             $featuredStories = $successStoriesRepository->activeStories(['featured' => 1]);
-            $data['success_stories'] = $featuredStories->count() > 0 ? $featuredStories : $successStoriesRepository->activeStories();
+            $data['featured_story'] = $featuredStories->first();
+            $data['success_stories'] = $successStoriesRepository->activeStories();
 
             // Fetch active coupon for banner display
             $activeCoupons = \App\Models\Coupon::active()

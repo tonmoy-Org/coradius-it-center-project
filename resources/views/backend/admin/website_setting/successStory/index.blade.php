@@ -35,4 +35,16 @@
 @endsection
 @push('js')
     {{ $dataTable->scripts() }}
+    <script>
+        $(document).on('click', '.status-change', function() {
+            var inputId = $(this).attr('id') || '';
+            if (inputId.indexOf('customSwitchFeatured-') !== -1) {
+                setTimeout(function() {
+                    if ($.fn.DataTable.isDataTable('.dataTable')) {
+                        $('.dataTable').DataTable().ajax.reload(null, false);
+                    }
+                }, 500);
+            }
+        });
+    </script>
 @endpush
