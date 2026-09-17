@@ -185,7 +185,7 @@
     }
 </style>
 
-<section class="categories-of-work-section p-t-60 p-b-60 bg-white">
+<section class="categories-of-work-section p-t-60 p-b-60" style="background-color: #F6F9FE !important;">
     <div class="container container-1278">
         @if($title)
             <h3 class="cow-title" data-aos="fade-up">{!! format_title_highlight($title) !!}</h3>

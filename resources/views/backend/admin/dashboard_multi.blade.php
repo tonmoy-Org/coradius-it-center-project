@@ -12,7 +12,7 @@
                 
                 <div class="row">
                     <!-- Total Leads -->
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6">
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
                         <div class="statistics-card bg-white color-success redious-border mb-20 p-20 p-md-20">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -28,42 +28,8 @@
                         </div>
                     </div>
 
-                    <!-- This Month -->
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6">
-                        <div class="statistics-card bg-white color-warning redious-border mb-20 p-20 p-sm-20">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="statistics-info mb-3">
-                                        <h6>Monthly Leads</h6>
-                                        <h4>{{ $monthlyLeads }}</h4>
-                                    </div>
-                                </div>
-                                <div class="statistics-footer d-flex align-items-center gap-3">
-                                    <p class="sales-price text-warning">This Month</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- This Week -->
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6">
-                        <div class="statistics-card bg-white color-blue redious-border mb-20 p-20 p-sm-20">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="statistics-info mb-3">
-                                        <h6>Weekly Leads</h6>
-                                        <h4>{{ $weeklyLeads }}</h4>
-                                    </div>
-                                </div>
-                                <div class="statistics-footer d-flex align-items-center gap-3">
-                                    <p class="sales-price text-primary">This Week</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Today -->
-                    <div class="col-xxl-3 col-xl-4 col-lg-6 col-md-6">
+                    <!-- Today's Leads -->
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
                         <div class="statistics-card bg-white color-danger redious-border mb-20 p-20 p-sm-20">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -78,6 +44,41 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Yesterday's Leads -->
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                        <div class="statistics-card bg-white color-blue redious-border mb-20 p-20 p-sm-20">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="statistics-info mb-3">
+                                        <h6>Yesterday's Leads</h6>
+                                        <h4>{{ $yesterdayLeads }}</h4>
+                                    </div>
+                                </div>
+                                <div class="statistics-footer d-flex align-items-center gap-3">
+                                    <p class="sales-price text-primary">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Leads -->
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                        <div class="statistics-card bg-white color-warning redious-border mb-20 p-20 p-sm-20">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="statistics-info mb-3">
+                                        <h6>Monthly Leads</h6>
+                                        <h4>{{ $monthlyLeads }}</h4>
+                                    </div>
+                                </div>
+                                <div class="statistics-footer d-flex align-items-center gap-3">
+                                    <p class="sales-price text-warning">This Month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xl-12 col-md-12">
                         <div class="bg-white redious-border mb-4 pt-20 p-30">

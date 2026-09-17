@@ -44,11 +44,13 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $today = Carbon::today();
+        $yesterday = Carbon::yesterday();
         $thisWeek = Carbon::today()->subDays(7);
         $thisMonth = Carbon::today()->startOfMonth();
 
         $totalLeads = \App\Models\MarketingLead::count();
         $todayLeads = \App\Models\MarketingLead::whereDate('created_at', $today)->count();
+        $yesterdayLeads = \App\Models\MarketingLead::whereDate('created_at', $yesterday)->count();
         $weeklyLeads = \App\Models\MarketingLead::where('created_at', '>=', $thisWeek)->count();
         $monthlyLeads = \App\Models\MarketingLead::where('created_at', '>=', $thisMonth)->count();
 
@@ -76,6 +78,7 @@ class AdminController extends Controller
         $data = [
             'totalLeads'         => $totalLeads,
             'todayLeads'         => $todayLeads,
+            'yesterdayLeads'     => $yesterdayLeads,
             'weeklyLeads'        => $weeklyLeads,
             'monthlyLeads'       => $monthlyLeads,
             'chartLabels'        => json_encode($chartLabels),

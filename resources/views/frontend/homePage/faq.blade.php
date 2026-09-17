@@ -170,7 +170,7 @@
     }
 </style>
 
-<section class="faq-section p-t-60 p-b-60 position-relative" id="faq" style="background-color: #ffffff;">
+<section class="faq-section p-t-60 p-b-60 position-relative" id="faq" style="background-color: #F8FAFE !important;">
     <div class="container container-1278">
         <div class="row">
             

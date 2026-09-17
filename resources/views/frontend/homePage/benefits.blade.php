@@ -138,8 +138,8 @@
     }
 </style>
 
-<section class="benefits-section " >
-   <div class="container container-1278 p-t-35 p-b-35" style="background-color: #f6f7fb; border-radius: 8px;">
+<section class="benefits-section p-t-60 p-b-60" style="background-color: #F8FAFE !important;">
+   <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
             @if(!empty($benefitsTitle))
             <h2 class="fw-bold course-section-title text-dark {{ empty($benefitsSubtitle) ? 'mb-5' : 'mb-3' }} text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">

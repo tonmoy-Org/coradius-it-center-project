@@ -70,10 +70,9 @@
 @if($showSpecialGift && (!empty($giftTitle) || !empty($giftBadge) || !empty($giftDescription)))
 <style>
     .mc-special-gift-card {
-        background-color: var(--color-blue-tint, #EAF2FE);
-        border: 1px solid var(--color-border-tint, #C7DCFA);
-        border-radius: 12px;
-        padding: 42px 28px;
+        background-color: transparent;
+        border: none;
+        padding: 0;
         margin-bottom: 0;
         position: relative;
     }
@@ -83,10 +82,10 @@
         flex-direction: column;
         align-items: center;
         gap: 12px;
-        background: #0051c6;
+        background: linear-gradient(135deg, #0045B8 0%, #0056D2 40%, #1a78ff 80%, #4facfe 100%);
         padding: 24px 32px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        box-shadow: 0 10px 30px rgba(0, 86, 210, 0.25);
     }
 
     .mc-gift-taka-circle {
@@ -465,7 +464,7 @@
         }
     }
 </style>
-<section class="special-gift-section p-t-60 p-b-60 bg-white">
+<section class="special-gift-section p-t-60 p-b-60" style="background-color: var(--color-blue-tint, #EAF2FE) !important;">
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-lg-12">

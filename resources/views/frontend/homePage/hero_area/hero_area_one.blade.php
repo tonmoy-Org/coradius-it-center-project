@@ -151,32 +151,29 @@
 
             <div class="row g-4 g-lg-5 align-items-start justify-content-center">
                 <!-- Left Column -->
-                <div class="col-lg-12 col-md-12">
-                    <div class="quote-decorator mb-2">
+                <div class="col-lg-12 col-md-12 text-center">
+                    <div class="quote-decorator mb-2 d-flex justify-content-center">
                         <svg width="38" height="30" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 18.2857C0 8.19048 6.09524 1.52381 16 0V6.47619C10.6667 7.61905 8.19048 10.8571 8.19048 15.0476H16V32H0V18.2857ZM24 18.2857C24 8.19048 30.0952 1.52381 40 0V6.47619C34.6667 7.61905 32.1905 10.8571 32.1905 15.0476H40V32H24V18.2857Z" fill="#0056D2"/>
                         </svg>
                     </div>
                     @if(!empty($descSubtitle))
-                        <h2 class="mb-3 fw-bold desc-main-title" style="color: #0A1E3F; font-size: 28px; line-height: 1.35; letter-spacing: -0.02em;">
+                        <h2 class="mb-3 fw-bold desc-main-title text-center" style="color: #0A1E3F; font-size: 28px; line-height: 1.35; letter-spacing: -0.02em;">
                             {!! format_title_highlight($descSubtitle) !!}
                         </h2>
                     @endif
                     
-                    <div class="course-description-content" style="color: #475569; font-size: 15.5px; line-height: 1.85; font-weight: 400;">
+                    <div class="course-description-content text-center" style="color: #475569; font-size: 15.5px; line-height: 1.85; font-weight: 400;">
                         {!! $descContent !!}
                     </div>
                 </div>
 
                 @if($hasRightContent)
-                <!-- Right Column: Statement Layout (Not a box) -->
-                <div class="col-lg-12 col-md-12 mt-2">
+                <!-- Right Column: Statement Layout (Centered without border/icon) -->
+                <div class="col-lg-12 col-md-12 mt-2 text-center">
                     @if(!empty($descRightTitle))
-                        <div class="d-flex align-items-center px-2 py-3" style="border-left: 4px solid #0056D2; padding-left: 20px !important;">
-                            <div class="icon-box me-4 flex-shrink-0" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0,86,210,0.1); display: flex; align-items: center; justify-content: center; color: #0056D2;">
-                                <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 7.5l-6.5-3.25L12 3l6.5 3.25L12 9.5zM2 12l10 5 10-5v5l-10 5-10-5v-5z"/></svg>
-                            </div>
-                            <h4 class="fw-bold m-0 desc-right-title" style="color: #0A1E3F; font-size: 22px; line-height: 1.6; letter-spacing:-0.01em;">
+                        <div class="py-2 text-center">
+                            <h4 class="fw-bold m-0 desc-right-title text-center" style="color: #0A1E3F; font-size: 22px; line-height: 1.6; letter-spacing:-0.01em;">
                                 {!! format_title_highlight($descRightTitle) !!}
                             </h4>
                         </div>
