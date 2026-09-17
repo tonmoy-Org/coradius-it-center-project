@@ -487,6 +487,12 @@
 
                                                 </div>
 
+                                                <div class="col-lg-12 mb-4">
+                                                    <label class="form-label">Benefits Subtitle</label>
+                                                    <textarea name="masterclass_settings[benefits_subtitle]" class="form-control rounded-2 summernote-title"
+                                                              rows="2" data-height="110">{!! $mcSettings['benefits_subtitle'] ?? '' !!}</textarea>
+                                                </div>
+
                                                 <div class="col-12 mb-2">
                                                     <label class="form-label mb-2">Benefit Items</label>
                                                     <div id="benefits_items_container">
