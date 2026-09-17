@@ -138,7 +138,7 @@
     }
 </style>
 
-<section class="benefits-section p-t-60 p-b-60" style="background-color: #F8FAFE !important;">
+<section class="benefits-section p-t-60 p-b-60" style="background-color: #F0F6FF !important;">
    <div class="container container-1278">
         <div class="mc-benefits-card-wrapper">
             @if(!empty($benefitsTitle))
