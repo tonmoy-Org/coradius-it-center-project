@@ -58,6 +58,7 @@
 
     $giftBadge = !empty($mcSettings['gift_badge']) ? $stripEmojis($mcSettings['gift_badge']) : '';
     $giftTitle = !empty($mcSettings['gift_title']) ? $stripEmojis($mcSettings['gift_title']) : '';
+    $giftSubtitle = !empty($mcSettings['gift_subtitle']) ? $mcSettings['gift_subtitle'] : '';
     $giftValue = !empty($mcSettings['gift_value']) ? $mcSettings['gift_value'] : '';
     $giftDescription = !empty($mcSettings['gift_description']) ? $mcSettings['gift_description'] : '';
     $giftQuote = !empty($mcSettings['gift_quote']) ? $mcSettings['gift_quote'] : '';
@@ -78,19 +79,34 @@
     }
 
     .mc-gift-price-corner {
-        position: absolute;
-        top: 24px;
-        right: 28px;
-        display: inline-flex;
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 10px;
-        z-index: 5;
+        gap: 12px;
+        background: #0051c6;
+        padding: 24px 32px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mc-gift-taka-circle {
+        width: 54px;
+        height: 54px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 4px;
     }
 
     .mc-gift-crossed-price {
         font-size: 1.95rem;
         font-weight: 800;
-        color: var(--color-text-ink, #0A1E3F);
+        color: #ffffff;
         position: relative;
         display: inline-block;
         white-space: nowrap;
@@ -134,10 +150,10 @@
     .mc-gift-free-badge {
         font-size: 1.55rem !important;
         font-weight: 700 !important;
-        padding: 6px 24px !important;
+        padding: 8px 32px !important;
         line-height: 1.2 !important;
         letter-spacing: 0.5px;
-        box-shadow: 0 2px 8px rgba(255, 122, 0, 0.25);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -146,6 +162,13 @@
         background-color: #FF7A00 !important;
         color: #ffffff !important;
         border-radius: 50px !important;
+    }
+
+    .mc-gift-subtitle {
+        color: var(--color-text-secondary, #4B5A72);
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 12px;
     }
 
     .mc-special-gift-title {
@@ -446,35 +469,46 @@
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="mc-special-gift-card text-center d-flex flex-column align-items-center" data-aos="fade-up">
-                    @if($giftValue)
-                        <div class="mc-gift-price-corner">
-                            <span class="mc-gift-crossed-price">
-                                <span class="mc-cross-line-1"></span>
-                                <span class="mc-cross-line-2"></span>
-                                {{ $formatCurrencyText($giftValue) }}
-                            </span>
-                            <span class="badge mc-gift-free-badge rounded-pill">ফ্রি</span>
+                <div class="mc-special-gift-card" data-aos="fade-up">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-lg-8 text-start">
+                            @if($giftBadge)
+                                <span class="mc-gift-pill">
+                                    {!! format_title_highlight($formatCurrencyText($giftBadge)) !!}
+                                </span>
+                            @endif
+
+                            @if($giftTitle)
+                                <h2 class="fw-bold mb-3 mc-special-gift-title {{ !$giftBadge ? 'mc-title-no-badge' : '' }}" style="margin-left: 0; margin-right: 0; max-width: 100%;">
+                                    {!! format_title_highlight($formatCurrencyText($giftTitle)) !!}
+                                </h2>
+                            @endif
+
+                            @if(!empty($giftSubtitle))
+                                <div class="mc-gift-subtitle">{!! $giftSubtitle !!}</div>
+                            @endif
+
+                            @if($giftDescription)
+                                <div class="text-secondary leading-relaxed fs-6 w-100">
+                                    {!! $giftDescription !!}
+                                </div>
+                            @endif
                         </div>
-                    @endif
-
-                    @if($giftBadge)
-                        <span class="mc-gift-pill">
-                            {!! format_title_highlight($formatCurrencyText($giftBadge)) !!}
-                        </span>
-                    @endif
-
-                    @if($giftTitle)
-                        <h2 class="fw-bold text-center mb-3 mc-special-gift-title {{ !$giftBadge ? 'mc-title-no-badge' : '' }}">
-                            {!! format_title_highlight($formatCurrencyText($giftTitle)) !!}
-                        </h2>
-                    @endif
-
-                    @if($giftDescription)
-                        <div class="text-secondary leading-relaxed fs-6 text-center w-100">
-                            {!! $giftDescription !!}
-                        </div>
-                    @endif
+                        
+                        @if($giftValue)
+                            <div class="col-lg-4 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-0">
+                                <div class="mc-gift-price-corner">
+                                    <div class="mc-gift-taka-circle">৳</div>
+                                    <span class="mc-gift-crossed-price">
+                                        <span class="mc-cross-line-1"></span>
+                                        <span class="mc-cross-line-2"></span>
+                                        {{ str_replace('৳', '', $formatCurrencyText($giftValue)) }} Taka
+                                    </span>
+                                    <span class="badge mc-gift-free-badge rounded-pill">ফ্রি রিসোর্সে</span>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
 
                     @php
                         $giftQuotesList = !empty($mcSettings['gift_quotes_list']) ? $mcSettings['gift_quotes_list'] : [];

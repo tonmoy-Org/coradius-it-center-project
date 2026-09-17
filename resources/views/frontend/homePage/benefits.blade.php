@@ -15,6 +15,7 @@
 @if($showBenefits)
 @php
     $benefitsTitle = !empty($mcSettings['benefits_title']) ? $mcSettings['benefits_title'] : '';
+    $benefitsSubtitle = !empty($mcSettings['benefits_subtitle']) ? $mcSettings['benefits_subtitle'] : '';
 
     $stripEmojis = function($text) {
         if (empty($text)) return '';
@@ -41,7 +42,9 @@
             'শিক্ষার্থী | যারা পড়াশলেখার পাশাপাশি আয় করতে চান। | দক্ষতা শিখে স্বাধীন আয় শুরু করুন',
             'বেকার | যারা ফুল টাইম আয় করার পথ খুঁজতে চান। | ঘরে বসে ক্যারিয়ার গড়ার সুযোগ',
             'গৃহিণী | যারা ঘরের কাজের পাশাপাশি আয় করতে চান। | সময় ও দক্ষতার সঠিক ব্যবহার',
-            'চাকুরীজীবী | যারা কাজের পরে এক্সট্রা আয় করতে চান। | অতিরিক্ত আয়ের একটি স্মার্ট উপায়'
+            'চাকুরীজীবী | যারা কাজের পরে এক্সট্রা আয় করতে চান। | অতিরিক্ত আয়ের একটি স্মার্ট উপায়',
+            'ফ্রিল্যান্সার | যারা নিজেদের স্কিল ডেভেলপ করে আরও বেশি আয় করতে চান। | ক্যারিয়ারে নতুন মাত্রা যোগ করুন',
+            'উদ্যোক্তা | যারা নিজেদের ব্যবসা বা এজেন্সি দাঁড় করাতে চান। | ব্যবসায় সফল হওয়ার সেরা কৌশল'
         ];
     }
 
@@ -49,7 +52,9 @@
         'দক্ষতা শিখে স্বাধীন আয় শুরু করুন',
         'ঘরে বসে ক্যারিয়ার গড়ার সুযোগ',
         'সময় ও দক্ষতার সঠিক ব্যবহার',
-        'অতিরিক্ত আয়ের একটি স্মার্ট উপায়'
+        'অতিরিক্ত আয়ের একটি স্মার্ট উপায়',
+        'ক্যারিয়ারে নতুন মাত্রা যোগ করুন',
+        'ব্যবসায় সফল হওয়ার সেরা কৌশল'
     ];
 @endphp
 
@@ -60,6 +65,9 @@
         border-radius: 8px;
         padding: 24px 22px 28px 22px;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         position: relative;
@@ -130,13 +138,19 @@
     }
 </style>
 
-<section class="benefits-section p-t-60 p-b-60" style="background-color: #ffffff;">
-    <div class="container container-1278">
+<section class="benefits-section " >
+   <div class="container container-1278 p-t-35 p-b-35" style="background-color: #f6f7fb; border-radius: 8px;">
         <div class="mc-benefits-card-wrapper">
             @if(!empty($benefitsTitle))
-            <h2 class="fw-bold course-section-title text-dark mb-5 text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">
+            <h2 class="fw-bold course-section-title text-dark {{ empty($benefitsSubtitle) ? 'mb-5' : 'mb-3' }} text-center px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; line-height: 1.4; font-size: 26px; color: var(--color-text-ink, #0A1E3F) !important;">
                 {!! format_title_highlight($benefitsTitle) !!}
             </h2>
+            @endif
+
+            @if(!empty($benefitsSubtitle))
+            <div class="text-center mb-5 px-3" data-aos="fade-up" style="max-width: 800px; margin: 0 auto; font-size: 16px; color: var(--color-text-secondary, #4B5A72);">
+                {!! $benefitsSubtitle !!}
+            </div>
             @endif
 
             <div class="row g-4 justify-content-center">
@@ -179,10 +193,10 @@
                             $iconBorder = '#D9E8FC';
                             $iconColor = '#0056D2';
                         } elseif ($idx === 1 || str_contains(strtolower($bTitle), 'বেকার') || str_contains(strtolower($bTitle), 'jobless') || str_contains(strtolower($bTitle), 'unemployed')) {
-                            $iconClass = 'fas fa-times-circle';
-                            $iconBg = '#fef2f2';
-                            $iconBorder = '#fecaca';
-                            $iconColor = '#ef4444';
+                            $iconClass = 'fas fa-chart-line';
+                            $iconBg = '#f0fdf4';
+                            $iconBorder = '#bbf7d0';
+                            $iconColor = '#16a34a';
                         } elseif ($idx === 2 || str_contains(strtolower($bTitle), 'গৃহিণী') || str_contains(strtolower($bTitle), 'housewife')) {
                             $iconClass = 'fas fa-coins';
                             $iconBg = '#fffbeb';
@@ -193,6 +207,16 @@
                             $iconBg = 'var(--color-blue-tint, #EAF2FE)';
                             $iconBorder = '#C7DCFA';
                             $iconColor = '#0056D2';
+                        } elseif ($idx === 4 || str_contains(strtolower($bTitle), 'ফ্রিল্যান্সার') || str_contains(strtolower($bTitle), 'freelancer')) {
+                            $iconClass = 'fas fa-laptop-code';
+                            $iconBg = '#f5f3ff';
+                            $iconBorder = '#ddd6fe';
+                            $iconColor = '#7c3aed';
+                        } elseif ($idx === 5 || str_contains(strtolower($bTitle), 'উদ্যোক্তা') || str_contains(strtolower($bTitle), 'entrepreneur')) {
+                            $iconClass = 'fas fa-rocket';
+                            $iconBg = '#fff1f2';
+                            $iconBorder = '#fecdd3';
+                            $iconColor = '#e11d48';
                         } else {
                             $iconClass = 'fas fa-check-circle';
                             $iconBg = 'var(--color-blue-tint, #EAF2FE)';
@@ -201,7 +225,7 @@
                         }
                     @endphp
 
-                    <div class="col-12" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
+                    <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
                         <div class="mc-target-audience-card-light" style="padding: 18px 24px;">
                             <div class="d-flex align-items-center gap-3" style="position: relative; z-index: 1;">
                                 <div class="mc-audience-icon-box-light" style="background: {{ $iconBg }}; border: 1px solid {{ $iconBorder }}; color: {{ $iconColor }};">

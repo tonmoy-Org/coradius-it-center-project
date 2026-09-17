@@ -178,7 +178,8 @@
                                     $defGiftValue = old('masterclass_settings.gift_value', '');
                                     $defGiftCtaText = old('masterclass_settings.gift_cta_text', '');
                                     $defGiftCtaLink = old('masterclass_settings.gift_cta_link', '');
-                                    $defGiftDescription = old('masterclass_settings.gift_description', '');
+                                    $defGiftSubtitle = old('masterclass_settings.gift_subtitle', '');
+                                                     $defGiftDescription = old('masterclass_settings.gift_description', '');
                                     $defGiftQuote = old('masterclass_settings.gift_quote', '');
                                     $defGiftFooterNote = old('masterclass_settings.gift_footer_note', '');
                                     $defSupportTitle = old('masterclass_settings.support_title', '');
