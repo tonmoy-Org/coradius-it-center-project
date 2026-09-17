@@ -464,7 +464,7 @@
         }
     }
 </style>
-<section class="special-gift-section p-t-60 p-b-60" style="background-color: var(--color-blue-tint, #EAF2FE) !important;">
+<section class="special-gift-section p-t-60 p-b-60" style="background-color: #F0F6FF !important;">
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-lg-12">
