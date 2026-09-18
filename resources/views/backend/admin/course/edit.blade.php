@@ -1469,7 +1469,7 @@
                                                  'for' => 'image',
                                                  'name' => 'faq_image_media_id',
                                                  'col' => 'col-12 mb-0',
-                                                 'size' => '',
+                                                 'size' => '800x600',
                                                  'image' => $mcSettings['faq_image_media_id'] ?? ($course->faq_image ?? '')
                                              ])
                                          </div>

@@ -54,58 +54,48 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="default-list-table table-responsive">
-                                    <table class="table">
+                                    <table class="table align-middle">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
+                                                <th>Personal Info</th>
                                                 <th>Phone</th>
                                                 <th>WhatsApp</th>
-                                                <th>Course / Source</th>
-                                                <th>Synced to Webhook?</th>
-                                                <th>Submitted At</th>
-                                                <th>Action</th>
+                                                <th class="text-center">Synced</th>
+                                                <th class="text-nowrap">Submitted At</th>
+                                                <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @forelse ($leads as $key => $lead)
                                                 <tr id="row_{{ $lead->id }}">
                                                     <td>{{ $leads->firstItem() + $key }}</td>
-                                                    <td>{{ $lead->name }}</td>
-                                                    <td>{{ $lead->email }}</td>
-                                                    <td>{{ $lead->phone }}</td>
-                                                    <td>{{ $lead->whatsapp_number ?? '-' }}</td>
                                                     <td>
-                                                        @if($lead->course_id)
-                                                            @php $course = \App\Models\Course::find($lead->course_id); @endphp
-                                                            @if($course)
-                                                                <a href="{{ route('course.details', $course->slug) }}" target="_blank">{{ $course->title }}</a>
-                                                            @else
-                                                                ID: {{ $lead->course_id }}
-                                                            @endif
-                                                        @else
-                                                            -
+                                                        <div class="fw-semibold text-dark">{{ $lead->name }}</div>
+                                                        @if($lead->email)
+                                                            <small class="text-muted d-block">{{ $lead->email }}</small>
                                                         @endif
                                                     </td>
-                                                    <td>
+                                                    <td class="text-nowrap">{{ $lead->phone }}</td>
+                                                    <td class="text-nowrap">{{ $lead->whatsapp_number ?: '-' }}</td>
+                                                    <td class="text-center">
                                                         @if($lead->is_synced)
-                                                            <div class="badge badge-success">Yes</div>
+                                                            <span class="badge badge-success px-3 py-2">Yes</span>
                                                         @else
-                                                            <div class="badge badge-danger">No</div>
+                                                            <span class="badge badge-danger px-3 py-2">No</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $lead->created_at->format('d M Y, h:i A') }}</td>
-                                                    <td>
+                                                    <td class="text-nowrap">{{ $lead->created_at->format('d M Y, h:i A') }}</td>
+                                                    <td class="text-center">
                                                         <a href="javascript:void(0)" onclick="delete_row('{{ route('marketing-leads.destroy', $lead->id) }}')"
                                                            data-toggle="tooltip" title="{{ __('delete') }}">
-                                                            <i class="las la-trash-alt text-danger"></i>
+                                                            <i class="las la-trash-alt text-danger fs-5"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="8" class="text-center">{{ __('no_data_found') }}</td>
+                                                    <td colspan="7" class="text-center py-4">{{ __('no_data_found') }}</td>
                                                 </tr>
                                             @endforelse
                                         </tbody>

@@ -26,15 +26,15 @@
                         </a>
                     </li>
                 @endif
-                @if(hasPermission('courses.index') || hasPermission('success-stories.index'))
-                    <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/success-stories*', 'admin/success-story-section'], 'active') }}">
+                @if(hasPermission('courses.index') || hasPermission('success-stories.index') || hasPermission('coupons.index'))
+                    <li class="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/sticky-promo*', 'admin/success-stories*', 'admin/success-story-section', 'admin/coupons', 'admin/coupons/*'], 'active') }}">
                         <a href="#home_landing" class="dropdown-icon" data-bs-toggle="collapse" role="button"
-                           aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/success-stories*', 'admin/success-story-section'], 'true', 'false') }}"
+                           aria-expanded="{{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/sticky-promo*', 'admin/success-stories*', 'admin/success-story-section', 'admin/coupons', 'admin/coupons/*'], 'true', 'false') }}"
                            aria-controls="home_landing">
                             <i class="las la-desktop"></i>
                             <span>{{ __('Home Landing Page') }}</span>
                         </a>
-                        <ul class="sub-menu collapse {{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/success-stories*', 'admin/success-story-section'], 'show') }}"
+                        <ul class="sub-menu collapse {{ menuActivation(['admin/category/*', 'admin/category', 'admin/subjects/*', 'admin/subjects', 'admin/tags/*', 'admin/tag/*', 'admin/tag', 'admin/level/*', 'admin/level', 'admin/courses/*', 'admin/courses', 'admin/quizzes*', 'admin/counter-section', 'admin/about-section', 'admin/categories-of-work-section', 'admin/newsletter-section', 'admin/sticky-promo-section', 'admin/sticky-promo*', 'admin/success-stories*', 'admin/success-story-section', 'admin/coupons', 'admin/coupons/*'], 'show') }}"
                             id="home_landing">
                             @php
                                 $firstCourse = \App\Models\Course::first();

@@ -15,7 +15,7 @@
                                 <div class="row gx-20">
                                     <div class="col-lg-12 input_file_div mb-4">
                                         <div class="mb-3">
-                                            <label class="form-label mb-1">{{__('light_logo')}} (100X36)</label>
+                                            <label class="form-label mb-1">{{__('light_logo')}} <small class="text-primary font-12 ms-1 fw-semibold">(Recommended Size: 100 x 36 px)</small></label>
                                             <label for="light_logo"
                                                    class="file-upload-text">
                                                 <p>1 {{ __('file_selected') }}</p>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="col-lg-12 input_file_div">
                                         <div class="mb-3">
-                                            <label class="form-label mb-1">{{__('dark_logo') }} (100X36)</label>
+                                            <label class="form-label mb-1">{{__('dark_logo') }} <small class="text-primary font-12 ms-1 fw-semibold">(Recommended Size: 100 x 36 px)</small></label>
                                             <label for="dark_logo"
                                                    class="file-upload-text">
                                                 <p>1 {{ __('file_selected') }}</p>

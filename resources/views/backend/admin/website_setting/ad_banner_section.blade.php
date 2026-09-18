@@ -1,4 +1,4 @@
-﻿@extends('backend.layouts.master')
+@extends('backend.layouts.master')
 @section('title', __('ad_banner_section'))
 @section('content')
     <section class="oftions">
@@ -29,7 +29,7 @@
 
                                             <div class="col-lg-12 input_file_div mb-3">
                                                 <div class="mb-3">
-                                                    <label for="home_ad_banner_image_1" class="form-label mb-1">{{ __('banner_image') }} 1 (1200x300)</label>
+                                                    <label for="home_ad_banner_image_1" class="form-label mb-1">{{ __('banner_image') }} 1 <small class="text-primary font-12 ms-1 fw-semibold">(Recommended Size: 1200 x 300 px)</small></label>
                                                     <label for="home_ad_banner_image_1" class="file-upload-text">
                                                         <p></p>
                                                         <span class="file-btn">{{ __('choose_file') }}</span>
@@ -76,7 +76,7 @@
 
                                             <div class="col-lg-12 input_file_div mb-3">
                                                 <div class="mb-3">
-                                                    <label for="home_ad_banner_image_2" class="form-label mb-1">{{ __('banner_image') }} 2 (1200x300)</label>
+                                                    <label for="home_ad_banner_image_2" class="form-label mb-1">{{ __('banner_image') }} 2 <small class="text-primary font-12 ms-1 fw-semibold">(Recommended Size: 1200 x 300 px)</small></label>
                                                     <label for="home_ad_banner_image_2" class="file-upload-text">
                                                         <p></p>
                                                         <span class="file-btn">{{ __('choose_file') }}</span>

@@ -82,56 +82,75 @@
         flex-direction: column;
         align-items: center;
         gap: 12px;
-        background: linear-gradient(135deg, #0045B8 0%, #0056D2 40%, #1a78ff 80%, #4facfe 100%);
-        padding: 24px 32px;
+        background: linear-gradient(135deg, #092c74 0%, #0056d2 55%, #0077ff 100%);
+        padding: 26px 36px;
         border-radius: 5px;
-        box-shadow: 0 10px 30px rgba(0, 86, 210, 0.25);
+        box-shadow: 0 14px 35px rgba(0, 86, 210, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mc-gift-price-corner:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(0, 86, 210, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     .mc-gift-taka-circle {
-        width: 54px;
-        height: 54px;
-        border: 2px solid #ffffff;
+        width: 56px;
+        height: 56px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: #ffffff;
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 4px;
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 2px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(4px);
+    }
+
+    .mc-gift-regular-price {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.05rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .mc-price-label {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.98rem;
+        font-weight: 600;
+    }
+
+    .mc-strike-price {
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-decoration: line-through;
+        text-decoration-color: #ff4d4d;
+        text-decoration-thickness: 3px;
+        opacity: 0.95;
     }
 
     .mc-gift-crossed-price {
-        font-size: 1.95rem;
+        font-size: 1.65rem;
         font-weight: 800;
         color: #ffffff;
         position: relative;
         display: inline-block;
         white-space: nowrap;
         line-height: 1;
-    }
-
-    .mc-gift-crossed-price .mc-cross-line-1 {
-        position: absolute;
-        width: 120%;
-        height: 3px;
-        background: red;
-        top: 50%;
-        left: -10%;
-        transform: rotate(-20deg);
-        pointer-events: none;
-    }
-
-    .mc-gift-crossed-price .mc-cross-line-2 {
-        position: absolute;
-        width: 120%;
-        height: 3px;
-        background: red;
-        top: 50%;
-        left: -10%;
-        transform: rotate(20deg);
-        pointer-events: none;
+        text-decoration: line-through;
+        text-decoration-color: #ff4d4d;
+        text-decoration-thickness: 3px;
     }
 
     .mc-gift-pill {
@@ -147,20 +166,28 @@
     }
 
     .mc-gift-free-badge {
-        font-size: 1.55rem !important;
-        font-weight: 700 !important;
-        padding: 8px 32px !important;
+        font-size: 1.15rem !important;
+        font-weight: 800 !important;
+        padding: 10px 28px !important;
         line-height: 1.2 !important;
         letter-spacing: 0.5px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        display: inline-flex;
+        box-shadow: 0 8px 22px rgba(255, 107, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+        display: inline-flex !important;
         align-items: center;
         justify-content: center;
+        gap: 6px;
         text-transform: uppercase;
         vertical-align: middle;
-        background-color: #FF7A00 !important;
+        background: linear-gradient(135deg, #FF6B00 0%, #FF8800 100%) !important;
         color: #ffffff !important;
         border-radius: 50px !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+
+    .mc-gift-free-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(255, 107, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
     }
 
     .mc-gift-subtitle {
@@ -182,7 +209,7 @@
     .mc-callout-quote {
         background: var(--color-white, #ffffff);
         border-left: 4px solid var(--color-primary, #0056D2);
-        border-radius: 8px;
+        border-radius: 5px;
         padding: 16px 20px;
         color: var(--color-text-secondary, #4B5A72);
         margin-top: 0;
@@ -217,7 +244,7 @@
         box-shadow: none !important;
         border: none !important;
         overflow: hidden;
-        border-radius: 8px;
+        border-radius: 5px;
         margin-top: 0;
         margin-bottom: 0;
         width: 100%;
@@ -227,7 +254,7 @@
         width: 100%;
         max-width: 100%;
         height: auto;
-        border-radius: 8px;
+        border-radius: 5px;
         display: block;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         transition: transform 0.3s ease;
@@ -241,7 +268,7 @@
     .mc-gift-animated-border-wrapper {
         position: relative;
         padding: 2px;
-        border-radius: 20px;
+        border-radius: 5px;
         overflow: hidden;
         background: #eaf2fe;
         border: 1px solid #c7dcfa;
@@ -251,7 +278,7 @@
         position: relative;
         z-index: 2;
         background: #ffffff;
-        border-radius: 18px;
+        border-radius: 5px;
         padding: 16px;
         height: 100%;
         width: 100%;
@@ -262,7 +289,7 @@
         position: relative;
         background: #ffffff;
         border: 1px solid var(--color-border-tint, #C7DCFA);
-        border-radius: 16px;
+        border-radius: 5px;
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(0, 31, 92, 0.06);
         width: 100%;
@@ -300,7 +327,7 @@
         position: relative;
         background: linear-gradient(150deg, #FFFFFF 0%, #F4F8FE 50%, #E6F0FC 100%);
         border: 2px solid #BFDBFE;
-        border-radius: 16px;
+        border-radius: 5px;
         padding: 36px 30px;
         box-shadow: 0 10px 28px rgba(0, 86, 210, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
         width: 100%;
@@ -323,7 +350,7 @@
         width: 6px;
         height: 100%;
         background: linear-gradient(180deg, var(--color-primary, #0056D2) 0%, #38BDF8 100%);
-        border-radius: 16px 0 0 16px;
+        border-radius: 5px 0 0 5px;
     }
 
     .mc-gift-card-content:hover {
@@ -464,7 +491,52 @@
         }
     }
 </style>
-<section class="special-gift-section p-t-60 p-b-60" style="background-color: #F0F6FF !important;">
+<section class="special-gift-section p-t-60 p-b-60 position-relative overflow-hidden" style="background-color: #F0F6FF !important;">
+    <!-- Background Network Node Design -->
+    <div style="position: absolute; top: 3%; right: -5%; width: 500px; height: 500px; z-index: 0; opacity: 0.05; pointer-events: none;">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+            <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="100" r="15" fill="#0056D2" />
+            <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+            <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+            <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+            <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+            <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+            <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+            <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+            <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+        </svg>
+    </div>
+    <div style="position: absolute; bottom: 3%; left: -5%; width: 500px; height: 500px; z-index: 0; opacity: 0.05; pointer-events: none;">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+            <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="100" r="15" fill="#0056D2" />
+            <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+            <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+            <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+            <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+            <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+            <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+            <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+            <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+        </svg>
+    </div>
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -498,12 +570,13 @@
                             <div class="col-lg-4 d-flex justify-content-lg-end justify-content-center mt-4 mt-lg-0">
                                 <div class="mc-gift-price-corner">
                                     <div class="mc-gift-taka-circle">৳</div>
-                                    <span class="mc-gift-crossed-price">
-                                        <span class="mc-cross-line-1"></span>
-                                        <span class="mc-cross-line-2"></span>
-                                        {{ str_replace('৳', '', $formatCurrencyText($giftValue)) }} Taka
+                                    <div class="mc-gift-regular-price">
+                                        <span class="mc-price-label">মূল্য:</span>
+                                        <span class="mc-strike-price">{{ $formatCurrencyText($giftValue) }}</span>
+                                    </div>
+                                    <span class="badge mc-gift-free-badge rounded-pill">
+                                        <i class="las la-gift me-1"></i> সম্পূর্ণ ফ্রি
                                     </span>
-                                    <span class="badge mc-gift-free-badge rounded-pill">ফ্রি রিসোর্সে</span>
                                 </div>
                             </div>
                         @endif
@@ -576,13 +649,36 @@
                                         <div class="row g-4 w-100 align-items-stretch justify-content-center mx-0">
                                     <!-- Image Card -->
                                     <div class="col-md-6 col-12 d-flex {{ $isEven ? 'order-1 order-md-1' : 'order-1 order-md-2' }}">
-                                        <div class="mc-gift-card-image w-100 h-100">
+                                        <div class="mc-gift-card-image w-100 h-100 position-relative overflow-hidden">
+                                            <!-- Background Network Node Design -->
+                                            <div style="position: absolute; top: -10%; right: -10%; width: 250px; height: 250px; z-index: 0; opacity: 0.12; pointer-events: none;">
+                                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                                    <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="100" cy="100" r="15" fill="#0056D2" />
+                                                    <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                </svg>
+                                            </div>
                                             @if(!empty($row['link']))
-                                                <a href="{{ $row['link'] }}" class="d-block w-100 h-100 overflow-hidden text-decoration-none">
+                                                <a href="{{ $row['link'] }}" class="d-block w-100 h-100 overflow-hidden text-decoration-none position-relative" style="z-index: 1;">
                                             @endif
                                             <img src="{{ dynamic_asset($row['image']) }}" 
                                                  alt="Bonus Gift Image" 
-                                                 class="img-fluid w-100 h-100">
+                                                 class="img-fluid w-100 h-100 position-relative" style="z-index: 1;">
                                             @if(!empty($row['link']))
                                                 </a>
                                             @endif
@@ -591,9 +687,32 @@
 
                                     <!-- Price & Text Card -->
                                     <div class="col-md-6 col-12 d-flex {{ $isEven ? 'order-2 order-md-2' : 'order-2 order-md-1' }}">
-                                        <div class="mc-gift-card-content w-100 h-100">
+                                        <div class="mc-gift-card-content w-100 h-100 position-relative overflow-hidden">
+                                            <!-- Background Network Node Design -->
+                                            <div style="position: absolute; bottom: -10%; left: -10%; width: 250px; height: 250px; z-index: 0; opacity: 0.08; pointer-events: none;">
+                                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                                    <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="100" cy="100" r="15" fill="#0056D2" />
+                                                    <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                    <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                </svg>
+                                            </div>
                                             <!-- Course Name / Title (Highlighted Hero) -->
-                                            <div class="mc-gift-course-title-wrapper">
+                                            <div class="mc-gift-course-title-wrapper position-relative" style="z-index: 1;">
                                                 <div class="mc-gift-course-title">
                                                     @if(!empty($row['text']))
                                                         {!! $row['text'] !!}
@@ -604,9 +723,9 @@
                                             </div>
 
                                             @if(!empty($row['price']))
-                                                <div class="mc-gift-separator"></div>
+                                                <div class="mc-gift-separator position-relative" style="z-index: 1;"></div>
                                                 <!-- Price Box (Pure Highlighted) -->
-                                                <div class="mc-gift-price-box">
+                                                <div class="mc-gift-price-box position-relative" style="z-index: 1;">
                                                     <span class="mc-gift-price-value">{{ $formatPriceDisplay($row['price']) }}</span>
                                                 </div>
                                             @endif
@@ -624,13 +743,36 @@
                                         <div class="row g-4 w-100 justify-content-center mx-0">
                                     @foreach($standaloneImages as $imgItem)
                                         <div class="col-md-6 col-12 d-flex">
-                                            <div class="mc-gift-card-image w-100 h-100">
+                                            <div class="mc-gift-card-image w-100 h-100 position-relative overflow-hidden">
+                                                <!-- Background Network Node Design -->
+                                                <div style="position: absolute; top: -10%; right: -10%; width: 250px; height: 250px; z-index: 0; opacity: 0.12; pointer-events: none;">
+                                                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                                        <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="100" cy="100" r="15" fill="#0056D2" />
+                                                        <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    </svg>
+                                                </div>
                                                 @if(!empty($imgItem['link']))
-                                                    <a href="{{ $imgItem['link'] }}" class="d-block w-100 h-100 overflow-hidden text-decoration-none">
+                                                    <a href="{{ $imgItem['link'] }}" class="d-block w-100 h-100 overflow-hidden text-decoration-none position-relative" style="z-index: 1;">
                                                 @endif
                                                 <img src="{{ dynamic_asset($imgItem['image']) }}" 
                                                      alt="Bonus Gift Image" 
-                                                     class="img-fluid w-100 h-100">
+                                                     class="img-fluid w-100 h-100 position-relative" style="z-index: 1;">
                                                 @if(!empty($imgItem['link']))
                                                     </a>
                                                 @endif
@@ -649,16 +791,39 @@
                                         <div class="row g-4 w-100 justify-content-center mx-0">
                                     @foreach($standaloneTextPrices as $sIdx => $textItem)
                                         <div class="col-md-6 col-12 d-flex">
-                                            <div class="mc-gift-card-content w-100 h-100">
+                                            <div class="mc-gift-card-content w-100 h-100 position-relative overflow-hidden">
+                                                <!-- Background Network Node Design -->
+                                                <div style="position: absolute; bottom: -10%; left: -10%; width: 250px; height: 250px; z-index: 0; opacity: 0.08; pointer-events: none;">
+                                                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                                        <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="100" cy="100" r="15" fill="#0056D2" />
+                                                        <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                                                        <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                        <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                                                    </svg>
+                                                </div>
                                                 <!-- Course Name / Title (Highlighted Hero) -->
-                                                <div class="mc-gift-course-title-wrapper">
+                                                <div class="mc-gift-course-title-wrapper position-relative" style="z-index: 1;">
                                                     <div class="mc-gift-course-title">
                                                         {!! $textItem['text'] !!}
                                                     </div>
                                                 </div>
                                                 @if(!empty($textItem['price']))
-                                                    <div class="mc-gift-separator"></div>
-                                                    <div class="mc-gift-price-box">
+                                                    <div class="mc-gift-separator position-relative" style="z-index: 1;"></div>
+                                                    <div class="mc-gift-price-box position-relative" style="z-index: 1;">
                                                         <span class="mc-gift-price-value">{{ $formatPriceDisplay($textItem['price']) }}</span>
                                                     </div>
                                                 @endif

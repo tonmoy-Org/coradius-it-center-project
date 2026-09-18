@@ -105,7 +105,7 @@ class MarketingLeadController extends Controller
         header('Content-Disposition: attachment; filename="' . $filename . '"');
 
         // Add CSV headers
-        fputcsv($handle, ['ID', 'Name', 'Email', 'Phone', 'WhatsApp Number', 'Course ID', 'Is Synced', 'Submitted At']);
+        fputcsv($handle, ['ID', 'Name', 'Email', 'Phone', 'WhatsApp Number', 'Is Synced', 'Submitted Date', 'Submitted Time']);
 
         foreach ($leads as $lead) {
             fputcsv($handle, [
@@ -114,9 +114,9 @@ class MarketingLeadController extends Controller
                 $lead->email,
                 $lead->phone,
                 $lead->whatsapp_number,
-                $lead->course_id,
                 $lead->is_synced ? 'Yes' : 'No',
-                $lead->created_at->format('Y-m-d H:i:s')
+                $lead->created_at ? $lead->created_at->format('Y-m-d') : '',
+                $lead->created_at ? $lead->created_at->format('h:i A') : ''
             ]);
         }
 

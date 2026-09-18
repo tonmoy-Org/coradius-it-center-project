@@ -89,16 +89,61 @@
 
 @if($status !== '0')
 <section class="about-me-section p-t-80 p-b-80 position-relative overflow-hidden bg-white" id="about">
-    <div class="container container-1278">
+    <!-- Background Network Node Design -->
+    <div style="position: absolute; top: 10%; right: -5%; width: 500px; height: 500px; z-index: 0; opacity: 0.05; pointer-events: none;">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+            <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="100" r="15" fill="#0056D2" />
+            <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+            <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+            <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+            <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+            <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+            <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+            <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+            <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+            <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="container container-1278 position-relative" style="z-index: 1;">
         <div class="row align-items-center g-4 g-lg-5">
             <!-- Left Side Image Card -->
             <div class="col-lg-5 col-md-12" data-aos="fade-right">
                 <div class="about-me-card position-relative overflow-hidden shadow-sm" 
                      style="border-radius: 16px; min-height: 500px; border: 1px solid var(--color-border-tint, #D9E8FC); box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
-                    
+                    <!-- Background Network Node Design inside Image Card -->
+                    <div style="position: absolute; top: -10%; right: -10%; width: 280px; height: 280px; z-index: 0; opacity: 0.12; pointer-events: none;">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <circle cx="100" cy="100" r="30" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="100" cy="100" r="15" fill="#0056D2" />
+                            <line x1="100" y1="70" x2="100" y2="20" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="100" y1="130" x2="100" y2="180" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="70" y1="100" x2="20" y2="100" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="130" y1="100" x2="180" y2="100" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="78.7" y1="78.7" x2="43.4" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="121.3" y1="121.3" x2="156.6" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="78.7" y1="121.3" x2="43.4" y2="156.6" stroke="#0056D2" stroke-width="2"/>
+                            <line x1="121.3" y1="78.7" x2="156.6" y2="43.4" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="100" cy="20" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="100" cy="180" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="20" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="180" cy="100" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="43.4" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="156.6" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="43.4" cy="156.6" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                            <circle cx="156.6" cy="43.4" r="15" fill="none" stroke="#0056D2" stroke-width="2"/>
+                        </svg>
+                    </div>
                     <img src="{{ $aboutImgUrl }}" alt="About Me Instructor" 
-                         class="img-fluid w-100" 
-                         style="object-fit: cover; width: 100%; height: 100%; min-height: 500px; border-radius: 16px; display: block;">
+                         class="img-fluid w-100 position-relative" 
+                         style="object-fit: cover; width: 100%; height: 100%; min-height: 500px; border-radius: 16px; display: block; z-index: 1;">
                 </div>
             </div>
 

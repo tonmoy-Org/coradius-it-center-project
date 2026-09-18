@@ -121,7 +121,7 @@
                     'for' => 'image',
                     'name' => 'support_image_media_id',
                     'col' => 'col-12',
-                    'size' => '',
+                    'size' => '600x600',
                     'image' => $mcSettings['support_image_media_id'] ?? ''
                 ])
             </div>
