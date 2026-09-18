@@ -155,26 +155,53 @@
     }
 
     .mc-strike-price {
+        position: relative;
+        display: inline-block;
         font-size: 1.65rem;
         font-weight: 800;
         color: #ffffff;
-        text-decoration: line-through;
-        text-decoration-color: #ff4d4d;
-        text-decoration-thickness: 3px;
         opacity: 0.95;
+        white-space: nowrap;
+        text-decoration: none !important;
+    }
+
+    .mc-strike-price::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -6%;
+        width: 112%;
+        height: 3px;
+        background: #ff4d4d;
+        border-radius: 2px;
+        transform: translateY(-50%) rotate(-13deg);
+        pointer-events: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
 
     .mc-gift-crossed-price {
+        position: relative;
+        display: inline-block;
         font-size: 1.65rem;
         font-weight: 800;
         color: #ffffff;
-        position: relative;
-        display: inline-block;
         white-space: nowrap;
         line-height: 1;
-        text-decoration: line-through;
-        text-decoration-color: #ff4d4d;
-        text-decoration-thickness: 3px;
+        text-decoration: none !important;
+    }
+
+    .mc-gift-crossed-price::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -6%;
+        width: 112%;
+        height: 3px;
+        background: #ff4d4d;
+        border-radius: 2px;
+        transform: translateY(-50%) rotate(-13deg);
+        pointer-events: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
 
     .mc-gift-pill {
