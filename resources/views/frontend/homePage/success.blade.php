@@ -690,7 +690,11 @@
                                                 
                                                 @if($videoInfo)
                                                     <div class="story-media-overlay">
-                                                        <span class="story-badge-video"><i class="fas fa-star" style="font-size: 9px;"></i> {{ __('Featured') }}</span>
+                                                        @if(!empty($success->is_featured))
+                                                            <span class="story-badge-video"><i class="fas fa-star" style="font-size: 9px;"></i> {{ __('Featured') }}</span>
+                                                        @else
+                                                            <span class="story-badge-video"><i class="fas fa-play" style="font-size: 9px;"></i> {{ __('Watch Story') }}</span>
+                                                        @endif
                                                         <div class="story-play-btn">
                                                             <svg width="22" height="22" viewBox="0 0 24 24">
                                                                 <polygon points="6 3 20 12 6 21 6 3"></polygon>
@@ -754,7 +758,11 @@
                                             
                                             @if($videoInfo)
                                                 <div class="story-media-overlay">
-                                                    <span class="story-badge-video"><i class="fas fa-play" style="font-size: 9px;"></i> {{ __('Watch Story') }}</span>
+                                                    @if(!empty($success->is_featured))
+                                                        <span class="story-badge-video"><i class="fas fa-star" style="font-size: 9px;"></i> {{ __('Featured') }}</span>
+                                                    @else
+                                                        <span class="story-badge-video"><i class="fas fa-play" style="font-size: 9px;"></i> {{ __('Watch Story') }}</span>
+                                                    @endif
                                                     <div class="story-play-btn">
                                                         <svg width="22" height="22" viewBox="0 0 24 24">
                                                             <polygon points="6 3 20 12 6 21 6 3"></polygon>
