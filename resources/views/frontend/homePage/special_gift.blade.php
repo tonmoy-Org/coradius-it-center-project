@@ -56,6 +56,27 @@
         return trim(preg_replace('/[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F780}-\x{1F7FF}\x{1F800}-\x{1F8FF}\x{1F900}-\x{1F9FF}\x{1FA00}-\x{1FA6F}\x{1FA70}-\x{1FAFF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}]/u', '', $text));
     };
 
+    $formatDashTitle = function($html) {
+        if (empty($html)) return '';
+
+        $pattern = '/(\s*&mdash;\s*|\s*—\s*|\s*–\s*|\s*--\s*|\s+-\s+)/u';
+        if (preg_match($pattern, $html)) {
+            $parts = preg_split($pattern, $html, 2);
+            if (count($parts) === 2 && !empty(trim(strip_tags($parts[0]))) && !empty(trim(strip_tags($parts[1])))) {
+                $main = trim($parts[0]);
+                $sub = trim($parts[1]);
+
+                $mainClean = preg_replace('/^<p>(.*?)<\/p>$/is', '$1', $main);
+                $subClean = preg_replace('/^<p>(.*?)<\/p>$/is', '$1', $sub);
+
+                return '<div class="mc-gift-title-main">' . $mainClean . '</div>' .
+                       '<div class="mc-gift-sub-line"></div>' .
+                       '<div class="mc-gift-title-sub">' . $subClean . '</div>';
+            }
+        }
+        return $html;
+    };
+
     $giftBadge = !empty($mcSettings['gift_badge']) ? $stripEmojis($mcSettings['gift_badge']) : '';
     $giftTitle = !empty($mcSettings['gift_title']) ? $stripEmojis($mcSettings['gift_title']) : '';
     $giftSubtitle = !empty($mcSettings['gift_subtitle']) ? $mcSettings['gift_subtitle'] : '';
@@ -379,6 +400,32 @@
         margin: 0;
         width: 100%;
         text-align: center;
+    }
+
+    .mc-gift-title-main {
+        font-family: var(--header-font, "Outfit", "Hind Siliguri", sans-serif);
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: var(--color-text-ink, #0A1E3F);
+        line-height: 1.35;
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    .mc-gift-sub-line {
+        width: 44px;
+        height: 3px;
+        background: linear-gradient(90deg, #0056D2 0%, #38BDF8 100%);
+        border-radius: 3px;
+        margin: 8px auto 12px auto;
+    }
+
+    .mc-gift-title-sub {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: var(--color-text-secondary, #4B5A72);
+        line-height: 1.6;
+        display: block;
     }
 
     .mc-gift-course-title p {
@@ -715,7 +762,7 @@
                                             <div class="mc-gift-course-title-wrapper position-relative" style="z-index: 1;">
                                                 <div class="mc-gift-course-title">
                                                     @if(!empty($row['text']))
-                                                        {!! $row['text'] !!}
+                                                        {!! $formatDashTitle($row['text']) !!}
                                                     @else
                                                         এক্সক্লুসিভ স্পেশাল বোনাস কোর্স
                                                     @endif
@@ -818,7 +865,7 @@
                                                 <!-- Course Name / Title (Highlighted Hero) -->
                                                 <div class="mc-gift-course-title-wrapper position-relative" style="z-index: 1;">
                                                     <div class="mc-gift-course-title">
-                                                        {!! $textItem['text'] !!}
+                                                        {!! $formatDashTitle($textItem['text']) !!}
                                                     </div>
                                                 </div>
                                                 @if(!empty($textItem['price']))
