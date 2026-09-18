@@ -165,6 +165,20 @@
         text-decoration: none !important;
     }
 
+    .mc-strike-price::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -6%;
+        width: 112%;
+        height: 3px;
+        background: #ff4d4d;
+        border-radius: 2px;
+        transform: translateY(-50%) rotate(-18deg);
+        pointer-events: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
     .mc-strike-price::after {
         content: '';
         position: absolute;
@@ -174,7 +188,7 @@
         height: 3px;
         background: #ff4d4d;
         border-radius: 2px;
-        transform: translateY(-50%) rotate(-13deg);
+        transform: translateY(-50%) rotate(18deg);
         pointer-events: none;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
@@ -190,6 +204,20 @@
         text-decoration: none !important;
     }
 
+    .mc-gift-crossed-price::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -6%;
+        width: 112%;
+        height: 3px;
+        background: #ff4d4d;
+        border-radius: 2px;
+        transform: translateY(-50%) rotate(-18deg);
+        pointer-events: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
     .mc-gift-crossed-price::after {
         content: '';
         position: absolute;
@@ -199,7 +227,7 @@
         height: 3px;
         background: #ff4d4d;
         border-radius: 2px;
-        transform: translateY(-50%) rotate(-13deg);
+        transform: translateY(-50%) rotate(18deg);
         pointer-events: none;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
     }
