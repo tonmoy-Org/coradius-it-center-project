@@ -59,19 +59,22 @@
     $formatDashTitle = function($html) {
         if (empty($html)) return '';
 
-        $pattern = '/(\s*&mdash;\s*|\s*—\s*|\s*–\s*|\s*--\s*|\s+-\s+)/u';
-        if (preg_match($pattern, $html)) {
-            $parts = preg_split($pattern, $html, 2);
-            if (count($parts) === 2 && !empty(trim(strip_tags($parts[0]))) && !empty(trim(strip_tags($parts[1])))) {
-                $main = trim($parts[0]);
-                $sub = trim($parts[1]);
+        $cleanStr = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $cleanStr = str_replace("\xC2\xA0", ' ', $cleanStr);
 
-                $mainClean = preg_replace('/^<p>(.*?)<\/p>$/is', '$1', $main);
-                $subClean = preg_replace('/^<p>(.*?)<\/p>$/is', '$1', $sub);
+        $pattern = '/(\s*—\s*|\s*–\s*|\s*--\s*|\s+-\s+)/u';
 
-                return '<div class="mc-gift-title-main">' . $mainClean . '</div>' .
-                       '<div class="mc-gift-sub-line"></div>' .
-                       '<div class="mc-gift-title-sub">' . $subClean . '</div>';
+        if (preg_match($pattern, $cleanStr)) {
+            $parts = preg_split($pattern, $cleanStr, 2);
+            if (count($parts) === 2) {
+                $mainText = trim(strip_tags($parts[0]));
+                $subText = trim(strip_tags($parts[1]));
+
+                if (!empty($mainText) && !empty($subText)) {
+                    return '<div class="mc-gift-title-main">' . e($mainText) . '</div>' .
+                           '<div class="mc-gift-sub-line"></div>' .
+                           '<div class="mc-gift-title-sub">' . e($subText) . '</div>';
+                }
             }
         }
         return $html;
@@ -413,11 +416,12 @@
     }
 
     .mc-gift-sub-line {
-        width: 44px;
-        height: 3px;
+        width: 50px;
+        height: 4px;
         background: linear-gradient(90deg, #0056D2 0%, #38BDF8 100%);
-        border-radius: 3px;
-        margin: 8px auto 12px auto;
+        border-radius: 4px;
+        margin: 10px auto 14px auto;
+        display: block !important;
     }
 
     .mc-gift-title-sub {
