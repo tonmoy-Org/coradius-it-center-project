@@ -27,6 +27,14 @@ apt-get update
 apt-get install -y nginx mariadb-server certbot python3-certbot-nginx
 apt-get install -y php8.1-fpm php8.1-mysql php8.1-mbstring php8.1-xml php8.1-bcmath php8.1-curl php8.1-zip php8.1-gd
 
+# Configure PHP Upload Limits
+sed -i "s/upload_max_filesize = .*/upload_max_filesize = 500M/" /etc/php/*/fpm/php.ini
+sed -i "s/post_max_size = .*/post_max_size = 500M/" /etc/php/*/fpm/php.ini
+sed -i "s/memory_limit = .*/memory_limit = 512M/" /etc/php/*/fpm/php.ini
+sed -i "s/max_execution_time = .*/max_execution_time = 600/" /etc/php/*/fpm/php.ini
+sed -i "s/max_input_time = .*/max_input_time = 600/" /etc/php/*/fpm/php.ini
+systemctl restart php8.1-fpm || systemctl restart php*-fpm
+
 echo "[3/10] Installing Composer..."
 if ! command -v composer &> /dev/null
 then
@@ -88,6 +96,8 @@ server {
     listen 80;
     server_name ${DOMAIN} www.${DOMAIN};
     root ${PROJECT_DIR}/public;
+
+    client_max_body_size 500M;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";

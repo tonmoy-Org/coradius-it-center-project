@@ -59,15 +59,31 @@ class MediaLibraryController extends Controller
             $type = get_yrsetting('supported_mimes');
 
             if ($request->hasFile('file')) {
-                $extension = strtolower($request->file('file')->getClientOriginalExtension());
+                $file = $request->file('file');
+                $extension = strtolower($file->getClientOriginalExtension());
 
                 if (! isset($type[$extension])) {
-                    return response()->json(__('This file type is not supported.'), 500);
+                    return response()->json(__('This file type is not supported.'), 422);
                 }
-                if ($type[$extension] == 'image') {
-                    $response = $this->saveImage($request->file('file'), '_media_', true);
+
+                $fileSizeInMB = $file->getSize() / (1024 * 1024);
+                $fileType = $type[$extension];
+
+                if ($fileType == 'image') {
+                    if ($fileSizeInMB > 10) {
+                        return response()->json(__('Image size cannot exceed 10 MB (ছবি ১০MB এর বেশি হতে পারবে না)'), 422);
+                    }
+                    $response = $this->saveImage($file, '_media_', true);
+                } else if ($fileType == 'video') {
+                    if ($fileSizeInMB > 100) {
+                        return response()->json(__('Video size cannot exceed 100 MB (ভিডিও ১০০MB এর বেশি হতে পারবে না)'), 422);
+                    }
+                    $response = $this->saveFile($file, $fileType);
                 } else {
-                    $response = $this->saveFile($request->file('file'), $type[$extension]);
+                    if ($fileSizeInMB > 100) {
+                        return response()->json(__('File size cannot exceed 100 MB (ফাইল ১০০MB এর বেশি হতে পারবে না)'), 422);
+                    }
+                    $response = $this->saveFile($file, $fileType);
                 }
 
                 return response()->json($response, 200);

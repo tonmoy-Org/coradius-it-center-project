@@ -8,7 +8,7 @@ Dropzone.autoDiscover = false;
 $('.media-uploader').dropzone({
     url: $('.media_store_route').val(),
     uploadMultiple: false,
-    maxFilesize: 20,
+    maxFilesize: 100,
     dictDefaultMessage: '',
     clickable: ".media-message",
     // clickable: false,
@@ -18,9 +18,25 @@ $('.media-uploader').dropzone({
     acceptedFiles: ".jpg,.jpeg,.png,.gif,.mp4,.mpg,.mpeg,.webp,.webm,.ogg,.avi,.mov,.flv,.swf,.mkv,.wmv,wma,.aac,.wav,.mp3,.zip,.rar,.7z,.doc,.txt,.docx,.pdf,.csv,.xml,.ods,.xlr,.xls,.xlsx",
     timeout: 180000,
     maxFiles: 20,
+    accept: function(file, done) {
+        let isImage = file.type.startsWith('image/') || /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name);
+        let isVideo = file.type.startsWith('video/') || /\.(mp4|mov|ogg|webm|mkv|avi|wmv|flv)$/i.test(file.name);
+        let sizeInMB = file.size / (1024 * 1024);
+
+        if (isImage && sizeInMB > 10) {
+            done("Image size cannot exceed 10 MB (ছবি ১০MB এর বেশি হতে পারবে না)");
+        } else if (isVideo && sizeInMB > 100) {
+            done("Video size cannot exceed 100 MB (ভিডিও ১০০MB এর বেশি হতে পারবে না)");
+        } else if (sizeInMB > 100) {
+            done("File size cannot exceed 100 MB (ফাইল ১০০MB এর বেশি হতে পারবে না)");
+        } else {
+            done();
+        }
+    },
     init: function () {
         this.on("error", function (file, responseText) {
-            toastr['error'](responseText)
+            let errorMsg = typeof responseText === 'object' && responseText.message ? responseText.message : responseText;
+            toastr['error'](errorMsg);
         });
         this.on("success", function () {
             page = 1;
@@ -30,9 +46,11 @@ $('.media-uploader').dropzone({
 
         this.on("complete", function (file) {
             if ($('.dropzone_file_container')) {
-                let urlString = file.xhr.responseText;
-                let path = urlString.replace(/\\/g, "")
-                $('.dropzone_file_container').append(`<input type="hidden" name="file" value=${path}>`)
+                let urlString = file.xhr ? file.xhr.responseText : '';
+                if (urlString) {
+                    let path = urlString.replace(/\\/g, "");
+                    $('.dropzone_file_container').append(`<input type="hidden" name="file" value=${path}>`);
+                }
             }
         })
     },

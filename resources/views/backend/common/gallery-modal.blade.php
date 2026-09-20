@@ -71,8 +71,7 @@
                                                 <span class="d-block">{{ __('or') }}</span>
                                                 <button type="button"
                                                     class="btn sg-btn-outline-primary">{{ __('select_file') }}</button>
-                                                <span class="d-block">{{ __('maximum_upload_file_size') }} : 10
-                                                    {{ __('mb') }}</span>
+                                                <span class="d-block">{{ __('maximum_upload_file_size') }} : Image 10 MB / Video 100 MB</span>
                                             </div>
                                         </div>
                                     </div>
