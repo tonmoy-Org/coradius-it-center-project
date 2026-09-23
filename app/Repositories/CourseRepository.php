@@ -99,6 +99,12 @@ class CourseRepository
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
             $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
             $mc['faq_status'] = isset($mc['faq_status']) ? (!empty($mc['faq_status']) ? 1 : 0) : 1;
+            if (isset($mc['pricing_status'])) {
+                $mc['pricing_status'] = !empty($mc['pricing_status']) ? 1 : 0;
+            }
+            if (isset($mc['use_custom_lead_form'])) {
+                $mc['use_custom_lead_form'] = !empty($mc['use_custom_lead_form']) ? 1 : 0;
+            }
 
             if (request()->hasFile('overview_image_file')) {
                 $response = $this->saveImage(request()->file('overview_image_file'), 'course');
@@ -472,6 +478,12 @@ class CourseRepository
             $mc['support_status'] = isset($mc['support_status']) ? 1 : 0;
             $mc['breakdown_status'] = isset($mc['breakdown_status']) ? 1 : 0;
             $mc['faq_status'] = isset($mc['faq_status']) ? (!empty($mc['faq_status']) ? 1 : 0) : 1;
+            if (isset($mc['pricing_status'])) {
+                $mc['pricing_status'] = !empty($mc['pricing_status']) ? 1 : 0;
+            }
+            if (isset($mc['use_custom_lead_form'])) {
+                $mc['use_custom_lead_form'] = !empty($mc['use_custom_lead_form']) ? 1 : 0;
+            }
             if (isset($mc['show_benefits_section'])) {
                 $mc['show_benefits_section'] = !empty($mc['show_benefits_section']) ? 1 : 0;
                 $mc['benefits_status'] = $mc['show_benefits_section'];

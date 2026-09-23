@@ -980,9 +980,7 @@
     @endif
 
     <!--====== Start Order Form Section ======-->
-    @if(!isset($mcSettings['pricing_status']) || $mcSettings['pricing_status'] == 1)
     @include('frontend.homePage.order_form')
-    @endif
 
 
 

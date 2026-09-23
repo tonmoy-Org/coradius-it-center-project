@@ -1553,8 +1553,17 @@
                             <div class="tab-pane fade {{ $request_tab == 'lead_form' ? 'show active' : '' }}"
                                  id="courseLeadForm" role="tabpanel" tabindex="0">
                                 <div class="card border mb-4 rounded-3 shadow-sm">
-                                    <div class="card-header bg-white py-3">
-                                        <span class="form-label m-0">{{ __('Lead Form Settings') }}</span>
+                                    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between">
+                                        <span class="form-label m-0 font-weight-bold" style="font-size: 15px;">{{ __('Lead Form Settings') }}</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label class="form-label m-0 cursor-pointer me-2" for="pricing_status" style="font-size: 13.5px; font-weight: 500; color: #475569;">{{ __('Show Form Title & Subtitle') }}</label>
+                                            <input type="hidden" name="masterclass_settings[pricing_status]" value="0">
+                                            <div class="setting-check m-0">
+                                                <input type="checkbox" name="masterclass_settings[pricing_status]" value="1" id="pricing_status"
+                                                       {{ !isset($mcSettings['pricing_status']) || !empty($mcSettings['pricing_status']) ? 'checked' : '' }}>
+                                                <label for="pricing_status" class="m-0"></label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card-body p-4">
                                         <div class="row gx-20">
@@ -1580,6 +1589,32 @@
                                                 <input type="text" name="masterclass_settings[order_form_button_text]" id="order_form_button_text" class="form-control rounded-2"
                                                        value="{{ $mcSettings['order_form_button_text'] ?? ($mcSettings['pay_now_btn_text'] ?? ($mcSettings['order_btn_text'] ?? '')) }}"
                                                        placeholder="e.g. ফ্রি এক্সেস নিন">
+                                            </div>
+
+                                            <!-- Toggle: Enable/Disable Custom Embedded Lead Form -->
+                                             <div class="col-12 mb-3">
+                                                 <div class="p-3 bg-light rounded-3 border d-flex align-items-center justify-content-between">
+                                                     <div>
+                                                         <label class="form-label m-0 font-weight-bold cursor-pointer" for="use_custom_lead_form" style="font-size: 14px; color: #1e293b;">
+                                                             <i class="las la-toggle-on text-primary me-1" style="font-size: 18px;"></i> {{ __('Custom Embedded Lead Form (ON / OFF)') }}
+                                                         </label>
+                                                         <small class="text-muted d-block mt-1">{{ __('Turn ON to display custom embed code (LeadsNimble/CRM) on landing page. Turn OFF to show default form.') }}</small>
+                                                     </div>
+                                                     <input type="hidden" name="masterclass_settings[use_custom_lead_form]" value="0">
+                                                     <div class="setting-check m-0">
+                                                         <input type="checkbox" name="masterclass_settings[use_custom_lead_form]" value="1" id="use_custom_lead_form"
+                                                                {{ (!isset($mcSettings['use_custom_lead_form']) ? !empty($mcSettings['custom_lead_form']) : !empty($mcSettings['use_custom_lead_form'])) ? 'checked' : '' }}>
+                                                         <label for="use_custom_lead_form" class="m-0"></label>
+                                                     </div>
+                                                 </div>
+                                             </div>
+
+                                             <!-- Custom Embedded Lead Form Code (Optional) -->
+                                            <div class="col-12 mb-4">
+                                                <label for="custom_lead_form" class="form-label">{{ __('Custom Embedded Lead Form Code (HTML / Script / iFrame)') }}</label>
+                                                <textarea name="masterclass_settings[custom_lead_form]" id="custom_lead_form" class="form-control rounded-2"
+                                                          rows="4" placeholder='e.g. <div id="textcrm-lead-form"></div>&#10;<script async src="https://app.leadsnimble.com/lead-form/loader.js?key=lf_yyv6myls2gdx1bbajgn0qbrl"></script>'>{!! $mcSettings['custom_lead_form'] ?? '' !!}</textarea>
+                                                <small class="text-muted d-block mt-1"><i class="las la-info-circle me-1 text-primary"></i> Paste custom lead form HTML/script (e.g. LeadsNimble, CRM form embed code). If provided, this embedded form will be displayed on the landing page instead of the static form.</small>
                                             </div>
 
                                             <!-- Bottom Text Editor -->

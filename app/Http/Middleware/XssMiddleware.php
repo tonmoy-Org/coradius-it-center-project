@@ -15,10 +15,26 @@ class XssMiddleware
     public function handle(Request $request, Closure $next)
     {
         $userInput = $request->all();
-        array_walk_recursive($userInput, function (&$userInput) {
-            $userInput = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $userInput);
-            $userInput = preg_replace('#&lt;script(.*?)gt;(.*?)&lt;/script&gt;#is', '', $userInput);
+
+        $exceptKeys = [
+            'custom_lead_form',
+            'custom_header_script',
+            'custom_footer_script',
+            'custom_css',
+            'custom_js',
+            'fb_pixel_id',
+            'google_analytics_id',
+            'header_script',
+            'footer_script',
+        ];
+
+        array_walk_recursive($userInput, function (&$val, $key) use ($exceptKeys) {
+            if (is_string($val) && !in_array($key, $exceptKeys, true)) {
+                $val = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $val);
+                $val = preg_replace('#&lt;script(.*?)gt;(.*?)&lt;/script&gt;#is', '', $val);
+            }
         });
+
         $request->merge($userInput);
 
         return $next($request);

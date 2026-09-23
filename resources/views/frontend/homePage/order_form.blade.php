@@ -3,6 +3,10 @@
     if(isset($course) && $course) {
         $mcSettings = is_array($course->masterclass_settings) ? $course->masterclass_settings : json_decode($course->masterclass_settings ?? '[]', true);
         if(!is_array($mcSettings)) $mcSettings = [];
+    } elseif(isset($hero_course) && $hero_course) {
+        $course = $hero_course;
+        $mcSettings = is_array($hero_course->masterclass_settings) ? $hero_course->masterclass_settings : json_decode($hero_course->masterclass_settings ?? '[]', true);
+        if(!is_array($mcSettings)) $mcSettings = [];
     }
 
     $heroBtnText = !empty($mcSettings['overview_btn_text']) ? $mcSettings['overview_btn_text'] : 'Get Free Access Now';
@@ -230,63 +234,103 @@
             
             <!-- Right Form Side -->
             <div class="lead-form-side {{ empty($blueSectionImage) ? 'w-100' : '' }}" style="{{ empty($blueSectionImage) ? 'flex: 0 0 100% !important; max-width: 100% !important; width: 100% !important;' : '' }}">
-                @if(!empty($orderFormTitle))
-                    <h3 class="form-heading">{!! $orderFormTitle !!}</h3>
-                @endif
-                @if(!empty($orderFormSubtitle))
-                    <div class="form-subheading">{!! $orderFormSubtitle !!}</div>
+                @if(!isset($mcSettings['pricing_status']) || !empty($mcSettings['pricing_status']))
+                    @if(!empty($orderFormTitle))
+                        <h3 class="form-heading">{!! $orderFormTitle !!}</h3>
+                    @endif
+                    @if(!empty($orderFormSubtitle))
+                        <div class="form-subheading">{!! $orderFormSubtitle !!}</div>
+                    @endif
                 @endif
                 
-                <form action="{{ route('masterclass.checkout') }}" method="post" class="form">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $course->id }}">
-                    <input type="hidden" name="type" value="course">
-                    <input type="hidden" name="quantity" value="1">
-                    
-                    <div class="mb-4">
-                        <label class="form-label">আপনার নাম <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control rounded-2 @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
-                        @error('name')
-                            <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
-                        @enderror
+                @if((!isset($mcSettings['use_custom_lead_form']) || !empty($mcSettings['use_custom_lead_form'])) && !empty($mcSettings['custom_lead_form']))
+                    <!-- Custom Embedded Lead Form (e.g. LeadsNimble / External CRM) -->
+                    <div class="custom-embedded-lead-form mb-3">
+                        {!! $mcSettings['custom_lead_form'] !!}
                     </div>
-
-                    <div class="mb-4">
-                        <label class="form-label">ইমেইল <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control rounded-2 @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
-                        @error('email')
-                            <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label">মোবাইল নাম্বার <span class="text-danger">*</span></label>
-                        <input type="tel" name="phone" class="form-control rounded-2 @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
-                        @error('phone')
-                            <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label">হোয়াটসঅ্যাপ নাম্বার <span class="text-danger">*</span></label>
-                        <input type="tel" name="whatsapp_number" class="form-control rounded-2 @error('whatsapp_number') is-invalid @enderror" value="{{ old('whatsapp_number') }}" placeholder="আপনার হোয়াটসঅ্যাপ নাম্বার লিখুন" required>
-                        @error('whatsapp_number')
-                            <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
-                        @enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-submit-profile w-100 text-center">
-                        <span>{{ $orderFormBtnText }}</span>
-                        <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
-
+                    <script>
+                        (function() {
+                            function executeEmbedScripts() {
+                                var container = document.querySelector('.custom-embedded-lead-form');
+                                if (!container) return;
+                                var scripts = container.querySelectorAll('script');
+                                scripts.forEach(function(oldScript) {
+                                    if (oldScript.dataset.executed) return;
+                                    var newScript = document.createElement('script');
+                                    Array.from(oldScript.attributes).forEach(function(attr) {
+                                        newScript.setAttribute(attr.name, attr.value);
+                                    });
+                                    newScript.dataset.executed = "true";
+                                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                                });
+                            }
+                            if (document.readyState === 'loading') {
+                                document.addEventListener('DOMContentLoaded', executeEmbedScripts);
+                            } else {
+                                executeEmbedScripts();
+                            }
+                        })();
+                    </script>
                     @if(!empty($mcSettings['order_form_bottom_text']))
                         <div class="order-form-bottom-text">
                             <i class="fas fa-info-circle"></i>
                             <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
                         </div>
                     @endif
-                </form>
+                @else
+                    <!-- Default Static Lead Form -->
+                    <form action="{{ route('masterclass.checkout') }}" method="post" class="form">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $course->id }}">
+                        <input type="hidden" name="type" value="course">
+                        <input type="hidden" name="quantity" value="1">
+                        
+                        <div class="mb-4">
+                            <label class="form-label">আপনার নাম <span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control rounded-2 @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="আপনার সম্পূর্ণ নাম লিখুন" required>
+                            @error('name')
+                                <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">ইমেইল <span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control rounded-2 @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="আপনার সঠিক ইমেইল লিখুন" required>
+                            @error('email')
+                                <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">মোবাইল নাম্বার <span class="text-danger">*</span></label>
+                            <input type="tel" name="phone" class="form-control rounded-2 @error('phone') is-invalid @enderror" value="{{ old('phone') }}" placeholder="আপনার মোবাইল নাম্বার লিখুন" required>
+                            @error('phone')
+                                <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">হোয়াটসঅ্যাপ নাম্বার <span class="text-danger">*</span></label>
+                            <input type="tel" name="whatsapp_number" class="form-control rounded-2 @error('whatsapp_number') is-invalid @enderror" value="{{ old('whatsapp_number') }}" placeholder="আপনার হোয়াটসঅ্যাপ নাম্বার লিখুন" required>
+                            @error('whatsapp_number')
+                                <span class="invalid-feedback d-block text-danger small mt-1"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-submit-profile w-100 text-center">
+                            <span>{{ $orderFormBtnText }}</span>
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+
+                        @if(!empty($mcSettings['order_form_bottom_text']))
+                            <div class="order-form-bottom-text">
+                                <i class="fas fa-info-circle"></i>
+                                <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
+                            </div>
+                        @endif
+                    </form>
+                @endif
             </div>
         </div>
     </div>
