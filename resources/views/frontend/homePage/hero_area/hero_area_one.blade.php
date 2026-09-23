@@ -14,7 +14,7 @@
     <div class="container container-1278">
         <div class="row justify-content-center">
             <div class="col-xl-11 col-lg-12 col-md-12">
-                <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+                <div class="hero-content">
                     
 
                     {{-- Title first --}}

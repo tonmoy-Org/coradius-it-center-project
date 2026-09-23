@@ -90,6 +90,11 @@
     <!--====== Performance Preconnect & Preload ======-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    @if(isset($hero_course) && $hero_course && $hero_course->image)
+        <link rel="preload" as="image" href="{{ getFileLink('original_image', $hero_course->image) }}" fetchpriority="high">
+    @elseif(isset($course) && $course && $course->image)
+        <link rel="preload" as="image" href="{{ getFileLink('original_image', $course->image) }}" fetchpriority="high">
+    @endif
 
     <!--====== Critical Bootstrap & Core CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
