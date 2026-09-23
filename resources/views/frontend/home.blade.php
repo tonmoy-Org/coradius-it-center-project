@@ -610,6 +610,9 @@
     @include('frontend.homePage.hero_area.hero_area_one')
     @endif
 
+    <!--====== Start Order Form Section (Upper Page Placement) ======-->
+    @include('frontend.homePage.order_form')
+
     <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
     {{-- @include('frontend.homePage.feature_section') --}}
