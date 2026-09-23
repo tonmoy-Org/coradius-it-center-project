@@ -98,11 +98,9 @@
         <link rel="preload" as="image" href="{{ getFileLink('original_image', $course->image) }}" fetchpriority="high">
     @endif
 
-    <!--====== Bootstrap deferred – rendered async, noscript fallback ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}"></noscript>
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}"></noscript>
+    <!--====== Core CSS (Synchronous for Zero CLS & Instant Painting) ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
 
     <!--====== Async Non-Critical CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">

@@ -229,17 +229,30 @@
 
 @push('js')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof Plyr !== 'undefined') {
-            const ytPlayers = document.querySelectorAll('.yt_player');
-            ytPlayers.forEach(function(el) {
-                new Plyr(el);
-            });
-            const html5Players = document.querySelectorAll('video.course-intro-video');
-            html5Players.forEach(function(el) {
-                new Plyr(el);
+        // Performance-Optimized Lazy Plyr Video Initialization (Zero Initial Network Overhead)
+        let plyrInitialized = false;
+        function initHeroPlyr() {
+            if (plyrInitialized) return;
+            plyrInitialized = true;
+            if (typeof Plyr !== 'undefined') {
+                const ytPlayers = document.querySelectorAll('.yt_player');
+                ytPlayers.forEach(function(el) {
+                    new Plyr(el, { autoplay: false, clickToPlay: true });
+                });
+                const html5Players = document.querySelectorAll('video.course-intro-video');
+                html5Players.forEach(function(el) {
+                    new Plyr(el, { autoplay: false });
+                });
+            }
+        }
+
+        const heroWrapper = document.querySelector('.hero-video-wrapper');
+        if (heroWrapper) {
+            ['click', 'mouseenter', 'touchstart'].forEach(function(evtName) {
+                heroWrapper.addEventListener(evtName, initHeroPlyr, { once: true, passive: true });
             });
         }
+        setTimeout(initHeroPlyr, 3500);
 
         // Modern Tech Cursor Follower & Stardust Particle Animation
         const heroSection = document.querySelector('.hero-area');
