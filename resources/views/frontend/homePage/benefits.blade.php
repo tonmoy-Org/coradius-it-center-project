@@ -226,23 +226,27 @@
                     @endphp
 
                     <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($idx % 2) * 100 }}">
-                        <div class="mc-target-audience-card-light" style="padding: 18px 24px;">
-                            <div class="d-flex align-items-center gap-3" style="position: relative; z-index: 1;">
-                                <div class="mc-audience-icon-box-light" style="background: {{ $iconBg }}; border: 1px solid {{ $iconBorder }}; color: {{ $iconColor }};">
-                                    <i class="{{ $iconClass }}"></i>
+                        <div class="mc-target-audience-card-light" style="padding: 22px 22px 20px 22px;">
+                            <div style="position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%;">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <div class="mc-audience-icon-box-light" style="background: {{ $iconBg }}; border: 1px solid {{ $iconBorder }}; color: {{ $iconColor }}; width: 52px; height: 52px; font-size: 24px; border-radius: 14px;">
+                                        <i class="{{ $iconClass }}"></i>
+                                    </div>
+                                    <div style="flex-grow: 1;">
+                                        <h4 class="mc-audience-title-light mb-0" style="font-size: 17px; line-height: 1.35;">{{ $bTitle }}</h4>
+                                    </div>
                                 </div>
-                                <div style="flex-grow: 1;">
-                                    <h4 class="mc-audience-title-light">{{ $bTitle }}</h4>
-                                    @if(!empty($bDesc))
-                                        <p class="mc-audience-desc-light mb-1">{{ $bDesc }}</p>
-                                    @endif
-                                    @if(!empty($bNote))
-                                        <div class="mc-audience-check-note-light mt-1">
-                                            <i class="fas fa-arrow-circle-right"></i>
-                                            <span>{{ $bNote }}</span>
-                                        </div>
-                                    @endif
-                                </div>
+                                
+                                @if(!empty($bDesc))
+                                    <p class="mc-audience-desc-light mb-2" style="font-size: 13.5px; line-height: 1.55; color: #4B5A72; flex-grow: 1;">{{ $bDesc }}</p>
+                                @endif
+
+                                @if(!empty($bNote))
+                                    <div class="mc-audience-check-note-light mt-auto pt-2" style="font-size: 13px; color: #FF7A00; border-top: 1px dashed rgba(0, 86, 210, 0.12);">
+                                        <i class="fas fa-arrow-circle-right flex-shrink-0" style="font-size: 14px;"></i>
+                                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600;">{{ $bNote }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
