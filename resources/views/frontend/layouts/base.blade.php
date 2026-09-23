@@ -87,29 +87,24 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
-    <!--====== Bootstrap CSS ======-->
+    <!--====== Performance Preconnect & Preload ======-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!--====== Critical Bootstrap & Core CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
-    <!--====== Slick Slider ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}">
-    <!--====== Magnific ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}">
-    <!--====== Nice Select ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}">
-    <!--====== Nice Select ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}">
-    <!--====== Plyr CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}">
-    <!--====== Font Awesome ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}">
-    <!--====== Box Icons ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}">
-    <!--====== Spacing CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}">
-    <!--====== AOS CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}">
-    <!--====== Main CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
-    {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
+
+    <!--====== Async Non-Critical CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
 
     <style>
         :root {
@@ -152,6 +147,15 @@
             border-radius: 8px !important;
         }
 
+        /* Universal Performance & Aspect Ratio Fixes (CLS Prevention) */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .hero-video-wrapper, .video-container, .yt_player, .course-intro-video {
+            aspect-ratio: 16 / 9 !important;
+            width: 100% !important;
+        }
         .card, .course-item, .blog-post-item, .category-item, .testimonial-item,
         .course-item-thumb, .course-item-thumb img, .blog-post-thumb img,
         .video-container, .video-banner-card, .video-banner-card img,
@@ -453,10 +457,17 @@
 
     @if (setting('disable_preloader') != '1')
         <script type="text/javascript">
-            window.addEventListener("load", function () {
-                const preloader = document.querySelector(".preloader");
-                preloader.classList.add("preloader-finish");
-            });
+            (function() {
+                function hidePreloader() {
+                    const preloader = document.querySelector(".preloader");
+                    if (preloader && !preloader.classList.contains("preloader-finish")) {
+                        preloader.classList.add("preloader-finish");
+                    }
+                }
+                document.addEventListener("DOMContentLoaded", hidePreloader);
+                window.addEventListener("load", hidePreloader);
+                setTimeout(hidePreloader, 1200);
+            })();
         </script>
     @endif
 </head>
@@ -476,35 +487,23 @@
          theme_color="{{ setting('facebook_messenger_color') }}">
     </div>
 @endif
-<!--====== jQuery ======-->
-<script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
-<!--====== Popper JS ======-->
-<script src="{{ static_asset('frontend/js/popper.min.js') }}"></script>
-<!--====== Bootstrap ======-->
-<script src="{{ static_asset('frontend/js/bootstrap.min.js') }}"></script>
-<!--====== Slick Slider ======-->
-<script src="{{ static_asset('frontend/js/slick.min.js') }}"></script>
-<!--====== Magnific ======-->
-<script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
-<!--====== Plyr JS ======-->
-<script src="{{ static_asset('frontend/js/plyr.js') }}"></script>
-<!--====== Nice Select ======-->
-<script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}"></script>
-<!--====== Nice Select ======-->
-<script src="{{ static_asset('frontend/js/select2.min.js') }}"></script>
-<!--====== AOS JS ======-->
-<script src="{{ static_asset('frontend/js/aos.js') }}"></script>
-<!--====== Cookie Alert ======-->
-<script src="{{ static_asset('frontend/js/cookiealert.js') }}"></script>
-<!--====== Main JS ======-->
-<script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}"></script>
-<!--====== App JS ======-->
-<script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}"></script>
+<!--====== jQuery & Core JS (Deferred for PageSpeed) ======-->
+<script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/popper.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/bootstrap.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/slick.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/plyr.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/select2.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/aos.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/cookiealert.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}" defer></script>
+<script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}" defer></script>
 @if (auth()->check() && auth()->user()->role_id > 1)
     <script src="{{ static_asset('admin/js/OneSignalSDK.js') }}" defer></script>
 @endif
-<!--============= toastr=======-->
-<script src="{{ static_asset('frontend/js/toastr.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
 
 {!! Toastr::message() !!}
 <script src="{{ static_asset('admin/js/sweetalert211.min.js') }}"></script>
