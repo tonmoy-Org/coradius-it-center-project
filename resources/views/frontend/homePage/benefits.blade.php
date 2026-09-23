@@ -48,14 +48,7 @@
         ];
     }
 
-    $defaultNotes = [
-        'দক্ষতা শিখে স্বাধীন আয় শুরু করুন',
-        'ঘরে বসে ক্যারিয়ার গড়ার সুযোগ',
-        'সময় ও দক্ষতার সঠিক ব্যবহার',
-        'অতিরিক্ত আয়ের একটি স্মার্ট উপায়',
-        'ক্যারিয়ারে নতুন মাত্রা যোগ করুন',
-        'ব্যবসায় সফল হওয়ার সেরা কৌশল'
-    ];
+
 @endphp
 
 <style>
@@ -160,27 +153,55 @@
                         $bDesc = '';
                         $bNote = '';
 
-                        if (str_contains($benefit, '|')) {
-                            $parts = array_map('trim', explode('|', $benefit));
+                        $benefitTrim = trim($benefit);
+                        if (str_contains($benefitTrim, '|')) {
+                            $parts = array_map('trim', explode('|', $benefitTrim));
                             $bTitle = $parts[0] ?? '';
-                            $bDesc = $parts[1] ?? '';
-                            $bNote = $parts[2] ?? '';
-                        } else {
-                            if (str_contains($benefit, ' - ')) {
-                                $parts = array_map('trim', explode(' - ', $benefit, 2));
-                                $bTitle = $parts[0] ?? '';
+                            if (count($parts) >= 3) {
                                 $bDesc = $parts[1] ?? '';
-                            } elseif (str_contains($benefit, '-')) {
-                                $parts = array_map('trim', explode('-', $benefit, 2));
-                                $bTitle = $parts[0] ?? '';
-                                $bDesc = $parts[1] ?? '';
-                            } else {
-                                $bTitle = $benefit;
+                                $bNote = implode(' | ', array_slice($parts, 2));
+                            } elseif (count($parts) == 2) {
+                                $descPart = $parts[1] ?? '';
+                                if (str_contains($descPart, ' - ')) {
+                                    $sub = array_map('trim', explode(' - ', $descPart, 2));
+                                    $bDesc = $sub[0] ?? '';
+                                    $bNote = $sub[1] ?? '';
+                                } elseif (str_contains($descPart, '-')) {
+                                    $sub = array_map('trim', explode('-', $descPart, 2));
+                                    $bDesc = $sub[0] ?? '';
+                                    $bNote = $sub[1] ?? '';
+                                } else {
+                                    $bDesc = $descPart;
+                                }
                             }
-                        }
-
-                        if (empty($bNote)) {
-                            $bNote = $defaultNotes[$idx % count($defaultNotes)];
+                        } else {
+                            if (str_contains($benefitTrim, ' - ')) {
+                                $parts = array_map('trim', explode(' - ', $benefitTrim));
+                                if (count($parts) >= 3) {
+                                    $bTitle = $parts[0] ?? '';
+                                    $bDesc = $parts[1] ?? '';
+                                    $bNote = implode(' - ', array_slice($parts, 2));
+                                } elseif (count($parts) == 2) {
+                                    $bTitle = $parts[0] ?? '';
+                                    $bDesc = $parts[1] ?? '';
+                                } else {
+                                    $bTitle = $benefitTrim;
+                                }
+                            } elseif (str_contains($benefitTrim, '-')) {
+                                $parts = array_map('trim', explode('-', $benefitTrim));
+                                if (count($parts) >= 3) {
+                                    $bTitle = $parts[0] ?? '';
+                                    $bDesc = $parts[1] ?? '';
+                                    $bNote = implode('-', array_slice($parts, 2));
+                                } elseif (count($parts) == 2) {
+                                    $bTitle = $parts[0] ?? '';
+                                    $bDesc = $parts[1] ?? '';
+                                } else {
+                                    $bTitle = $benefitTrim;
+                                }
+                            } else {
+                                $bTitle = $benefitTrim;
+                            }
                         }
 
                         $bTitle = $stripEmojis($bTitle);
