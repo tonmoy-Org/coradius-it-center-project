@@ -634,8 +634,7 @@ if (! function_exists('css_font_name')) {
 if (! function_exists('font_link')) {
     function font_link()
     {
-        $url              = '<link rel="preconnect" href="https://fonts.googleapis.com">';
-        $url .= '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+        $url = '';
 
         // header font
         $header_font_name = setting('header_font');

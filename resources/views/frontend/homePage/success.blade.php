@@ -5,7 +5,7 @@
     }
 
     if(!isset($success_stories) || count($success_stories) == 0) {
-        $success_stories = \App\Models\SuccessStory::active()->latest()->get();
+        $success_stories = \App\Models\SuccessStory::active()->latest()->take(6)->get();
     }
 
     $mcSettings = [];
