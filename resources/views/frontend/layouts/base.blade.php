@@ -484,37 +484,37 @@
 <!--====== jQuery ======-->
 <script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
 <!--====== Popper JS ======-->
-<script src="{{ static_asset('frontend/js/popper.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/popper.min.js') }}" defer></script>
 <!--====== Bootstrap ======-->
-<script src="{{ static_asset('frontend/js/bootstrap.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/bootstrap.min.js') }}" defer></script>
 <!--====== Slick Slider ======-->
-<script src="{{ static_asset('frontend/js/slick.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/slick.min.js') }}" defer></script>
 <!--====== Magnific ======-->
-<script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}" defer></script>
 <!--====== Plyr JS ======-->
-<script src="{{ static_asset('frontend/js/plyr.js') }}"></script>
+<script src="{{ static_asset('frontend/js/plyr.js') }}" defer></script>
 <!--====== Nice Select ======-->
-<script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}" defer></script>
 <!--====== Nice Select ======-->
-<script src="{{ static_asset('frontend/js/select2.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/select2.min.js') }}" defer></script>
 <!--====== AOS JS ======-->
-<script src="{{ static_asset('frontend/js/aos.js') }}"></script>
+<script src="{{ static_asset('frontend/js/aos.js') }}" defer></script>
 <!--====== Cookie Alert ======-->
-<script src="{{ static_asset('frontend/js/cookiealert.js') }}"></script>
+<script src="{{ static_asset('frontend/js/cookiealert.js') }}" defer></script>
 <!--====== Main JS ======-->
-<script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}"></script>
+<script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}" defer></script>
 <!--====== App JS ======-->
-<script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}"></script>
+<script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}" defer></script>
 @if (auth()->check() && auth()->user()->role_id > 1)
     <script src="{{ static_asset('admin/js/OneSignalSDK.js') }}" defer></script>
 @endif
 <!--============= toastr=======-->
-<script src="{{ static_asset('frontend/js/toastr.min.js') }}"></script>
+<script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
 
 {!! Toastr::message() !!}
-<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}"></script>
+<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}" defer></script>
 @if (setting('is_pusher_notification_active') && auth()->check())
-    <script src="{{ static_asset('admin/js/pusher.min.js') }}"></script>
+    <script src="{{ static_asset('admin/js/pusher.min.js') }}" defer></script>
     <script>
         const pusher = new Pusher('{{ setting('pusher_app_key') ?: config('broadcasting.connections.pusher.key') }}', {
             cluster: '{{ setting('pusher_app_cluster') ?: config('broadcasting.connections.pusher.options.cluster') }}',
@@ -538,43 +538,45 @@
             $(this).closest('form').find('input[name="' + name + '"]').val(value);
         });
     });
-    //facebook chat
-    @if (setting('is_tawk_messenger_activated') == 1)
 
-    var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0];
+    // Lazy load third-party chat widgets after page interactive to avoid main thread blocking
+    function initThirdPartyChatWidgets() {
+        @if (setting('is_tawk_messenger_activated') == 1)
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
         s1.async = true;
         s1.src = 'https://embed.tawk.to/{{ setting('tawk_property_id') }}/{{ setting('tawk_widget_id') }}';
         s1.charset = 'UTF-8';
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
-    })();
-    @endif
+        @endif
 
         @if (setting('is_facebook_messenger_activated') == 1)
         window.fbAsyncInit = function () {
-        FB.init({
-            appId: 'facebook-developer-app-id',
-
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v3.3'
-        });
-    };
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
+            FB.init({
+                appId: 'facebook-developer-app-id',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.3'
+            });
+        };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        @endif
+    }
+    window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(initThirdPartyChatWidgets, { timeout: 4000 });
+        } else {
+            setTimeout(initThirdPartyChatWidgets, 3500);
         }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    @endif
+    });
 
         @if (auth()->check() && auth()->user()->role_id > 1)
     if ('serviceWorker' in navigator) {
