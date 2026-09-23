@@ -22,7 +22,7 @@ class XssMiddleware
             'custom_footer_script',
             'custom_css',
             'custom_js',
-            'fb_pixel_id',
+            'fb_pixel_id', 
             'google_analytics_id',
             'header_script',
             'footer_script',
