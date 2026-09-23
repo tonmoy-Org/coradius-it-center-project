@@ -87,18 +87,22 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
-    <!--====== Performance Preconnect & Preload ======-->
+    <!--====== Performance Preconnect & DNS Prefetch ======-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     @if(isset($hero_course) && $hero_course && $hero_course->image)
         <link rel="preload" as="image" href="{{ getFileLink('original_image', $hero_course->image) }}" fetchpriority="high">
     @elseif(isset($course) && $course && $course->image)
         <link rel="preload" as="image" href="{{ getFileLink('original_image', $course->image) }}" fetchpriority="high">
     @endif
 
-    <!--====== Critical Bootstrap & Core CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
+    <!--====== Bootstrap deferred – rendered async, noscript fallback ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}"></noscript>
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}"></noscript>
 
     <!--====== Async Non-Critical CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
@@ -514,7 +518,7 @@
 <script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
 
 {!! Toastr::message() !!}
-<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}"></script>
+<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}" defer></script>
 @if (setting('is_pusher_notification_active') && auth()->check())
     <script src="{{ static_asset('admin/js/pusher.min.js') }}"></script>
     <script>
