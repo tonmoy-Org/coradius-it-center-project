@@ -425,17 +425,20 @@
         .loading_button.d-none {
             display: none !important;
         }
+
+        /* Force font-display: swap for FontAwesome, BoxIcons, and Google Fonts */
+        @font-face {
+            font-display: swap !important;
+        }
     </style>
-    <!--====== Responsive CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}">
-    {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.min.css') }}"> --}}
-    <!--====== Color CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/toastr.min.css') }}">
+    <!--====== Async Responsive & Theme CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/toastr.min.css') }}" media="print" onload="this.media='all'">
     @php
         $theme_color = setting('theme_color') ?: 'coradius';
     @endphp
     @if ($theme_color)
-        <link rel="stylesheet" href="{{ static_asset('frontend/css/theme/' . $theme_color . '.css') }}">
+        <link rel="stylesheet" href="{{ static_asset('frontend/css/theme/' . $theme_color . '.css') }}" media="print" onload="this.media='all'">
     @endif
     @stack('css')
     <style>
