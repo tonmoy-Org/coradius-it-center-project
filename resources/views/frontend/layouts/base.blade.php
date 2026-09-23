@@ -90,23 +90,23 @@
     <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
     <!--====== Slick Slider ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Magnific ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Select2 ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Nice Select ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}">
-    <!--====== Nice Select ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Plyr CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}" media="print" onload="this.media='all'">
     <!--====== Font Awesome ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}">
     <!--====== Box Icons ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Spacing CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}">
     <!--====== AOS CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
     <!--====== Main CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
     {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
@@ -453,10 +453,15 @@
 
     @if (setting('disable_preloader') != '1')
         <script type="text/javascript">
-            window.addEventListener("load", function () {
+            function dismissPreloader() {
                 const preloader = document.querySelector(".preloader");
-                preloader.classList.add("preloader-finish");
-            });
+                if (preloader && !preloader.classList.contains("preloader-finish")) {
+                    preloader.classList.add("preloader-finish");
+                }
+            }
+            document.addEventListener("DOMContentLoaded", dismissPreloader);
+            window.addEventListener("load", dismissPreloader);
+            setTimeout(dismissPreloader, 600);
         </script>
     @endif
 </head>
