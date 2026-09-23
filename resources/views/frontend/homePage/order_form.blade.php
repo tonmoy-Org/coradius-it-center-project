@@ -201,7 +201,8 @@
         font-weight: 500;
         line-height: 1.5;
         border: 1px dashed rgba(0, 86, 210, 0.3);
-        margin-top: 16px;
+        margin-top: 10px;
+        margin-bottom: 22px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -243,6 +244,13 @@
                     @endif
                 @endif
                 
+                @if(!empty($mcSettings['order_form_bottom_text']))
+                    <div class="order-form-bottom-text mb-4">
+                        <i class="fas fa-info-circle"></i>
+                        <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
+                    </div>
+                @endif
+                
                 @if((!isset($mcSettings['use_custom_lead_form']) || !empty($mcSettings['use_custom_lead_form'])) && !empty($mcSettings['custom_lead_form']))
                     <!-- Custom Embedded Lead Form (e.g. LeadsNimble / External CRM) -->
                     <div class="custom-embedded-lead-form mb-3">
@@ -272,12 +280,6 @@
                             }
                         })();
                     </script>
-                    @if(!empty($mcSettings['order_form_bottom_text']))
-                        <div class="order-form-bottom-text">
-                            <i class="fas fa-info-circle"></i>
-                            <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
-                        </div>
-                    @endif
                 @else
                     <!-- Default Static Lead Form -->
                     <form action="{{ route('masterclass.checkout') }}" method="post" class="form">
@@ -322,13 +324,6 @@
                             <span>{{ $orderFormBtnText }}</span>
                             <i class="fas fa-arrow-right ms-2"></i>
                         </button>
-
-                        @if(!empty($mcSettings['order_form_bottom_text']))
-                            <div class="order-form-bottom-text">
-                                <i class="fas fa-info-circle"></i>
-                                <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
-                            </div>
-                        @endif
                     </form>
                 @endif
             </div>
