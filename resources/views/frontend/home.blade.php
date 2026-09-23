@@ -67,7 +67,7 @@
 
         section.mc-support-section-wrapper {
             padding-top: 38px !important;
-            padding-bottom: 0px !important;
+            padding-bottom: 38px !important;
         }
 
         section.about-me-section,
@@ -610,9 +610,6 @@
     @include('frontend.homePage.hero_area.hero_area_one')
     @endif
 
-    <!--====== Start Order Form Section (Upper Page Placement) ======-->
-    @include('frontend.homePage.order_form')
-
     <div class="home-page-sections">
     <!--====== Start Feature Cards Section (Life Time Access, Free Course Materials, Dedicated Support) ======-->
     {{-- @include('frontend.homePage.feature_section') --}}
@@ -852,15 +849,6 @@
     @include('frontend.homePage.faq')
     @endif
 
-    <!--====== Start Support Section ======-->
-    @if(!isset($mcSettings['support_status']) || $mcSettings['support_status'] == 1)
-    @include('frontend.homePage.support')
-    @endif
-
-
-
-
-
     <!--====== Start Coupon Banner Section ======-->
     @if(isset($active_banner_coupon) && $active_banner_coupon && $active_banner_coupon->image)
     <section class="coupon-banner-section p-t-60 p-b-60 bg-white overflow-hidden">
@@ -985,7 +973,10 @@
     <!--====== Start Order Form Section ======-->
     @include('frontend.homePage.order_form')
 
-
+    <!--====== Start Support Section ======-->
+    @if(!isset($mcSettings['support_status']) || $mcSettings['support_status'] == 1)
+    @include('frontend.homePage.support')
+    @endif
 
     <!--====== Global Countdown Script for both timers is now in footer.blade.php ======-->
 

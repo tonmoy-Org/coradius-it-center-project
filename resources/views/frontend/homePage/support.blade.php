@@ -102,8 +102,8 @@
         background-size: 20px 20px;
         border-top: 1px solid var(--color-border-tint, #C7DCFA);
         border-bottom: none;
-        padding-top: 120px;
-        padding-bottom: 20px;
+        padding-top: 60px;
+        padding-bottom: 70px;
         margin-top: 0 !important;
         width: 100%;
         position: relative;
@@ -113,7 +113,7 @@
     .mc-support-section-bottom {
         background: transparent;
         padding-top: 50px;
-        padding-bottom: 20px;
+        padding-bottom: 100px;
         width: 100%;
         position: relative;
     }
@@ -569,7 +569,7 @@
     @media (min-width: 1400px) {
         .mc-support-section-wrapper {
             padding-top: 60px;
-            padding-bottom: 20px;
+            padding-bottom: 70px;
         }
 
         .mc-support-title {
@@ -594,8 +594,8 @@
     /* 2. Laptops & Compact Desktops (992px - 1199px) */
     @media (min-width: 992px) and (max-width: 1199px) {
         .mc-support-section-wrapper {
-            padding-top: 45px;
-            padding-bottom: 20px;
+            padding-top: 50px;
+            padding-bottom: 60px;
         }
 
         .mc-support-title {
@@ -701,8 +701,8 @@
     /* 3. Tablets (768px - 991px) */
     @media (min-width: 768px) and (max-width: 991px) {
         .mc-support-section-wrapper {
-            padding-top: 40px;
-            padding-bottom: 20px;
+            padding-top: 45px;
+            padding-bottom: 50px;
         }
 
         .mc-support-title {
@@ -774,8 +774,8 @@
     /* 4. Small Tablets & Landscape Mobile (576px - 767px) */
     @media (min-width: 576px) and (max-width: 767px) {
         .mc-support-section-wrapper {
-            padding-top: 35px;
-            padding-bottom: 15px;
+            padding-top: 40px;
+            padding-bottom: 45px;
         }
 
         .mc-support-title {
@@ -856,8 +856,8 @@
     /* 5. Mobile Phones (max-width: 575px) */
     @media (max-width: 575px) {
         .mc-support-section-wrapper {
-            padding-top: 30px;
-            padding-bottom: 15px;
+            padding-top: 35px;
+            padding-bottom: 40px;
         }
 
         .mc-support-title {
