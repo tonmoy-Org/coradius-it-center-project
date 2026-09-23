@@ -33,7 +33,7 @@
                     @endif
 
                     {{-- Video or Image --}}
-                    <div class="hero-video-wrapper has-border-beam video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 8px; overflow: hidden; background: #000; max-width: 960px; border: 2px solid rgba(0, 86, 210, 0.4);">
+                    <div class="hero-video-wrapper has-border-beam video-container position-relative mt-4 shadow-lg mx-auto" style="border-radius: 8px; overflow: hidden; background: #000; max-width: 960px; border: 2px solid rgba(0, 86, 210, 0.4); aspect-ratio: 16 / 9;">
                         <!-- Border Beam SVG -->
                         <svg class="border-beam-svg">
                             <defs>
@@ -230,16 +230,29 @@
 @push('js')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        if (typeof Plyr !== 'undefined') {
-            const ytPlayers = document.querySelectorAll('.yt_player');
-            ytPlayers.forEach(function(el) {
-                new Plyr(el);
-            });
-            const html5Players = document.querySelectorAll('video.course-intro-video');
-            html5Players.forEach(function(el) {
-                new Plyr(el);
-            });
+        let plyrLoaded = false;
+        function loadPlyrPlayers() {
+            if (plyrLoaded) return;
+            plyrLoaded = true;
+            if (typeof Plyr !== 'undefined') {
+                const ytPlayers = document.querySelectorAll('.yt_player');
+                ytPlayers.forEach(function(el) {
+                    new Plyr(el);
+                });
+                const html5Players = document.querySelectorAll('video.course-intro-video');
+                html5Players.forEach(function(el) {
+                    new Plyr(el);
+                });
+            }
         }
+
+        const videoWrapper = document.querySelector('.hero-video-wrapper');
+        if (videoWrapper) {
+            videoWrapper.addEventListener('click', loadPlyrPlayers, { once: true });
+            videoWrapper.addEventListener('pointerover', loadPlyrPlayers, { once: true });
+            videoWrapper.addEventListener('touchstart', loadPlyrPlayers, { once: true, passive: true });
+        }
+        setTimeout(loadPlyrPlayers, 3500);
 
         // Modern Tech Cursor Follower & Stardust Particle Animation
         const heroSection = document.querySelector('.hero-area');
