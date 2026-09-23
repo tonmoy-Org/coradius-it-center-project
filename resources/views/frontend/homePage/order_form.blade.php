@@ -201,8 +201,8 @@
         font-weight: 500;
         line-height: 1.5;
         border: 1px dashed rgba(0, 86, 210, 0.3);
-        margin-top: 10px;
-        margin-bottom: 22px;
+        margin-top: 20px;
+        margin-bottom: 0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -242,13 +242,6 @@
                     @if(!empty($orderFormSubtitle))
                         <div class="form-subheading">{!! $orderFormSubtitle !!}</div>
                     @endif
-                @endif
-                
-                @if(!empty($mcSettings['order_form_bottom_text']))
-                    <div class="order-form-bottom-text mb-4">
-                        <i class="fas fa-info-circle"></i>
-                        <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
-                    </div>
                 @endif
                 
                 @if((!isset($mcSettings['use_custom_lead_form']) || !empty($mcSettings['use_custom_lead_form'])) && !empty($mcSettings['custom_lead_form']))
@@ -325,6 +318,13 @@
                             <i class="fas fa-arrow-right ms-2"></i>
                         </button>
                     </form>
+                @endif
+
+                @if(!empty($mcSettings['order_form_bottom_text']))
+                    <div class="order-form-bottom-text">
+                        <i class="fas fa-info-circle"></i>
+                        <div>{!! $mcSettings['order_form_bottom_text'] !!}</div>
+                    </div>
                 @endif
             </div>
         </div>
