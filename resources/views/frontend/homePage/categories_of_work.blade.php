@@ -125,16 +125,29 @@
         object-fit: cover;
     }
     .cow-card-only-image {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
         padding: 0;
         background: transparent;
         box-shadow: none;
+        border: none;
+        width: 100%;
+    }
+    .cow-card-only-image a {
+        display: block;
+        width: 100%;
     }
     .cow-card-only-image img {
-        max-width: 100%;
-        border-radius: 8px;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 56, 148, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cow-card-only-image img:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 56, 148, 0.15);
     }
     .cow-title p,
     .cow-card-title p {
@@ -200,8 +213,8 @@
             <div class="row g-4 justify-content-center">
                 @foreach($cards as $card)
                     @php
-                        $hasTitle = !empty($card['title']);
-                        $hasContent = !empty($card['content']);
+                        $hasTitle = !empty(trim(strip_tags($card['title'] ?? '')));
+                        $hasContent = !empty(trim(strip_tags($card['content'] ?? '')));
                         $hasImage = !empty($card['image']);
                         $hasLink = !empty($card['link']);
                         $onlyImage = !$hasTitle && !$hasContent && $hasImage;
