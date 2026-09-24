@@ -94,21 +94,19 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
-    <!--====== Critical Layout CSS ======-->
+    <!--====== Core Stylesheets ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
-    <!--====== Main CSS (async, zero render-block) ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}"></noscript>
-    <!--====== Non-Critical CSS (async, no render-block) ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}">
+    <!--====== Secondary Plugin CSS (async) ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
     {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
 
     <style>
@@ -491,39 +489,20 @@
 <script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ static_asset('frontend/js/popper.min.js') }}" defer></script>
 <script src="{{ static_asset('frontend/js/bootstrap.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/slick.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/plyr.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/select2.min.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/aos.js') }}" defer></script>
+<script src="{{ static_asset('frontend/js/cookiealert.js') }}" defer></script>
 <script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}" defer></script>
 <script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}" defer></script>
+<script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
+<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}" defer></script>
 @if (auth()->check() && auth()->user()->role_id > 1)
     <script src="{{ static_asset('admin/js/OneSignalSDK.js') }}" defer></script>
 @endif
-
-<!--====== Non-Critical Vendor JS (Deferred Idle Loading) ======-->
-<script>
-    function loadNonCriticalVendorScripts() {
-        var vendorScripts = [
-            "{{ static_asset('frontend/js/slick.min.js') }}",
-            "{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}",
-            "{{ static_asset('frontend/js/plyr.js') }}",
-            "{{ static_asset('frontend/js/jquery.nice-select.min.js') }}",
-            "{{ static_asset('frontend/js/select2.min.js') }}",
-            "{{ static_asset('frontend/js/aos.js') }}",
-            "{{ static_asset('frontend/js/cookiealert.js') }}",
-            "{{ static_asset('frontend/js/toastr.min.js') }}",
-            "{{ static_asset('admin/js/sweetalert211.min.js') }}"
-        ];
-        vendorScripts.forEach(function(src) {
-            var s = document.createElement('script');
-            s.src = src;
-            s.async = true;
-            document.body.appendChild(s);
-        });
-    }
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadNonCriticalVendorScripts, { timeout: 1500 });
-    } else {
-        window.addEventListener('load', function() { setTimeout(loadNonCriticalVendorScripts, 300); });
-    }
-</script>
 
 {!! Toastr::message() !!}
 @if (setting('is_pusher_notification_active') && auth()->check())
