@@ -642,7 +642,8 @@ if (! function_exists('font_link')) {
         $header_font_name = trim($header_font_name, '');
         $header_font_name = ucwords($header_font_name, '_');
         $header_font_name = str_replace('_', '+', $header_font_name);
-        $url .= '<link href="https://fonts.googleapis.com/css2?family='.$header_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet">';
+        $url .= '<link href="https://fonts.googleapis.com/css2?family='.$header_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media=\'all\'">';
+        $url .= '<noscript><link href="https://fonts.googleapis.com/css2?family='.$header_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>';
 
         if (setting('body_font') == setting('header_font')) {
             return $url;
@@ -654,7 +655,8 @@ if (! function_exists('font_link')) {
             $body_font_name = trim($body_font_name, '');
             $body_font_name = ucwords($body_font_name, '_');
             $body_font_name = str_replace('_', '+', $body_font_name);
-            $url .= '<link href="https://fonts.googleapis.com/css2?family='.$body_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet">';
+            $url .= '<link href="https://fonts.googleapis.com/css2?family='.$body_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media=\'all\'">';
+            $url .= '<noscript><link href="https://fonts.googleapis.com/css2?family='.$body_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>';
         }
 
         return $url;

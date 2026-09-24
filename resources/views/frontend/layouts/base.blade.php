@@ -93,6 +93,9 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
+    <!--====== Preload Critical CSS ======-->
+    <link rel="preload" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" as="style">
+    <link rel="preload" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" as="style">
     <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
     <!--====== Slick Slider ======-->
