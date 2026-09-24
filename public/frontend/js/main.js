@@ -1274,39 +1274,54 @@ function AnimateProgress(el) {
 mainMenu();
 categoryDropdown();
 profileDropdown();
-activeNiceSelect();
-videoPopup();
-previewSlider();
-mentorLessonSliderOne();
-mentorLessonSliderTwo();
-recentVideoSlider();
-testimonialSlider();
-successStorySliderOne();
-successStorySliderTwo();
-courseLessonSliderOne();
-courseLessonSliderTwo();
-blogPostSliderOne();
-blogPostSliderTwo();
-teamSlider();
-bookSlider();
-aboutSlider();
-counterUp();
-brandSlider();
-scrollToTop();
-setUserDropdownListener();
-toggleSearchbar();
-passwordEye();
-cartQuantity();
-SidebarToggleSide();
-videoLessonPlayer();
-courseVideoLesson();
-recentVideoPlayer();
-audioPodcast();
-// courseIntroVideo();
-pricingSlider();
-relatedCourseSlider();
-showMoreSubject();
-showMOreCourses();
-notificationToggle();
-otpForm();
-lessonPlaylistScrollBar();
+
+function initDeferredMainComponents() {
+    activeNiceSelect();
+    videoPopup();
+    previewSlider();
+    mentorLessonSliderOne();
+    mentorLessonSliderTwo();
+    recentVideoSlider();
+    testimonialSlider();
+    successStorySliderOne();
+    successStorySliderTwo();
+    courseLessonSliderOne();
+    courseLessonSliderTwo();
+    blogPostSliderOne();
+    blogPostSliderTwo();
+    teamSlider();
+    bookSlider();
+    aboutSlider();
+    counterUp();
+    brandSlider();
+    scrollToTop();
+    setUserDropdownListener();
+    toggleSearchbar();
+    passwordEye();
+    cartQuantity();
+    SidebarToggleSide();
+    videoLessonPlayer();
+    courseVideoLesson();
+    recentVideoPlayer();
+    audioPodcast();
+    pricingSlider();
+    relatedCourseSlider();
+    showMoreSubject();
+    showMOreCourses();
+    notificationToggle();
+    otpForm();
+    lessonPlaylistScrollBar();
+}
+
+if (document.readyState === 'complete') {
+    initDeferredMainComponents();
+} else {
+    window.addEventListener('load', function () {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(initDeferredMainComponents, { timeout: 1000 });
+        } else {
+            setTimeout(initDeferredMainComponents, 100);
+        }
+    });
+}
+

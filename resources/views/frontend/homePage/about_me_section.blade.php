@@ -143,6 +143,7 @@
                     </div>
                     <img src="{{ $aboutImgUrl }}" alt="About Me Instructor" 
                          class="img-fluid w-100 position-relative" 
+                         width="600" height="500"
                          loading="lazy" decoding="async"
                          style="object-fit: cover; width: 100%; height: 100%; min-height: 500px; border-radius: 16px; display: block; z-index: 1;">
                 </div>

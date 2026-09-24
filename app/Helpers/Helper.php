@@ -634,11 +634,10 @@ if (! function_exists('css_font_name')) {
 if (! function_exists('font_link')) {
     function font_link()
     {
-        $url  = '<link rel="preconnect" href="https://fonts.googleapis.com">';
-        $url .= '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+        $url  = '';
 
         // header font
-        $header_font_name = setting('header_font');
+        $header_font_name = setting('header_font') ?: 'jost';
         $header_font_name = trim($header_font_name, '');
         $header_font_name = ucwords($header_font_name, '_');
         $header_font_name = str_replace('_', '+', $header_font_name);
@@ -651,7 +650,7 @@ if (! function_exists('font_link')) {
         }
 
         //body font
-        $body_font_name = setting('body_font');
+        $body_font_name = setting('body_font') ?: 'poppins';
         if ($header_font_name != $body_font_name) {
             $body_font_name = trim($body_font_name, '');
             $body_font_name = ucwords($body_font_name, '_');

@@ -155,7 +155,7 @@
                             @php
                                 $src = setting('light_logo') && @is_file_exists(setting('light_logo')['original_image']) ? get_media(setting('light_logo')['original_image']) : get_media('images/default/logo/logo.png');
                             @endphp
-                            <img style="max-width: 150px;" src="{{ $src }}" alt="logo">
+                            <img style="max-width: 150px; height: auto;" width="150" height="40" src="{{ $src }}" alt="logo">
                         </a>
                         @php
                             $footerLogoDesc = setting('footer_logo_description', app()->getLocale());

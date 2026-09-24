@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    {!! font_link() !!}
 
     <!-- SEO -->
     <meta name="title" content="{{ $meta['meta_title'] }}"/>
@@ -111,6 +112,9 @@
     {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
 
     <style>
+        @font-face {
+            font-display: swap;
+        }
         :root {
             --body-font: '{{ setting("body_font") }}', sans-serif;
             --header-font: '{{ setting("header_font") }}', sans-serif;
