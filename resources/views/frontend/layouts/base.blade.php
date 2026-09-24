@@ -24,6 +24,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') | {{ setting('system_name') != '' ? setting('system_name') : 'Coradius IT Center' }}</title>
 
+    <!-- Preconnect & Preload Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
     <!-- SEO -->
     <meta name="title" content="{{ $meta['meta_title'] }}"/>
     <meta name="description" content="{{ $meta['meta_description'] }}"/>
@@ -100,11 +106,11 @@
     <!--====== Plyr CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}" media="print" onload="this.media='all'">
     <!--====== Font Awesome ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Box Icons ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Spacing CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}">
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}" media="print" onload="this.media='all'">
     <!--====== AOS CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
     <!--====== Main CSS ======-->

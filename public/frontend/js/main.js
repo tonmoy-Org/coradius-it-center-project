@@ -1228,7 +1228,6 @@ function lessonPlaylistScrollBar() {
 ----------------------*/
 $(window).on("scroll", function () {
     stickyHeader();
-    AOS.refresh();
 });
 
 /*------------------
