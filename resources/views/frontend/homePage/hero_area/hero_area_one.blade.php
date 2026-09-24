@@ -53,10 +53,10 @@
                                 'video'  => $hero_course->video, 
                                 'class'  => 'course-intro-video yt_player w-100', 
                                 'image'  => $hero_course->image,
-                                'size'   => 'original_image'
+                                'size'   => '417x384'
                             ])
                         @else
-                            <img src="{{ getFileLink('original_image', $hero_course->image) }}" alt="{{ strip_tags($hero_course->title) }}" class="img-fluid w-100" width="960" height="540" fetchpriority="high" loading="eager" decoding="async" style="object-fit: cover; max-height: 550px;">
+                            <img src="{{ getFileLink('417x384', $hero_course->image) }}" alt="{{ strip_tags($hero_course->title) }}" class="img-fluid w-100" width="960" height="540" fetchpriority="high" loading="eager" decoding="async" style="object-fit: cover; max-height: 550px;">
                         @endif
                     </div>
                     

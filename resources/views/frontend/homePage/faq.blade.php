@@ -210,14 +210,14 @@
                     if (!empty($mcSettings['faq_image_media_id'])) {
                         $faqMedia = \App\Models\MediaLibrary::find($mcSettings['faq_image_media_id']);
                         if ($faqMedia && !empty($faqMedia->image_variants)) {
-                            $faqImgUrl = getFileLink('original_image', $faqMedia->image_variants);
+                            $faqImgUrl = getFileLink('417x384', $faqMedia->image_variants);
                         }
                     }
                     if (!$faqImgUrl && !empty($mcSettings['faq_image_url'])) {
                         $faqImgUrl = dynamic_asset($mcSettings['faq_image_url']);
                     }
                     if (!$faqImgUrl && !empty($course->faq_image)) {
-                        $faqImgUrl = getFileLink('original_image', $course->faq_image);
+                        $faqImgUrl = getFileLink('417x384', $course->faq_image);
                     }
                     if (!$faqImgUrl || str_contains($faqImgUrl, 'default')) {
                         $faqImgUrl = static_asset('images/faq/faq_classroom.jpg');

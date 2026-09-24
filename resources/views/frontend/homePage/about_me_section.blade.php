@@ -26,14 +26,14 @@
     $aboutImgSetting = setting('about_me_image');
     $aboutImgUrl = '';
     if ($aboutImgSetting) {
-        $aboutImgUrl = getFileLink('original_image', $aboutImgSetting);
+        $aboutImgUrl = getFileLink('417x384', $aboutImgSetting);
     }
     if (!$aboutImgUrl || str_contains($aboutImgUrl, 'default')) {
         $aboutMediaId = setting('about_me_media_id');
         if ($aboutMediaId) {
             $media = \App\Models\MediaLibrary::find($aboutMediaId);
             if ($media && !empty($media->image_variants)) {
-                $aboutImgUrl = getFileLink('original_image', $media->image_variants);
+                $aboutImgUrl = getFileLink('417x384', $media->image_variants);
             }
         }
     }

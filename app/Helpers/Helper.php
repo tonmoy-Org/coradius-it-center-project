@@ -511,16 +511,30 @@ if (! function_exists('setting')) {
 if (! function_exists('getFileLink')) {
     function getFileLink($size, $array, $offline = null)
     {
-        if ($size == 'original_image' && is_array($array) && array_key_exists($size, $array)) {
-            if (@is_file_exists($array[$size], $array['storage'])) {
-                return get_media($array[$size], $array['storage']);
-            } else {
-                return static_asset('images/default/default-image-320x320.png');
-            }
-        }
         if (is_array($array) && array_key_exists('image_'.$size, $array)) {
             if (@is_file_exists($array['image_'.$size], $array['storage'])) {
                 return get_media($array['image_'.$size], $array['storage']);
+            }
+        }
+        if ($size == 'original_image' && is_array($array) && array_key_exists($size, $array)) {
+            if (@is_file_exists($array[$size], $array['storage'])) {
+                return get_media($array[$size], $array['storage']);
+            }
+        }
+        // Optimized variant fallbacks to prevent loading multi-megabyte original images on mobile
+        if (is_array($array) && array_key_exists('image_417x384', $array)) {
+            if (@is_file_exists($array['image_417x384'], $array['storage'])) {
+                return get_media($array['image_417x384'], $array['storage']);
+            }
+        }
+        if (is_array($array) && array_key_exists('image_295x248', $array)) {
+            if (@is_file_exists($array['image_295x248'], $array['storage'])) {
+                return get_media($array['image_295x248'], $array['storage']);
+            }
+        }
+        if (is_array($array) && array_key_exists('original_image', $array)) {
+            if (@is_file_exists($array['original_image'], $array['storage'])) {
+                return get_media($array['original_image'], $array['storage']);
             }
         }
 

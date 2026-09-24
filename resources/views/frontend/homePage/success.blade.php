@@ -620,8 +620,8 @@
                 $fMediaType = $featured_story->media_type ?? (!empty($featured_story->video) ? 'video' : 'image');
                 $fHasVideo  = ($fMediaType === 'video' && !empty($featured_story->video));
                 $fVideoInfo = $fHasVideo ? $getVideoInfo($featured_story->video) : null;
-                $fFullImage = getFileLink('original_image', $featured_story->image);
-                $fCardImage = getFileLink('original_image', $featured_story->image) ?: getFileLink('473x337', $featured_story->image);
+                $fFullImage = getFileLink('417x384', $featured_story->image);
+                $fCardImage = getFileLink('417x384', $featured_story->image) ?: getFileLink('473x337', $featured_story->image);
             @endphp
             <div class="row justify-content-center featured-story-wrapper" data-aos="fade-up">
                 <div class="col-12">

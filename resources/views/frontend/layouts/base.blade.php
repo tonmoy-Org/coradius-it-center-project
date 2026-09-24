@@ -94,10 +94,10 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
-    <!--====== Preload Critical CSS (highest priority fetch, zero render-block) ======-->
-    <link rel="preload" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}"></noscript>
-    <link rel="preload" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!--====== Critical Layout CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
+    <!--====== Main CSS (async, zero render-block) ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}"></noscript>
     <!--====== Non-Critical CSS (async, no render-block) ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
@@ -487,38 +487,45 @@
          theme_color="{{ setting('facebook_messenger_color') }}">
     </div>
 @endif
-<!--====== jQuery (sync: must load before defer-dependent scripts) ======-->
+<!--====== Core JS (critical for layout & interactivity) ======-->
 <script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
-<!--====== Popper JS ======-->
 <script src="{{ static_asset('frontend/js/popper.min.js') }}" defer></script>
-<!--====== Bootstrap ======-->
 <script src="{{ static_asset('frontend/js/bootstrap.min.js') }}" defer></script>
-<!--====== Slick Slider ======-->
-<script src="{{ static_asset('frontend/js/slick.min.js') }}" defer></script>
-<!--====== Magnific ======-->
-<script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}" defer></script>
-<!--====== Plyr JS ======-->
-<script src="{{ static_asset('frontend/js/plyr.js') }}" defer></script>
-<!--====== Nice Select ======-->
-<script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}" defer></script>
-<!--====== Nice Select ======-->
-<script src="{{ static_asset('frontend/js/select2.min.js') }}" defer></script>
-<!--====== AOS JS ======-->
-<script src="{{ static_asset('frontend/js/aos.js') }}" defer></script>
-<!--====== Cookie Alert ======-->
-<script src="{{ static_asset('frontend/js/cookiealert.js') }}" defer></script>
-<!--====== Main JS ======-->
 <script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}" defer></script>
-<!--====== App JS ======-->
 <script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}" defer></script>
 @if (auth()->check() && auth()->user()->role_id > 1)
     <script src="{{ static_asset('admin/js/OneSignalSDK.js') }}" defer></script>
 @endif
-<!--============= toastr=======-->
-<script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
+
+<!--====== Non-Critical Vendor JS (Deferred Idle Loading) ======-->
+<script>
+    function loadNonCriticalVendorScripts() {
+        var vendorScripts = [
+            "{{ static_asset('frontend/js/slick.min.js') }}",
+            "{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}",
+            "{{ static_asset('frontend/js/plyr.js') }}",
+            "{{ static_asset('frontend/js/jquery.nice-select.min.js') }}",
+            "{{ static_asset('frontend/js/select2.min.js') }}",
+            "{{ static_asset('frontend/js/aos.js') }}",
+            "{{ static_asset('frontend/js/cookiealert.js') }}",
+            "{{ static_asset('frontend/js/toastr.min.js') }}",
+            "{{ static_asset('admin/js/sweetalert211.min.js') }}"
+        ];
+        vendorScripts.forEach(function(src) {
+            var s = document.createElement('script');
+            s.src = src;
+            s.async = true;
+            document.body.appendChild(s);
+        });
+    }
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadNonCriticalVendorScripts, { timeout: 1500 });
+    } else {
+        window.addEventListener('load', function() { setTimeout(loadNonCriticalVendorScripts, 300); });
+    }
+</script>
 
 {!! Toastr::message() !!}
-<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}" defer></script>
 @if (setting('is_pusher_notification_active') && auth()->check())
     <script src="{{ static_asset('admin/js/pusher.min.js') }}" defer></script>
     <script>

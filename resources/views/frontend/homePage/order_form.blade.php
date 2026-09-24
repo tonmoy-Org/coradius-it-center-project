@@ -23,7 +23,7 @@
     if (!empty($mcSettings['order_form_image_media_id'])) {
         $media = \App\Models\MediaLibrary::find($mcSettings['order_form_image_media_id']);
         if ($media && !empty($media->image_variants)) {
-            $blueSectionImage = getFileLink('original_image', $media->image_variants);
+            $blueSectionImage = getFileLink('417x384', $media->image_variants);
         }
     }
     if (!$blueSectionImage && !empty($mcSettings['order_form_image_url'])) {
