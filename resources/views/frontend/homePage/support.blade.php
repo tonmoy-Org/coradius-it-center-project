@@ -1113,7 +1113,7 @@
         <!-- Middle Tier: Full Width Showcase Image -->
         <div class="row justify-content-center">
             <div class="col-12 text-center mc-support-img-wrapper" data-aos="zoom-in" data-aos-delay="180">
-                <img src="{{ $supportImageUrl }}" alt="{{ strip_tags($supportTitle) ?: 'Support' }}" class="mc-support-img img-fluid">
+                <img src="{{ $supportImageUrl }}" alt="{{ strip_tags($supportTitle) ?: 'Support' }}" class="mc-support-img img-fluid" loading="lazy" decoding="async">
             </div>
         </div>
         @endif

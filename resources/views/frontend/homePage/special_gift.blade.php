@@ -784,6 +784,7 @@
                                             @endif
                                             <img src="{{ dynamic_asset($row['image']) }}" 
                                                  alt="Bonus Gift Image" 
+                                                 loading="lazy" decoding="async"
                                                  class="img-fluid w-100 h-100 position-relative" style="z-index: 1;">
                                             @if(!empty($row['link']))
                                                 </a>
@@ -878,6 +879,7 @@
                                                 @endif
                                                 <img src="{{ dynamic_asset($imgItem['image']) }}" 
                                                      alt="Bonus Gift Image" 
+                                                     loading="lazy" decoding="async"
                                                      class="img-fluid w-100 h-100 position-relative" style="z-index: 1;">
                                                 @if(!empty($imgItem['link']))
                                                     </a>

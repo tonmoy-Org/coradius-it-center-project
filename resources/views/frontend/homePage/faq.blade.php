@@ -225,7 +225,7 @@
                 @endphp
 
                 <div class="faq-image-card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
-                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" style="border-radius: 12px; height: auto; max-height: 500px; width: 100%; object-fit: cover;">
+                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" loading="lazy" decoding="async" style="border-radius: 12px; height: auto; max-height: 500px; width: 100%; object-fit: cover;">
                     
                     @if(!empty($faqBadgeTitle) || !empty($faqBadgeSubtitle))
                     <div class="faq-badge-floating d-flex">

@@ -229,7 +229,7 @@
             <!-- Left Info Side (Only shown if image is uploaded) -->
             @if(!empty($blueSectionImage))
                 <div class="lead-info-side">
-                    <img src="{{ $blueSectionImage }}" alt="Lead Form Banner" class="lead-info-full-img">
+                    <img src="{{ $blueSectionImage }}" alt="Lead Form Banner" class="lead-info-full-img" loading="lazy" decoding="async">
                 </div>
             @endif
             
