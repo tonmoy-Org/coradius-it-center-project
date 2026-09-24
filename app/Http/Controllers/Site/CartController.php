@@ -444,12 +444,13 @@ class CartController extends Controller
                     }
 
                     $response = \Illuminate\Support\Facades\Http::withHeaders($headers)->post($webhookUrl, [
-                        'name'            => $request->name,
-                        'email'           => $request->email,
-                        'phone'           => $request->phone,
-                        'whatsapp'        => $whatsappNum,
-                        'whatsapp_number' => $whatsappNum,
-                        'course_id'       => $request->id,
+                        'name'                     => $request->name,
+                        'email'                    => $request->email,
+                        'phone'                    => $request->phone,
+                        'whatsapp'                 => $whatsappNum,
+                        'whatsapp_number'          => $whatsappNum,
+                        'আপনার ওয়াটস অ্যাপ নাম্বার' => $whatsappNum,
+                        'course_id'                => $request->id,
                     ]);
 
                     if ($response->successful()) {
