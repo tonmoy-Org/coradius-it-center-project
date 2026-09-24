@@ -97,8 +97,7 @@
     <link rel="preload" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" as="style">
     <link rel="preload" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" as="style">
     <!--====== Bootstrap CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}"></noscript>
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
     <!--====== Slick Slider ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
     <!--====== Magnific ======-->
@@ -118,8 +117,7 @@
     <!--====== AOS CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
     <!--====== Main CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}"></noscript>
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
     {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
 
     <style>
