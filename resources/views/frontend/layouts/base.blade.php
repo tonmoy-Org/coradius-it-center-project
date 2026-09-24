@@ -93,31 +93,21 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
-    <!--====== Preload Critical CSS ======-->
-    <link rel="preload" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" as="style">
-    <link rel="preload" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" as="style">
-    <!--====== Bootstrap CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
-    <!--====== Slick Slider ======-->
+    <!--====== Preload Critical CSS (highest priority fetch, zero render-block) ======-->
+    <link rel="preload" href="{{ static_asset('frontend/css/bootstrap.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}"></noscript>
+    <link rel="preload" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}"></noscript>
+    <!--====== Non-Critical CSS (async, no render-block) ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== Magnific ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== Select2 ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== Nice Select ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== Plyr CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}" media="print" onload="this.media='all'">
-    <!--====== Font Awesome ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== Box Icons ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== Spacing CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}" media="print" onload="this.media='all'">
-    <!--====== AOS CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
-    <!--====== Main CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
     {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
 
     <style>
@@ -426,11 +416,11 @@
             display: none !important;
         }
     </style>
-    <!--====== Responsive CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}">
-    {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.min.css') }}"> --}}
-    <!--====== Color CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/toastr.min.css') }}">
+    <!--====== Responsive CSS (preloaded, no render-block) ======-->
+    <link rel="preload" href="{{ static_asset('frontend/css/responsive.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}"></noscript>
+    <!--====== Toastr CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/toastr.min.css') }}" media="print" onload="this.media='all'">
     @php
         $theme_color = setting('theme_color') ?: 'coradius';
     @endphp
@@ -493,8 +483,8 @@
          theme_color="{{ setting('facebook_messenger_color') }}">
     </div>
 @endif
-<!--====== jQuery ======-->
-<script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}" defer></script>
+<!--====== jQuery (sync: must load before defer-dependent scripts) ======-->
+<script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
 <!--====== Popper JS ======-->
 <script src="{{ static_asset('frontend/js/popper.min.js') }}" defer></script>
 <!--====== Bootstrap ======-->
@@ -541,7 +531,8 @@
 @endif
 @stack('js')
 <script>
-    $(document).ready(function () {
+    // Defer heavy DOM-ready work until after paint
+    window.addEventListener('DOMContentLoaded', function () {
         $(document).on('click', '.list-groups a', function (e) {
             let name = $(this).data('name');
             let value = $(this).data('value');

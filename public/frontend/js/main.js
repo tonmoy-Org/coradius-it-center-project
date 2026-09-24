@@ -1234,19 +1234,21 @@ $(window).on("scroll", function () {
 === WINDOW LOAD  ===
 --------------------*/
 $(window).on("load", function () {
-    AOS.init({
-        disable: "mobile",
-        easing: "ease",
-        duration: 500,
-        once: true,
-        delay: 200,
-    });
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            easing: "ease",
+            duration: 500,
+            once: true,
+            delay: 100,
+            offset: 60,
+        });
+    }
 });
 
 /*-------------------
 === Window Load  ===
 --------------------*/
-window.onload = function () {
+window.addEventListener('load', function () {
     const progressBarLength =
         document.querySelectorAll(".line-progress").length;
     const dataProgressLength = document.querySelectorAll(
@@ -1259,7 +1261,7 @@ window.onload = function () {
     if (progressBarLength > 0 && dataProgressLength > 0) {
         dataProgress.forEach((x) => AnimateProgress(x));
     }
-};
+});
 
 function AnimateProgress(el) {
     el.className = "animate-progress";

@@ -236,23 +236,44 @@
             plyrLoaded = true;
             if (typeof Plyr !== 'undefined') {
                 const ytPlayers = document.querySelectorAll('.yt_player');
-                ytPlayers.forEach(function(el) {
-                    new Plyr(el);
-                });
+                ytPlayers.forEach(function(el) { new Plyr(el); });
                 const html5Players = document.querySelectorAll('video.course-intro-video');
-                html5Players.forEach(function(el) {
-                    new Plyr(el);
-                });
+                html5Players.forEach(function(el) { new Plyr(el); });
+            } else {
+                // Retry once after JS loads if Plyr not available yet
+                setTimeout(function() {
+                    if (typeof Plyr !== 'undefined') {
+                        document.querySelectorAll('.yt_player').forEach(function(el) { new Plyr(el); });
+                        document.querySelectorAll('video.course-intro-video').forEach(function(el) { new Plyr(el); });
+                    }
+                }, 800);
             }
         }
 
         const videoWrapper = document.querySelector('.hero-video-wrapper');
         if (videoWrapper) {
+            // Load on interaction
             videoWrapper.addEventListener('click', loadPlyrPlayers, { once: true });
             videoWrapper.addEventListener('pointerover', loadPlyrPlayers, { once: true });
             videoWrapper.addEventListener('touchstart', loadPlyrPlayers, { once: true, passive: true });
+
+            // IntersectionObserver: load when video enters viewport
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            // Delay slightly so it doesn't block initial paint
+                            setTimeout(loadPlyrPlayers, 400);
+                            obs.disconnect();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                obs.observe(videoWrapper);
+            } else {
+                // Fallback: load after 3s
+                setTimeout(loadPlyrPlayers, 3000);
+            }
         }
-        setTimeout(loadPlyrPlayers, 3500);
 
         // Modern Tech Cursor Follower & Stardust Particle Animation
         const heroSection = document.querySelector('.hero-area');
