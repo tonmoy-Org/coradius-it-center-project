@@ -397,38 +397,59 @@ class CartController extends Controller
     public function masterclassCheckout(Request $request)
     {
         $request->validate([
-            'name'  => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:marketing_leads,email',
-            'phone' => 'required|string|max:30|unique:marketing_leads,phone',
+            'name'            => 'required|string|max:255',
+            'email'           => 'required|email|max:255|unique:marketing_leads,email',
+            'phone'           => 'required|string|max:30|unique:marketing_leads,phone',
             'whatsapp_number' => 'nullable|string|max:30',
-            'id'    => 'required',
+            'whatsapp'        => 'nullable|string|max:30',
+            'id'              => 'required',
         ], [
             'email.unique' => 'Already submitted, try a new email',
             'phone.unique' => 'Already submitted, try a new number',
         ]);
 
         try {
+            $whatsappNum = $request->whatsapp_number ?: ($request->whatsapp ?: $request->phone);
+
             // 1. Save Marketing Lead
             $marketingLead = \App\Models\MarketingLead::create([
-                'name'      => $request->name,
-                'email'     => $request->email,
-                'phone'     => $request->phone,
-                'whatsapp_number' => $request->whatsapp_number,
-                'course_id' => $request->id,
+                'name'            => $request->name,
+                'email'           => $request->email,
+                'phone'           => $request->phone,
+                'whatsapp_number' => $whatsappNum,
+                'course_id'       => $request->id,
             ]);
 
             // 2. Trigger Webhook
-            $webhookUrl = setting('marketing_webhook_url');
+            $webhookUrl   = setting('marketing_webhook_url');
+            $webhookToken = setting('marketing_webhook_token');
+
             if (!empty($webhookUrl)) {
                 try {
-                    \Illuminate\Support\Facades\Http::post($webhookUrl, [
-                        'name'      => $request->name,
-                        'email'     => $request->email,
-                        'phone'     => $request->phone,
-                        'whatsapp_number' => $request->whatsapp_number,
-                        'course_id' => $request->id,
+                    $headers = [
+                        'Content-Type' => 'application/json',
+                        'Accept'       => 'application/json',
+                    ];
+
+                    if (!empty($webhookToken)) {
+                        $cleanToken = preg_replace('/^Bearer\s+/i', '', trim($webhookToken));
+                        $headers['Authorization'] = 'Bearer ' . $cleanToken;
+                    }
+
+                    $response = \Illuminate\Support\Facades\Http::withHeaders($headers)->post($webhookUrl, [
+                        'name'            => $request->name,
+                        'email'           => $request->email,
+                        'phone'           => $request->phone,
+                        'whatsapp'        => $whatsappNum,
+                        'whatsapp_number' => $whatsappNum,
+                        'course_id'       => $request->id,
                     ]);
-                    $marketingLead->update(['is_synced' => 1]);
+
+                    if ($response->successful()) {
+                        $marketingLead->update(['is_synced' => 1]);
+                    } else {
+                        \Illuminate\Support\Facades\Log::error('Marketing Webhook Failed with status ' . $response->status() . ': ' . $response->body());
+                    }
                 } catch (\Exception $e) {
                     \Illuminate\Support\Facades\Log::error('Marketing Webhook Failed: ' . $e->getMessage());
                 }

@@ -50,12 +50,18 @@ class MarketingLeadController extends Controller
     public function saveWebhook(Request $request)
     {
         $request->validate([
-            'marketing_webhook_url' => 'nullable|url'
+            'marketing_webhook_url'   => 'nullable|url',
+            'marketing_webhook_token' => 'nullable|string'
         ]);
 
         \Illuminate\Support\Facades\DB::table('settings')->updateOrInsert(
             ['title' => 'marketing_webhook_url'],
             ['value' => $request->marketing_webhook_url, 'lang' => 'en', 'status' => 1]
+        );
+
+        \Illuminate\Support\Facades\DB::table('settings')->updateOrInsert(
+            ['title' => 'marketing_webhook_token'],
+            ['value' => $request->marketing_webhook_token, 'lang' => 'en', 'status' => 1]
         );
 
         Toastr::success(__('Settings Updated Successfully'));

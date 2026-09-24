@@ -33,18 +33,21 @@
 
                     <!-- Webhook Settings Card -->
                     <div class="bg-white redious-border p-20 p-sm-30 pt-sm-30 mb-4">
-                        <h4 class="mb-3">Webhook Settings</h4>
+                        <h4 class="mb-3">Webhook Settings (LeadsNimble / Zapier / Make / CRM)</h4>
                         <form action="{{ route('marketing-leads.webhook.save') }}" method="POST">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group mb-0">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <input type="url" name="marketing_webhook_url" class="form-control" placeholder="https://hooks.zapier.com/..." value="{{ setting('marketing_webhook_url') }}" style="flex-grow: 1;">
-                                            <button type="submit" class="btn sg-btn-primary" style="height: 44px; min-width: 150px;">Save Webhook</button>
-                                        </div>
-                                        <small class="text-muted mt-2 d-block">Enter your Zapier, Make, or custom CRM webhook URL. We will send a POST request with the lead's Name, Email, Phone, and Course ID instantly when they submit.</small>
-                                    </div>
+                            <div class="row g-3">
+                                <div class="col-md-7">
+                                    <label class="form-label font-bold text-dark">Webhook URL</label>
+                                    <input type="url" name="marketing_webhook_url" class="form-control" placeholder="https://app.leadsnimble.com/api/v1/forms/YOUR_FORM_ID/submissions" value="{{ setting('marketing_webhook_url') }}">
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label font-bold text-dark">Bearer Token / Authorization Key (Optional)</label>
+                                    <input type="text" name="marketing_webhook_token" class="form-control" placeholder="Enter Bearer Token if required" value="{{ setting('marketing_webhook_token') }}">
+                                </div>
+                                <div class="col-md-12 d-flex justify-content-between align-items-center mt-3">
+                                    <small class="text-muted">Sends POST request with Name, Email, Phone, WhatsApp, and Course ID on every lead submission.</small>
+                                    <button type="submit" class="btn sg-btn-primary" style="height: 44px; min-width: 150px;">Save Webhook</button>
                                 </div>
                             </div>
                         </form>
