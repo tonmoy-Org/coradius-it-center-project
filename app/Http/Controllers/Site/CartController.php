@@ -422,7 +422,14 @@ class CartController extends Controller
 
             // 2. Trigger Webhook
             $webhookUrl   = setting('marketing_webhook_url');
+            if (empty($webhookUrl)) {
+                $webhookUrl = \Illuminate\Support\Facades\DB::table('settings')->where('title', 'marketing_webhook_url')->value('value');
+            }
+
             $webhookToken = setting('marketing_webhook_token');
+            if (empty($webhookToken)) {
+                $webhookToken = \Illuminate\Support\Facades\DB::table('settings')->where('title', 'marketing_webhook_token')->value('value');
+            }
 
             if (!empty($webhookUrl)) {
                 try {

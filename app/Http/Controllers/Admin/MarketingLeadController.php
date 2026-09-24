@@ -64,6 +64,8 @@ class MarketingLeadController extends Controller
             ['value' => $request->marketing_webhook_token, 'lang' => 'en', 'status' => 1]
         );
 
+        \Illuminate\Support\Facades\Cache::forget('settings');
+
         Toastr::success(__('Settings Updated Successfully'));
         return back();
     }
