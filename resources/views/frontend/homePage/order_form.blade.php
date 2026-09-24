@@ -23,7 +23,7 @@
     if (!empty($mcSettings['order_form_image_media_id'])) {
         $media = \App\Models\MediaLibrary::find($mcSettings['order_form_image_media_id']);
         if ($media && !empty($media->image_variants)) {
-            $blueSectionImage = getFileLink('417x384', $media->image_variants);
+            $blueSectionImage = getFileLink('original_image', $media->image_variants);
         }
     }
     if (!$blueSectionImage && !empty($mcSettings['order_form_image_url'])) {
@@ -229,7 +229,7 @@
             <!-- Left Info Side (Only shown if image is uploaded) -->
             @if(!empty($blueSectionImage))
                 <div class="lead-info-side">
-                    <img src="{{ $blueSectionImage }}" alt="Lead Form Banner" class="lead-info-full-img" loading="lazy" decoding="async">
+                    <img src="{{ $blueSectionImage }}" alt="Lead Form Banner" class="lead-info-full-img">
                 </div>
             @endif
             

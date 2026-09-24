@@ -668,7 +668,7 @@
                     @if($b1Link)
                         <a href="{{ $b1Link }}" target="_blank" class="d-block w-100 overflow-hidden">
                     @endif
-                        <img src="{{ $b1Url }}" alt="Ad Banner 1" class="img-fluid w-100" loading="lazy" decoding="async" style="border-radius: 0px !important; width: 100%; height: auto; max-height: none !important; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                        <img src="{{ $b1Url }}" alt="Ad Banner 1" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; height: auto; max-height: none !important; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
                     @if($b1Link)
                         </a>
                     @endif
@@ -786,7 +786,7 @@
                         </h2>
                         <p class="text-muted font-16">{{ setting('success_page_banner_description') ?: 'Discover how learners are achieving their goals and building better futures with Coradius IT Center.' }}</p>
                     </div>
-                    <img src="{{ $successBannerUrl }}" alt="Success Banner" class="img-fluid w-100" data-aos="fade-up" data-aos-delay="100" loading="lazy" decoding="async" style="border-radius: 20px; max-height: 500px; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
+                    <img src="{{ $successBannerUrl }}" alt="Success Banner" class="img-fluid w-100" data-aos="fade-up" data-aos-delay="100" style="border-radius: 20px; max-height: 500px; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
                 </div>
             </div>
         </div>
@@ -833,7 +833,7 @@
                     @if($b2Link)
                         <a href="{{ $b2Link }}" target="_blank" class="d-block w-100 overflow-hidden">
                     @endif
-                        <img src="{{ $b2Url }}" alt="Ad Banner 2" class="img-fluid w-100" loading="lazy" decoding="async" style="border-radius: 0px !important; width: 100%; height: auto; max-height: none !important; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                        <img src="{{ $b2Url }}" alt="Ad Banner 2" class="img-fluid w-100" style="border-radius: 0px !important; width: 100%; height: auto; max-height: none !important; display: block; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
                     @if($b2Link)
                         </a>
                     @endif
@@ -898,7 +898,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 text-center" data-aos="fade-up">
                     <div class="coupon-banner-wrapper position-relative d-inline-block">
-                        <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" loading="lazy" decoding="async" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #0056D2;">
+                        <img src="{{ getFileLink('original_image', $active_banner_coupon->image) }}" alt="Special Offer Coupon" class="img-fluid rounded shadow-sm" style="max-width: 100%; max-height: 400px; object-fit: cover; border: 2px dashed #0056D2;">
                         <div class="coupon-code-badge position-absolute"
                              id="bannerCouponBadge"
                              onclick="copyCouponCode('{{ $active_banner_coupon->code }}', this)"

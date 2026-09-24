@@ -24,13 +24,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') | {{ setting('system_name') != '' ? setting('system_name') : 'Coradius IT Center' }}</title>
 
-    <!-- Preconnect & Preload Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    {!! font_link() !!}
-
     <!-- SEO -->
     <meta name="title" content="{{ $meta['meta_title'] }}"/>
     <meta name="description" content="{{ $meta['meta_description'] }}"/>
@@ -94,25 +87,31 @@
     @else
         <link rel="shortcut icon" href="{{ static_asset('images/default/favicon/faviocns.png') }}">
     @endif
-    <!--====== Core Stylesheets ======-->
+    <!--====== Bootstrap CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}">
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}">
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}">
-    <!--====== Secondary Plugin CSS (async) ======-->
+    <!--====== Slick Slider ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/slick.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Magnific ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Select2 ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/select2.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Nice Select ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/nice-select.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Plyr CSS ======-->
     <link rel="stylesheet" href="{{ static_asset('frontend/css/plyr.css') }}" media="print" onload="this.media='all'">
+    <!--====== Font Awesome ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/fontawesome/css/all.min.css') }}">
+    <!--====== Box Icons ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/fonts/boxicons/css/boxicons.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Spacing CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/spacing.min.css') }}">
+    <!--====== AOS CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/aos.css') }}" media="print" onload="this.media='all'">
+    <!--====== Main CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/style.css') }}?v={{ setting('current_version') }}">
     {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/style.min.css') }}"> --}}
 
     <style>
-        @font-face {
-            font-display: swap;
-        }
         :root {
             --body-font: '{{ setting("body_font") }}', sans-serif;
             --header-font: '{{ setting("header_font") }}', sans-serif;
@@ -418,11 +417,11 @@
             display: none !important;
         }
     </style>
-    <!--====== Responsive CSS (preloaded, no render-block) ======-->
-    <link rel="preload" href="{{ static_asset('frontend/css/responsive.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}"></noscript>
-    <!--====== Toastr CSS ======-->
-    <link rel="stylesheet" href="{{ static_asset('frontend/css/toastr.min.css') }}" media="print" onload="this.media='all'">
+    <!--====== Responsive CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.css') }}">
+    {{-- <link rel="stylesheet" href="{{ static_asset('frontend/css/responsive.min.css') }}"> --}}
+    <!--====== Color CSS ======-->
+    <link rel="stylesheet" href="{{ static_asset('frontend/css/toastr.min.css') }}">
     @php
         $theme_color = setting('theme_color') ?: 'coradius';
     @endphp
@@ -458,14 +457,11 @@
                 const preloader = document.querySelector(".preloader");
                 if (preloader && !preloader.classList.contains("preloader-finish")) {
                     preloader.classList.add("preloader-finish");
-                    setTimeout(function() { if (preloader.parentNode) preloader.parentNode.removeChild(preloader); }, 200);
                 }
             }
-            if (document.readyState === "complete" || document.readyState === "interactive") {
-                dismissPreloader();
-            } else {
-                document.addEventListener("DOMContentLoaded", dismissPreloader);
-            }
+            document.addEventListener("DOMContentLoaded", dismissPreloader);
+            window.addEventListener("load", dismissPreloader);
+            setTimeout(dismissPreloader, 600);
         </script>
     @endif
 </head>
@@ -485,26 +481,38 @@
          theme_color="{{ setting('facebook_messenger_color') }}">
     </div>
 @endif
-<!--====== Core JS (critical for layout & interactivity) ======-->
+<!--====== jQuery ======-->
 <script src="{{ static_asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
+<!--====== Popper JS ======-->
 <script src="{{ static_asset('frontend/js/popper.min.js') }}" defer></script>
+<!--====== Bootstrap ======-->
 <script src="{{ static_asset('frontend/js/bootstrap.min.js') }}" defer></script>
+<!--====== Slick Slider ======-->
 <script src="{{ static_asset('frontend/js/slick.min.js') }}" defer></script>
+<!--====== Magnific ======-->
 <script src="{{ static_asset('frontend/js/jquery.magnific-popup.min.js') }}" defer></script>
+<!--====== Plyr JS ======-->
 <script src="{{ static_asset('frontend/js/plyr.js') }}" defer></script>
+<!--====== Nice Select ======-->
 <script src="{{ static_asset('frontend/js/jquery.nice-select.min.js') }}" defer></script>
+<!--====== Nice Select ======-->
 <script src="{{ static_asset('frontend/js/select2.min.js') }}" defer></script>
+<!--====== AOS JS ======-->
 <script src="{{ static_asset('frontend/js/aos.js') }}" defer></script>
+<!--====== Cookie Alert ======-->
 <script src="{{ static_asset('frontend/js/cookiealert.js') }}" defer></script>
+<!--====== Main JS ======-->
 <script src="{{ static_asset('frontend/js/main.js') }}?v={{ setting('current_version') }}" defer></script>
+<!--====== App JS ======-->
 <script src="{{ static_asset('frontend/js/app.js') }}?v={{ setting('current_version') }}" defer></script>
-<script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
-<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}" defer></script>
 @if (auth()->check() && auth()->user()->role_id > 1)
     <script src="{{ static_asset('admin/js/OneSignalSDK.js') }}" defer></script>
 @endif
+<!--============= toastr=======-->
+<script src="{{ static_asset('frontend/js/toastr.min.js') }}" defer></script>
 
 {!! Toastr::message() !!}
+<script src="{{ static_asset('admin/js/sweetalert211.min.js') }}" defer></script>
 @if (setting('is_pusher_notification_active') && auth()->check())
     <script src="{{ static_asset('admin/js/pusher.min.js') }}" defer></script>
     <script>
@@ -521,8 +529,7 @@
 @endif
 @stack('js')
 <script>
-    // Defer heavy DOM-ready work until after paint
-    window.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         $(document).on('click', '.list-groups a', function (e) {
             let name = $(this).data('name');
             let value = $(this).data('value');

@@ -511,37 +511,20 @@ if (! function_exists('setting')) {
 if (! function_exists('getFileLink')) {
     function getFileLink($size, $array, $offline = null)
     {
-        if (is_string($array)) {
-            $decoded = json_decode($array, true);
-            if (is_array($decoded)) {
-                $array = $decoded;
-            } elseif (@is_file_exists($array)) {
-                return get_media($array);
+        if ($size == 'original_image' && is_array($array) && array_key_exists($size, $array)) {
+            if (@is_file_exists($array[$size], $array['storage'])) {
+                return get_media($array[$size], $array['storage']);
+            } else {
+                return static_asset('images/default/default-image-320x320.png');
             }
         }
-
         if (is_array($array) && array_key_exists('image_'.$size, $array)) {
-            if (@is_file_exists($array['image_'.$size], $array['storage'] ?? null)) {
-                return get_media($array['image_'.$size], $array['storage'] ?? null);
-            }
-        }
-        if (is_array($array) && array_key_exists('original_image', $array)) {
-            if (@is_file_exists($array['original_image'], $array['storage'] ?? null)) {
-                return get_media($array['original_image'], $array['storage'] ?? null);
-            }
-        }
-        if (is_array($array) && array_key_exists('image_417x384', $array)) {
-            if (@is_file_exists($array['image_417x384'], $array['storage'] ?? null)) {
-                return get_media($array['image_417x384'], $array['storage'] ?? null);
-            }
-        }
-        if (is_array($array) && array_key_exists('image_295x248', $array)) {
-            if (@is_file_exists($array['image_295x248'], $array['storage'] ?? null)) {
-                return get_media($array['image_295x248'], $array['storage'] ?? null);
+            if (@is_file_exists($array['image_'.$size], $array['storage'])) {
+                return get_media($array['image_'.$size], $array['storage']);
             }
         }
 
-        return static_asset('images/default/default-image-320x320.png');
+        return static_asset('images/default/default-image-'.$size.'.png');
     }
 }
 
@@ -651,30 +634,27 @@ if (! function_exists('css_font_name')) {
 if (! function_exists('font_link')) {
     function font_link()
     {
-        $url  = '';
+        $url              = '<link rel="preconnect" href="https://fonts.googleapis.com">';
+        $url .= '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 
         // header font
-        $header_font_name = setting('header_font') ?: 'jost';
+        $header_font_name = setting('header_font');
         $header_font_name = trim($header_font_name, '');
         $header_font_name = ucwords($header_font_name, '_');
         $header_font_name = str_replace('_', '+', $header_font_name);
-        $fontUrl1 = 'https://fonts.googleapis.com/css2?family='.$header_font_name.':wght@400;500;600;700&display=swap';
-        $url .= '<link rel="preload" href="'.$fontUrl1.'" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
-        $url .= '<noscript><link rel="stylesheet" href="'.$fontUrl1.'"></noscript>';
+        $url .= '<link href="https://fonts.googleapis.com/css2?family='.$header_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet">';
 
         if (setting('body_font') == setting('header_font')) {
             return $url;
         }
 
         //body font
-        $body_font_name = setting('body_font') ?: 'poppins';
+        $body_font_name   = setting('body_font');
         if ($header_font_name != $body_font_name) {
             $body_font_name = trim($body_font_name, '');
             $body_font_name = ucwords($body_font_name, '_');
             $body_font_name = str_replace('_', '+', $body_font_name);
-            $fontUrl2 = 'https://fonts.googleapis.com/css2?family='.$body_font_name.':wght@400;500;600;700&display=swap';
-            $url .= '<link rel="preload" href="'.$fontUrl2.'" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
-            $url .= '<noscript><link rel="stylesheet" href="'.$fontUrl2.'"></noscript>';
+            $url .= '<link href="https://fonts.googleapis.com/css2?family='.$body_font_name.':wght@400;500;600;700&display=swap" rel="stylesheet">';
         }
 
         return $url;

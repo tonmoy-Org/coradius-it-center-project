@@ -219,10 +219,10 @@
                             <div class="cow-card cow-card-only-image h-100">
                                 @if($hasLink)
                                     <a href="{{ $card['link'] }}" {{ str_starts_with($card['link'], '#') ? '' : 'target="_blank"' }}>
-                                        <img src="{{ asset($imagePath) }}" alt="Category Image" width="400" height="250" loading="lazy" decoding="async">
+                                        <img src="{{ asset($imagePath) }}" alt="Category Image">
                                     </a>
                                 @else
-                                    <img src="{{ asset($imagePath) }}" alt="Category Image" width="400" height="250" loading="lazy" decoding="async">
+                                    <img src="{{ asset($imagePath) }}" alt="Category Image">
                                 @endif
                             </div>
                         @else
@@ -243,11 +243,11 @@
                                     @if($hasImage)
                                         @if($hasLink)
                                             <a href="{{ $card['link'] }}" {{ str_starts_with($card['link'], '#') ? '' : 'target="_blank"' }} class="cow-card-img-floating-wrapper">
-                                                <img src="{{ asset($imagePath) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}" width="400" height="250" loading="lazy" decoding="async">
+                                                <img src="{{ asset($imagePath) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
                                             </a>
                                         @else
                                             <div class="cow-card-img-floating-wrapper">
-                                                <img src="{{ asset($imagePath) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}" width="400" height="250" loading="lazy" decoding="async">
+                                                <img src="{{ asset($imagePath) }}" class="cow-card-img-floating" alt="{{ $card['title'] ?? 'Category Image' }}">
                                             </div>
                                         @endif
                                     @endif

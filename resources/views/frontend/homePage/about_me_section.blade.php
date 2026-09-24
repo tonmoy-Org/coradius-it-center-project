@@ -26,14 +26,14 @@
     $aboutImgSetting = setting('about_me_image');
     $aboutImgUrl = '';
     if ($aboutImgSetting) {
-        $aboutImgUrl = getFileLink('417x384', $aboutImgSetting);
+        $aboutImgUrl = getFileLink('original_image', $aboutImgSetting);
     }
     if (!$aboutImgUrl || str_contains($aboutImgUrl, 'default')) {
         $aboutMediaId = setting('about_me_media_id');
         if ($aboutMediaId) {
             $media = \App\Models\MediaLibrary::find($aboutMediaId);
             if ($media && !empty($media->image_variants)) {
-                $aboutImgUrl = getFileLink('417x384', $media->image_variants);
+                $aboutImgUrl = getFileLink('original_image', $media->image_variants);
             }
         }
     }
@@ -143,8 +143,6 @@
                     </div>
                     <img src="{{ $aboutImgUrl }}" alt="About Me Instructor" 
                          class="img-fluid w-100 position-relative" 
-                         width="600" height="500"
-                         loading="lazy" decoding="async"
                          style="object-fit: cover; width: 100%; height: 100%; min-height: 500px; border-radius: 16px; display: block; z-index: 1;">
                 </div>
             </div>

@@ -210,14 +210,14 @@
                     if (!empty($mcSettings['faq_image_media_id'])) {
                         $faqMedia = \App\Models\MediaLibrary::find($mcSettings['faq_image_media_id']);
                         if ($faqMedia && !empty($faqMedia->image_variants)) {
-                            $faqImgUrl = getFileLink('417x384', $faqMedia->image_variants);
+                            $faqImgUrl = getFileLink('original_image', $faqMedia->image_variants);
                         }
                     }
                     if (!$faqImgUrl && !empty($mcSettings['faq_image_url'])) {
                         $faqImgUrl = dynamic_asset($mcSettings['faq_image_url']);
                     }
                     if (!$faqImgUrl && !empty($course->faq_image)) {
-                        $faqImgUrl = getFileLink('417x384', $course->faq_image);
+                        $faqImgUrl = getFileLink('original_image', $course->faq_image);
                     }
                     if (!$faqImgUrl || str_contains($faqImgUrl, 'default')) {
                         $faqImgUrl = static_asset('images/faq/faq_classroom.jpg');
@@ -225,7 +225,7 @@
                 @endphp
 
                 <div class="faq-image-card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0, 86, 210, 0.08);">
-                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" loading="lazy" decoding="async" style="border-radius: 12px; height: auto; max-height: 500px; width: 100%; object-fit: cover;">
+                    <img src="{{ $faqImgUrl }}" alt="{{ strip_tags($faqTitle) ?: 'FAQ' }}" style="border-radius: 12px; height: auto; max-height: 500px; width: 100%; object-fit: cover;">
                     
                     @if(!empty($faqBadgeTitle) || !empty($faqBadgeSubtitle))
                     <div class="faq-badge-floating d-flex">

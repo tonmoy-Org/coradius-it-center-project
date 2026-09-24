@@ -620,8 +620,8 @@
                 $fMediaType = $featured_story->media_type ?? (!empty($featured_story->video) ? 'video' : 'image');
                 $fHasVideo  = ($fMediaType === 'video' && !empty($featured_story->video));
                 $fVideoInfo = $fHasVideo ? $getVideoInfo($featured_story->video) : null;
-                $fFullImage = getFileLink('417x384', $featured_story->image);
-                $fCardImage = getFileLink('417x384', $featured_story->image) ?: getFileLink('473x337', $featured_story->image);
+                $fFullImage = getFileLink('original_image', $featured_story->image);
+                $fCardImage = getFileLink('original_image', $featured_story->image) ?: getFileLink('473x337', $featured_story->image);
             @endphp
             <div class="row justify-content-center featured-story-wrapper" data-aos="fade-up">
                 <div class="col-12">
@@ -638,7 +638,7 @@
                              data-video-type="{{ $fVideoInfo['type'] ?? '' }}"
                              data-video-url="{{ $fVideoInfo['url'] ?? '' }}">
                             
-                            <img class="card-top-image" src="{{ $fCardImage }}" alt="{{ $featured_story->title }} Preview" loading="lazy" decoding="async">
+                            <img class="card-top-image" src="{{ $fCardImage }}" alt="{{ $featured_story->title }} Preview">
                             
                             <span class="story-badge-video"><i class="fas fa-star" style="font-size: 9px;"></i> {{ __('Featured') }}</span>
                             
@@ -686,7 +686,7 @@
                                                  data-video-type="{{ $videoInfo['type'] ?? '' }}"
                                                  data-video-url="{{ $videoInfo['url'] ?? '' }}">
                                                 
-                                                <img class="card-top-image" src="{{ $cardImage }}" alt="{{ $success->title }} Preview" loading="lazy" decoding="async">
+                                                <img class="card-top-image" src="{{ $cardImage }}" alt="{{ $success->title }} Preview">
                                                 
                                                 @if($videoInfo)
                                                     <div class="story-media-overlay">
@@ -706,7 +706,7 @@
                                             <div class="card-body">
                                                 <p>"{{ $success->description }}"</p>
                                                 <div class="custom-testimonial-author">
-                                                    <img src="{{ getFileLink('40x40', $success->image) }}" alt="{{ $success->title }}" loading="lazy" decoding="async">
+                                                    <img src="{{ getFileLink('40x40', $success->image) }}" alt="{{ $success->title }}">
                                                     <div class="author-details">
                                                         <h6>{{ $success->title }}</h6>
                                                         <span>{{ $success->position ?? __('Student') }}</span>
@@ -754,7 +754,7 @@
                                              data-video-type="{{ $videoInfo['type'] ?? '' }}"
                                              data-video-url="{{ $videoInfo['url'] ?? '' }}">
                                             
-                                            <img class="card-top-image" src="{{ $cardImage }}" alt="{{ $success->title }} Preview" loading="lazy" decoding="async">
+                                            <img class="card-top-image" src="{{ $cardImage }}" alt="{{ $success->title }} Preview">
                                             
                                             @if($videoInfo)
                                                 <div class="story-media-overlay">
@@ -774,7 +774,7 @@
                                         <div class="card-body">
                                             <p>"{{ $success->description }}"</p>
                                             <div class="custom-testimonial-author">
-                                                <img src="{{ getFileLink('40x40', $success->image) }}" alt="{{ $success->title }}" loading="lazy" decoding="async">
+                                                <img src="{{ getFileLink('40x40', $success->image) }}" alt="{{ $success->title }}">
                                                 <div class="author-details">
                                                     <h6>{{ $success->title }}</h6>
                                                     <span>{{ $success->position ?? __('Student') }}</span>

@@ -1228,27 +1228,26 @@ function lessonPlaylistScrollBar() {
 ----------------------*/
 $(window).on("scroll", function () {
     stickyHeader();
+    AOS.refresh();
 });
 
 /*------------------
 === WINDOW LOAD  ===
 --------------------*/
 $(window).on("load", function () {
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            easing: "ease",
-            duration: 500,
-            once: true,
-            delay: 100,
-            offset: 60,
-        });
-    }
+    AOS.init({
+        disable: "mobile",
+        easing: "ease",
+        duration: 500,
+        once: true,
+        delay: 200,
+    });
 });
 
 /*-------------------
 === Window Load  ===
 --------------------*/
-window.addEventListener('load', function () {
+window.onload = function () {
     const progressBarLength =
         document.querySelectorAll(".line-progress").length;
     const dataProgressLength = document.querySelectorAll(
@@ -1261,7 +1260,7 @@ window.addEventListener('load', function () {
     if (progressBarLength > 0 && dataProgressLength > 0) {
         dataProgress.forEach((x) => AnimateProgress(x));
     }
-});
+};
 
 function AnimateProgress(el) {
     el.className = "animate-progress";
@@ -1274,54 +1273,39 @@ function AnimateProgress(el) {
 mainMenu();
 categoryDropdown();
 profileDropdown();
-
-function initDeferredMainComponents() {
-    activeNiceSelect();
-    videoPopup();
-    previewSlider();
-    mentorLessonSliderOne();
-    mentorLessonSliderTwo();
-    recentVideoSlider();
-    testimonialSlider();
-    successStorySliderOne();
-    successStorySliderTwo();
-    courseLessonSliderOne();
-    courseLessonSliderTwo();
-    blogPostSliderOne();
-    blogPostSliderTwo();
-    teamSlider();
-    bookSlider();
-    aboutSlider();
-    counterUp();
-    brandSlider();
-    scrollToTop();
-    setUserDropdownListener();
-    toggleSearchbar();
-    passwordEye();
-    cartQuantity();
-    SidebarToggleSide();
-    videoLessonPlayer();
-    courseVideoLesson();
-    recentVideoPlayer();
-    audioPodcast();
-    pricingSlider();
-    relatedCourseSlider();
-    showMoreSubject();
-    showMOreCourses();
-    notificationToggle();
-    otpForm();
-    lessonPlaylistScrollBar();
-}
-
-if (document.readyState === 'complete') {
-    initDeferredMainComponents();
-} else {
-    window.addEventListener('load', function () {
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(initDeferredMainComponents, { timeout: 1000 });
-        } else {
-            setTimeout(initDeferredMainComponents, 100);
-        }
-    });
-}
-
+activeNiceSelect();
+videoPopup();
+previewSlider();
+mentorLessonSliderOne();
+mentorLessonSliderTwo();
+recentVideoSlider();
+testimonialSlider();
+successStorySliderOne();
+successStorySliderTwo();
+courseLessonSliderOne();
+courseLessonSliderTwo();
+blogPostSliderOne();
+blogPostSliderTwo();
+teamSlider();
+bookSlider();
+aboutSlider();
+counterUp();
+brandSlider();
+scrollToTop();
+setUserDropdownListener();
+toggleSearchbar();
+passwordEye();
+cartQuantity();
+SidebarToggleSide();
+videoLessonPlayer();
+courseVideoLesson();
+recentVideoPlayer();
+audioPodcast();
+// courseIntroVideo();
+pricingSlider();
+relatedCourseSlider();
+showMoreSubject();
+showMOreCourses();
+notificationToggle();
+otpForm();
+lessonPlaylistScrollBar();

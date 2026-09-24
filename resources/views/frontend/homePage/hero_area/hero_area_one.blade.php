@@ -53,10 +53,10 @@
                                 'video'  => $hero_course->video, 
                                 'class'  => 'course-intro-video yt_player w-100', 
                                 'image'  => $hero_course->image,
-                                'size'   => '417x384'
+                                'size'   => 'original_image'
                             ])
                         @else
-                            <img src="{{ getFileLink('417x384', $hero_course->image) }}" alt="{{ strip_tags($hero_course->title) }}" class="img-fluid w-100" width="960" height="540" fetchpriority="high" loading="eager" decoding="async" style="object-fit: cover; max-height: 550px;">
+                            <img src="{{ getFileLink('original_image', $hero_course->image) }}" alt="{{ strip_tags($hero_course->title) }}" class="img-fluid w-100" style="object-fit: cover; max-height: 550px;">
                         @endif
                     </div>
                     
@@ -236,44 +236,23 @@
             plyrLoaded = true;
             if (typeof Plyr !== 'undefined') {
                 const ytPlayers = document.querySelectorAll('.yt_player');
-                ytPlayers.forEach(function(el) { new Plyr(el); });
+                ytPlayers.forEach(function(el) {
+                    new Plyr(el);
+                });
                 const html5Players = document.querySelectorAll('video.course-intro-video');
-                html5Players.forEach(function(el) { new Plyr(el); });
-            } else {
-                // Retry once after JS loads if Plyr not available yet
-                setTimeout(function() {
-                    if (typeof Plyr !== 'undefined') {
-                        document.querySelectorAll('.yt_player').forEach(function(el) { new Plyr(el); });
-                        document.querySelectorAll('video.course-intro-video').forEach(function(el) { new Plyr(el); });
-                    }
-                }, 800);
+                html5Players.forEach(function(el) {
+                    new Plyr(el);
+                });
             }
         }
 
         const videoWrapper = document.querySelector('.hero-video-wrapper');
         if (videoWrapper) {
-            // Load on interaction
             videoWrapper.addEventListener('click', loadPlyrPlayers, { once: true });
             videoWrapper.addEventListener('pointerover', loadPlyrPlayers, { once: true });
             videoWrapper.addEventListener('touchstart', loadPlyrPlayers, { once: true, passive: true });
-
-            // IntersectionObserver: load when video enters viewport
-            if ('IntersectionObserver' in window) {
-                var obs = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            // Delay slightly so it doesn't block initial paint
-                            setTimeout(loadPlyrPlayers, 400);
-                            obs.disconnect();
-                        }
-                    });
-                }, { threshold: 0.1 });
-                obs.observe(videoWrapper);
-            } else {
-                // Fallback: load after 3s
-                setTimeout(loadPlyrPlayers, 3000);
-            }
         }
+        setTimeout(loadPlyrPlayers, 3500);
 
         // Modern Tech Cursor Follower & Stardust Particle Animation
         const heroSection = document.querySelector('.hero-area');
